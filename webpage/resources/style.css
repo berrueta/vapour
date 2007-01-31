@@ -43,6 +43,11 @@ img {
   border: 0;
 }
 
+strong {
+  color: #005a9c;
+  font-weight: bold;
+}
+
 div#content {
   margin: 2em 2em 4em 2em;
 }
