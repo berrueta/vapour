@@ -1,0 +1,73 @@
+
+body {
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #005a9c;
+}
+
+h1 {
+  font-size: 4em;
+  font-family: monospace;
+  display: block;
+  margin: 0;
+  padding: 0.5em;
+  color: #ffffff;
+  background-color: #005a9c;
+}
+
+h1 a, h1 a:active, h1 a:hover, h1 a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+h1 span {
+  display: block;
+  font-size: 0.4em;
+}
+
+h2 {
+  width: 100%;
+  margin-top: 2em;
+  border-bottom: 3px #005a9c dotted;
+}
+
+p {
+  text-align: justify;
+}
+
+img {
+  border: 0;
+}
+
+div#content {
+  margin: 2em 2em 4em 2em;
+}
+
+.accessibility {
+  display: none;
+}
+
+div#foot {
+  text-align: right;
+  padding: 0.3em 2em 0.2em 2em;
+  margin: 0;
+  background-color: #005a9c;
+  color: #ffffff;
+}
+
+div#foot ul {
+  list-style: none;
+  display: block;
+  text-align: right;
+  margin: 0;
+}
+
+div#foot ul li {
+  margin-left: 2em;
+  display: inline;
+}
+
