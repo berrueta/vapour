@@ -35,7 +35,8 @@ public abstract class AbstractTestCase extends TestCase {
 	
 	private static final Logger logger = Logger.getLogger(AbstractTestCase.class);
 	
-	protected static final String COMMON_BASE_URI = "http://isegserv.itd.rl.ac.uk/VM/http-examples/";
+    //protected static final String COMMON_BASE_URI = "http://isegserv.itd.rl.ac.uk/VM/http-examples/";
+    protected static final String COMMON_BASE_URI = "http://vapour.sourceforge.net/recipes-web/";
 	//protected static final String COMMON_BASE_URI = "http://localhost/~berrueta/recipes/";
 	protected static final String PURL_BASE_URI = "http://purl.org/net/swbp-vm/";
 
