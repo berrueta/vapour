@@ -1,0 +1,18 @@
+Unit tests for "Best Practice Recipes for Publishing RDF Vocabularies"
+=====================================================================
+
+(c) Diego Berrueta (CTIC Foundation)
+
+See LICENSE for distribution terms
+
+Usage
+*****
+
+The easiest way to run the tests is to use Maven2. Open a terminal
+in the root directory of the project and run:
+
+  mvn test
+
+All dependencies are managed by Maven.
+
+Please report bugs to <diego.berrueta @ fundacionctic.org>.

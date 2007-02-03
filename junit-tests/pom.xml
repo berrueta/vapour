@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.fundacionctic</groupId>
+  <artifactId>rdfbestprac</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Unit tests for 'Best Practice Recipes for Publishing RDF Vocabularies'</name>
+  <url>http://idi.fundacionctic.org/rdfbestprac/</url>
+  <description>
+    A set of unit test to check the compilance of a web site w.r.t. the
+    recipes described in the document 'Best Practices for Publishing RDF
+    Vocabularies'. THIS SOFTWARE IS NOT ENDORSED BY W3C.
+  </description>
+
+  <organization>
+    <name>CTIC Foundation</name>
+    <url>http://www.fundacionctic.org/</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>W3C Software License</name>
+      <url>http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231,text</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>berrueta</id>
+      <name>Diego Berrueta</name>
+      <email>diego.berrueta@fundacionctic.org</email>
+      <organization>CTIC Foundation</organization>
+      <organizationUrl>http://www.fundacionctic.org/</organizationUrl>
+      <roles>
+	<role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <ciManagement>
+    <system>continuum</system>
+    <url>http://192.168.2.5:9192/continuum/</url>
+    <notifiers>
+      <notifier>
+        <type>mail</type>
+        <sendOnError />
+        <sendOnFailure />
+        <sendOnSuccess />
+        <configuration>
+          <address>bopa-xsl-dev@localhost</address>
+        </configuration>
+      </notifier>
+    </notifiers>
+  </ciManagement>
+
+  <scm>
+    <connection>scm:svn:https://svn.xana.fundacionctic.org/svn/swd-wg/trunk/rdfbestprac-test</connection>
+    <developerConnection>scm:svn:https://svn.xana.fundacionctic.org/svn/swd-wg/trunk/rdfbestprac-test</developerConnection>
+    <url>http://xana.fundacionctic.org/plugins/scmsvn/viewcvs.php/?root=swd-wg</url>
+  </scm>
+
+
+
+  <!--
+  <distributionManagement>
+    <downloadUrl>http://idi.fundacionctic.org/rdfbestprac/</downloadUrl>
+    <status>deployed</status>
+  </distributionManagement>
+  -->
+
+  <reporting>
+    <plugins>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-report-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>src</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>httpunit</groupId>
+      <artifactId>httpunit</artifactId>
+      <version>1.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.13</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.8.1</version>
+    </dependency>
+  </dependencies>
+
+</project>
