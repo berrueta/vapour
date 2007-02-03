@@ -6,7 +6,7 @@
 
 # Rewrite engine setup
 RewriteEngine On
-RewriteBase /~berrueta/recipes
+RewriteBase /recipes-web
 
 # Rewrite rule to serve RDF/XML content from the vocabulary URI
 RewriteRule ^example1$ example1.rdf
@@ -22,7 +22,7 @@ Options -MultiViews
 
 # Rewrite engine setup
 RewriteEngine On
-RewriteBase /~berrueta/recipes
+RewriteBase /recipes-web
 
 # Rewrite rule to redirect 303 from any class or prop URI
 RewriteRule ^example2/.+ example2/ [R=303]
@@ -41,7 +41,7 @@ Options -MultiViews
 
 # Rewrite engine setup
 RewriteEngine On
-RewriteBase /~berrueta/recipes
+RewriteBase /recipes-web
 
 # Rewrite rule to serve HTML content from the vocabulary URI if requested
 RewriteCond %{HTTP_ACCEPT} text/html [OR]
@@ -75,7 +75,7 @@ Options -MultiViews
 
 # Rewrite engine setup
 RewriteEngine On
-RewriteBase /~berrueta/recipes
+RewriteBase /recipes-web
 
 # Rewrite rule to serve HTML content from the vocabulary URI if requested
 RewriteCond %{HTTP_ACCEPT} text/html [OR]
@@ -116,7 +116,7 @@ Options -MultiViews
 
 # Rewrite engine setup
 RewriteEngine On
-RewriteBase /~berrueta/recipes
+RewriteBase /recipes-web
 
 # Rewrite rule to serve HTML content from the namespace URI if requested
 RewriteCond %{HTTP_ACCEPT} text/html [OR]
