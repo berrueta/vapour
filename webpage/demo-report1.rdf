@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY earl "http://www.w3.org/WAI/ER/EARL/nmg-strawman#">
+<!ENTITY recipes "http://vapour.sourceforge.net/recipes.rdf#">
+]>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+    xmlns:earl="&earl;"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:http="http://www.w3.org/2006/http#"
+    xmlns:uri="http://www.w3.org/2006/uri#"
+    >
+
+  <earl:TestSubject rdf:nodeID="subjectRecipe1VocabularyUri">
+    <dc:title xml:lang="en">Derreferenced vocabulary URI</dc:title>
+    <dc:date>2007-02-20</dc:date>
+    <earl:httpRequest>
+      <http:GetRequest>
+	<uri:uri>http://vapour.sourceforge.net/recipes-web/example1</uri:uri>
+	<http:version>1.1</http:version>
+	<http:accept><!-- empty --></http:accept>
+	<http:user-agent>Vapour validation tool 1.0</http:user-agent>
+      </http:GetRequest>	  
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:Response>
+	<http:content-type>application/rdf+xml</http:content-type>
+	<http:responseCode>200</http:responseCode>
+	<!--http:location-->
+      </http:Response>
+    </earl:httpResponse>
+  </earl:TestSubject>
+
+  <earl:TestSubject rdf:nodeID="subjectRecipe1ClassUri">
+    <dc:title xml:lang="en">Derreferenced class URI</dc:title>
+    <dc:date>2007-02-20</dc:date>
+    <earl:httpRequest>
+      <http:GetRequest>
+	<uri:uri>http://vapour.sourceforge.net/recipes-web/example1#ClassA</uri:uri>
+	<http:version>1.1</http:version>
+	<http:accept><!-- empty --></http:accept>
+	<http:user-agent>Vapour validation tool 1.0</http:user-agent>
+      </http:GetRequest>	  
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:Response>
+	<http:content-type>application/rdf+xml</http:content-type>
+	<http:responseCode>200</http:responseCode>
+	<!--http:location-->
+      </http:Response>
+    </earl:httpResponse>
+  </earl:TestSubject>
+
+  <earl:TestSubject rdf:nodeID="subjectRecipe1PropertyUri">
+    <dc:title xml:lang="en">Derreferenced property URI</dc:title>
+    <dc:date>2007-02-20</dc:date>
+    <earl:httpRequest>
+      <http:GetRequest>
+	<uri:uri>http://vapour.sourceforge.net/recipes-web/example1#propA</uri:uri>
+	<http:version>1.1</http:version>
+	<http:accept><!-- empty --></http:accept>
+	<http:user-agent>Vapour validation tool 1.0</http:user-agent>
+      </http:GetRequest>	  
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:Response>
+	<http:content-type>application/rdf+xml</http:content-type>
+	<http:responseCode>200</http:responseCode>
+	<!--http:location-->
+      </http:Response>
+    </earl:httpResponse>
+  </earl:TestSubject>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1VocabularyUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestVocabularyResponseCode"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1VocabularyUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestVocabularyContentType"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1ClassUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestClassResponseCode"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1ClassUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestClassContentType"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1PropertyUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestPropertyResponseCode"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+  <earl:Assertion>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:subject rdf:nodeID="subjectRecipe1PropertyUri"/>
+    <earl:test rdf:resource="&recipes;Recipe1TestPropertyContentType"/>
+    <earl:mode rdf:resource="&earl;automatic"/>
+    <earl:result>
+      <earl:TestResult>
+	<earl:validity rdf:resource="&earl;pass" />
+	<!-- dc:title xml:lang="en" -->
+	<!-- dc:description xml:lang="en" -->
+      </earl:TestResult>
+    </earl:result>
+  </earl:Assertion>
+
+</rdf:RDF>
