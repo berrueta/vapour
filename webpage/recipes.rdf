@@ -9,6 +9,7 @@
 
   <!-- RECIPE 1 ************************************************** -->
   
+  <!--
   <earl:TestRequirement rdf:about="#Recipe1Suite">
     <dc:title xml:lang="en">Recipe 1 test suite</dc:title>
     <dc:description xml:lang="en">Recipe 1 as specified in the Recipes document</dc:description>
@@ -19,64 +20,44 @@
     <dct:hasPart rdf:resource="#Recipe1TestPropertyResponseCode" />
     <dct:hasPart rdf:resource="#Recipe1TestPropertyContentType" />
   </earl:TestRequirement>
+  -->
 
-  <earl:TestCase rdf:about="#Recipe1TestVocabularyResponseCode">
-    <dc:title xml:lang="en">Recipe 1, test vocabulary URI HTTP response code</dc:title>
+  <earl:TestCase rdf:about="#TestResponseCode200">
+    <dc:title xml:lang="en">HTTP response code should be 200</dc:title>
     <dc:description xml:lang="en">
-      Recipe 1, when derreferencing the vocabulary URI, the HTTP
-      response code should be 200
+      The HTTP response code should be 200, without further redirection
     </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
 
-  <earl:TestCase rdf:about="#Recipe1TestVocabularyContentType">
-    <dc:title xml:lang="en">Recipe 1, test vocabulary URI content-type</dc:title>
+  <earl:TestCase rdf:about="#TestContentTypeRdf">
+    <dc:title xml:lang="en">Content type should be 'application/rdf+xml'</dc:title>
     <dc:description xml:lang="en">
-      Recipe 1, when derreferencing the vocabulary URI, the HTTP
-      content-type should be 'application/rdf+xml'
+      The Content-Type header of the response should be
+      'application/rdf+xml'
     </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
 
-  <earl:TestCase rdf:about="#Recipe1TestClassResponseCode">
-    <dc:title xml:lang="en">Recipe 1, test class URI HTTP response code</dc:title>
+  <earl:TestCase rdf:about="#TestResponseCode303">
+    <dc:title xml:lang="en">HTTP response code should be 303 (redirect)</dc:title>
     <dc:description xml:lang="en">
-      Recipe 1, when derreferencing a class URI, the HTTP response
-      code should be 200
+      The HTTP response code should be 303 (redirect), with a Location
+      header linking to the correct URI
     </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
 
-  <earl:TestCase rdf:about="#Recipe1TestClassContentType">
-    <dc:title xml:lang="en">Recipe 1, test class URI content-type</dc:title>
+  <earl:TestCase rdf:about="#TestContentTypeHtml">
+    <dc:title xml:lang="en">Content type should be 'text/html'</dc:title>
     <dc:description xml:lang="en">
-      Recipe 1, when derreferencing a class URI, the HTTP 
-      content-type should be 'application/rdf+xml'
+      The Content-Type header of the response should be
+      'text/html'
     </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
-    <!-- dc:identifier -->
-  </earl:TestCase>
-
-  <earl:TestCase rdf:about="#Recipe1TestPropertyResponseCode">
-    <dc:title xml:lang="en">Recipe 1, test property URI HTTP response code</dc:title>
-    <dc:description xml:lang="en">
-      Recipe 1, when derreferencing a property URI, the HTTP response
-      code should be 200
-    </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
-    <!-- dc:identifier -->
-  </earl:TestCase>
-
-  <earl:TestCase rdf:about="#Recipe1TestPropertyContentType">
-    <dc:title xml:lang="en">Recipe 1, test property URI content-type</dc:title>
-    <dc:description xml:lang="en">
-      Recipe 1, when derreferencing a property URI, the HTTP 
-      content-type should be 'application/rdf+xml'
-    </dc:description>
-    <dct:isPartOf rdf:resource="#Recipe1Suite" />
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
 
