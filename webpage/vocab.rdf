@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://vapour.sourceforge.net/vocab.rdf"    
+    >
+
+  <rdfs:Property rdf:about="#previousSubject">
+    <rdfs:label xml:lang="en">The previous HTTP dialogue</rdfs:label>
+    <rdfs:comment xml:lang="en">Some dereferences require more than
+    one HTTP request/response dialogue, because the first response
+    contains an HTTP 303 REDIRECT code. This property connects a
+    dialogue fragment with the inmediate previous one.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+    <rdfs:range rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+  </rdfs:Property>
+
+</rdf:RDF>
