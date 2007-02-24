@@ -1,0 +1,135 @@
+/* CSS style for reports */
+
+.request
+{ 
+  background: #ffffcf url(resources/images/arrow-right.png) no-repeat right 50%;
+  margin: 0;
+  margin-bottom: .6em;
+  padding: 0;
+//  float: left;
+//  clear: both;
+}
+
+.requestInner
+{
+  border: 1px solid #afafff;
+  border-right-width: 0;  
+  margin-right: 1.1em;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  padding-left: .3em;
+}
+
+.request p
+{
+}
+
+.response
+{ 
+  background: #fff url(resources/images/arrow-left.png) no-repeat left 50%;
+  margin: 0;
+  padding: 0;
+  margin-bottom: .6em;
+//  float: right;
+//  clear: left;
+}
+
+.responseInner 
+{ 
+  border: 1px solid #afafff;
+  border-left-width: 0;
+  margin-left: 1.6em;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  padding-right: .3em;
+}
+
+.reponse p
+{ 
+}
+
+.httpHeader
+{
+  display: block;
+  /*             border: 1px solid #363;
+     border-left-width: 0;
+     */
+  margin: 0;
+  text-decoration: none;
+  font-size:small;
+}
+
+.badHttpHeader
+{
+  color: red;
+}
+
+.goodHttpHeader
+{ 
+  color: green;
+}
+
+/* icons ============================================== */
+
+.httpDialog
+{ 
+  border: 1px solid black;
+  padding: .6em;
+}
+
+.dialogArea
+{
+  margin-left: 160px;
+  margin-right: 160px;
+}
+
+.dummyR
+{
+  clear: both;
+ }
+
+.clientIcon
+{
+  float: left;
+}
+
+.clientIcon p
+{
+  text-align: center;
+}
+
+.serverIcon
+{
+  float: right;
+}
+
+.serverIcon p
+{
+  text-align: center;
+}
+
+/* summary ====================================================== */
+
+.correctValue
+{ 
+}
+
+.badValue
+{
+  font-weight: bold;
+}
+
+.testResultCorrect
+{ 
+  color: green;
+}
+
+.testResultFail
+{ 
+  color: red;
+}
+
+h2
+{ 
+  margin-top: .2em;
+}
