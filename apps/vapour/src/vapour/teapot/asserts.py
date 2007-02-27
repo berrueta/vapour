@@ -4,17 +4,36 @@ from rdflib import BNode
 
 def assertLastResponseCode200(graph, rootTestSubject):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    # FIXME
-    # suppose that the test passes...
-    addAssertion(graph, testSubject, RECIPES["TestResponseCode200"], True)
+    result = (getResponseCode(graph, testSubject) == 200)
+    addAssertion(graph, testSubject, RECIPES["TestResponseCode200"], result)
     
 def assertIntermediateResponseCode303(graph, rootTestSubject):
-    # FIXME
-    None
+    l = testSubjectsAsList(graph, rootTestSubject)
+    for testSubject in l[0:len(l)-1]:
+        result = (getResponseCode(graph, testSubject) == 303)
+        addAssertion(graph, testSubject, RECIPES["TestResponseCode302"], result)
     
 def assertLastResponseContentTypeRdf(graph, rootTestSubject):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    # FIXME
+    result = (getContentType(graph, testSubject) == "application/rdf+xml")
+    addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result)
+
+def getResponseCode(graph, testSubject):
+    httpResponse = getHttpResponse(graph, testSubject)
+    return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
+
+def getContentType(graph, testSubject):
+    httpResponse = getHttpResponse(graph, testSubject)
+    return str(getLiteralProperty(graph, httpResponse, HTTP["content-type"]))
+
+def getHttpResponse(graph, testSubject):
+    l = [x for x in graph.objects(testSubject, EARL["httpResponse"])]
+    return l[0]
+
+def getLiteralProperty(graph, resource, property):
+    l = [x for x in graph.objects(resource, property)]
+    if len(l) == 0: return None
+    else: return l[0]
     
 def addAssertion(graph, testSubject, test, validity):
     assertion = BNode()

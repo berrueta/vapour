@@ -9,8 +9,14 @@ def recipe1(graph, vocabUri, classUri, instanceUri):
     assertLastResponseContentTypeRdf(graph, rootTestSubject)
 
     rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri)
+    assertLastResponseCode200(graph, rootTestSubject)
+    assertIntermediateResponseCode303(graph, rootTestSubject)
+    assertLastResponseContentTypeRdf(graph, rootTestSubject)
 
     rootTestSubject = launchHttpDialog(graph, "dereferencing instance URI", instanceUri)    
+    assertLastResponseCode200(graph, rootTestSubject)
+    assertIntermediateResponseCode303(graph, rootTestSubject)
+    assertLastResponseContentTypeRdf(graph, rootTestSubject)
     
 if __name__ == "__main__":
     g = Graph()
