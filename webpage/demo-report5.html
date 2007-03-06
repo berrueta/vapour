@@ -8,54 +8,55 @@
     <title>Vapour report</title>
   </head>
   <body>
-    <h1>Vapour report</h1>
+	<h1>Vapour report</h1>
+  	<div class="all">
     <div class="httpDialog">
       <h2>Dereference the vocabulary URI, without specifying the desired content</h2>
       <div class="clientIcon">
-	<img src="resources/images/computer.png" alt="A computer on the client-side"/>
-	<p>Client</p>
-      </div>
-      <div class="serverIcon">
-	<img src="resources/images/apacheconf.png" alt="A web server" />
-	<p>Web server</p>
+		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
       </div>
       <div class="dialogArea">
-	<div class="request">
-	  <div class="requestInner">
-	    <p class="httpHeader">GET http://.../example5/</p>
-	  </div>
-	</div>
-	<div class="response">
-	  <div class="responseInner">
-	    <p class="httpHeader goodHttpHeader">303 REDIRECT</p>
-	    <p class="httpHeader">Location: http://.../example5-content/2005-10-05.rdf</p>
-	  </div>
-	</div>
-	<div class="request">
-	  <div class="requestInner">
-	    <p class="httpHeader">GET http://.../example5-content/2005-10-05.rdf/</p>
-	  </div>
-	</div>
-	<div class="response">
-	  <div class="responseInner">
-	    <p class="httpHeader goodHttpHeader">200 OK</p>
-	    <p class="httpHeader badHttpHeader">Content-Type: text/html</p>
-	  </div>
-	</div>
-	<a href="http://vapour.sourceforge.net/recipes-web/example5-content/2005-10-05.rdf">
-	  <img src="resources/images/rdf-file.png"
-	       alt="HTML icon"
-	       border="0"/>
-	</a>
+		<div class="request">
+			<div class="requestInner">
+		    	<span class="httpHeader">GET http://.../example5/</span>
+			 </div>
+		</div>
+		<div class="response">
+		  <div class="responseInner">
+	    	<span class="httpHeader goodHttpHeader">303 REDIRECT</span><br/>
+		    <span class="httpHeader">Location: http://.../example5-content/2005-10-05.rdf</span>
+		  </div>
+		</div>
+		<div class="request">
+		  <div class="requestInner">
+		    <span class="httpHeader">GET http://.../example5-content/2005-10-05.rdf/</span>
+		  </div>
+		</div>
+		<div class="response">
+		  <div class="responseInner">
+		  	<div class="rdf-file">
+		    <a href="http://vapour.sourceforge.net/recipes-web/example5-content/2005-10-05.rdf">
+			  <img src="resources/images/rdf-file.png" alt="HTML icon" class="sin-borde"/>
+			</a>
+			</div>
+		    <span class="httpHeader goodHttpHeader">200 OK</span><br/>
+		    <span class="httpHeader badHttpHeader">Content-Type: text/html</span>
+		  </div>
+		</div>
       </div>
-	<div class="dummyR"/>
+      <div class="serverIcon">
+		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
       </div>
-
+	  <div class="dummyR"/>
+ 	</div>
     <h3>Summary:</h3>
     <ul>
       <li>First request response code: <span class="correctValue">303</span> <span class="testResultCorrect">(correct)</span></li>
       <li>Second request response code: <span class="correctValue">200</span> <span class="testResultCorrect">(correct)</span></li>
       <li>Second request content type: <span class="badValue">text/html</span> <span class="testResultFail">(fail)</span></li>
     </ul>
+   </div>
   </body>
 </html>
