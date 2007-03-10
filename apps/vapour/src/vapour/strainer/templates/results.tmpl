@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Vapour Report</title>
+  </head>
+  <body>
+    <h1>Vapour Report</h1>
+    <h2>Test results</h2>
+    <ul>
+	#for $test in $testResults:
+	<li>$test[0] :  $test[1] </li>
+	#end for
+    </ul>
+
+    <h2>HTTP trace</h2>
+    <ul>
+	#for $trace in $httpTraces:
+	<li>$trace[1] : $trace[2] ($trace[3] , $trace[4])</li>
+	#end for
+    </ul>
+  </body>
+
+</html>
