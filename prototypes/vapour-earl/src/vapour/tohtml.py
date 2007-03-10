@@ -11,11 +11,11 @@ HTTP = Namespace("http://www.w3.org/2006/http#")
 
 store = Graph()
 
-store.parse("http://localhost/~berrueta/vapour.rdf")
-store.parse("http://localhost/~berrueta/recipes.rdf")
-store.parse("http://localhost/~berrueta/earl.rdf")
+store.parse("../../../../webpage/vapour.rdf")
+store.parse("../../../../webpage/recipes.rdf")
+store.parse("../../../../webpage/earl.rdf")
 
-store.parse("/home/berrueta/scratch/svn/vapour/trunk/webpage/demo-report1.rdf")
+store.parse("../../../../webpage/demo-report1.rdf")
 
 sparqlGr = sparqlGraph.SPARQLGraph(store)
 
