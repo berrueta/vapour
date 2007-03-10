@@ -122,11 +122,13 @@ float:left;
 
 .correctValue
 { 
+  color: green;
 }
 
 .badValue
 {
   font-weight: bold;
+  color: red;
 }
 
 .testResultCorrect
