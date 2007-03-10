@@ -1,16 +1,16 @@
 /* CSS style for reports */
 
-.sin-borde{
-	border: 0;
-}
-
 .all{
 	width:90%;
 	margin-left:5%;
 }
 
-.rdf-file{
+.fileIcon {
     float:right;
+}
+
+.fileIcon img {
+    border: 0;
 }
 
 .request
