@@ -71,7 +71,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?response", HTTP["content-type"], "?responseContentType"),
         ("?response", HTTP["location"], "?responseLocation")
     ])
-    results = model.query(select, where, optional)
+    results = [x for x in model.query(select, where, optional)]
     return results
 
 def getFinalUriFromModel(model, testRequirementUri):
@@ -104,7 +104,10 @@ def getTestAgent(model):
     ])
     results = model.query(select, where)
     return [x for x in results][0]
-    
+
+def sortTrace(trace):    
+    # FIXME
+    return trace
 
 def resultsModelToHTML(model, templateDir = "templates"):
     """
@@ -118,7 +121,7 @@ def resultsModelToHTML(model, templateDir = "templates"):
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
-        data['httpTraces'][testRequirementUri] = getHttpTracesFromModel(model, testRequirementUri)
+        data['httpTraces'][testRequirementUri] = sortTrace(getHttpTracesFromModel(model, testRequirementUri))
         data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
     data['passTestUri'] = str(EARL["pass"])
