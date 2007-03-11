@@ -26,21 +26,35 @@
           </tr>
         </thead>
         <tbody>
+          #for $testRequirement in $testRequirements:
           <tr>
-            <td>spam</td>
-            <td class="allTestsOk">5/5</td>            
+            <td>
+              <!--a href="#$testRequirement[0]"-->
+              $testRequirement[1]
+              <!--/a-->
+             </td>
+             #set $totalTests = len($testResults[$testRequirement[0]])
+             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["fail"]])
+             #if $failedTests == 0:
+               #set $cssClass = "allTestsOk"
+             #else:
+               #set $cssClass = "someTestsFail"
+             #endif
+            <td class="$cssClass">
+            $failedTests/$totalTests
+            </td>            
           </tr>
-          <tr>
-            <td>eggs</td>
-            <td class="someTestsFail">3/5</td>
-          </tr>
+          #end for
         </tbody>
       </table>
     </div>
 
      #for $testRequirement in $testRequirements:
       <div class="httpDialog">
-        <h2>$testRequirement[1]</h2>
+        <h2>
+          <!-- a target="$testRequirement[0]"/ -->
+          $testRequirement[1]
+         </h2>
       <div class="clientIcon">
 		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
 		<p>Client</p>
