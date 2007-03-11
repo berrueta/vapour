@@ -1,5 +1,9 @@
 /* CSS style for reports */
 
+h1, h2, h3, h4, h5, h6 {
+  color: #5674bc;
+}
+
 .all{
 	width:90%;
 	margin-left:5%;
@@ -26,7 +30,7 @@
 
 .requestInner
 {
-  border: 1px solid #afafff;
+  border: 1px #afafff solid;
   border-right-width: 0;  
   margin-right: 4%;
   padding-top: .3em;
@@ -51,7 +55,7 @@
 
 .responseInner 
 { 
-  border: 1px solid #afafff;
+  border: 1px #afafff solid;
   border-left-width: 0;
   margin-left: 8%;
   padding-top: .3em;
@@ -88,7 +92,7 @@
 
 .httpDialog
 { 
-  border: 1px solid black;
+  border: 1px #5674bc solid;
   padding: .6em;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -145,12 +149,12 @@ float:left;
 
 h2
 { 
-  margin-top: .2em;
+  margin-top: 0.2em;
 }
 
 .summary
 { 
-  border: 1px solid black;
+  border: 1px #5674bc solid;
   margin-bottom: 1em;
   padding: .6em;
   background-color: #f0f0ff;
@@ -158,6 +162,8 @@ h2
 
 .summaryTable
 {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .summaryTable thead
@@ -169,7 +175,7 @@ h2
 .summaryTable td
 { 
   padding:.2em;
-  border: 1px blue solid;
+  border: 1px #5674bc solid;
 }
 
 .allTestsOk
@@ -180,5 +186,5 @@ h2
 .someTestsFail
 { 
   font-weight: bold;  
-  color:red;
+  color: red;
 }
