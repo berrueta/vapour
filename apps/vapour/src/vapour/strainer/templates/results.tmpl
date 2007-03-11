@@ -41,7 +41,7 @@
                #set $cssClass = "someTestsFail"
              #endif
             <td class="$cssClass">
-            $failedTests/$totalTests
+            #echo ($totalTests - $failedTests)#/$totalTests
             </td>            
           </tr>
           #end for
