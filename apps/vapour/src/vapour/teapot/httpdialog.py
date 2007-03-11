@@ -6,17 +6,22 @@ import urlparse
 import datetime
 
 userAgentString = "vapour.sourceforge.net"
+maxRedirects = 10
 
 def launchHttpDialog(graph, what, url, accept = None):
     r = simpleRequest(graph, url, accept)
     firstTestSubjectResource = r[0]
 
+    redirectsCount = 0
     response = r[1]
     while (response.status == httplib.SEE_OTHER or response.status == httplib.FOUND):
         previousSubjectResource = r[0]
         r = simpleRequest(graph, url, accept, previousSubjectResource)
         response = r[1]
         url = response.getheader("Location")
+        redirectsCount = redirectsCount + 1
+        if (redirectsCount > maxRedirects):
+            raise "Too many redirections, aborting"
         
     labelTestSubjects(graph, firstTestSubjectResource, what)        
         
