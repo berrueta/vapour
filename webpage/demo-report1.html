@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="Vapour 1.0 (http://vapour.sourceforge.net)" />
+    <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
+    <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
+    <link type="text/css" rel="stylesheet" href="report-style.css" media="screen,projection,print" />
+    <link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />
+    <title>Vapour Report</title>
+  </head>
+  <body>
+    <h1>Vapour Report</h1>
+    <div class="all">
+    
+    <div class="summary">
+      <h2>Summary</h2>
+      <table class="summaryTable">
+        <thead>
+          <tr>
+            <td>Test requirement</td>
+            <td>Passed tests</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>spam</td>
+            <td class="allTestsOk">5/5</td>            
+          </tr>
+          <tr>
+            <td>eggs</td>
+            <td class="someTestsFail">3/5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+      <div class="httpDialog">
+        <h2>Dereferencing class URI</h2>
+      <div class="clientIcon">
+		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div>
+            <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://vapour.sourceforge.net/recipes-web/example1#Concept</span>
+	  	 </div>
+	  </div>
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://vapour.sourceforge.net/recipes-web/example1#Concept">
+			    <img src="resources/images/unknown-file.png" alt="Unknown file type icon" />
+			</a>
+			</div>
+	      <span class="httpHeader goodHeader">200</span>
+	      <span class="httpHeader">Content-type: </span>
+	    </div>
+	  </div>
+       </div>
+      <div class="serverIcon">
+		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+	  <div class="dummyR"/>
+      </div>
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  1st request while dereferencing class URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  1st request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+
+
+    </div>
+      <div class="httpDialog">
+        <h2>Dereferencing property URI</h2>
+      <div class="clientIcon">
+		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div>
+            <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://vapour.sourceforge.net/recipes-web/ERRATA/example1#prefLabel</span>
+	  	 </div>
+	  </div>
+	  <div class="response">
+	    <div class="responseInner">
+	      <span class="httpHeader goodHeader">404</span>
+	    </div>
+	  </div>
+       </div>
+      <div class="serverIcon">
+		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+	  <div class="dummyR"/>
+      </div>
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  1st request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="badValue">Fail</span>
+	</li>
+	<li>
+	  1st request while dereferencing property URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="badValue">Fail</span>
+	</li>
+    </ul>
+
+
+    </div>
+      <div class="httpDialog">
+        <h2>Dereferencing the vocabulary URI</h2>
+      <div class="clientIcon">
+		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div>
+            <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://vapour.sourceforge.net/recipes-web/example1</span>
+	  	 </div>
+	  </div>
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://vapour.sourceforge.net/recipes-web/example1">
+			    <img src="resources/images/unknown-file.png" alt="Unknown file type icon" />
+			</a>
+			</div>
+	      <span class="httpHeader goodHeader">200</span>
+	      <span class="httpHeader">Content-type: </span>
+	    </div>
+	  </div>
+       </div>
+      <div class="serverIcon">
+		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+	  <div class="dummyR"/>
+      </div>
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  1st request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  1st request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+
+
+    </div>
+    
+    <div class="footer">
+      <p>Report generated by <a href="http://vapour.sourceforge.net/">Vapour</a>,
+      version 1.0 on 2007-03-11 12:08:18.709063. Please read the
+      <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a>
+      document. You can also <a href="FIXME">get an RDF version</a> of this
+      report.</p>
+    </div>
+    
+  </body>
+
+</html>
