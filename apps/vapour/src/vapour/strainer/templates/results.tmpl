@@ -98,6 +98,26 @@
 	</li>
 	#end for
     </ul>
+    
+    #if len($finalUris[$testRequirement[0]]) > 0:
+    <h3>Further validation</h3>
+    <ul>
+    #from urllib import quote
+    #for $finalUri in $finalUris[$testRequirement[0]]:
+    <li>
+      #if $finalUri[1] == 'text/html':
+      <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">
+        Check the response with the W3C HTTP validator
+      </a>
+      #else if $finalUri[1] == 'application/rdf+xml':
+      <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
+        Check the response with the W3C RDF validator
+      </a>
+      #end if
+    </li>
+    #end for
+    </ul>
+    #end if
 
 
     </div>
