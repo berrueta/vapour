@@ -73,7 +73,19 @@ def getHttpTracesFromModel(model, testRequirementUri):
     ])
     results = model.query(select, where, optional)
     return results
-	
+
+def getFinalUriFromModel(model, testRequirementUri):
+    select = ("?finalUri", "?contentType")
+    # FIXME: a FILTER clause should be added to check the responseCode == 200
+    where = GraphPattern([
+        (testRequirementUri, DCT["hasPart"], "?assertion"),
+        ("?assertion", EARL["subject"], "?testSubject"),
+        ("?testSubject", EARL["httpRequest"], "?getRequest"),
+        ("?testSubject", EARL["httpResponse"], "?httpResponse"),
+        ("?httpResponse", HTTP["content-type"], "?contentType"),
+        ("?getRequest", URI["uri"], "?finalUri")
+    ])
+    return [x for x in model.query(select, where)]
 
 def getTestAgent(model):
     """
@@ -102,10 +114,12 @@ def resultsModelToHTML(model, templateDir = "templates"):
     data = {}
     data['testResults'] = {}
     data['httpTraces'] = {}
+    data['finalUris'] = {}
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
         data['httpTraces'][testRequirementUri] = getHttpTracesFromModel(model, testRequirementUri)
+        data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
     data['passTestUri'] = str(EARL["pass"])
     data['reportDate'] = str(datetime.datetime.now())
