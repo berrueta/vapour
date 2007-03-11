@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY http "http://www.w3.org/2006/http#">
+]>
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:earl="http://www.w3.org/WAI/ER/EARL/nmg-strawman#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:vapour="http://vapour.sourceforge.net/vocab.rdf#"
     xml:base="http://vapour.sourceforge.net/recipes.rdf"
     >
 
@@ -27,6 +31,7 @@
     <dc:description xml:lang="en">
       The HTTP response code should be 200, without further redirection
     </dc:description>
+    <vapour:propertyUnderTest rdf:resource="&http;responseCode"/>
     <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
@@ -37,6 +42,7 @@
       The Content-Type header of the response should be
       'application/rdf+xml'
     </dc:description>
+    <vapour:propertyUnderTest rdf:resource="&http;content-type"/>
     <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
@@ -47,6 +53,7 @@
       The HTTP response code should be 303 (redirect), with a Location
       header linking to the correct URI
     </dc:description>
+    <vapour:propertyUnderTest rdf:resource="&http;responseCode"/>
     <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>
@@ -57,6 +64,7 @@
       The Content-Type header of the response should be
       'text/html'
     </dc:description>
+    <vapour:propertyUnderTest rdf:resource="&http;content-type"/>
     <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
     <!-- dc:identifier -->
   </earl:TestCase>

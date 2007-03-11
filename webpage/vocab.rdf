@@ -15,4 +15,14 @@
     <rdfs:range rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
   </rdfs:Property>
 
+  <rdfs:Property rdf:about="#propertyUnderTest">
+    <rdfs:label xml:lang="en">
+      Property under test
+    </rdfs:label>
+    <rdfs:comment xml:lang="en">
+      The property of the HTTP which value is checked in this test.
+    </rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestCase"/>
+  </rdfs:Property>
+
 </rdf:RDF>
