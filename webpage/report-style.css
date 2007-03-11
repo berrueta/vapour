@@ -90,6 +90,7 @@
 { 
   border: 1px solid black;
   padding: .6em;
+  magin-top: 1em;
   margin-bottom: 1em;
 }
 
@@ -145,4 +146,39 @@ float:left;
 h2
 { 
   margin-top: .2em;
+}
+
+.summary
+{ 
+  border: 1px solid black;
+  margin-bottom: 1em;
+  padding: .6em;
+  background-color: #f0f0ff;
+}
+
+.summaryTable
+{
+}
+
+.summaryTable thead
+{
+  font-weight: bold;
+  background-color: #e0e0ff;
+}
+
+.summaryTable td
+{ 
+  padding:.2em;
+  border-width: 1px solid blue;
+}
+
+.allTestsOk
+{
+  color:green;
+}
+
+.someTestsFail
+{ 
+  font-weight: bold;  
+  color:red;
 }
