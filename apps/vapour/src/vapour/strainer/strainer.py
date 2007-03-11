@@ -67,10 +67,10 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?testSub", EARL["httpResponse"], "?response"),
         ("?response", HTTP["responseCode"], "?responseCode")
     ])
-    optional = GraphPattern([
-        ("?response", HTTP["content-type"], "?responseContentType"),
-        ("?response", HTTP["location"], "?responseLocation")
-    ])
+    optional = [
+        GraphPattern([("?response", HTTP["content-type"], "?responseContentType")]),
+        GraphPattern([("?response", HTTP["location"], "?responseLocation")])
+    ]
     results = [x for x in model.query(select, where, optional)]
     return results
 
