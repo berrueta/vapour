@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+#from vapour.namespaces import EARL
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
@@ -67,10 +68,28 @@
 			</a>
 			</div>
 	      #end if
-	      <span class="httpHeader goodHeader">$trace[3]</span>
+	      
+	      #if $trace[7] == EARL["pass"]:
+	        #set $additionalCssClass = "goodHttpHeader"
+	      #else if $trace[7] == EARL["fail"]:
+	        #set $additionalCssClass = "badHttpHeader"
+	      #else:
+	        #set $additionalCssClass = ""
+	      #end if
+	      <span class="httpHeader $additionalCssClass">$trace[3]</span>
+	      
 	      #if $trace[3] == "200":
-	      <span class="httpHeader">Content-type: $trace[4]</span>
-	      #else if $trace[3] == "303":
+	        #if $trace[9] == EARL["pass"]:
+	          #set $additionalCssClass = "goodHttpHeader"
+	        #else if $trace[9] == EARL["fail"]:
+	          #set $additionalCssClass = "badHttpHeader"
+	        #else:
+	          #set $additionalCssClass = ""
+	        #end if	        
+	      <span class="httpHeader $additionalCssClass">Content-type: $trace[4]</span>
+	      #end if
+	      
+	      #if $trace[3] == "303":
 	      <span class="httpHeader">Location: $trace[5]</span>
 	      #end if
 	    </div>
@@ -87,7 +106,7 @@
     <h3>Test results</h3>
     <ul>
 	#for $test in $testResults[$testRequirement[0]]:
-      #if $test[3] == $passTestUri:
+      #if $test[3] == EARL["pass"]:
         #set $testResultCssClass = "correctValue"
       #else
         #set $testResultCssClass = "badValue"
