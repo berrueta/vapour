@@ -26,65 +26,44 @@
         </thead>
         <tbody>
           <tr>
-            <td>spam</td>
-            <td class="allTestsOk">5/5</td>            
+            <td>
+              <!--a href="#mSBZCwCK74"-->
+              Dereferencing property URI
+              <!--/a-->
+             </td>
+            <td class="someTestsFail">
+            2/2
+            </td>            
           </tr>
           <tr>
-            <td>eggs</td>
-            <td class="someTestsFail">3/5</td>
+            <td>
+              <!--a href="#mSBZCwCK66"-->
+              Dereferencing class URI
+              <!--/a-->
+             </td>
+            <td class="allTestsOk">
+            0/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <!--a href="#mSBZCwCK58"-->
+              Dereferencing the vocabulary URI
+              <!--/a-->
+             </td>
+            <td class="allTestsOk">
+            0/2
+            </td>            
           </tr>
         </tbody>
       </table>
     </div>
 
       <div class="httpDialog">
-        <h2>Dereferencing class URI</h2>
-      <div class="clientIcon">
-		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
-		<p>Client</p>
-      </div>
-            <div class="dialogArea">
- 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
-	  <div class="request">
-	  	 <div class="requestInner">
-	  	   <span class="httpHeader">GET http://vapour.sourceforge.net/recipes-web/example1#Concept</span>
-	  	 </div>
-	  </div>
-	  <div class="response">
-	    <div class="responseInner">
-            <div class="fileIcon">
-		    <a href="http://vapour.sourceforge.net/recipes-web/example1#Concept">
-			    <img src="resources/images/unknown-file.png" alt="Unknown file type icon" />
-			</a>
-			</div>
-	      <span class="httpHeader goodHeader">200</span>
-	      <span class="httpHeader">Content-type: </span>
-	    </div>
-	  </div>
-       </div>
-      <div class="serverIcon">
-		<img src="resources/images/apacheconf.png" alt="A web server" />
-		<p>Web server</p>
-      </div>
-	  <div class="dummyR"/>
-      </div>
-
-    <h3>Test results</h3>
-    <ul>
-	<li>
-	  1st request while dereferencing class URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
-	  <span class="correctValue">Pass</span>
-	</li>
-	<li>
-	  1st request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
-	  <span class="correctValue">Pass</span>
-	</li>
-    </ul>
-
-
-    </div>
-      <div class="httpDialog">
-        <h2>Dereferencing property URI</h2>
+        <h2>
+          <!-- a target="mSBZCwCK74"/ -->
+          Dereferencing property URI
+         </h2>
       <div class="clientIcon">
 		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
 		<p>Client</p>
@@ -98,7 +77,10 @@
 	  </div>
 	  <div class="response">
 	    <div class="responseInner">
-	      <span class="httpHeader goodHeader">404</span>
+	      
+	      <span class="httpHeader badHttpHeader">404</span>
+	      
+	      
 	    </div>
 	  </div>
        </div>
@@ -120,11 +102,84 @@
 	  <span class="badValue">Fail</span>
 	</li>
     </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+    <li>
+      <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fvapour.sourceforge.net%2Frecipes-web%2FERRATA%2Fexample1%23prefLabel">
+        Check the response with the W3C HTTP validator
+      </a>
+    </li>
+    </ul>
 
 
     </div>
       <div class="httpDialog">
-        <h2>Dereferencing the vocabulary URI</h2>
+        <h2>
+          <!-- a target="mSBZCwCK66"/ -->
+          Dereferencing class URI
+         </h2>
+      <div class="clientIcon">
+		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div>
+            <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://vapour.sourceforge.net/recipes-web/example1#Concept</span>
+	  	 </div>
+	  </div>
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://vapour.sourceforge.net/recipes-web/example1#Concept">
+			    <img src="resources/images/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div>
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div>
+       </div>
+      <div class="serverIcon">
+		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+	  <div class="dummyR"/>
+      </div>
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  1st request while dereferencing class URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  1st request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+    <li>
+      <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Fvapour.sourceforge.net%2Frecipes-web%2Fexample1%23Concept">
+        Check the response with the W3C RDF validator
+      </a>
+    </li>
+    </ul>
+
+
+    </div>
+      <div class="httpDialog">
+        <h2>
+          <!-- a target="mSBZCwCK58"/ -->
+          Dereferencing the vocabulary URI
+         </h2>
       <div class="clientIcon">
 		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
 		<p>Client</p>
@@ -140,11 +195,14 @@
 	    <div class="responseInner">
             <div class="fileIcon">
 		    <a href="http://vapour.sourceforge.net/recipes-web/example1">
-			    <img src="resources/images/unknown-file.png" alt="Unknown file type icon" />
+			    <img src="resources/images/rdf-file.png" alt="RDF icon" />
 			</a>
 			</div>
-	      <span class="httpHeader goodHeader">200</span>
-	      <span class="httpHeader">Content-type: </span>
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
 	    </div>
 	  </div>
        </div>
@@ -158,13 +216,22 @@
     <h3>Test results</h3>
     <ul>
 	<li>
-	  1st request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
-	  <span class="correctValue">Pass</span>
-	</li>
-	<li>
 	  1st request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
 	  <span class="correctValue">Pass</span>
 	</li>
+	<li>
+	  1st request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+    <li>
+      <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Fvapour.sourceforge.net%2Frecipes-web%2Fexample1">
+        Check the response with the W3C RDF validator
+      </a>
+    </li>
     </ul>
 
 
@@ -172,7 +239,7 @@
     
     <div class="footer">
       <p>Report generated by <a href="http://vapour.sourceforge.net/">Vapour</a>,
-      version 1.0 on 2007-03-11 12:08:18.709063. Please read the
+      version 1.0 on 2007-03-11 16:56:17.282134. Please read the
       <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a>
       document. You can also <a href="FIXME">get an RDF version</a> of this
       report.</p>
