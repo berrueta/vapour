@@ -51,12 +51,20 @@ def getResultsFromModel(model, testRequirementUri):
     return resultSet
 
 def getHttpTracesFromModel(model, testRequirementUri):
-    select = ("?testSub", # 0
+    select = (
+              "?testSub", # 0
               "?testSubTitle", # 1
               "?uri", # 2
+
               "?responseCode", # 3
               "?responseContentType", # 4
-              "?responseLocation") # 5
+              "?responseLocation",  # 5
+
+              "?responseCodeTest", # 6
+              "?responseCodeValidity", # 7
+              "?responseContentTypeTest", # 8
+              "?responseContentTypeValidity", # 9
+              )
     where = GraphPattern([
         ("?testSub", RDF["type"], EARL["TestSubject"]),
         (testRequirementUri, DCT["hasPart"], "?assertion"),
@@ -69,7 +77,21 @@ def getHttpTracesFromModel(model, testRequirementUri):
     ])
     optional = [
         GraphPattern([("?response", HTTP["content-type"], "?responseContentType")]),
-        GraphPattern([("?response", HTTP["location"], "?responseLocation")])
+        GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
+        GraphPattern([
+                      ("?responseCodeAssertion", EARL["subject"], "?testSub"),
+                      ("?responseCodeAssertion", EARL["test"], "?responseCodeTest"),
+                      ("?responseCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["responseCode"]),
+                      ("?responseCodeAssertion", EARL["result"], "?responseCodeResult"),
+                      ("?responseCodeResult", EARL["validity"], "?responseCodeValidity")
+        ]),
+        GraphPattern([
+                      ("?responseContentTypeAssertion", EARL["subject"], "?testSub"),
+                      ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
+                      ("?responseContentTypeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["content-type"]),
+                      ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
+                      ("?responseContentTypeResult", EARL["validity"], "?responseContentTypeValidity")
+        ])
     ]
     results = [x for x in model.query(select, where, optional)]
     return results
@@ -124,7 +146,6 @@ def resultsModelToHTML(model, templateDir = "templates"):
         data['httpTraces'][testRequirementUri] = sortTrace(getHttpTracesFromModel(model, testRequirementUri))
         data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
-    data['passTestUri'] = str(EARL["pass"])
     data['reportDate'] = str(datetime.datetime.now())
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
