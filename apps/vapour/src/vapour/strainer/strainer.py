@@ -1,4 +1,5 @@
 from Cheetah.Template import Template
+import datetime
 
 try:
     import Cheetah
@@ -14,73 +15,115 @@ except ImportError:
 
 
 from rdflib.sparql.graphPattern import GraphPattern
-from rdflib import Namespace
+from vapour.namespaces import *
 
-
-EARL = Namespace("http://www.w3.org/WAI/ER/EARL/nmg-strawman#")
-RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
-DC = Namespace("http://purl.org/dc/elements/1.1/")
-URI = Namespace("http://www.w3.org/2006/uri#")
-HTTP = Namespace("http://www.w3.org/2006/http#")
-
-def getResultsFromModel(model):
-    select = ("?assertion", "?test", "?testTitle",
-              "?validity", "?validityLabel")
+def getTestRequirements(model):
+    select = ("?testRequirement", # 0
+              "?testRequirementTitle" # 1
+              )
     where = GraphPattern([
+         ("?testRequirement", RDF["type"], EARL["TestRequirement"]),
+         ("?testRequirement", DC["title"], "?testRequirementTitle")
+         ])
+    resultSet = model.query(select, where)
+    return resultSet
+
+def getResultsFromModel(model, testRequirementUri):
+    select = ("?assertion", #0
+              "?test", # 1
+              "?testTitle", # 2
+              "?validity", # 3
+              "?validityLabel", # 4
+              "?subject", # 5
+              "?subjectTitle") # 6
+    where = GraphPattern([          
         ("?assertion", RDF["type"], EARL["Assertion"]),
+        (testRequirementUri, DCT["hasPart"], "?assertion"),
         ("?assertion", EARL["test"], "?test"),
         ("?test", DC["title"], "?testTitle"),
         ("?assertion", EARL["result"], "?result"),
         ("?result", EARL["validity"], "?validity"),
-        ("?validity", RDFS["label"], "?validityLabel")
+        ("?validity", RDFS["label"], "?validityLabel"),
+        ("?assertion", EARL["subject"], "?subject"),
+        ("?subject", DC["title"], "?subjectTitle")
         ])
     resultSet = model.query(select, where)
-    results = []
-    for r in resultSet:
-        results.append((r[2], r[4]))
-    return results
+    return resultSet
 
-def getHttpTracesFromModel(model):
-    select = ("?testSub", "?testSubTitle", "?uri",
-              "?responseCode", "?responseContentType")
+def getHttpTracesFromModel(model, testRequirementUri):
+    select = ("?testSub", # 0
+              "?testSubTitle", # 1
+              "?uri", # 2
+              "?responseCode", # 3
+              "?responseContentType", # 4
+              "?responseLocation") # 5
     where = GraphPattern([
         ("?testSub", RDF["type"], EARL["TestSubject"]),
+        (testRequirementUri, DCT["hasPart"], "?assertion"),
+        ("?assertion", EARL["subject"], "?testSub"),
         ("?testSub", DC["title"], "?testSubTitle"),
         ("?testSub", EARL["httpRequest"], "?request"),
         ("?request", URI["uri"], "?uri"),
         ("?testSub", EARL["httpResponse"], "?response"),
-        ("?response", HTTP["responseCode"], "?responseCode"),
-        ("?response", HTTP["content-type"], "?responseContentType")
+        ("?response", HTTP["responseCode"], "?responseCode")
     ])
-    results = model.query(select, where)
+    optional = GraphPattern([
+        ("?response", HTTP["content-type"], "?responseContentType"),
+        ("?response", HTTP["location"], "?responseLocation")
+    ])
+    results = model.query(select, where, optional)
     return results
 	
 
+def getTestAgent(model):
+    """
+    Determine the software agent that was used to execute the tests
+    """
+    select = ("?agent", # 0
+              "?agentTitle", # 1
+              "?agentVersion", # 2
+              "?agentHomepage" # 3
+              )
+    where = GraphPattern([
+       ("?x", EARL["assertedBy"], "?agent"),
+       ("?agent", DC["title"], "?agentTitle"),
+       ("?agent", DCT["hasVersion"], "?agentVersion"),
+       ("?agent", FOAF["homepage"], "?agentHomepage")
+    ])
+    results = model.query(select, where)
+    return [x for x in results][0]
+    
 
-def resultsModelToHTML(model):
+def resultsModelToHTML(model, templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
     data = {}
-    data['testResults'] = getResultsFromModel(model)
-    data['httpTraces'] = getHttpTracesFromModel(model)
-    t = Template(file="templates/results.tmpl", searchList=[data])
+    data['testResults'] = {}
+    data['httpTraces'] = {}
+    data['testRequirements'] = getTestRequirements(model)
+    for testRequirementUri in [x[0] for x in data['testRequirements']]:        
+        data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
+        data['httpTraces'][testRequirementUri] = getHttpTracesFromModel(model, testRequirementUri)
+    data['testAgent'] = getTestAgent(model)
+    data['passTestUri'] = str(EARL["pass"])
+    data['reportDate'] = str(datetime.datetime.now())
+    t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
-	
+
 if __name__ == "__main__":
     #
     # Test with local files
     #
-    from rdflib.Graph import ConjunctiveGraph
+    from rdflib.Graph import ConjunctiveGraph, Graph
     from rdflib.sparql import sparqlGraph
     
-    store = ConjunctiveGraph()
+    store = Graph()
     store.parse("../../../../../webpage/vapour.rdf")
     store.parse("../../../../../webpage/recipes.rdf")
     store.parse("../../../../../webpage/earl.rdf")
-    store.parse("../../../../../webpage/demo-report1.rdf")
+    store.parse("../../../../../webpage/demo-report5.rdf")
     model = sparqlGraph.SPARQLGraph(store)
     t = resultsModelToHTML(model)
     print t
