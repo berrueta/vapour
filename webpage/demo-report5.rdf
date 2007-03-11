@@ -137,7 +137,28 @@
 
   <!-- Assertions ************************************************** -->
 
-  <earl:Assertion>
+  <earl:TestRequirement>
+    <dc:title xml:lang="en">Dereference the vocabulary URI, without specifying the desired content</dc:title>
+    <dct:hasPart rdf:nodeID="A01"/>
+    <dct:hasPart rdf:nodeID="A02"/>
+    <dct:hasPart rdf:nodeID="A03"/>
+  </earl:TestRequirement>
+
+  <earl:TestRequirement>
+    <dc:title xml:lang="en">Dereference the vocabulary URI with Accept HTML</dc:title>
+    <dct:hasPart rdf:nodeID="A04"/>
+    <dct:hasPart rdf:nodeID="A05"/>
+    <dct:hasPart rdf:nodeID="A06"/>
+  </earl:TestRequirement>
+
+  <earl:TestRequirement>
+    <dc:title xml:lang="en">Dereference the vocabulary URI with Accept RDF</dc:title>
+    <dct:hasPart rdf:nodeID="A07"/>
+    <dct:hasPart rdf:nodeID="A08"/>
+    <dct:hasPart rdf:nodeID="A09"/>
+  </earl:TestRequirement>
+
+  <earl:Assertion rdf:nodeID="A01">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriWOAccept"/>
     <earl:test rdf:resource="&recipes;TestResponseCode303"/>
@@ -151,7 +172,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A02">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriWOAccept-2"/>
     <earl:test rdf:resource="&recipes;TestResponseCode200"/>
@@ -165,7 +186,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A03">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriWOAccept-2"/>
     <earl:test rdf:resource="&recipes;TestContentTypeRdf"/>
@@ -179,7 +200,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A04">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptHTML"/>
     <earl:test rdf:resource="&recipes;TestResponseCode303"/>
@@ -193,7 +214,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A05">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptHTML-2"/>
     <earl:test rdf:resource="&recipes;TestResponseCode200"/>
@@ -207,7 +228,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A06">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptHTML-2"/>
     <earl:test rdf:resource="&recipes;TestContentTypeHtml"/>
@@ -221,7 +242,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A07">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptRdf"/>
     <earl:test rdf:resource="&recipes;TestResponseCode303"/>
@@ -235,7 +256,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A08">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptRdf-2"/>
     <earl:test rdf:resource="&recipes;TestResponseCode200"/>
@@ -249,7 +270,7 @@
     </earl:result>
   </earl:Assertion>
 
-  <earl:Assertion>
+  <earl:Assertion rdf:nodeID="A09">
     <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
     <earl:subject rdf:nodeID="subjectRecipe5VocabularyUriAcceptRdf-2"/>
     <earl:test rdf:resource="&recipes;TestContentTypeRdf"/>
