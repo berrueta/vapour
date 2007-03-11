@@ -1,22 +1,22 @@
 from util import *
 from vapour.namespaces import *
-from rdflib import BNode
+from rdflib import BNode, Literal
 
-def assertLastResponseCode200(graph, rootTestSubject):
+def assertLastResponseCode200(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
     result = (getResponseCode(graph, testSubject) == 200)
-    addAssertion(graph, testSubject, RECIPES["TestResponseCode200"], result)
+    addAssertion(graph, testSubject, RECIPES["TestResponseCode200"], result, testRequirement)
     
-def assertIntermediateResponseCode303(graph, rootTestSubject):
+def assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement):
     l = testSubjectsAsList(graph, rootTestSubject)
     for testSubject in l[0:len(l)-1]:
         result = (getResponseCode(graph, testSubject) == 303)
-        addAssertion(graph, testSubject, RECIPES["TestResponseCode302"], result)
+        addAssertion(graph, testSubject, RECIPES["TestResponseCode302"], result, testRequirement)
     
-def assertLastResponseContentTypeRdf(graph, rootTestSubject):
+def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
     result = (getContentType(graph, testSubject) == "application/rdf+xml")
-    addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result)
+    addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
 def getResponseCode(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
@@ -35,7 +35,7 @@ def getLiteralProperty(graph, resource, property):
     if len(l) == 0: return None
     else: return l[0]
     
-def addAssertion(graph, testSubject, test, validity):
+def addAssertion(graph, testSubject, test, validity, testRequirement):
     assertion = BNode()
     resultSubject = BNode()
     
@@ -55,4 +55,15 @@ def addAssertion(graph, testSubject, test, validity):
         validityResource = EARL["fail"]
     graph.add((resultSubject, EARL["validity"], validityResource))
     
+    graph.add((assertion, DCT["isPartOf"], testRequirement))
+    graph.add((testRequirement, DCT["hasPart"], assertion))
+    
     return assertion
+
+def addTestRequirement(graph, title):
+    testRequirement = BNode()
+    graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
+    titleLiteral = Literal(title)
+    titleLiteral.language = "en"
+    graph.add((testRequirement, DC["title"], titleLiteral))    
+    return testRequirement
