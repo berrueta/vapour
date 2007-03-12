@@ -1,3 +1,4 @@
+
 from util import *
 from vapour.namespaces import *
 from rdflib import BNode, Literal
