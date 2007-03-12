@@ -22,8 +22,6 @@ if __name__ == "__main__":
     classUri = sys.argv[3]
     propUri = sys.argv[4]
     
-    print sys.argv
-    
     store = Graph()
     store.parse(pathToRdfFiles + "/vapour.rdf")
     store.parse(pathToRdfFiles + "/recipes.rdf")
