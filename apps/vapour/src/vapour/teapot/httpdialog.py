@@ -9,14 +9,14 @@ userAgentString = "vapour.sourceforge.net"
 maxRedirects = 10
 
 def launchHttpDialog(graph, what, url, accept = None):
-    r = simpleRequest(graph, url, accept)
+    redirectsCount = 0
+    r = simpleRequest(graph, url, redirectsCount, accept)
     firstTestSubjectResource = r[0]
 
-    redirectsCount = 0
     response = r[1]
     while (response.status == httplib.SEE_OTHER or response.status == httplib.FOUND):
         previousSubjectResource = r[0]
-        r = simpleRequest(graph, url, accept, previousSubjectResource)
+        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource)
         response = r[1]
         url = response.getheader("Location")
         redirectsCount = redirectsCount + 1
@@ -27,7 +27,7 @@ def launchHttpDialog(graph, what, url, accept = None):
         
     return firstTestSubjectResource
         
-def simpleRequest(graph, url, accept, previousTestSubjectResource = None):
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None):
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
     server = parsedUrl[1]
     path = parsedUrl[2]
@@ -38,14 +38,14 @@ def simpleRequest(graph, url, accept, previousTestSubjectResource = None):
     conn.request("GET", path, headers = headers)
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount)
     if (previousTestSubjectResource is not None):
         graph.add((previousTestSubjectResource, VAPOUR_VOCAB["nextSubject"], testSubjectResource))
         graph.add((testSubjectResource, VAPOUR_VOCAB["previousSubject"], previousTestSubjectResource))
 
     return (testSubjectResource, response)
     
-def addToGraph(graph, url, accept, response):
+def addToGraph(graph, url, accept, response, previousRequestCount):
     httpStatus = response.status
     location = response.getheader("Location")
     contentType = response.getheader("Content-Type")
@@ -60,6 +60,7 @@ def addToGraph(graph, url, accept, response):
     
     graph.add((testSubjectResource, RDF["type"], EARL["TestSubject"]))
     graph.add((testSubjectResource, DC["date"], Literal(datetime.datetime.now()))) # FIXME: use standard format
+    graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
     
     graph.add((responseResource, RDF["type"], HTTP["GetRequest"]))
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests

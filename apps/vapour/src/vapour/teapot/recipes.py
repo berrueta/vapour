@@ -2,46 +2,72 @@
 from rdflib import Graph
 from httpdialog import launchHttpDialog
 from asserts import *
+import mimetypes
+
+assertLastResponseContentTypeFunctions = {
+                                          mimetypes.rdfXml : assertLastResponseContentTypeRdf,
+                                          mimetypes.html : assertLastResponseContentTypeHtml,
+                                          None : assertLastResponseContentTypeRdf
+                                }    
 
 # it needs a refactor into OOP
 
 def recipe1(graph, vocabUri, classUri, instanceUri):
-    testRequirement = addTestRequirement(graph, "Dereferencing the vocabulary URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri)
-    assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-    assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
 
-    testRequirement = addTestRequirement(graph, "Dereferencing class URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri)
-    assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-    assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
-
-    testRequirement = addTestRequirement(graph, "Dereferencing property URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", instanceUri)    
-    assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-    assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
-    
 def recipe2(graph, vocabUri, classUri, instanceUri):
-    testRequirement = addTestRequirement(graph, "Dereferencing the vocabulary URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri)
-    assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-    assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri);
 
-    testRequirement = addTestRequirement(graph, "Dereferencing class URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri)
+def recipe3(graph, vocabUri, classUri, instanceUri):
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    
+def recipe4(graph, vocabUri, classUri, instanceUri):
+     #FIXME
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    
+def recipe5(graph, vocabUri, classUri, instanceUri):
+     #FIXME
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    
+def checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri):
+    scenarioDescription = " (without content negotiation)"
+    contentType = None
+    runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
+    
+def checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri):
+    scenarioDescription = " (requesting RDF/XML)"
+    contentType = mimetypes.rdfXml
+    runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
+    
+def checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri):
+    scenarioDescription = " (requesting HTML)"
+    contentType = mimetypes.html
+    runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
+    
+def runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType):
+    testRequirement = addTestRequirement(graph, "Dereferencing the vocabulary URI" + scenarioDescription)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri, contentType)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
+    assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
 
-    testRequirement = addTestRequirement(graph, "Dereferencing property URI")
-    rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", instanceUri)    
+    testRequirement = addTestRequirement(graph, "Dereferencing class URI" + scenarioDescription)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri, contentType)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
+    assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
+
+    testRequirement = addTestRequirement(graph, "Dereferencing property URI" + scenarioDescription)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", instanceUri, contentType)    
+    assertLastResponseCode200(graph, rootTestSubject, testRequirement)
+    assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
+    assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)    
     
 if __name__ == "__main__":
     store = Graph()
