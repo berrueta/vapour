@@ -64,6 +64,9 @@ def getHttpTracesFromModel(model, testRequirementUri):
               "?responseCodeValidity", # 7
               "?responseContentTypeTest", # 8
               "?responseContentTypeValidity", # 9
+              
+              "?requestAccept", # 10
+              "?previousRequestCount", # 11
               )
     where = GraphPattern([
         ("?testSub", RDF["type"], EARL["TestSubject"]),
@@ -73,9 +76,11 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?testSub", EARL["httpRequest"], "?request"),
         ("?request", URI["uri"], "?uri"),
         ("?testSub", EARL["httpResponse"], "?response"),
-        ("?response", HTTP["responseCode"], "?responseCode")
+        ("?response", HTTP["responseCode"], "?responseCode"),
+        ("?testSub", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
+        GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
         GraphPattern([("?response", HTTP["content-type"], "?responseContentType")]),
         GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
         GraphPattern([
@@ -93,7 +98,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
                       ("?responseContentTypeResult", EARL["validity"], "?responseContentTypeValidity")
         ])
     ]
-    results = [x for x in model.query(select, where, optional)]
+    results = [x for x in model.query(select, where, optional)] # FIXME: ORDER BY ?previousRequestCount
     return results
 
 def getFinalUriFromModel(model, testRequirementUri):

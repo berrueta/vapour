@@ -66,6 +66,9 @@
 	  <div class="request">
 	  	 <div class="requestInner">
 	  	   <span class="httpHeader">GET $trace[2]</span>
+	  	   #if $trace[10] != None:
+		  	   <span class="httpHeader">Accept: $trace[10]</span>
+		   #end if
 	  	 </div>
 	  </div> <!-- /request -->
 	  <div class="response">
@@ -138,17 +141,19 @@
     <ul>
     #from urllib import quote
     #for $finalUri in $finalUris[$testRequirement[0]]:
-    <li>
       #if $finalUri[1] == 'text/html':
-      <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">
-        Check the response with the W3C HTTP validator
-      </a>
+      <li>
+        <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
       #else if $finalUri[1] == 'application/rdf+xml':
-      <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
-        Check the response with the W3C RDF validator
-      </a>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
       #end if
-    </li>
     #end for
     </ul>
     #end if
