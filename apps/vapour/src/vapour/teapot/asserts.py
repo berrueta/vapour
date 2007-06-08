@@ -2,6 +2,7 @@
 from util import *
 from vapour.namespaces import *
 from rdflib import BNode, Literal
+import mimetypes
 
 def assertLastResponseCode200(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
@@ -13,10 +14,15 @@ def assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement):
     for testSubject in l[0:len(l)-1]:
         result = (getResponseCode(graph, testSubject) == 303)
         addAssertion(graph, testSubject, RECIPES["TestResponseCode302"], result, testRequirement)
+
+def assertLastResponseContentTypeHtml(graph, rootTestSubject, testRequirement):
+    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
+    result = (getContentType(graph, testSubject) == mimetypes.html)
+    addAssertion(graph, testSubject, RECIPES["TestContentTypeHtml"], result, testRequirement)
     
 def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    result = (getContentType(graph, testSubject) == "application/rdf+xml")
+    result = (getContentType(graph, testSubject) == mimetypes.rdfXml)
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
 def getResponseCode(graph, testSubject):
