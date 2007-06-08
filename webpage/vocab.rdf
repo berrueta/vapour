@@ -15,6 +15,13 @@
     <rdfs:range rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
   </rdfs:Property>
 
+  <rdfs:Property rdf:about="#previousRequestCount">
+    <rdfs:label xml:lang="en">Number of previous request</rdfs:label>
+    <rdfs:comment xml:lang="en">The number of HTTP requests previous to this one (i.e.: hop-count)</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+    <!--rdfs:range rdf:resource=""/-->  <!-- FIXME: xs:integer -->
+  </rdfs:Property>
+
   <rdfs:Property rdf:about="#propertyUnderTest">
     <rdfs:label xml:lang="en">
       Property under test
