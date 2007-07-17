@@ -4,6 +4,7 @@ from rdflib.Graph import ConjunctiveGraph, Graph
 from rdflib.sparql import sparqlGraph
 from vapour.strainer import strainer
 from vapour.teapot import recipes
+from vapour.namespaces import *
 
 if os.environ.get("VAPOUR_RDF_FILES"):
     pathToRdfFiles = os.environ.get("VAPOUR_RDF_FILES")
@@ -25,6 +26,18 @@ if __name__ == "__main__":
     outputRdfFileName = sys.argv[6]
     
     store = Graph()
+    store.bind('earl', EARL)
+    store.bind('rdf', RDF)
+    store.bind('rdfs', RDFS)
+    store.bind('dc', DC)
+    store.bind('dct', DCT)
+    store.bind('uri', URI)
+    store.bind('http', HTTP)
+    store.bind('vapourv', VAPOUR_VOCAB)
+    store.bind('vapour', VAPOUR_SOFT)
+    store.bind('recipes', RECIPES)
+    store.bind('foaf', FOAF)
+    
     
     recipesFunctions = { 1 : recipes.recipe1,
                          2 : recipes.recipe2,

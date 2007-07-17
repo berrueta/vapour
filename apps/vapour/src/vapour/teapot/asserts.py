@@ -17,12 +17,12 @@ def assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement):
 
 def assertLastResponseContentTypeHtml(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    result = (getContentType(graph, testSubject) == mimetypes.html)
+    result = (mimetypes.html in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeHtml"], result, testRequirement)
     
 def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    result = (getContentType(graph, testSubject) == mimetypes.rdfXml)
+    result = (mimetypes.rdfXml in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
 def getResponseCode(graph, testSubject):
