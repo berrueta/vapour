@@ -1,3 +1,9 @@
+
+from rdflib.Graph import ConjunctiveGraph
+from rdflib.sparql.sparqlGraph import SPARQLGraph
+from rdflib.sparql.graphPattern import GraphPattern
+from rdflib.sparql import Query
+from vapour.namespaces import *
 from Cheetah.Template import Template
 import datetime
 
@@ -14,10 +20,8 @@ except ImportError:
     sys.exit(-1)
 
 
-from rdflib.sparql.graphPattern import GraphPattern
-from vapour.namespaces import *
-
 def getTestRequirements(model):
+    sparqlGr = SPARQLGraph(model)
     select = ("?testRequirement", # 0
               "?testRequirementTitle" # 1
               )
@@ -25,10 +29,11 @@ def getTestRequirements(model):
          ("?testRequirement", RDF["type"], EARL["TestRequirement"]),
          ("?testRequirement", DC["title"], "?testRequirementTitle")
          ])
-    resultSet = model.query(select, where)
+    resultSet = Query.query(sparqlGr, select, where)
     return resultSet
 
 def getResultsFromModel(model, testRequirementUri):
+    sparqlGr = SPARQLGraph(model)
     select = ("?assertion", #0
               "?test", # 1
               "?testTitle", # 2
@@ -47,10 +52,11 @@ def getResultsFromModel(model, testRequirementUri):
         ("?assertion", EARL["subject"], "?subject"),
         ("?subject", DC["title"], "?subjectTitle")
         ])
-    resultSet = model.query(select, where)
+    resultSet = Query.query(sparqlGr, select, where)
     return resultSet
 
 def getHttpTracesFromModel(model, testRequirementUri):
+    sparqlGr = SPARQLGraph(model)
     select = (
               "?testSub", # 0
               "?testSubTitle", # 1
@@ -98,10 +104,11 @@ def getHttpTracesFromModel(model, testRequirementUri):
                       ("?responseContentTypeResult", EARL["validity"], "?responseContentTypeValidity")
         ])
     ]
-    results = [x for x in model.query(select, where, optional)] # FIXME: ORDER BY ?previousRequestCount
+    results = [x for x in Query.query(sparqlGr, select, where, optional)] # FIXME: ORDER BY ?previousRequestCount
     return results
 
 def getFinalUriFromModel(model, testRequirementUri):
+    sparqlGr = SPARQLGraph(model)
     select = ("?finalUri", "?contentType")
     # FIXME: a FILTER clause should be added to check the responseCode == 200
     where = GraphPattern([
@@ -112,12 +119,13 @@ def getFinalUriFromModel(model, testRequirementUri):
         ("?httpResponse", HTTP["content-type"], "?contentType"),
         ("?getRequest", URI["uri"], "?finalUri")
     ])
-    return [x for x in model.query(select, where)]
+    return [x for x in Query.query(sparqlGr, select, where)]
 
 def getTestAgent(model):
     """
     Determine the software agent that was used to execute the tests
     """
+    sparqlGr = SPARQLGraph(model)
     select = ("?agent", # 0
               "?agentTitle", # 1
               "?agentVersion", # 2
@@ -129,7 +137,7 @@ def getTestAgent(model):
        ("?agent", DCT["hasVersion"], "?agentVersion"),
        ("?agent", FOAF["homepage"], "?agentHomepage")
     ])
-    results = model.query(select, where)
+    results = Query.query(sparqlGr, select, where)
     return [x for x in results][0]
 
 def sortTrace(trace):    
