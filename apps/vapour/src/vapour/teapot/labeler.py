@@ -8,10 +8,8 @@ def labelTestSubjects(graph, rootTestSubject, what, accept = None):
         title = inttoord(i+1) + " request while " + what
         if (accept is None):
             title = title + " without specifying the desired content type"
-        elif (accept == "application/rdf+xml"):
-            title = title + " requesting RDF content"
-        elif (accept == "text/html"):
-            title = title + " requesting HTML content"
+        else:
+            title = title + " " + mimetypes.requestDescription[accept]
         titleLiteral = Literal(title)
         titleLiteral.language = "en"
         graph.add((sequence[i], DC["title"], titleLiteral))
