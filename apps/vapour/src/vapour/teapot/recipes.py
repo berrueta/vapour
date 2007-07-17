@@ -7,6 +7,8 @@ import mimetypes
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
                                           mimetypes.html : assertLastResponseContentTypeHtml,
+                                          mimetypes.qualifiedRdfXml :  assertLastResponseContentTypeRdf,
+                                          mimetypes.qualifiedHtml : assertLastResponseContentTypeHtml,
                                           None : assertLastResponseContentTypeRdf
                                 }    
 
@@ -22,18 +24,24 @@ def recipe3(graph, vocabUri, classUri, instanceUri):
     checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdfQualified(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, instanceUri)
     
 def recipe4(graph, vocabUri, classUri, instanceUri):
      #FIXME
     checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdfQualified(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, instanceUri)
     
 def recipe5(graph, vocabUri, classUri, instanceUri):
      #FIXME
     checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri)
     checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptRdfQualified(graph, vocabUri, classUri, instanceUri)
+    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, instanceUri)
     
 def checkWithoutAcceptHeader(graph, vocabUri, classUri, instanceUri):
     scenarioDescription = " (without content negotiation)"
@@ -48,6 +56,16 @@ def checkWithAcceptRdf(graph, vocabUri, classUri, instanceUri):
 def checkWithAcceptHtml(graph, vocabUri, classUri, instanceUri):
     scenarioDescription = " (requesting HTML)"
     contentType = mimetypes.html
+    runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
+    
+def checkWithAcceptRdfQualified(graph, vocabUri, classUri, instanceUri):
+    scenarioDescription = " (requesting RDF/XML with qualifier)"
+    contentType = mimetypes.qualifiedRdfXml
+    runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
+
+def checkWithAcceptHtmlQualified(graph, vocabUri, classUri, instanceUri):
+    scenarioDescription = " (requesting HTML with qualifier)"
+    contentType = mimetypes.qualifiedHtml
     runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType)
     
 def runScenario(graph, vocabUri, classUri, instanceUri, scenarioDescription, contentType):
