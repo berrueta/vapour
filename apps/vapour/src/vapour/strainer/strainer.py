@@ -30,6 +30,9 @@ def getTestRequirements(model):
          ("?testRequirement", DC["title"], "?testRequirementTitle")
          ])
     resultSet = Query.query(sparqlGr, select, where)
+    # manually sorting the results
+    sortByTitleFunc = lambda x, y : cmp(x[1],y[1]) 
+    resultSet.sort(sortByTitleFunc)
     return resultSet
 
 def getResultsFromModel(model, testRequirementUri):
