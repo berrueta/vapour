@@ -107,7 +107,10 @@ def getHttpTracesFromModel(model, testRequirementUri):
                       ("?responseContentTypeResult", EARL["validity"], "?responseContentTypeValidity")
         ])
     ]
-    results = [x for x in Query.query(sparqlGr, select, where, optional)] # FIXME: ORDER BY ?previousRequestCount
+    results = [x for x in Query.query(sparqlGr, select, where, optional)]
+    # manually sorting the results
+    sortByPreviousRequestCount = lambda x, y : cmp(x[11],y[11]) 
+    results.sort(sortByPreviousRequestCount)    
     return results
 
 def getFinalUriFromModel(model, testRequirementUri):
