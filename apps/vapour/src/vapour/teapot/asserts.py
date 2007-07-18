@@ -22,6 +22,11 @@ def assertLastResponseContentTypeHtml(graph, rootTestSubject, testRequirement):
     result = (mimetypes.html in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeHtml"], result, testRequirement)
     
+def assertLastResponseContentTypeXhtml(graph, rootTestSubject, testRequirement):
+    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
+    result = (mimetypes.xhtml in getContentType(graph, testSubject))
+    addAssertion(graph, testSubject, RECIPES["TestContentTypeXhtml"], result, testRequirement)
+    
 def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
     result = (mimetypes.rdfXml in getContentType(graph, testSubject))
