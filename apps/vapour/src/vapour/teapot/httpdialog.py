@@ -10,7 +10,7 @@ maxRedirects = 10
 
 def launchHttpDialog(graph, what, url, accept = None):
     redirectsCount = 0
-    r = simpleRequest(graph, url, redirectsCount, accept)
+    r = simpleRequest(graph, url, accept, redirectsCount)
     firstTestSubjectResource = r[0]
 
     response = r[1]
@@ -35,6 +35,8 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     headers = {"User-agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
+    else:
+        headers["Accept"] = ""
     conn.request("GET", path, headers = headers)
     response = conn.getresponse()
     
