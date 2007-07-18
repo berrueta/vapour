@@ -14,14 +14,15 @@ def launchHttpDialog(graph, what, url, accept = None):
     firstTestSubjectResource = r[0]
 
     response = r[1]
-    while (response.status == httplib.SEE_OTHER or response.status == httplib.FOUND):
-        previousSubjectResource = r[0]
-        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource)
-        response = r[1]
+    while (response.status == httplib.SEE_OTHER):
+        previousSubjectResource = r[0]        
         url = response.getheader("Location")
         redirectsCount = redirectsCount + 1
         if (redirectsCount > maxRedirects):
             raise "Too many redirections, aborting"
+
+        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource)
+        response = r[1]
         
     labelTestSubjects(graph, firstTestSubjectResource, what)        
         
