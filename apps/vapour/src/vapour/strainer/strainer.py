@@ -77,10 +77,10 @@ def getHttpTracesFromModel(model, testRequirementUri):
               "?requestAccept", # 10
               "?previousRequestCount", # 11
               )
-    where = GraphPattern([
-        ("?testSub", RDF["type"], EARL["TestSubject"]),
+    where = GraphPattern([Concept.
         (testRequirementUri, DCT["hasPart"], "?assertion"),
         ("?assertion", EARL["subject"], "?testSub"),
+        ("?testSub", RDF["type"], EARL["TestSubject"]),
         ("?testSub", DC["title"], "?testSubTitle"),
         ("?testSub", EARL["httpRequest"], "?request"),
         ("?request", URI["uri"], "?uri"),

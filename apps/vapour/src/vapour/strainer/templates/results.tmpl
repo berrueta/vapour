@@ -29,9 +29,9 @@
           #for $testRequirement in $testRequirements:
           <tr>
             <td>
-              <!--a href="#$testRequirement[0]"-->
+              <a href="#$testRequirement[0]">
               $testRequirement[1]
-              <!--/a-->
+              </a>
              </td>
              #set $totalTests = len($testResults[$testRequirement[0]])
              #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["fail"]])
@@ -52,8 +52,7 @@
      #for $testRequirement in $testRequirements:
     <div>
       <div class="httpDialog">
-        <h2>
-          <!-- a target="$testRequirement[0]"/ -->
+        <h2 id="$testRequirement[0]">
           $testRequirement[1]
          </h2>
       <div class="clientIcon">

@@ -1,8 +1,10 @@
 
 from util import *
 from vapour.namespaces import *
-from rdflib import BNode, Literal
+from rdflib import BNode, Literal, URIRef
 import mimetypes
+
+reqCount = 1
 
 def assertLastResponseCode200(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
@@ -68,7 +70,9 @@ def addAssertion(graph, testSubject, test, validity, testRequirement):
     return assertion
 
 def addTestRequirement(graph, title):
-    testRequirement = BNode()
+    global reqCount
+    testRequirement = URIRef("req" + str(reqCount))
+    reqCount += 1
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
     titleLiteral = Literal(title)
     titleLiteral.language = "en"
