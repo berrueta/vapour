@@ -35,8 +35,6 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     headers = {"User-agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
-    else:
-        headers["Accept"] = ""
     conn.request("GET", path, headers = headers)
     response = conn.getresponse()
     
