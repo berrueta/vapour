@@ -59,7 +59,7 @@ if __name__ == "__main__":
     store.parse(pathToRdfFiles + "/earl.rdf")
 
     model = sparqlGraph.SPARQLGraph(store)
-    html = strainer.resultsModelToHTML(model, pathToTemplates)
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, pathToTemplates)
     if outputFileName is not None:
         outputFile = open(outputFileName,'w')
         outputFile.write(str(html))

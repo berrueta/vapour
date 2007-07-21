@@ -150,12 +150,18 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def resultsModelToHTML(model, templateDir = "templates"):
+def resultsModelToHTML(model, vocabUri, classUri, propertyUri, templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
     data = {}
+    
+    data['printForm'] = True
+    data['vocabUri'] = vocabUri
+    data['classUri'] = classUri
+    data['propertyUri'] = propertyUri
+    
     data['testResults'] = {}
     data['httpTraces'] = {}
     data['finalUris'] = {}
