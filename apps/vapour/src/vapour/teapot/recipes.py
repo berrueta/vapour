@@ -23,7 +23,7 @@ def recipe1(graph, vocabUri, classUri = None, propertyUri = None):
     checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
 
 def recipe2(graph, vocabUri, classUri = None, propertyUri = None):
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri);
+    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
 
 def recipe3(graph, vocabUri, classUri = None, propertyUri = None):
     checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
