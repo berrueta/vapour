@@ -19,47 +19,19 @@ assertLastResponseContentTypeFunctions = {
 
 # it needs a refactor into OOP
 
-def recipe1(graph, vocabUri, classUri = None, propertyUri = None):
+def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = None):
     checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
+    checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
+    checkWithAcceptRdfQualified(graph, vocabUri, classUri, propertyUri)
+    if htmlVersions:
+        checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
+        checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
+        checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
+        checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
+    
+    for i in range(0,4):
+        checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
-def recipe2(graph, vocabUri, classUri = None, propertyUri = None):
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
-
-def recipe3(graph, vocabUri, classUri = None, propertyUri = None):
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdfQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
-    for i in range(0,4):
-        checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
-    
-def recipe4(graph, vocabUri, classUri = None, propertyUri = None):
-     #FIXME
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdfQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
-    for i in range(0,4):
-        checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
-    
-def recipe5(graph, vocabUri, classUri = None, propertyUri = None):
-     #FIXME
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdfQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
-    for i in range(0,4):
-        checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
-    
 def checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri):
     scenarioDescription = " (without content negotiation)"
     contentType = None

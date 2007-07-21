@@ -19,12 +19,11 @@ else:
 
 if __name__ == "__main__":
 
-    recipeNumber = int(sys.argv[1])
-    vocabUri = sys.argv[2]
-    classUri = sys.argv[3]
-    propUri = sys.argv[4]
-    outputFileName = sys.argv[5]
-    outputRdfFileName = sys.argv[6]
+    vocabUri = sys.argv[1]
+    classUri = sys.argv[2]
+    propUri = sys.argv[3]
+    outputFileName = sys.argv[4]
+    outputRdfFileName = sys.argv[5]
     
     store = Graph()
     store.bind('earl', EARL)
@@ -38,15 +37,7 @@ if __name__ == "__main__":
     store.bind('vapour', VAPOUR_SOFT)
     store.bind('recipes', RECIPES)
     store.bind('foaf', FOAF)
-    
-    
-    recipesFunctions = { 1 : recipes.recipe1,
-                         2 : recipes.recipe2,
-                         3 : recipes.recipe3,
-                         4 : recipes.recipe4,
-                         5 : recipes.recipe5
-                       }
-    
+        
     if classUri is None and propertyUri is None:
         (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
         random.seed()
@@ -55,12 +46,8 @@ if __name__ == "__main__":
         if propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
             propertyUri = random.choice(propertyUris)
     
-    if recipeNumber in recipesFunctions:
-        recipe = recipesFunctions[recipeNumber]
-        recipe(store, vocabUri, classUri, propUri)
-    else:
-        print "ERROR: Unknown recipe number: " + recipeNumber
-        sys.exit(-1)
+    htmlVersions = True
+    recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propUri)
     
     if outputRdfFileName is not None:
         outputRdfFile = open(outputRdfFileName,'w')
