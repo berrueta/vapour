@@ -9,6 +9,9 @@ userAgentString = "vapour.sourceforge.net"
 maxRedirects = 10
 
 def launchHttpDialog(graph, what, url, accept = None):
+    return followRedirects(graph, what, url, accept)[0]
+
+def followRedirects(graph, what, url, accept = None):
     redirectsCount = 0
     r = simpleRequest(graph, url, accept, redirectsCount)
     firstTestSubjectResource = r[0]
@@ -24,9 +27,9 @@ def launchHttpDialog(graph, what, url, accept = None):
         r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource)
         response = r[1]
         
-    labelTestSubjects(graph, firstTestSubjectResource, what)        
-        
-    return firstTestSubjectResource
+    labelTestSubjects(graph, firstTestSubjectResource, what)                
+    return (firstTestSubjectResource, response)
+    
         
 def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None):
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
