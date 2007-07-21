@@ -3,8 +3,9 @@ import os, sys
 from rdflib.Graph import ConjunctiveGraph, Graph
 from rdflib.sparql import sparqlGraph
 from vapour.strainer import strainer
-from vapour.teapot import recipes
+from vapour.teapot import recipes, autodetect
 from vapour.namespaces import *
+import random
 
 if os.environ.get("VAPOUR_RDF_FILES"):
     pathToRdfFiles = os.environ.get("VAPOUR_RDF_FILES")
@@ -45,6 +46,14 @@ if __name__ == "__main__":
                          4 : recipes.recipe4,
                          5 : recipes.recipe5
                        }
+    
+    if classUri is None and propertyUri is None:
+        (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
+        random.seed()
+        if classUri is None and classUris is not None and len(classUris) > 0:
+            classUri = random.choice(classUris)
+        if propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
+            propertyUri = random.choice(propertyUris)
     
     if recipeNumber in recipesFunctions:
         recipe = recipesFunctions[recipeNumber]
