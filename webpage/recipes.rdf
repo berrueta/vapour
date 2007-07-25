@@ -80,4 +80,15 @@
     <!-- dc:identifier -->
   </earl:TestCase>
 
+  <earl:TestCase rdf:about="#TestContentTypeXhtmlOrHtml">
+    <dc:title xml:lang="en">Content type should be 'application/xhtml+xml' or 'text/html'</dc:title>
+    <dc:description xml:lang="en">
+      The Content-Type header of the response should be
+      'application/xhtml+xml' or 'text/html'
+    </dc:description>
+    <vapour:propertyUnderTest rdf:resource="&http;content-type"/>
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
+    <!-- dc:identifier -->
+  </earl:TestCase>
+
 </rdf:RDF>
