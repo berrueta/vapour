@@ -7,15 +7,15 @@ assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
                                           mimetypes.html : assertLastResponseContentTypeHtml,
                                           mimetypes.xhtml : assertLastResponseContentTypeXhtml,
+                                          mimetypes.xhtmlOrHtml : assertLastResponseContentTypeXhtmlOrHtml,
                                           mimetypes.qualifiedRdfXml :  assertLastResponseContentTypeRdf,
                                           mimetypes.qualifiedHtml : assertLastResponseContentTypeHtml,
                                           mimetypes.qualifiedXhtml : assertLastResponseContentTypeXhtml,
                                           mimetypes.mixed[0] : assertLastResponseContentTypeRdf,
                                           mimetypes.mixed[1]: assertLastResponseContentTypeHtml,
                                           mimetypes.mixed[2]: assertLastResponseContentTypeRdf,
-                                          mimetypes.mixed[3]: assertLastResponseContentTypeXhtml,
-                                          mimetypes.mixed[4]: assertLastResponseContentTypeRdf,
-                                          mimetypes.mixed[5]: assertLastResponseContentTypeHtml,
+                                          mimetypes.mixed[3]: assertLastResponseContentTypeRdf,
+                                          mimetypes.mixed[4]: assertLastResponseContentTypeHtml,
                                           None : assertLastResponseContentTypeRdf
                                 }    
 
@@ -28,10 +28,11 @@ def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = N
     if htmlVersions:
         checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
+        checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
     
-    for i in range(0,6):
+    for i in range(0,5):
         checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
 def checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri):
@@ -52,6 +53,11 @@ def checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri):
 def checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri):
     scenarioDescription = " (requesting XHTML)"
     contentType = mimetypes.xhtml
+    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    
+def checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri):
+    scenarioDescription = " (requesting (X)HTML)"
+    contentType = mimetypes.xhtmlOrHtml
     runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
     
 def checkWithAcceptRdfQualified(graph, vocabUri, classUri, propertyUri):
