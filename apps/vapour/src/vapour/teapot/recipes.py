@@ -29,8 +29,8 @@ def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = N
         checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri)
     
-    for i in range(0,8):
-        checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
+    #for i in range(0,8):
+     #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
 def checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri):
     scenarioDescription = " (without content negotiation)"
