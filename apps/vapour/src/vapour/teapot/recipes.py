@@ -14,6 +14,8 @@ assertLastResponseContentTypeFunctions = {
                                           mimetypes.mixed[1]: assertLastResponseContentTypeHtml,
                                           mimetypes.mixed[2]: assertLastResponseContentTypeRdf,
                                           mimetypes.mixed[3]: assertLastResponseContentTypeXhtml,
+                                          mimetypes.mixed[4]: assertLastResponseContentTypeRdf,
+                                          mimetypes.mixed[5]: assertLastResponseContentTypeHtml,
                                           None : assertLastResponseContentTypeRdf
                                 }    
 
@@ -29,7 +31,7 @@ def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = N
         checkWithAcceptHtmlQualified(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptXhtmlQualified(graph, vocabUri, classUri, propertyUri)
     
-    for i in range(0,4):
+    for i in range(0,6):
         checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
 def checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri):

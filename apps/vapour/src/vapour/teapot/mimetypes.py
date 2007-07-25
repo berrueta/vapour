@@ -9,7 +9,9 @@ qualifiedXhtml = "application/xhtml+xml;q=0.5"
 mixed = [ "application/rdf+xml;q=0.5,text/html;q=.3",
  "application/rdf+xml;q=0.3,text/html;q=.5",
  "application/rdf+xml;q=0.5,text/html;q=.5",
- xhtml + "," +html ]
+ xhtml + "," +html,
+ rdfXml + "," + html,
+ html + "," + rdfXml ]
 
 requestDescription = {
                rdfXml : "requesting RDF/XML data",
