@@ -53,7 +53,7 @@
                #set $cssClass = "allTestsOk"
              #else:
                #set $cssClass = "someTestsFail"
-             #endif
+             #end if
             <td class="$cssClass">
             #echo ($totalTests - $failedTests)#/$totalTests
             </td>            
