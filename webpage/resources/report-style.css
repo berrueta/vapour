@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 .request
 { 
   width:70%;
-  background: #ffffcf url(/resources/images/arrow-right.png) no-repeat right 50%;
+  background: #ffffcf url(arrow-right.png) no-repeat right 50%;
   margin: 0;
   margin-bottom: .6em; 
   margin-left:10%;
@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .response
 { 
-  background: #fff url(/resources/images/arrow-left.png) no-repeat left 50%;
+  background: #fff url(arrow-left.png) no-repeat left 50%;
   margin: 0;
   padding: 0;
   margin-bottom: .6em;
