@@ -150,21 +150,28 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def resultsModelToHTML(model, vocabUri, classUri, propertyUri, templateDir = "templates"):
-    """
-    Entry point: use a RDFmodel with results as input to populate a
-    cheetah template
-    """
+def prepareData(vocabUri = "", classUri = "", propertyUri = ""):
     data = {}
     
     data['printForm'] = True
     data['vocabUri'] = vocabUri
     data['classUri'] = classUri
     data['propertyUri'] = propertyUri
+
+    data['testAgent'] = {} # it may be overwritten later
+    data['testRequirements'] = {} # it may be overwritten later
     
     data['testResults'] = {}
     data['httpTraces'] = {}
     data['finalUris'] = {}
+    return data
+
+def resultsModelToHTML(model, vocabUri, classUri, propertyUri, templateDir = "templates"):
+    """
+    Entry point: use a RDFmodel with results as input to populate a
+    cheetah template
+    """
+    data = prepareData(vocabUri, classUri, propertyUri)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
@@ -172,6 +179,11 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, templateDir = "te
         data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
     data['reportDate'] = str(datetime.datetime.now())
+    t = Template(file=templateDir + "/results.tmpl", searchList=[data])
+    return t
+
+def justTheFormInHTML(templateDir = "tempaltes"):    
+    data = prepareData()
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
