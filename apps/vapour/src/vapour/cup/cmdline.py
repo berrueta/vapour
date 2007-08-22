@@ -5,6 +5,7 @@ from vapour.teapot import recipes, autodetect
 from vapour.cup import common
 import random
 
+resourceBaseUri = "../resources"
 
 if __name__ == "__main__":
 
@@ -39,7 +40,7 @@ if __name__ == "__main__":
     store.parse(common.pathToRdfFiles + "/earl.rdf")
 
     model = common.createModel(store)
-    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, common.pathToTemplates)
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, resourceBaseUri, common.pathToTemplates)
     if outputFileName is not None:
         outputFile = open(outputFileName,'w')
         outputFile.write(str(html))

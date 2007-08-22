@@ -11,7 +11,7 @@
 	#end if
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
-    <link type="text/css" rel="stylesheet" href="report-style.css" media="screen,projection,print" />
+    <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
     <link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />
     <title>Vapour Report</title>
   </head>
@@ -72,7 +72,7 @@
           $testRequirement[1]
          </h2>
       <div class="clientIcon">
-		<img src="resources/images/computer.png" alt="A computer on the client-side"/>
+		<img src="$resourceBaseUri/computer.png" alt="A computer on the client-side"/>
 		<p>Client</p>
       </div> <!-- /clientIcon -->
       <div class="dialogArea">
@@ -92,11 +92,11 @@
             <div class="fileIcon">
 		    <a href="$trace[2]">
 		      #if ($trace[4].startswith(mimetypes.rdfXml)):
-			    <img src="resources/images/rdf-file.png" alt="RDF icon" />
+			    <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
 			  #else if ($trace[4].startswith(mimetypes.html)):
-			    <img src="resources/images/html-file.png" alt="HTML icon" />
+			    <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
 			  #else:
-			    <img src="resources/images/unknown-file.png" alt="Unknown file type icon" />
+			    <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
 			 #end if
 			</a>
 			</div> <!-- /fileIcon -->
@@ -130,7 +130,7 @@
 	#end for
        </div> <!-- /dialogArea -->
       <div class="serverIcon">
-		<img src="resources/images/apacheconf.png" alt="A web server" />
+		<img src="$resourceBaseUri/apacheconf.png" alt="A web server" />
 		<p>Web server</p>
       </div>
       <div class="dummyR"/>
