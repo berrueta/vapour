@@ -1,42 +1,22 @@
 
-import os, sys
-from rdflib.Graph import ConjunctiveGraph, Graph
-from rdflib.sparql import sparqlGraph
+import sys
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect
-from vapour.namespaces import *
+from vapour.cup import common
 import random
 
-if os.environ.get("VAPOUR_RDF_FILES"):
-    pathToRdfFiles = os.environ.get("VAPOUR_RDF_FILES")
-else:
-    pathToRdfFiles = "http://vapour.sourceforge.net"
-    
-if os.environ.get("VAPOUR_TEMPLATES"):
-    pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
-else:
-    pathToTemplates = "../strainer/templates"
 
 if __name__ == "__main__":
 
+    common.readEnvironment()
+    
     vocabUri = sys.argv[1]
     classUri = sys.argv[2]
     propUri = sys.argv[3]
     outputFileName = sys.argv[4]
     outputRdfFileName = sys.argv[5]
     
-    store = Graph()
-    store.bind('earl', EARL)
-    store.bind('rdf', RDF)
-    store.bind('rdfs', RDFS)
-    store.bind('dc', DC)
-    store.bind('dct', DCT)
-    store.bind('uri', URI)
-    store.bind('http', HTTP)
-    store.bind('vapourv', VAPOUR_VOCAB)
-    store.bind('vapour', VAPOUR_SOFT)
-    store.bind('recipes', RECIPES)
-    store.bind('foaf', FOAF)
+    store = common.createStore()
         
     if classUri is None and propertyUri is None:
         (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
@@ -54,12 +34,12 @@ if __name__ == "__main__":
         outputRdfFile.write(store.serialize(format="pretty-xml"))
         outputRdfFile.close()
 
-    store.parse(pathToRdfFiles + "/vapour.rdf")
-    store.parse(pathToRdfFiles + "/recipes.rdf")
-    store.parse(pathToRdfFiles + "/earl.rdf")
+    store.parse(common.pathToRdfFiles + "/vapour.rdf")
+    store.parse(common.pathToRdfFiles + "/recipes.rdf")
+    store.parse(common.pathToRdfFiles + "/earl.rdf")
 
-    model = sparqlGraph.SPARQLGraph(store)
-    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, pathToTemplates)
+    model = common.createModel(store)
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, common.pathToTemplates)
     if outputFileName is not None:
         outputFile = open(outputFileName,'w')
         outputFile.write(str(html))
