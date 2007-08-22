@@ -4,6 +4,8 @@ from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect
 from vapour.cup import common
 
+resourceBaseUri = "http://vapour.sf.net/resources"
+
 class cup:
       def GET(self, format="html"):
             args = web.input()
@@ -47,13 +49,13 @@ class cup:
                     store.parse(common.pathToRdfFiles + "/earl.rdf")        
                     model = common.createModel(store)
                     web.header("Content-Type", "application/xhtml+xml", unique=True)
-                    web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, common.pathToTemplates))
+                    web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri, common.pathToTemplates))
                 elif format is "rdf":
                     web.header("Content-Type", "application/rdf+xml", unique=True)
                     web.output(store.serialize(format="pretty-xml"))
             else:
                 web.header("Content-Type", "application/xhtml+xml", unique=True)
-                web.output(strainer.justTheFormInHTML(common.pathToTemplates))
+                web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
           
 urls = (
       '/(.*)', 'cup'
