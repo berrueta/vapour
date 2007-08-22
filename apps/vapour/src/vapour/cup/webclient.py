@@ -1,4 +1,5 @@
 import web
+import random
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect
 from vapour.cup import common
@@ -6,9 +7,26 @@ from vapour.cup import common
 class cup:
       def GET(self, format="html"):
             args = web.input()
-            vocabUri = None #args["vocabUri"]
-            classUri = None #args["classUri"]
-            propUri = None #args["propUri"]
+            try:
+                vocabUri = args["vocabUri"]
+            except KeyError:
+                vocabUri = None
+            try:
+                classUri = args["classUri"]
+            except KeyError:
+                classUri = None                
+            try:
+                propertyUri = args["propertyUri"]
+            except KeyError:
+                propertyUri = None
+            try:
+                format = args["format"]
+            except KeyError:
+                format = "html"
+            try:
+                htmlVersions = args["htmlVersions"] is "1"
+            except KeyError:
+                htmlVersions = False
             
             store = common.createStore()
                 
@@ -21,19 +39,18 @@ class cup:
                     if propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                         propertyUri = random.choice(propertyUris)
                 
-                htmlVersions = True
-                recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propUri)
+                recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
                 
-                #if format is "html":        
-                store.parse(common.pathToRdfFiles + "/vapour.rdf")
-                store.parse(common.pathToRdfFiles + "/recipes.rdf")
-                store.parse(common.pathToRdfFiles + "/earl.rdf")        
-                model = common.createModel(store)
-                web.header("Content-Type", "application/xhtml+xml", unique=True)
-                web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, common.pathToTemplates))
-                #elif format is "rdf":
-                #web.header("Content-Type", "application/rdf+xml", unique=True)
-                #web.output(store.serialize(format="pretty-xml"))
+                if format is "html":        
+                    store.parse(common.pathToRdfFiles + "/vapour.rdf")
+                    store.parse(common.pathToRdfFiles + "/recipes.rdf")
+                    store.parse(common.pathToRdfFiles + "/earl.rdf")        
+                    model = common.createModel(store)
+                    web.header("Content-Type", "application/xhtml+xml", unique=True)
+                    web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, common.pathToTemplates))
+                elif format is "rdf":
+                    web.header("Content-Type", "application/rdf+xml", unique=True)
+                    web.output(store.serialize(format="pretty-xml"))
             else:
                 web.header("Content-Type", "application/xhtml+xml", unique=True)
                 web.output(strainer.justTheFormInHTML(common.pathToTemplates))
