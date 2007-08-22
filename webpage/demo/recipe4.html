@@ -1,0 +1,1369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	    <meta name="generator" content="Vapour 1.0 (http://vapour.sourceforge.net)" />
+    <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
+    <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
+    <link type="text/css" rel="stylesheet" href="../resources/report-style.css" media="screen,projection,print" />
+    <link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />
+    <title>Vapour Report</title>
+  </head>
+  <body>    
+    <div class="all">
+    
+    <h1>Vapour</h1>
+    <h2>Input data</h2>
+    <form action="" method="get">
+      <p><label for="vocabUri">Vocabulary URI:</label> <input type="text" length="50" name="vocabUri" value="http://localhost/~berrueta/recipes-web/example4/"/></p>
+      <p><label for="classUri">Class URI:</label> <input type="text" length="50" name="classUri" value="http://localhost/~berrueta/recipes-web/example4/Concept"/></p>
+      <p><label for="propertyUri">Property URI:</label> <input type="text" length="50" name="propertyUri" value="http://localhost/~berrueta/recipes-web/example4/prefLabel"/></p>
+      <p><input type="checkbox" name="htmlVersions" value="1" checked="checked"/> There are HTML descriptions of the symbols</p>
+      <p><input type="submit" value="Run tests"/></p>      
+    </form>
+    
+    <h1>Vapour Report</h1>
+    <div class="summary">
+      <h2>Summary</h2>
+      <table class="summaryTable">
+        <thead>
+          <tr>
+            <td>Test requirement</td>
+            <td>Passed tests</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="#req14">
+              Dereferencing class URI (requesting (X)HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req8">
+              Dereferencing class URI (requesting HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req5">
+              Dereferencing class URI (requesting RDF/XML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req11">
+              Dereferencing class URI (requesting XHTML)
+              </a>
+             </td>
+            <td class="someTestsFail">
+            1/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req2">
+              Dereferencing class URI (without content negotiation)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req15">
+              Dereferencing property URI (requesting (X)HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req9">
+              Dereferencing property URI (requesting HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req6">
+              Dereferencing property URI (requesting RDF/XML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req12">
+              Dereferencing property URI (requesting XHTML)
+              </a>
+             </td>
+            <td class="someTestsFail">
+            1/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req3">
+              Dereferencing property URI (without content negotiation)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req13">
+              Dereferencing the vocabulary URI (requesting (X)HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req7">
+              Dereferencing the vocabulary URI (requesting HTML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req4">
+              Dereferencing the vocabulary URI (requesting RDF/XML)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req10">
+              Dereferencing the vocabulary URI (requesting XHTML)
+              </a>
+             </td>
+            <td class="someTestsFail">
+            1/2
+            </td>            
+          </tr>
+          <tr>
+            <td>
+              <a href="#req1">
+              Dereferencing the vocabulary URI (without content negotiation)
+              </a>
+             </td>
+            <td class="allTestsOk">
+            2/2
+            </td>            
+          </tr>
+        </tbody>
+      </table>
+    </div> <!-- /summary -->
+
+    <div>
+      <div class="httpDialog">
+        <h2 id="req14">
+          Dereferencing class URI (requesting (X)HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/Concept</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (Content type should be 'application/xhtml+xml' or 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23Concept">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req8">
+          Dereferencing class URI (requesting HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/Concept</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (Content type should be 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23Concept">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req5">
+          Dereferencing class URI (requesting RDF/XML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/Concept</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req11">
+          Dereferencing class URI (requesting XHTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/Concept</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader badHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (Content type should be 'application/xhtml+xml'):
+	  <span class="badValue">Fail</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23Concept">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req2">
+          Dereferencing class URI (without content negotiation)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/Concept</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing class URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing class URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req15">
+          Dereferencing property URI (requesting (X)HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/prefLabel</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (Content type should be 'application/xhtml+xml' or 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23prefLabel">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req9">
+          Dereferencing property URI (requesting HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/prefLabel</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (Content type should be 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23prefLabel">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req6">
+          Dereferencing property URI (requesting RDF/XML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/prefLabel</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req12">
+          Dereferencing property URI (requesting XHTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/prefLabel</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader badHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (Content type should be 'application/xhtml+xml'):
+	  <span class="badValue">Fail</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html%23prefLabel">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req3">
+          Dereferencing property URI (without content negotiation)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/prefLabel</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing property URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing property URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req13">
+          Dereferencing the vocabulary URI (requesting (X)HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml,text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/xhtml+xml' or 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req7">
+          Dereferencing the vocabulary URI (requesting HTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+		  	   <span class="httpHeader">Accept: text/html</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'text/html'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req4">
+          Dereferencing the vocabulary URI (requesting RDF/XML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+		  	   <span class="httpHeader">Accept: application/rdf+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req10">
+          Dereferencing the vocabulary URI (requesting XHTML)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</span>
+		  	   <span class="httpHeader">Accept: application/xhtml+xml</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html">
+			    <img src="../resources/html-file.png" alt="HTML icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader badHttpHeader">Content-type: text/html</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/xhtml+xml'):
+	  <span class="badValue">Fail</span>
+	</li>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.html">
+          Check the response with the W3C HTTP validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+    <div>
+      <div class="httpDialog">
+        <h2 id="req1">
+          Dereferencing the vocabulary URI (without content negotiation)
+         </h2>
+      <div class="clientIcon">
+		<img src="../resources/computer.png" alt="A computer on the client-side"/>
+		<p>Client</p>
+      </div> <!-- /clientIcon -->
+      <div class="dialogArea">
+ 	   <!-- 1st request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4/</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+	      
+	      <span class="httpHeader ">303</span>
+	      
+	      
+	      <span class="httpHeader">Location: http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	    </div>
+	  </div> <!-- /response -->
+ 	   <!-- 2nd request while dereferencing vocabulary URI without specifying the desired content type -->
+	  <div class="request">
+	  	 <div class="requestInner">
+	  	   <span class="httpHeader">GET http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</span>
+	  	 </div>
+	  </div> <!-- /request -->
+	  <div class="response">
+	    <div class="responseInner">
+            <div class="fileIcon">
+		    <a href="http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf">
+			    <img src="../resources/rdf-file.png" alt="RDF icon" />
+			</a>
+			</div> <!-- /fileIcon -->
+	      
+	      <span class="httpHeader goodHttpHeader">200</span>
+	      
+	      <span class="httpHeader goodHttpHeader">Content-type: application/rdf+xml</span>
+	      
+	    </div>
+	  </div> <!-- /response -->
+       </div> <!-- /dialogArea -->
+      <div class="serverIcon">
+		<img src="../resources/apacheconf.png" alt="A web server" />
+		<p>Web server</p>
+      </div>
+      <div class="dummyR"/>
+      </div> <!-- /httpDialog -->
+
+    <h3>Test results</h3>
+    <ul>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (HTTP response code should be 200):
+	  <span class="correctValue">Pass</span>
+	</li>
+	<li>
+	  2nd request while dereferencing vocabulary URI without specifying the desired content type (Content type should be 'application/rdf+xml'):
+	  <span class="correctValue">Pass</span>
+	</li>
+    </ul>
+    
+    <h3>Further validation</h3>
+    <ul>
+      <li>
+        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=http%3A%2F%2Flocalhost%2F%7Eberrueta%2Frecipes-web%2Fexample4-content%2F2005-10-31.rdf">
+         Check the response with the W3C RDF validator
+        </a>
+      </li>
+    </ul>
+
+
+    </div>
+
+  </div> <!-- /all -->
+    
+    <div class="footer">
+      <p>Report generated by <a href="http://vapour.sourceforge.net/">Vapour</a>,
+      version 1.0 on 2007-08-22 20:36:22.810686. Please read the
+      <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a>
+      document. You can also <a href="FIXME">get an RDF version</a> of this
+      report.</p>
+    </div>
+    
+  </body>
+
+</html>

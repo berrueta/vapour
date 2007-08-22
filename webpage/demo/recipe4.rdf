@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:earl='http://www.w3.org/WAI/ER/EARL/nmg-strawman#'
+  xmlns:http='http://www.w3.org/2006/http#'
+  xmlns:dc='http://purl.org/dc/elements/1.1/'
+  xmlns:uri='http://www.w3.org/2006/uri#'
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:vapourv='http://vapour.sourceforge.net/vocab.rdf#'
+  xmlns:dct='http://purl.org/dc/terms/'
+>
+  <http:GetRequest rdf:nodeID="KpGHBZoU19">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU47">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestRequirement rdf:about="req3">
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU37"/>
+        <dct:isPartOf rdf:resource="req3"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU29"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU33"/>
+        <dct:isPartOf rdf:resource="req3"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU29"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU35"/>
+        <dct:isPartOf rdf:resource="req3"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU26"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dc:title xml:lang="en">Dereferencing property URI (without content negotiation)</dc:title>
+  </earl:TestRequirement>
+  <earl:TestResult rdf:nodeID="KpGHBZoU49">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU150">
+    <http:accept>application/xhtml+xml,text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU149">
+    <dc:title xml:lang="en">2nd request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+    <earl:httpRequest rdf:nodeID="KpGHBZoU150"/>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:content-type>text/html</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.318002</dc:date>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+    <vapourv:previousSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU146">
+        <dc:title xml:lang="en">1st request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU147"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU148"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU149"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.314906</dc:date>
+      </earl:TestSubject>
+    </vapourv:previousSubject>
+  </earl:TestSubject>
+  <earl:Assertion rdf:nodeID="KpGHBZoU48">
+    <earl:result rdf:nodeID="KpGHBZoU49"/>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req4">
+        <dct:hasPart rdf:nodeID="KpGHBZoU48"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU44"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU46"/>
+        <dc:title xml:lang="en">Dereferencing the vocabulary URI (requesting RDF/XML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU41">
+        <dc:title xml:lang="en">2nd request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU42"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU43"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.227365</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU38"/>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU95">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU2">
+    <dc:title xml:lang="en">1st request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4/</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU5">
+        <dc:title xml:lang="en">2nd request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU6"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU7"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.193324</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU2"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.178390</dc:date>
+  </earl:TestSubject>
+  <rdf:Description rdf:nodeID="KpGHBZoU102">
+    <http:accept>text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU77">
+    <dc:title xml:lang="en">2nd request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <http:accept>text/html</http:accept>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:content-type>text/html</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.257693</dc:date>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+    <vapourv:previousSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU74">
+        <dc:title xml:lang="en">1st request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU75"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU76"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU77"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.254712</dc:date>
+      </earl:TestSubject>
+    </vapourv:previousSubject>
+  </earl:TestSubject>
+  <earl:TestResult rdf:nodeID="KpGHBZoU35">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestRequirement rdf:about="req7">
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU81"/>
+        <dct:isPartOf rdf:resource="req7"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU77"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU83"/>
+        <dct:isPartOf rdf:resource="req7"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU74"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU85"/>
+        <dct:isPartOf rdf:resource="req7"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeHtml"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU77"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dc:title xml:lang="en">Dereferencing the vocabulary URI (requesting HTML)</dc:title>
+  </earl:TestRequirement>
+  <rdf:Description rdf:nodeID="KpGHBZoU6">
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestResult rdf:nodeID="KpGHBZoU59">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU64">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU170">
+    <dc:title xml:lang="en">1st request while dereferencing property URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <http:accept>application/xhtml+xml,text/html</http:accept>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4/prefLabel</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU173">
+        <dc:title xml:lang="en">2nd request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU174"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU175"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.337642</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU170"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.334402</dc:date>
+  </earl:TestSubject>
+  <earl:Assertion rdf:nodeID="KpGHBZoU72">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req6">
+        <dct:hasPart rdf:nodeID="KpGHBZoU70"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU72"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU68"/>
+        <dc:title xml:lang="en">Dereferencing property URI (requesting RDF/XML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU65">
+        <dc:title xml:lang="en">2nd request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU66"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU67"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.248082</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU62"/>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU106">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req9">
+        <dct:hasPart rdf:nodeID="KpGHBZoU104"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU106"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU108"/>
+        <dc:title xml:lang="en">Dereferencing property URI (requesting HTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU98">
+        <dc:title xml:lang="en">1st request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU99"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU100"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU101"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.275345</dc:date>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU145">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#fail"/>
+  </earl:TestResult>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU89">
+    <dc:title xml:lang="en">2nd request while dereferencing class URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <http:accept>text/html</http:accept>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:content-type>text/html</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.268387</dc:date>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+    <vapourv:previousSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU86">
+        <dc:title xml:lang="en">1st request while dereferencing class URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU87"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU88"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU89"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.265362</dc:date>
+      </earl:TestSubject>
+    </vapourv:previousSubject>
+  </earl:TestSubject>
+  <rdf:Description rdf:nodeID="KpGHBZoU63">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestResult rdf:nodeID="KpGHBZoU165">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU136">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <rdf:Description rdf:nodeID="KpGHBZoU174">
+    <http:accept>application/xhtml+xml,text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU176">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req15">
+        <dct:hasPart rdf:nodeID="KpGHBZoU176"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU178"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU180"/>
+        <dc:title xml:lang="en">Dereferencing property URI (requesting (X)HTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU173"/>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU103">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:Assertion rdf:nodeID="KpGHBZoU8">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req1">
+        <dct:hasPart rdf:nodeID="KpGHBZoU8"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU12"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU10"/>
+        <dc:title xml:lang="en">Dereferencing the vocabulary URI (without content negotiation)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU5"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU71">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU18">
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU46">
+    <earl:result rdf:nodeID="KpGHBZoU47"/>
+    <dct:isPartOf rdf:resource="req4"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU38">
+        <dc:title xml:lang="en">1st request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU39"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU40"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU41"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.224235</dc:date>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU112">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:Assertion rdf:nodeID="KpGHBZoU120">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#fail"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req10">
+        <dct:hasPart rdf:nodeID="KpGHBZoU118"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU120"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU116"/>
+        <dc:title xml:lang="en">Dereferencing the vocabulary URI (requesting XHTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU113">
+        <dc:title xml:lang="en">2nd request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU114"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU115"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.288598</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU110"/>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU153">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU75">
+    <http:accept>text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU10">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req1"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU2"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU133">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#fail"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU99">
+    <http:accept>text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="KpGHBZoU30">
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU122">
+    <dc:title xml:lang="en">1st request while dereferencing class URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <http:accept>application/xhtml+xml</http:accept>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4/Concept</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU125">
+        <dc:title xml:lang="en">2nd request while dereferencing class URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU126"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU127"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.298318</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU122"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.294926</dc:date>
+  </earl:TestSubject>
+  <earl:TestResult rdf:nodeID="KpGHBZoU167">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:Assertion rdf:nodeID="KpGHBZoU132">
+    <earl:result rdf:nodeID="KpGHBZoU133"/>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req11">
+        <dct:hasPart rdf:nodeID="KpGHBZoU130"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU128"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU132"/>
+        <dc:title xml:lang="en">Dereferencing class URI (requesting XHTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU125"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU118">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req10"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU110">
+        <dc:title xml:lang="en">1st request while dereferencing vocabulary URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU111"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU112"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU113"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.285697</dc:date>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU139">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU169">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:Assertion rdf:nodeID="KpGHBZoU70">
+    <earl:result rdf:nodeID="KpGHBZoU71"/>
+    <dct:isPartOf rdf:resource="req6"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU62">
+        <dc:title xml:lang="en">1st request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU63"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU64"/>
+        <vapourv:nextSubject rdf:nodeID="KpGHBZoU65"/>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.244581</dc:date>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <rdf:Description rdf:nodeID="KpGHBZoU51">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/Concept</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestResult rdf:nodeID="KpGHBZoU179">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestResult rdf:nodeID="KpGHBZoU57">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU27">
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="KpGHBZoU114">
+    <http:accept>application/xhtml+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <http:GetRequest rdf:nodeID="KpGHBZoU52">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU69">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:Assertion rdf:nodeID="KpGHBZoU144">
+    <earl:result rdf:nodeID="KpGHBZoU145"/>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req12">
+        <dct:hasPart rdf:nodeID="KpGHBZoU144"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU140"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU142"/>
+        <dc:title xml:lang="en">Dereferencing property URI (requesting XHTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU137">
+        <dc:title xml:lang="en">2nd request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU138"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU139"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.308125</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU134"/>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU134">
+    <dc:title xml:lang="en">1st request while dereferencing property URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <http:accept>application/xhtml+xml</http:accept>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4/prefLabel</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse rdf:nodeID="KpGHBZoU136"/>
+    <vapourv:nextSubject rdf:nodeID="KpGHBZoU137"/>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.305028</dc:date>
+  </earl:TestSubject>
+  <http:GetRequest rdf:nodeID="KpGHBZoU175">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU13">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU115">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU14">
+    <dc:title xml:lang="en">1st request while dereferencing class URI without specifying the desired content type</dc:title>
+    <earl:httpRequest>
+      <rdf:Description>
+        <uri:uri>http://localhost/~berrueta/recipes-web/example4/Concept</uri:uri>
+        <http:user-agent>vapour.sourceforge.net</http:user-agent>
+      </rdf:Description>
+    </earl:httpRequest>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU17">
+        <dc:title xml:lang="en">2nd request while dereferencing class URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU18"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU19"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.204181</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU14"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.200917</dc:date>
+  </earl:TestSubject>
+  <earl:Assertion rdf:nodeID="KpGHBZoU180">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req15"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtmlOrHtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU173"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU105">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestResult rdf:nodeID="KpGHBZoU85">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU87">
+    <http:accept>text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/Concept</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="KpGHBZoU147">
+    <http:accept>application/xhtml+xml,text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU116">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req10"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU113"/>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU127">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU50">
+    <dc:title xml:lang="en">1st request while dereferencing class URI without specifying the desired content type</dc:title>
+    <earl:httpRequest rdf:nodeID="KpGHBZoU51"/>
+    <earl:httpResponse rdf:nodeID="KpGHBZoU52"/>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU53">
+        <dc:title xml:lang="en">2nd request while dereferencing class URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU54"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU55"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.237243</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU50"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.234087</dc:date>
+  </earl:TestSubject>
+  <earl:Assertion rdf:nodeID="KpGHBZoU20">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req2">
+        <dct:hasPart rdf:nodeID="KpGHBZoU20"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU24"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU22"/>
+        <dc:title xml:lang="en">Dereferencing class URI (without content negotiation)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU17"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU33">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestRequirement rdf:about="req14">
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU169"/>
+        <dct:isPartOf rdf:resource="req14"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtmlOrHtml"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU161"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU167"/>
+        <dct:isPartOf rdf:resource="req14"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU158"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU165"/>
+        <dct:isPartOf rdf:resource="req14"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU161"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dc:title xml:lang="en">Dereferencing class URI (requesting (X)HTML)</dc:title>
+  </earl:TestRequirement>
+  <earl:TestResult rdf:nodeID="KpGHBZoU25">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:Assertion rdf:nodeID="KpGHBZoU24">
+    <earl:result rdf:nodeID="KpGHBZoU25"/>
+    <dct:isPartOf rdf:resource="req2"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU17"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU140">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req12"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU137"/>
+  </earl:Assertion>
+  <rdf:Description rdf:nodeID="KpGHBZoU126">
+    <http:accept>application/xhtml+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestResult rdf:nodeID="KpGHBZoU97">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU100">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <http:GetRequest rdf:nodeID="KpGHBZoU40">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:Assertion rdf:nodeID="KpGHBZoU104">
+    <earl:result rdf:nodeID="KpGHBZoU105"/>
+    <dct:isPartOf rdf:resource="req9"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU101">
+        <dc:title xml:lang="en">2nd request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU102"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU103"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.278316</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU98"/>
+      </earl:TestSubject>
+    </earl:subject>
+  </earl:Assertion>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU26">
+    <dc:title xml:lang="en">1st request while dereferencing property URI without specifying the desired content type</dc:title>
+    <earl:httpRequest rdf:nodeID="KpGHBZoU27"/>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU29">
+        <dc:title xml:lang="en">2nd request while dereferencing property URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU30"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU31"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.217214</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU26"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.210725</dc:date>
+  </earl:TestSubject>
+  <earl:TestResult rdf:nodeID="KpGHBZoU23">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU159">
+    <http:accept>application/xhtml+xml,text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/Concept</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <http:GetRequest rdf:nodeID="KpGHBZoU43">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <rdf:Description rdf:nodeID="KpGHBZoU42">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU178">
+    <earl:result rdf:nodeID="KpGHBZoU179"/>
+    <dct:isPartOf rdf:resource="req15"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU170"/>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU148">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestRequirement rdf:about="req8">
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU97"/>
+        <dct:isPartOf rdf:resource="req8"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeHtml"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU89"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU95"/>
+        <dct:isPartOf rdf:resource="req8"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU86"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dct:hasPart>
+      <earl:Assertion>
+        <earl:result rdf:nodeID="KpGHBZoU93"/>
+        <dct:isPartOf rdf:resource="req8"/>
+        <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+        <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+        <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+        <earl:subject rdf:nodeID="KpGHBZoU89"/>
+      </earl:Assertion>
+    </dct:hasPart>
+    <dc:title xml:lang="en">Dereferencing class URI (requesting HTML)</dc:title>
+  </earl:TestRequirement>
+  <earl:TestResult rdf:nodeID="KpGHBZoU143">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU67">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <http:GetRequest rdf:nodeID="KpGHBZoU163">
+    <http:content-type>text/html</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <http:GetRequest rdf:nodeID="KpGHBZoU76">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:Assertion rdf:nodeID="KpGHBZoU108">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req9"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeHtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU101"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU22">
+    <earl:result rdf:nodeID="KpGHBZoU23"/>
+    <dct:isPartOf rdf:resource="req2"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU14"/>
+  </earl:Assertion>
+  <rdf:Description rdf:nodeID="KpGHBZoU111">
+    <http:accept>application/xhtml+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU12">
+    <earl:result rdf:nodeID="KpGHBZoU13"/>
+    <dct:isPartOf rdf:resource="req1"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU5"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU154">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req13">
+        <dct:hasPart rdf:nodeID="KpGHBZoU154"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU152"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU156"/>
+        <dc:title xml:lang="en">Dereferencing the vocabulary URI (requesting (X)HTML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU146"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU152">
+    <earl:result rdf:nodeID="KpGHBZoU153"/>
+    <dct:isPartOf rdf:resource="req13"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU149"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU37">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:Assertion rdf:nodeID="KpGHBZoU58">
+    <earl:result rdf:nodeID="KpGHBZoU59"/>
+    <dct:isPartOf>
+      <earl:TestRequirement rdf:about="req5">
+        <dct:hasPart rdf:nodeID="KpGHBZoU60"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU56"/>
+        <dct:hasPart rdf:nodeID="KpGHBZoU58"/>
+        <dc:title xml:lang="en">Dereferencing class URI (requesting RDF/XML)</dc:title>
+      </earl:TestRequirement>
+    </dct:isPartOf>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU50"/>
+  </earl:Assertion>
+  <http:GetRequest rdf:nodeID="KpGHBZoU31">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU45">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU138">
+    <http:accept>application/xhtml+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#prefLabel</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:TestSubject rdf:nodeID="KpGHBZoU158">
+    <dc:title xml:lang="en">1st request while dereferencing class URI without specifying the desired content type</dc:title>
+    <earl:httpRequest rdf:nodeID="KpGHBZoU159"/>
+    <earl:httpResponse>
+      <http:GetRequest>
+        <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</http:location>
+        <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+        <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+        <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+      </http:GetRequest>
+    </earl:httpResponse>
+    <vapourv:nextSubject>
+      <earl:TestSubject rdf:nodeID="KpGHBZoU161">
+        <dc:title xml:lang="en">2nd request while dereferencing class URI without specifying the desired content type</dc:title>
+        <earl:httpRequest rdf:nodeID="KpGHBZoU162"/>
+        <earl:httpResponse rdf:nodeID="KpGHBZoU163"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.328014</dc:date>
+        <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vapourv:previousRequestCount>
+        <vapourv:previousSubject rdf:nodeID="KpGHBZoU158"/>
+      </earl:TestSubject>
+    </vapourv:nextSubject>
+    <vapourv:previousRequestCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</vapourv:previousRequestCount>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2007-08-22T20:36:22.324652</dc:date>
+  </earl:TestSubject>
+  <earl:Assertion rdf:nodeID="KpGHBZoU130">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req11"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU122"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU81">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU54">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU60">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req5"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeRdf"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU53"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU128">
+    <earl:result>
+      <earl:TestResult>
+        <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+      </earl:TestResult>
+    </earl:result>
+    <dct:isPartOf rdf:resource="req11"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU125"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU142">
+    <earl:result rdf:nodeID="KpGHBZoU143"/>
+    <dct:isPartOf rdf:resource="req12"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode302"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU134"/>
+  </earl:Assertion>
+  <earl:Assertion rdf:nodeID="KpGHBZoU68">
+    <earl:result rdf:nodeID="KpGHBZoU69"/>
+    <dct:isPartOf rdf:resource="req6"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU65"/>
+  </earl:Assertion>
+  <earl:TestResult rdf:nodeID="KpGHBZoU93">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <http:GetRequest rdf:nodeID="KpGHBZoU7">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:TestResult rdf:nodeID="KpGHBZoU157">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <earl:TestResult rdf:nodeID="KpGHBZoU83">
+    <earl:validity rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#pass"/>
+  </earl:TestResult>
+  <rdf:Description rdf:nodeID="KpGHBZoU39">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4/</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU44">
+    <earl:result rdf:nodeID="KpGHBZoU45"/>
+    <dct:isPartOf rdf:resource="req4"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU41"/>
+  </earl:Assertion>
+  <rdf:Description rdf:nodeID="KpGHBZoU162">
+    <http:accept>application/xhtml+xml,text/html</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <http:GetRequest rdf:nodeID="KpGHBZoU88">
+    <http:location>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.html#Concept</http:location>
+    <http:content-type>text/html; charset=iso-8859-1</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">303</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <http:GetRequest rdf:nodeID="KpGHBZoU55">
+    <http:content-type>application/rdf+xml</http:content-type>
+    <http:responseCode rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</http:responseCode>
+    <rdf:type rdf:resource="http://www.w3.org/2006/http#Response"/>
+  </http:GetRequest>
+  <earl:Assertion rdf:nodeID="KpGHBZoU156">
+    <earl:result rdf:nodeID="KpGHBZoU157"/>
+    <dct:isPartOf rdf:resource="req13"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestContentTypeXhtmlOrHtml"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU149"/>
+  </earl:Assertion>
+  <rdf:Description rdf:nodeID="KpGHBZoU66">
+    <http:accept>application/rdf+xml</http:accept>
+    <uri:uri>http://localhost/~berrueta/recipes-web/example4-content/2005-10-31.rdf</uri:uri>
+    <http:user-agent>vapour.sourceforge.net</http:user-agent>
+  </rdf:Description>
+  <earl:Assertion rdf:nodeID="KpGHBZoU56">
+    <earl:result rdf:nodeID="KpGHBZoU57"/>
+    <dct:isPartOf rdf:resource="req5"/>
+    <earl:test rdf:resource="http://vapour.sourceforge.net/recipes.rdf#TestResponseCode200"/>
+    <earl:assertedBy rdf:resource="http://vapour.sourceforge.net/vapour.rdf#vapour1-0"/>
+    <earl:mode rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic"/>
+    <earl:subject rdf:nodeID="KpGHBZoU53"/>
+  </earl:Assertion>
+</rdf:RDF>
