@@ -11,14 +11,17 @@ class cup:
             args = web.input()
             try:
                 vocabUri = args["vocabUri"]
+                if vocabUri is "": vocabUri = None
             except KeyError:
                 vocabUri = None
             try:
                 classUri = args["classUri"]
+                if classUri is "": classUri = None
             except KeyError:
                 classUri = None                
             try:
                 propertyUri = args["propertyUri"]
+                if propertyUri is "": propertyUri = None
             except KeyError:
                 propertyUri = None
             try:
@@ -29,16 +32,24 @@ class cup:
                 htmlVersions = args["htmlVersions"] is "1"
             except KeyError:
                 htmlVersions = False
+            try:
+                autodetectClassUriIfEmpty = args["autodetectClassUri"] is "1"
+            except KeyError:
+                autodetectClassUriIfEmpty = False
+            try:
+                autodetectPropertyUriIfEmpty = args["autodetectPropertyUri"] is "1"
+            except KeyError:
+                autodetectPropertyUriIfEmpty = False
             
             store = common.createStore()
                 
             if vocabUri is not None:
-                if classUri is None and propertyUri is None:
+                if (classUri is None and autodetectClassUriIfEmpty) or (propertyUri is None and autodetectPropertyUriIfEmpty):
                     (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
                     random.seed()
-                    if classUri is None and classUris is not None and len(classUris) > 0:
+                    if autodetectClassUriIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
                         classUri = random.choice(classUris)
-                    if propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
+                    if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                         propertyUri = random.choice(propertyUris)
                 
                 recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
