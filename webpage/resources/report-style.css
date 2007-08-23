@@ -124,6 +124,44 @@ float:left;
   clear: both;
 }
 
+/* input form =================================================== */
+
+
+.inputData
+{
+  border: 1px #b0b0c0 solid;
+  padding: .6em;
+  background-color: #e0e0d0;
+}
+
+th
+{
+  text-align:right;
+}
+
+input
+{ 
+  border: 1px solid #bbb;
+  border-top: 1px solid #777;
+  border-bottom: 1px solid #ddd;
+  background: #fefefe;
+  padding: 0.2em 0.2em;
+  max-width: 1000px;
+  font-variant: normal;
+}
+
+input .uri
+{
+  font-family: Monaco, "Courier New", Monospace;
+  font-size: 0.9em;
+  width: 85%;
+}
+
+p #submit
+{ 
+  text-align:center;
+}
+
 /* summary ====================================================== */
 
 .correctValue

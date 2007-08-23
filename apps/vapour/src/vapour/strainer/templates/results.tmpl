@@ -20,20 +20,38 @@
     
     #if $printForm:
     <h1>Vapour</h1>
+    <div class="inputData">
     <h2>Input data</h2>
     <form action="" method="get">
-      <p><label for="vocabUri">Vocabulary URI:</label> <input type="text" length="50" name="vocabUri" value="$vocabUri"/></p>
-      <p><label for="classUri">Class URI:</label>
-        <input type="text" length="50" name="classUri" value="$classUri"/>
-        <input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
-        <label for="autodetectClassUri">Autodetect if empty</label></p>        
-      <p><label for="propertyUri">Property URI:</label>
-        <input type="text" length="50" name="propertyUri" value="$propertyUri"/>
-        <input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
-        <label for="autodetectPropertyUri">Autodectect if empty</label></p>
-      <p><input type="checkbox" name="htmlVersions" value="1" checked="checked"/> There are HTML descriptions of the symbols</p>
-      <p><input type="submit" value="Run tests"/></p>      
+      <table>
+      <tbody>
+      <tr>
+        <th><label title="Address of the page containing the vocabulary" for="vocabUri">Vocabulary URI:</label></th>
+        <td><input class="uri" type="text" size="50" name="vocabUri" value="$vocabUri"/></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><label title="URI of a class in the vocabulary" for="classUri">Class URI:</label></th>
+        <td><input class="uri" type="text" size="50" name="classUri" value="$classUri"/></td>
+        <td><input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
+        <label for="autodetectClassUri">Autodetect if empty</label></td>
+      </tr>
+      <tr>
+        <th><label title="URI of a property in the vocabulary" for="propertyUri">Property URI:</label></th>
+        <td><input class="uri" type="text" size="50" name="propertyUri" value="$propertyUri"/></td>
+        <td><input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
+        <label for="autodetectPropertyUri">Autodetect if empty</label></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="checkbox" name="htmlVersions" value="1" checked="checked"/> There are HTML descriptions of the symbols</td>
+        <td></td>
+      </tr>
+      </tbody>
+      </table>
+      <p class="submit"><input type="submit" value="Run tests"/></p>      
     </form>
+    </div>
     #end if
     
     #if len($testRequirements) > 0:
