@@ -1,5 +1,5 @@
 import web
-import random
+import random, traceback
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect
 from vapour.cup import common
@@ -70,7 +70,8 @@ class cup:
                     web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
             except Exception, e:
                 web.internalerror()
-                web.output("Vapour was unable to complete the request due to the following exception: " + str(e))
+                web.output("<p>Vapour was unable to complete the request due to the following exception:</p>")
+                web.output("<pre>" + traceback.format_exc(e) + "</pre>")
           
 urls = (
       '/(.*)', 'cup'
