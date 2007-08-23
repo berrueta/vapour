@@ -41,32 +41,36 @@ class cup:
             except KeyError:
                 autodetectPropertyUriIfEmpty = False
             
-            store = common.createStore()
-                
-            if vocabUri is not None:
-                if (classUri is None and autodetectClassUriIfEmpty) or (propertyUri is None and autodetectPropertyUriIfEmpty):
-                    (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
-                    random.seed()
-                    if autodetectClassUriIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
-                        classUri = random.choice(classUris)
-                    if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
-                        propertyUri = random.choice(propertyUris)
-                
-                recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
-                
-                if format is "html":        
-                    store.parse(common.pathToRdfFiles + "/vapour.rdf")
-                    store.parse(common.pathToRdfFiles + "/recipes.rdf")
-                    store.parse(common.pathToRdfFiles + "/earl.rdf")        
-                    model = common.createModel(store)
+            try:
+                store = common.createStore()
+                    
+                if vocabUri is not None:
+                    if (classUri is None and autodetectClassUriIfEmpty) or (propertyUri is None and autodetectPropertyUriIfEmpty):
+                        (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
+                        random.seed()
+                        if autodetectClassUriIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
+                            classUri = random.choice(classUris)
+                        if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
+                            propertyUri = random.choice(propertyUris)
+                    
+                    recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
+                    
+                    if format is "html":        
+                        store.parse(common.pathToRdfFiles + "/vapour.rdf")
+                        store.parse(common.pathToRdfFiles + "/recipes.rdf")
+                        store.parse(common.pathToRdfFiles + "/earl.rdf")        
+                        model = common.createModel(store)
+                        web.header("Content-Type", "application/xhtml+xml", unique=True)
+                        web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri, common.pathToTemplates))
+                    elif format is "rdf":
+                        web.header("Content-Type", "application/rdf+xml", unique=True)
+                        web.output(store.serialize(format="pretty-xml"))
+                else:
                     web.header("Content-Type", "application/xhtml+xml", unique=True)
-                    web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri, common.pathToTemplates))
-                elif format is "rdf":
-                    web.header("Content-Type", "application/rdf+xml", unique=True)
-                    web.output(store.serialize(format="pretty-xml"))
-            else:
-                web.header("Content-Type", "application/xhtml+xml", unique=True)
-                web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
+                    web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
+            except Exception, e:
+                web.internalerror()
+                web.output("Vapour was unable to complete the request due to the following exception: " + str(e))
           
 urls = (
       '/(.*)', 'cup'
