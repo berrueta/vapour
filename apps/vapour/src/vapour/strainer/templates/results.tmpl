@@ -33,18 +33,37 @@
       <tr>
         <th><label title="URI of a class in the vocabulary" for="classUri">Class URI:</label></th>
         <td><input class="uri" type="text" size="50" name="classUri" value="$classUri"/></td>
-        <td><input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
-        <label for="autodetectClassUri">Autodetect if empty</label></td>
+        <td>
+          #if $autodetectClassUri:
+            <input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
+          #else:
+            <input type="checkbox" name="autodetectClassUri" value="1"/>
+          #end if
+          <label for="autodetectClassUri">Autodetect if empty</label>
+        </td>
       </tr>
       <tr>
         <th><label title="URI of a property in the vocabulary" for="propertyUri">Property URI:</label></th>
         <td><input class="uri" type="text" size="50" name="propertyUri" value="$propertyUri"/></td>
-        <td><input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
-        <label for="autodetectPropertyUri">Autodetect if empty</label></td>
+        <td>
+          #if $autodetectPropertyUri:
+            <input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
+          #else:
+            <input type="checkbox" name="autodetectPropertyUri" value="1"/>
+          #end if
+          <label for="autodetectPropertyUri">Autodetect if empty</label>
+        </td>
       </tr>
       <tr>
         <td></td>
-        <td><input type="checkbox" name="htmlVersions" value="1" checked="checked"/> There are HTML descriptions of the symbols</td>
+        <td>
+          #if $htmlVersions:
+          <input type="checkbox" name="htmlVersions" value="1" checked="checked"/>
+          #else:
+          <input type="checkbox" name="htmlVersions" value="1"/>
+          #end if
+          There are HTML descriptions of the symbols
+        </td>
         <td></td>
       </tr>
       </tbody>

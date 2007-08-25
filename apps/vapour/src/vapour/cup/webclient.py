@@ -61,7 +61,8 @@ class cup:
                         store.parse(common.pathToRdfFiles + "/earl.rdf")        
                         model = common.createModel(store)
                         web.header("Content-Type", "application/xhtml+xml", unique=True)
-                        web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri, common.pathToTemplates))
+                        web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, True,
+                                                               autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, htmlVersions, resourceBaseUri, common.pathToTemplates))
                     elif format is "rdf":
                         web.header("Content-Type", "application/rdf+xml", unique=True)
                         web.output(store.serialize(format="pretty-xml"))
