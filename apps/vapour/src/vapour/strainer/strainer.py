@@ -4,6 +4,7 @@ from rdflib.sparql.sparqlGraph import SPARQLGraph
 from rdflib.sparql.graphPattern import GraphPattern
 from rdflib.sparql import Query
 from vapour.namespaces import *
+import httplib
 from Cheetah.Template import Template
 import datetime
 
@@ -115,7 +116,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
 
 def getFinalUriFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
-    select = ("?finalUri", "?contentType")
+    select = ("?finalUri", "?contentType", "?responseCode")
     # FIXME: a FILTER clause should be added to check the responseCode == 200
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
@@ -123,9 +124,10 @@ def getFinalUriFromModel(model, testRequirementUri):
         ("?testSubject", EARL["httpRequest"], "?getRequest"),
         ("?testSubject", EARL["httpResponse"], "?httpResponse"),
         ("?httpResponse", HTTP["content-type"], "?contentType"),
+        ("?httpResponse", HTTP["responseCode"], "?responseCode"),
         ("?getRequest", URI["uri"], "?finalUri")
     ])
-    return [x for x in Query.query(sparqlGr, select, where)]
+    return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]
 
 def getTestAgent(model):
     """
