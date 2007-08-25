@@ -150,15 +150,18 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = ""):
+def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "", printForm = False, autodetectClassUri = False, autodetectPropertyUri = False, htmlVersions = False):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
     
-    data['printForm'] = True
+    data['printForm'] = printForm
     data['vocabUri'] = vocabUri
     data['classUri'] = classUri
     data['propertyUri'] = propertyUri
+    data['autodetectClassUri'] = autodetectClassUri
+    data['autodetectPropertyUri'] = autodetectPropertyUri
+    data['htmlVersions'] = htmlVersions
 
     data['testAgent'] = {} # it may be overwritten later
     data['testRequirements'] = {} # it may be overwritten later
@@ -168,12 +171,14 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "")
     data['finalUris'] = {}
     return data
 
-def resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri = "resources", templateDir = "templates"):
+def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
+                       autodetectClassUri, autodetectPropertyUri, htmlVersions,
+                       resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri)
+    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, htmlVersions)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
@@ -184,8 +189,8 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, resourceBaseUri =
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
-def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "tempaltes"):    
-    data = prepareData(resourceBaseUri)
+def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "templates"):    
+    data = prepareData(resourceBaseUri, printForm = True)
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
