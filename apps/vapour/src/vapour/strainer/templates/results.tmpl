@@ -201,7 +201,7 @@
     <ul>
     #from urllib import quote
     #for $finalUri in $finalUris[$testRequirement[0]]:
-      #if $finalUri[1] == 'text/html':
+      #if 'text/html' in $finalUri[1] or 'application/xhtml+xml' in $finalUri[1]:
       <li>
         <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">
           Check the response with the W3C HTTP validator
