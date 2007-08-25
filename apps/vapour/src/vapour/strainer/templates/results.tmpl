@@ -21,55 +21,55 @@
     #if $printForm:
     <h1>Vapour</h1>
     <div class="inputData">
-    <h2>Input data</h2>
-    <form action="" method="get">
-      <table>
-      <tbody>
-      <tr>
-        <th><label title="Address of the page containing the vocabulary" for="vocabUri">Vocabulary URI:</label></th>
-        <td><input class="uri" type="text" size="50" name="vocabUri" value="$vocabUri"/></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th><label title="URI of a class in the vocabulary" for="classUri">Class URI:</label></th>
-        <td><input class="uri" type="text" size="50" name="classUri" value="$classUri"/></td>
-        <td>
-          #if $autodetectClassUri:
-            <input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
-          #else:
-            <input type="checkbox" name="autodetectClassUri" value="1"/>
-          #end if
-          <label for="autodetectClassUri">Autodetect if empty</label>
-        </td>
-      </tr>
-      <tr>
-        <th><label title="URI of a property in the vocabulary" for="propertyUri">Property URI:</label></th>
-        <td><input class="uri" type="text" size="50" name="propertyUri" value="$propertyUri"/></td>
-        <td>
-          #if $autodetectPropertyUri:
-            <input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
-          #else:
-            <input type="checkbox" name="autodetectPropertyUri" value="1"/>
-          #end if
-          <label for="autodetectPropertyUri">Autodetect if empty</label>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          #if $htmlVersions:
-          <input type="checkbox" name="htmlVersions" value="1" checked="checked"/>
-          #else:
-          <input type="checkbox" name="htmlVersions" value="1"/>
-          #end if
-          There are HTML descriptions of the symbols
-        </td>
-        <td></td>
-      </tr>
-      </tbody>
-      </table>
-      <p class="submit"><input type="submit" value="Run tests"/></p>      
-    </form>
+	    <h2>Input data</h2>
+	    <form action="" method="get">
+	      <table>
+	      <tbody>
+	      <tr>
+	        <th><label title="Address of the page containing the vocabulary" for="vocabUri">Vocabulary URI:</label></th>
+	        <td><input class="uri" type="text" size="50" name="vocabUri" value="$vocabUri"/></td>
+	        <td></td>
+	      </tr>
+	      <tr>
+	        <th><label title="URI of a class in the vocabulary" for="classUri">Class URI:</label></th>
+	        <td><input class="uri" type="text" size="50" name="classUri" value="$classUri"/></td>
+	        <td>
+	          #if $autodetectClassUri:
+	            <input type="checkbox" name="autodetectClassUri" value="1" checked="checked"/>
+	          #else:
+	            <input type="checkbox" name="autodetectClassUri" value="1"/>
+	          #end if
+	          <label for="autodetectClassUri">Autodetect if empty</label>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th><label title="URI of a property in the vocabulary" for="propertyUri">Property URI:</label></th>
+	        <td><input class="uri" type="text" size="50" name="propertyUri" value="$propertyUri"/></td>
+	        <td>
+	          #if $autodetectPropertyUri:
+	            <input type="checkbox" name="autodetectPropertyUri" value="1" checked="checked"/>
+	          #else:
+	            <input type="checkbox" name="autodetectPropertyUri" value="1"/>
+	          #end if
+	          <label for="autodetectPropertyUri">Autodetect if empty</label>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td></td>
+	        <td>
+	          #if $htmlVersions:
+	          <input type="checkbox" name="htmlVersions" value="1" checked="checked"/>
+	          #else:
+	          <input type="checkbox" name="htmlVersions" value="1"/>
+	          #end if
+	          There are HTML descriptions of the symbols
+	        </td>
+	        <td></td>
+	      </tr>
+	      </tbody>
+	      </table>
+	      <p class="submit"><input type="submit" value="Run tests"/></p>      
+	    </form>
     </div>
     #end if
     
@@ -109,74 +109,76 @@
     </div> <!-- /summary -->
 
      #for $testRequirement in $testRequirements:
-    <div>
+    <div class="testRequirement">
       <div class="httpDialog">
         <h2 id="$testRequirement[0]">
           $testRequirement[1]
          </h2>
-      <div class="clientIcon">
-		<img src="$resourceBaseUri/computer.png" alt="A computer on the client-side"/>
-		<p>Client</p>
-      </div> <!-- /clientIcon -->
-      <div class="dialogArea">
-	#for $trace in $httpTraces[$testRequirement[0]]:
- 	   <!-- $trace[1] -->
-	  <div class="request">
-	  	 <div class="requestInner">
-	  	   <span class="httpHeader">GET $trace[2]</span>
-	  	   #if $trace[10] != None:
-		  	   <span class="httpHeader">Accept: $trace[10]</span>
-		   #end if
-	  	 </div>
-	  </div> <!-- /request -->
-	  <div class="response">
-	    <div class="responseInner">
-	      #if $trace[3] == 200:
-            <div class="fileIcon">
-		    <a href="$trace[2]">
-		      #if ($trace[4].startswith(mimetypes.rdfXml)):
-			    <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
-			  #else if ($trace[4].startswith(mimetypes.html)):
-			    <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
-			  #else:
-			    <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
-			 #end if
-			</a>
-			</div> <!-- /fileIcon -->
-	      #end if
+         <div class="clientIcon">
+           <img src="$resourceBaseUri/computer.png" alt="A computer on the client-side"/>
+           <p>Client</p>
+         </div> <!-- /clientIcon -->
+         <div class="dialogArea">
+	       #for $trace in $httpTraces[$testRequirement[0]]:
+ 	       <!-- $trace[1] -->
+	       <div class="request">
+	  	      <div class="requestInner">
+	  	         <span class="httpHeader">GET $trace[2]</span>
+	  	         #if $trace[10] != None:
+		  	     <span class="httpHeader">Accept: $trace[10]</span>
+		         #end if
+	  	      </div> <!-- /requestInner -->
+           </div> <!-- /request -->
+	       <div class="response">
+	         <div class="responseInner">
+	            #if $trace[3] == 200:
+                <div class="fileIcon">
+		          <a href="$trace[2]">
+		          #if ($trace[4].startswith(mimetypes.rdfXml)):
+			        <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
+			      #else if ($trace[4].startswith(mimetypes.html)):
+			        <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
+			      #else:
+			        <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
+			      #end if
+			      </a>
+			    </div> <!-- /fileIcon -->
+	            #end if
 	      
-	      #if $trace[7] == EARL["pass"]:
-	        #set $additionalCssClass = "goodHttpHeader"
-	      #else if $trace[7] == EARL["fail"]:
-	        #set $additionalCssClass = "badHttpHeader"
-	      #else:
-	        #set $additionalCssClass = ""
-	      #end if
-	      <span class="httpHeader $additionalCssClass">$trace[3]</span>
-	      
-	      #if $trace[3] == 200:
-	        #if $trace[9] == EARL["pass"]:
-	          #set $additionalCssClass = "goodHttpHeader"
-	        #else if $trace[9] == EARL["fail"]:
-	          #set $additionalCssClass = "badHttpHeader"
-	        #else:
-	          #set $additionalCssClass = ""
-	        #end if	        
-	      <span class="httpHeader $additionalCssClass">Content-type: $trace[4]</span>
-	      #end if
-	      
-	      #if $trace[3] == 303:
-	      <span class="httpHeader">Location: $trace[5]</span>
-	      #end if
-	    </div>
-	  </div> <!-- /response -->
-	#end for
-       </div> <!-- /dialogArea -->
-      <div class="serverIcon">
-		<img src="$resourceBaseUri/apacheconf.png" alt="A web server" />
-		<p>Web server</p>
-      </div>
-      <div class="dummyR"/>
+                #if $trace[7] == EARL["pass"]:
+                  #set $additionalCssClass = "goodHttpHeader"
+			    #else if $trace[7] == EARL["fail"]:
+			      #set $additionalCssClass = "badHttpHeader"
+			    #else:
+			      #set $additionalCssClass = ""
+			    #end if
+			    
+                <span class="httpHeader $additionalCssClass">$trace[3]</span>
+			      
+			    #if $trace[3] == 200:
+			      #if $trace[9] == EARL["pass"]:
+			        #set $additionalCssClass = "goodHttpHeader"
+			      #else if $trace[9] == EARL["fail"]:
+			        #set $additionalCssClass = "badHttpHeader"
+			      #else:
+			        #set $additionalCssClass = ""
+			      #end if	        
+			      <span class="httpHeader $additionalCssClass">Content-type: $trace[4]</span>
+			    #end if
+			      
+			    #if $trace[3] == 303:
+			    <span class="httpHeader">Location: $trace[5]</span>
+			    #end if
+	         </div> <!-- /responseInner>
+	       </div> <!-- /response -->
+	       #end for
+         </div> <!-- /dialogArea -->
+         
+         <div class="serverIcon">
+		   <img src="$resourceBaseUri/apacheconf.png" alt="A web server" />
+		   <p>Web server</p>
+         </div>
+         <div class="dummyR"></div>
       </div> <!-- /httpDialog -->
 
     <h3>Test results</h3>
@@ -217,7 +219,7 @@
     #end if
 
 
-    </div>
+    </div> <!-- /testRequirement -->
     #end for
     #end if
 
