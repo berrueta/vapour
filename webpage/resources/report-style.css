@@ -90,12 +90,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* icons ============================================== */
 
-.httpDialog
-{ 
+.testRequirement {
   border: 1px #5674bc solid;
-  padding: .6em;
   margin-top: 1em;
   margin-bottom: 1em;
+  padding: .6em;
+  background-color:#fffff9;
+}
+
+.httpDialog
+{ 
 }
 
 
