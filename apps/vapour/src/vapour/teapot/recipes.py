@@ -25,8 +25,8 @@ def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = N
     checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
     checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
     if htmlVersions:
-        checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-        checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
+        #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
+        #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
         checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri)
     
     #for i in range(0,8):
