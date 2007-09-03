@@ -7,7 +7,7 @@ from vapour.namespaces import RDF, RDFS, OWL
 def autodetectUris(graph, vocabUri):
     contentType = mimetypes.rdfXml
     try:
-        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType )
+        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET" )
     except Exception, e:
         raise Exception( "Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")" )
 
