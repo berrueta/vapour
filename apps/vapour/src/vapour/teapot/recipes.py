@@ -64,21 +64,21 @@ def checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, mixNum):
     
 def runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType):
     testRequirement = addTestRequirement(graph, "Dereferencing the vocabulary URI" + scenarioDescription)
-    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri, contentType)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri, contentType, method = "HEAD")
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
     assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
 
     if classUri is not None:
         testRequirement = addTestRequirement(graph, "Dereferencing class URI" + scenarioDescription)
-        rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri, contentType)
+        rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri, contentType, method = "HEAD")
         assertLastResponseCode200(graph, rootTestSubject, testRequirement)
         assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
         assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
     
     if propertyUri is not None:
         testRequirement = addTestRequirement(graph, "Dereferencing property URI" + scenarioDescription)
-        rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", propertyUri, contentType)    
+        rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", propertyUri, contentType, method = "HEAD")    
         assertLastResponseCode200(graph, rootTestSubject, testRequirement)
         assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
         assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)    

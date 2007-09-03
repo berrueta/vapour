@@ -8,12 +8,12 @@ import datetime
 userAgentString = "vapour.sourceforge.net"
 maxRedirects = 10
 
-def launchHttpDialog(graph, what, url, accept = None):
-    return followRedirects(graph, what, url, accept)[0]
+def launchHttpDialog(graph, what, url, accept = None, method = "GET"):
+    return followRedirects(graph, what, url, accept, method)[0]
 
-def followRedirects(graph, what, url, accept = None):
+def followRedirects(graph, what, url, accept = None, method = "GET"):
     redirectsCount = 0
-    r = simpleRequest(graph, url, accept, redirectsCount)
+    r = simpleRequest(graph, url, accept, redirectsCount, method)
     firstTestSubjectResource = r[0]
 
     response = r[1]
@@ -24,14 +24,14 @@ def followRedirects(graph, what, url, accept = None):
         if (redirectsCount > maxRedirects):
             raise "Too many redirections, aborting"
 
-        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource)
+        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method)
         response = r[1]
         
     labelTestSubjects(graph, firstTestSubjectResource, what)                
     return (firstTestSubjectResource, response)
     
         
-def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None):
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None, method="GET"):
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
     server = parsedUrl[1]
     path = parsedUrl[2]
@@ -39,7 +39,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     headers = {"User-agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
-    conn.request("GET", path, headers = headers)
+    conn.request(method, path, headers = headers)
     response = conn.getresponse()
     
     testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount)
