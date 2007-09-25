@@ -152,7 +152,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "", printForm = False, autodetectClassUri = False, autodetectPropertyUri = False, htmlVersions = False):
+def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "", printForm = False, autodetectClassUri = False, autodetectPropertyUri = False, htmlVersions = False, namespaceFlavour = None, validRecipes = []):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
@@ -164,7 +164,9 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "",
     data['autodetectClassUri'] = autodetectClassUri
     data['autodetectPropertyUri'] = autodetectPropertyUri
     data['htmlVersions'] = htmlVersions
-
+    data['namespaceFlavour'] = namespaceFlavour
+    data['validRecipes'] = validRecipes
+    
     data['testAgent'] = {} # it may be overwritten later
     data['testRequirements'] = {} # it may be overwritten later
     
@@ -175,12 +177,13 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "",
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
                        autodetectClassUri, autodetectPropertyUri, htmlVersions,
+                       namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, htmlVersions)
+    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, htmlVersions, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)

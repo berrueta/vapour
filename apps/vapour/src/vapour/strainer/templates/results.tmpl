@@ -106,6 +106,17 @@
           #end for
         </tbody>
       </table>
+      #if $namespaceFlavour:
+        <p>It is a $namespaceFlavour['name'].</p>
+      #end if
+      #if len($validRecipes) > 0:
+         <p>Suggested recipes for this configuration:</p>
+         <ul>
+           #for $validRecipe in $validRecipes:
+             <li><a href="$validRecipe['link']">$validRecipe['name']</a></li>
+           #end for
+         </ul>
+      #end if
     </div> <!-- /summary -->
 
      #for $testRequirement in $testRequirements:
