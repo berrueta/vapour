@@ -29,6 +29,12 @@ if __name__ == "__main__":
     
     htmlVersions = True
     recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propUri)
+    if classUri is not None:
+        namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
+        validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
+    else:
+        namespaceFlavour = None
+        validRecipes = []
     
     if outputRdfFileName is not None:
         outputRdfFile = open(outputRdfFileName,'w')
@@ -40,7 +46,10 @@ if __name__ == "__main__":
     store.parse(common.pathToRdfFiles + "/earl.rdf")
 
     model = common.createModel(store)
-    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, False, False, False, False, resourceBaseUri, common.pathToTemplates)
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, 
+                                       False, False, False, False,
+                                       namespaceFlavour, validRecipes,
+                                       resourceBaseUri, common.pathToTemplates)
     if outputFileName is not None:
         outputFile = open(outputFileName,'w')
         outputFile.write(str(html))
