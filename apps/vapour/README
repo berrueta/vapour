@@ -9,3 +9,4 @@ Dependencies:
 - Python-rdflib
 - Python-httplib
 - Cheetah
+- WebPy
