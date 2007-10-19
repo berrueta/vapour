@@ -7,7 +7,7 @@ from vapour.cup import common
 resourceBaseUri = "http://vapour.sf.net/resources"
 
 class cup:
-      def GET(self, format="html"):
+      def GET(self, getArgs):
             args = web.input()
             try:
                 vocabUri = args["vocabUri"]
@@ -40,7 +40,7 @@ class cup:
                 autodetectPropertyUriIfEmpty = args["autodetectPropertyUri"] is "1"
             except KeyError:
                 autodetectPropertyUriIfEmpty = False
-            
+
             try:
                 store = common.createStore()
                     
@@ -61,7 +61,7 @@ class cup:
                         namespaceFlavour = None
                         validRecipes = []
                     
-                    if format is "html":        
+                    if format == "html":        
                         store.parse(common.pathToRdfFiles + "/vapour.rdf")
                         store.parse(common.pathToRdfFiles + "/recipes.rdf")
                         store.parse(common.pathToRdfFiles + "/earl.rdf")        
@@ -70,10 +70,13 @@ class cup:
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, True,
                                                                autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, htmlVersions,
                                                                namespaceFlavour, validRecipes, resourceBaseUri, common.pathToTemplates))
-                    elif format is "rdf":
+                    elif format == "rdf":
                         web.header("Content-Type", "application/rdf+xml", unique=True)
                         web.output(store.serialize(format="pretty-xml"))
-                else:
+                    else:
+                        web.ctx.status = "400 Bad Request"
+                        web.output("<p>Unknown format " + format + "</p>")
+                else:  # vocabUri is None
                     web.header("Content-Type", "application/xhtml+xml", unique=True)
                     web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
             except Exception, e:
