@@ -1,0 +1,11 @@
+Vapour
+======
+
+Dependencies:
+*************
+
+- Python (>=2.4)
+- DNSPython
+- Python-rdflib
+- Python-httplib
+- Cheetah
