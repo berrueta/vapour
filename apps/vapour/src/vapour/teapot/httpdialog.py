@@ -4,6 +4,7 @@ from rdflib import Graph, BNode, Literal
 import httplib
 import urlparse
 import datetime
+import dns.resolver
 
 userAgentString = "vapour.sourceforge.net"
 maxRedirects = 10
@@ -31,10 +32,15 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
     return (firstTestSubjectResource, response)
     
         
-def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None, method="GET"):
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None, method="GET"):    
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
     server = parsedUrl[1]
     path = parsedUrl[2]
+    # FIXME: skip DNS resolution if the server is already an IP address
+    ipList = dns.resolver.query(server)
+    for ip in ipList:
+        if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
+            raise "Internal IP address are forbidden"
     conn = httplib.HTTPConnection(server)
     headers = {"User-agent": userAgentString}
     if (accept is not None):
