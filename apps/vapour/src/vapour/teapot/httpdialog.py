@@ -7,7 +7,7 @@ import datetime
 import dns.resolver
 
 userAgentString = "vapour.sourceforge.net"
-maxRedirects = 10
+maxRedirects = 3
 
 def launchHttpDialog(graph, what, url, accept = None, method = "GET"):
     return followRedirects(graph, what, url, accept, method)[0]
