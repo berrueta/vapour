@@ -10,7 +10,7 @@
     <admin:generatorAgent rdf:resource="http://doapy.bonjourlesmouettes.org/doap-a-matic"/>
   </rdf:Description>
 
-  <doap:Project rdf:about="http://vapour.sourceforge.net/resources/doap.rdf">
+  <doap:Project rdf:about="http://vapour.sourceforge.net/resources/doap.rdf#vapour">
 
     <doap:name>Vapour</doap:name>
     <doap:homepage rdf:resource="http://vapour.sourceforge.net/"/>
