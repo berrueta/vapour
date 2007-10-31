@@ -1,3 +1,10 @@
+#!/usr/bin/env python2.4
+# -*- coding: utf8 -*-
+
+#path to work inside apache (uncomment these lines)
+#import sys
+#sys.path.append('../..')
+
 import web
 import random, traceback
 from vapour.strainer import strainer
@@ -90,6 +97,9 @@ urls = (
 
 web.webapi.internalerror = web.debugerror
 
+application = web.wsgifunc(web.webpyfunc(urls, globals())) #seeAlso: http://webpy.org/install
+
 if __name__ == "__main__":
     common.readEnvironment()
     web.run(urls, globals(), web.reloader)
+
