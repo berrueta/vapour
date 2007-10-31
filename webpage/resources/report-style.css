@@ -8,6 +8,12 @@ img {
   border: 0;
 }
 
+div#logo {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  text-align: right;
+}
+
 .all{
 	width:90%;
 	margin-left:5%;
@@ -168,11 +174,6 @@ input .uri
 p #submit
 { 
   text-align:center;
-}
-
-div#foot {
-  margin-top: 2em;
-  text-align: right;
 }
 
 /* summary ====================================================== */
