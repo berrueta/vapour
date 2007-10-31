@@ -4,6 +4,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #5674bc;
 }
 
+img {
+  border: 0;
+}
+
 .all{
 	width:90%;
 	margin-left:5%;
@@ -164,6 +168,11 @@ input .uri
 p #submit
 { 
   text-align:center;
+}
+
+div#foot {
+  margin-top: 2em;
+  text-align: right;
 }
 
 /* summary ====================================================== */
