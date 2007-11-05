@@ -4,6 +4,23 @@ h1, h2, h3, h4, h5, h6 {
   color: #5674bc;
 }
 
+h1 {
+  font-size: 3em;
+  font-weight: bold;
+  display: block;
+  color: #5674bc;
+}
+
+h1 a, h1 a:active, h1 a:hover, h1 a:visited {
+  color: #5674bc;
+  text-decoration: none;
+}
+
+h1 a abbr {
+  border-bottom: 0;
+  text-transform: uppercase
+}
+
 img {
   border: 0;
 }
