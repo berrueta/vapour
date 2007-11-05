@@ -15,6 +15,7 @@ resourceBaseUri = "http://vapour.sf.net/resources"
 
 class cup:
       def GET(self, getArgs):
+            web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
             args = web.input()
             try:
                 vocabUri = args["vocabUri"]
