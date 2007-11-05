@@ -62,11 +62,11 @@
 	        <td></td>
 	        <td>
 	          #if $htmlVersions:
-	          <input type="checkbox" name="htmlVersions" value="1" checked="checked"/>
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" checked="checked"/>
 	          #else:
-	          <input type="checkbox" name="htmlVersions" value="1"/>
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1"/>
 	          #end if
-	          There are HTML descriptions of the symbols
+	          <label for="htmlVersions">There are HTML descriptions of the symbols</label>
 	        </td>
 	        <td></td>
 	      </tr>
@@ -123,7 +123,7 @@
       #end if
     </div> <!-- /summary -->
 
-     #for $testRequirement in $testRequirements:
+    #for $testRequirement in $testRequirements:
     <div class="testRequirement">
       <div class="httpDialog">
         <h2 id="$testRequirement[0]">
