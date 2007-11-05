@@ -157,21 +157,13 @@ float:left;
 
 /* input form =================================================== */
 
-
-.inputData
-{
+.inputData {
   border: 1px #b0b0c0 solid;
   padding: .6em;
   background-color: #e0e0d0;
 }
 
-th
-{
-  text-align:right;
-}
-
-input
-{ 
+input { 
   border: 1px solid #bbb;
   border-top: 1px solid #777;
   border-bottom: 1px solid #ddd;
@@ -181,16 +173,32 @@ input
   font-variant: normal;
 }
 
-input .uri
-{
-  font-family: Monaco, "Courier New", Monospace;
-  font-size: 0.9em;
-  width: 85%;
+input:hover {
+  background-color: #f0f0ff;
 }
 
-p #submit
-{ 
-  text-align:center;
+input.uri {
+  display: block;
+  float: left;
+  font-family: Monaco, "Courier New", Monospace;
+  font-size: 0.9em;
+  margin-bottom: 0.3em;
+}
+
+label.uri {
+  display: block;
+  float: left;
+  width: 200px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+input#htmlVersions, p.submit{
+  margin-left: 210px;
+}
+
+br {
+  clear: left;
 }
 
 /* summary ====================================================== */
