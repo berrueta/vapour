@@ -93,7 +93,7 @@ class cup:
                 web.output("<pre>" + traceback.format_exc(e) + "</pre>")
           
 urls = (
-      '/(.*)', 'cup'
+      '(.*)', 'cup'
   )
 
 web.webapi.internalerror = web.debugerror
