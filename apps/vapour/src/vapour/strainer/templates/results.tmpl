@@ -13,6 +13,7 @@
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
     <link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />
+    <script src="$resourceBaseUri/scripts.js" />
     <title>Vapour Report</title>
   </head>
   <body>    
@@ -27,42 +28,46 @@
     <div class="inputData">
 	    <h2>Input data</h2>
 	    <form action="" method="get">
-	      <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">Vocabulary URI:</label>
-	      <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri"/>
 
-          <br/>
+          <p>
+            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">Vocabulary URI:</label>
+	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" />
+            <span class="small">(example: <tt id="example">http://isegserv.itd.rl.ac.uk/VM/http-examples/example1</tt>)</small>
+          </p>
 
-          <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
-	      <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri"/>
-	      #if $autodetectClassUri:
-	        <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1" checked="checked"/>
-	      #else:
-	        <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1"/>
-	      #end if
-          <label for="autodetectClassUri">Autodetect if empty</label>
+          <p>
+            <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
+	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
+	        #if $autodetectClassUri:
+	          <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1" />
+	        #end if
+            <label for="autodetectClassUri">Autodetect if empty</label>
+          </p>
 
-          <br/>
+          <p>
+            <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
+	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri" />
+	        #if $autodetectPropertyUri:
+	          <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1" />
+	        #end if
+	        <label for="autodetectPropertyUri" class="check">Autodetect if empty</label>
+          </p>
 
-          <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
-	      <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri"/>
-	      #if $autodetectPropertyUri:
-	        <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1" checked="checked"/>
-	      #else:
-	        <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1"/>
-	      #end if
-	      <label for="autodetectPropertyUri" class="check">Autodetect if empty</label>
+          <p>
+	        #if $htmlVersions:
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" />
+	        #end if
+	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
+          </p>
 
-          <br/><br/>
+	      <p class="submit"><input type="submit" value="Run tests" /></p>      
 
-	      #if $htmlVersions:
-	        <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" checked="checked"/>
-	      #else:
-	        <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1"/>
-	      #end if
-	      <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
-          <br/>
-
-	      <p class="submit"><input type="submit" value="Run tests"/></p>      
 	    </form>
     </div>
     #end if

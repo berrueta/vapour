@@ -25,6 +25,10 @@ img {
   border: 0;
 }
 
+.small {
+  font-size: 0.8em;
+}
+
 div#logo {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -157,6 +161,11 @@ float:left;
 
 /* input form =================================================== */
 
+form > p {
+  clear: left;
+  margin-bottom: 1em;
+}
+
 .inputData {
   border: 1px #b0b0c0 solid;
   padding: .6em;
@@ -169,7 +178,7 @@ input {
   border-bottom: 1px solid #ddd;
   background: #fefefe;
   padding: 0.2em 0.2em;
-  max-width: 1000px;
+  max-width: 800px;
   font-variant: normal;
 }
 
@@ -180,25 +189,25 @@ input:hover {
 input.uri {
   display: block;
   float: left;
+  margin-right: 10px;
   font-family: Monaco, "Courier New", Monospace;
   font-size: 0.9em;
-  margin-bottom: 0.3em;
 }
 
 label.uri {
   display: block;
   float: left;
-  width: 200px;
+  width: 10em;
   text-align: right;
-  margin-right: 10px;
+  margin-right: 0.3em;
 }
 
-input#htmlVersions, p.submit{
-  margin-left: 210px;
+input#htmlVersions {
+  margin-left: 13em;
 }
 
-br {
-  clear: left;
+p.submit {
+  margin-left: 10.3em;
 }
 
 /* summary ====================================================== */
