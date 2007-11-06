@@ -2,9 +2,11 @@ import os
 from rdflib.Graph import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 from rdflib.sparql import sparqlGraph
+import logging
 
 pathToRdfFiles = "http://vapour.sourceforge.net"
-pathToTemplates = "../strainer/templates"    
+pathToTemplates = "../strainer/templates" 
+pathToLog = "../../../log/vapour.log"  
 
 def createStore():
     store = Graph()
@@ -31,3 +33,13 @@ def readEnvironment():
     global pathToTemplates
     if os.environ.get("VAPOUR_TEMPLATES"):
         pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
+
+def createLogger(name='vapour'):
+	logger = logging.getLogger(name)
+	hdlr = logging.FileHandler(pathToLog)
+	formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
+	hdlr.setFormatter(formatter)
+	logger.addHandler(hdlr)
+	logger.setLevel(logging.INFO)
+	return logger
+

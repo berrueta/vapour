@@ -53,6 +53,7 @@ class cup:
                 store = common.createStore()
                     
                 if vocabUri is not None:
+                    logger.info("request over vocabulary on " + vocabUri)
                     if (classUri is None and autodetectClassUriIfEmpty) or (propertyUri is None and autodetectPropertyUriIfEmpty):
                         (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
                         random.seed()
@@ -88,13 +89,17 @@ class cup:
                     web.header("Content-Type", "application/xhtml+xml", unique=True)
                     web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
             except Exception, e:
+                logger.error(str(e))
                 web.internalerror()
                 web.output("<p>Vapour was unable to complete the request due to the following exception:</p>")
                 web.output("<pre>" + traceback.format_exc(e) + "</pre>")
+			
           
 urls = (
       '(.*)', 'cup'
   )
+
+logger = common.createLogger()
 
 web.webapi.internalerror = web.debugerror
 
