@@ -25,7 +25,7 @@ img {
   border: 0;
 }
 
-.small {
+span.small {
   font-size: 0.8em;
 }
 
@@ -192,6 +192,7 @@ input.uri {
   margin-right: 10px;
   font-family: Monaco, "Courier New", Monospace;
   font-size: 0.9em;
+  width: 40%;
 }
 
 label.uri {
