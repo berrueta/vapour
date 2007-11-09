@@ -34,8 +34,16 @@ def readEnvironment():
     if os.environ.get("VAPOUR_TEMPLATES"):
         pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
 
+def clearLoggerHandlers(logger):
+	#because logger prints duplicate message, and I don't know how to fix it
+	handlers = logger.handlers
+	for handler in handlers:
+		logger.removeHandler(handler)
+	return logger
+
 def createLogger(name='vapour'):
 	logger = logging.getLogger(name)
+	logger = clearLoggerHandlers(logger) #FIXME
 	hdlr = logging.FileHandler(pathToLog)
 	formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
 	hdlr.setFormatter(formatter)
