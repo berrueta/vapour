@@ -5,6 +5,7 @@ from rdflib.sparql.graphPattern import GraphPattern
 from rdflib.sparql import Query
 from vapour.namespaces import *
 import httplib
+import urllib
 from Cheetah.Template import Template
 import datetime
 
@@ -173,6 +174,7 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "",
     data['testResults'] = {}
     data['httpTraces'] = {}
     data['finalUris'] = {}
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri,'classUri':classUri,'autodetectClassUri':str(int(autodetectClassUri)),'propertyUri':propertyUri,'autodetectPropertyUri':str(int(autodetectPropertyUri)),'htmlVersions':str(int(htmlVersions)),'format':'rdf'}))
     return data
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
