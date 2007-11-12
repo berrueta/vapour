@@ -99,13 +99,12 @@ urls = (
       '(.*)', 'cup'
   )
 
-logger = common.createLogger()
-
 web.webapi.internalerror = web.debugerror
 
+common.readEnvironment()
+logger = common.createLogger()
 application = web.wsgifunc(web.webpyfunc(urls, globals())) #seeAlso: http://webpy.org/install
 
 if __name__ == "__main__":
-    common.readEnvironment()
     web.run(urls, globals(), web.reloader)
 
