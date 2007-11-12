@@ -1,5 +1,4 @@
 #!/usr/bin/env python2.4
-# -*- coding: utf8 -*-
 
 #path to work inside apache (uncomment these lines)
 #import sys
