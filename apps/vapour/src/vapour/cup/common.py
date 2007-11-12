@@ -33,6 +33,9 @@ def readEnvironment():
     global pathToTemplates
     if os.environ.get("VAPOUR_TEMPLATES"):
         pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
+    global pathToLog
+    if os.environ.get("VAPOUR_LOG"):
+        pathToLog = os.environ.get("VAPOUR_LOG")
 
 def clearLoggerHandlers(logger):
 	#because logger prints duplicate message, and I don't know how to fix it
