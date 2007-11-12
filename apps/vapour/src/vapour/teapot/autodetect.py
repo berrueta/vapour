@@ -20,9 +20,7 @@ def autodetectUris(graph, vocabUri):
     try:
         ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET" )
     except Exception, e:
-        message = "Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")"
-        common.createLogger().error(message)
-        raise Exception(message)
+        raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")")
 
     if response.status == httplib.OK:
             tempGraph = ConjunctiveGraph()
@@ -42,9 +40,7 @@ def autodetectUris(graph, vocabUri):
             properties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
             return ( classes, properties )
     else:
-            message = "Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")"
-            common.createLogger().error(message)
-            raise Exception(message)
+            raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")")
         
 def autodetectNamespaceFlavour(vocabUri, oneResourceUri):
     # FIXME: this is a silly implementation
