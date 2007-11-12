@@ -24,6 +24,8 @@
     <doap:programming-language>python</doap:programming-language>
     <doap:license rdf:resource="http://usefulinc.com/doap/licenses/w3c"/>
 
+    <doap:category rdf:resource="http://rdflib.net/projects#using_rdflib" />rdf
+
     <doap:maintainer>
       <foaf:Person>
         <foaf:name>Diego Berrueta</foaf:name>
@@ -45,7 +47,7 @@
 
     <doap:developer>
       <foaf:Person>
-        <foaf:name>Sergio Fdez</foaf:name>
+        <foaf:name>Sergio Fernández</foaf:name>
         <foaf:nick>Wikier</foaf:nick>
         <foaf:mbox_sha1sum>d0fd987214f56f70b4c47fb96795f348691f93ab</foaf:mbox_sha1sum>
         <rdfs:seeAlso rdf:resource="http://www.wikier.org/foaf.rdf#wikier"/>
