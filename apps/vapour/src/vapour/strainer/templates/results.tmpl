@@ -176,7 +176,7 @@
 			      <span class="httpHeader $additionalCssClass">Content-type: $trace[4]</span>
 			    #end if
 			      
-			    #if $trace[3] == 303:
+			    #if $trace[3] == 303 or $trace[3] == 302:
 			    <span class="httpHeader">Location: $trace[5]</span>
 			    #end if
 	         </div> <!-- /responseInner -->
