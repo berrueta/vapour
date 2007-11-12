@@ -3,6 +3,7 @@ from httpdialog import followRedirects
 import mimetypes
 import httplib
 from vapour.namespaces import RDF, RDFS, OWL
+from vapour.cup import common
 
 HASH_NAMESPACE = { "name": "hash namespace" }
 SLASH_NAMESPACE = { "name": "slash namespace" }
@@ -19,7 +20,9 @@ def autodetectUris(graph, vocabUri):
     try:
         ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET" )
     except Exception, e:
-        raise Exception( "Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")" )
+        message = "Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")"
+        common.createLogger().error(message)
+        raise Exception(message)
 
     if response.status == httplib.OK:
             tempGraph = ConjunctiveGraph()
@@ -39,7 +42,9 @@ def autodetectUris(graph, vocabUri):
             properties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
             return ( classes, properties )
     else:
-            raise Exception( "Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")" )
+            message = "Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")"
+            common.createLogger().error(message)
+            raise Exception(message)
         
 def autodetectNamespaceFlavour(vocabUri, oneResourceUri):
     # FIXME: this is a silly implementation
@@ -61,4 +66,4 @@ def autodetectValidRecipes(vocabUri, oneResourceUri, namespaceFlavour, htmlVersi
             return [RECIPE3]
         else:
             return [RECIPE4, RECIPE5, RECIPE6]
-        
+
