@@ -18,7 +18,10 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
     firstTestSubjectResource = r[0]
 
     response = r[1]
-    while (response.status == httplib.SEE_OTHER):
+    while (response.status == httplib.SEE_OTHER or
+               response.status == httplib.FOUND or
+               response.status == httplib.TEMPORARY_REDIRECT or
+               response.status == httplib.MOVED_PERMANENTLY):
         previousSubjectResource = r[0]        
         url = response.getheader("Location")
         redirectsCount = redirectsCount + 1
