@@ -4,9 +4,9 @@ Vapour
 Dependencies:
 *************
 
-- Python (>=2.4)
-- DNSPython
-- Python-rdflib
-- Python-httplib
-- Cheetah
-- WebPy
+- python (>=2.4)
+- python-dnspython
+- python-rdflib
+- python-httplib
+- python-cheetah
+- python-webpy
