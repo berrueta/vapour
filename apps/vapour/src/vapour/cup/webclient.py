@@ -102,6 +102,7 @@ urls = (
 web.webapi.internalerror = web.debugerror
 
 common.readEnvironment()
+
 logger = common.createLogger()
 application = web.wsgifunc(web.webpyfunc(urls, globals())) #seeAlso: http://webpy.org/install
 
