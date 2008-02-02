@@ -36,11 +36,18 @@ def autodetectUris(graph, vocabUri):
             # remove unwanted URIs
             owlClasses = filter( lambda x : not x.startswith( OWL ), owlClasses )
     
-            classes = rdfsClasses + owlClasses
-            properties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
+            classes = pickFromNamespaceIfPossible(rdfsClasses + owlClasses, vocabUri)
+            properties = pickFromNamespaceIfPossible(rdfProperties + objectProperties + datatypeProperties + annotationProperties, vocabUri)
             return ( classes, properties )
     else:
             raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")")
+
+def pickFromNamespaceIfPossible(entities, namespace):
+    definedInTheNamespace = filter ( lambda x : x.startswith(namespace), entities )
+    if len(definedInTheNamespace) > 0:
+        return definedInTheNamespace
+    else:
+        return entities
         
 def autodetectNamespaceFlavour(vocabUri, oneResourceUri):
     # FIXME: this is a silly implementation
