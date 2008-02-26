@@ -1,0 +1,38 @@
+
+\documentclass{../templates/llncs}
+%\documentstyle{../templates/llncs}
+\usepackage{../templates/salt-light}
+
+\begin{document}
+
+\title{Vapour, a scripting  approach to implement HTTP best practices}
+
+\author{Diego Berrueta\inst{1}, Sergio Fern\'andez\inst{1} and Iv\'an Frade\inst{2}}
+
+\institute{
+Fundaci\'on CTIC\\
+Gij\'on, Asturias, Spain\\
+\email{\{diego.berrueta,sergio.fernandez\}@fundacionctic.org\\http://www.fundacionctic.org/}
+\and
+Universidad de Oviedo\\
+Oviedo, Asturias, Spain\\
+\email{ivan.frade@gmail.com\\http://www.uniovi.es/}
+}
+
+\maketitle
+
+\begin{abstract}
+Semantic Web is built upon on a distributed amount of knowledge published in the 
+Web. But this vision could not be implemented without some basic norms and rules 
+to public and make it machine-understandable this data. In this paper we describe 
+a light scripting web application to validates some of these rules, concretely 
+rules to publish RDF vocabularies.
+\end{abstract}
+
+\input{paper} %SALT bug
+
+% ---- Bibliography ----
+\bibliographystyle{abbrv}
+\bibliography{../references}
+
+\end{document}
