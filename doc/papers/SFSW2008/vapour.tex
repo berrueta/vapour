@@ -1,11 +1,24 @@
 
 \documentclass{../templates/llncs}
-%\documentstyle{../templates/llncs}
 \usepackage{../templates/salt-light}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{graphicx}
 
 \begin{document}
 
-\title{Vapour, a scripting  approach to implement HTTP best practices}
+%\title{Vapour, a scripting approach to implement HTTP best practices}
+%funny title???
+%Cooking HTTP content negotiation with Vapour
+%HTTP pressurizing with Vapour
+%Vapour as a HTTP steam engine
+
+\title{Cooking HTTP content negotiation with Vapour}
+
+%TODO list:
+% - decide the final title of the paper
+% - find work related to cite it
+
 
 \author{Diego Berrueta\inst{1}, Sergio Fern\'andez\inst{1} and Iv\'an Frade\inst{2}}
 
@@ -24,9 +37,12 @@ Oviedo, Asturias, Spain\\
 \begin{abstract}
 Semantic Web is built upon on a distributed amount of knowledge published in the 
 Web. But this vision could not be implemented without some basic norms and rules 
-to public and make it machine-understandable this data. In this paper we describe 
-a light scripting web application to validates some of these rules, concretely 
-rules to publish RDF vocabularies.
+to publish and make machine-understandable all this data. Special mention must be
+given the publication of RDF vocabularies for the importance that they have in 
+the Semantic Web organization model. In this paper we describe a light scripting 
+web application to validates some of these rules, because we think that practical 
+experimentation permits to illustrate and to discuss the existing problems of these
+mechanisms.
 \end{abstract}
 
 \input{paper} %SALT bug
