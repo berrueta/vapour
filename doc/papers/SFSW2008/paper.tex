@@ -37,7 +37,8 @@ each one with a different approach:
         an additional header (\texttt{Content-Location}) indicating the direct 
         location of the file served. Could also be extended using 
         \texttt{mod\_mime}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_mime.html}}
-        to associate concrete handlers to other file extensions.
+        to associate concrete handlers to other file extensions. But this solution
+        has a quite important problem: it only works in the same directory.
 
   \item \textbf{Rewrite request:} probably because the both methods previously 
         presented do not work as expected, the most currently used is another 
@@ -70,6 +71,11 @@ to \texttt{mod\_negotiation}, or with a combination of both techniques.
 \textbf{FIXME: solution ISSUE 58???}
 %http://lists.w3.org/Archives/Public/public-swd-wg/2007Jul/0177.html
 
+So it is necessary to solve as soon as possible this important issue. 
+But while we do not find the most correct way to do it, maybe it will be 
+necessary a \textit{push} action from Web community to develop a new
+module that allows to serve in the correct way the content negotiation.
+
 \section{Vapour, a scripting approach to debug content negotiation} %find a better title for this section
 
 As we can see, the Recipes are not perfect. And testing the results of content 
@@ -81,7 +87,7 @@ But it is not a very handy way, specially when you need to do intensive tests ov
 configuration.
 
 In order to facilitate the testing of the results of content negotiation on a single 
-URI, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}} 
+URI, we developed a web-based application, called Vapour\footnote{\url{http://vapour.sourceforge.net/}}, 
 that facilitates the task. This service will request a provided URI from a server, 
 run a test suite specifically designed to test the response of the server against 
 the Recipe specifications. According with these tests, the system suggest you the 
