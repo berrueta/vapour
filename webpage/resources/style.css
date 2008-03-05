@@ -40,8 +40,8 @@ h2 {
 h3 {
   width: 100%;
   margin-top: 2em;
-  border-bottom: 3px #5674bc dotted;
-  font-size: 1.6em;
+  border-bottom: 2px #5674bc dotted;
+  font-size: 1.4em;
 }
 
 p {
@@ -52,7 +52,7 @@ img {
   border: 0;
 }
 
-strong {
+strong.vapour {
   color: #5674bc;
   font-weight: bold;
 }
@@ -64,8 +64,20 @@ div#content {
   border: 2px #cccccc solid;
 }
 
+div#content ul {
+  list-style-type: none;
+}
+
 .accessibility {
   display: none;
+}
+
+img#demo {
+  margin: 1em auto 1em 3em;
+}
+
+img#demo:hover {
+  
 }
 
 div#foot {
