@@ -5,21 +5,30 @@ The Semantic Web is a big container, a universal medium for data, information
 and knowledge exchange. But the Semantic Web is not only about putting data on
 the Web, it is something more. There are necessary some basic rules to follow
 in order to get a useful knowledge from all this linked data. Tim Berners-Lee 
-outlined four principles~\cite{TimBL2006} that could be summarized as that you 
-must use \texttt{URIs}~\cite{RFC3986} as names and provide useful information 
-where you could be discovered more information. But cool URIs~\cite{Sauermann2007} 
-are not enough, you also need to provide the best representation expected for 
-each agent, human or software, request.
+outlined four principles~\cite{TimBL2006} of how to publish linked data on the 
+Web~\cite{PublishLinkedData2007}. Could be summarized as that you must use 
+\texttt{URIs}~\cite{RFC3986} as names and provide useful information where you 
+could be discovered more information. But cool URIs~\cite{Sauermann2007} are 
+not enough, you also need to provide the best representation expected in each
+request for each kind of agent, human or software.
 
 The HTTP Protocol~\cite{HTTP} is used to request representations of Web documents
 and send back the responses. It provides a mechanism known as \textit{content negotiation}.
-Using this mechanism it is possible to offer Web content in different formats and
-languages. Use transparent content negotiation in HTTP~\cite{Holtman1998} has many 
-benefits~\cite{Seshan1998}, but must be implemented carefully if you do not want 
-to make some mistakes, as we could see with more detail in next sections of this
-paper.
+Using this mechanism it is possible to offer Web content in better format or 
+languages requested. Use transparent content negotiation in HTTP~\cite{Holtman1998} 
+has many benefits~\cite{Seshan1998}, but must be implemented carefully if you do 
+not want to make some mistakes, as we could see with more detail in 
+Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} presents 
+a scripting application for the Semantic Web that helps in the task of implement 
+correctly HTTP content negotiation. Finally, in Section~\ref{sec:conclusions} 
+we present some conclusions and future work.
 
-\section{Content negotiation with Apache: Recipes}
+
+\section{\label{sec:contentnegotiation}Content negotiation with Apache: Recipes}
+
+%FIXME: something generic about content negotiation
+%an image explaining content negotiation?
+%something like http://www.w3.org/TR/cooluris/img20071212/303.png
 
 Apache HTTP Server, probably the most used Web server now, mainly provides three ways 
 to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}, 
@@ -46,13 +55,10 @@ each one with a different approach:
         mechanism uses the module 
         \texttt{mod\_rewrite}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html}}
         to rewrite the request according some mandatory ad-hoc rules and redirect,
-        using HTTP \texttt{30X} status codes, to the appropriate URI. Obviously it loses 
+        using HTTP 30X status codes, to the appropriate URI. Obviously it loses 
         some time with the extra HTTP round-trip, but it is negligible.
 
 \end{itemize}
-
-%FIXME: an image explaining content negotiation
-%something like http://www.w3.org/TR/cooluris/img20071212/303.png
 
 The W3C has published \textit{Best Practice Recipes for Publishing RDF Vocabularies}~\cite{Recipes},
 a document with several recipes that show how to publish RDF/OWL Vocabularies using
@@ -63,20 +69,16 @@ common cases. It's a document really useful to help to publish the vocabularies.
 But it is not perfect, ant still there is an important issue to 
 solve\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}: 
 ``the recipe for responding to an accept header only responds to a header which
-EXACTLY matches''. Consider cases like \texttt{application/rdf+xml;q=0.1} or 
+EXACTLY matches''. Consider cases like \texttt{application/rdf+xml;q=0.01} or 
 \texttt{text/*} or combinations of such patterns. This is a very serius problem
 with not an easy solution. Probably might be solved by moving from \texttt{mod\_rewrite}
 to \texttt{mod\_negotiation}, or with a combination of both techniques.
 
-\textbf{FIXME: solution ISSUE 58???}
+%FIXME: solution ISSUE #58 !!!
 %http://lists.w3.org/Archives/Public/public-swd-wg/2007Jul/0177.html
 
-So it is necessary to solve as soon as possible this important issue. 
-But while we do not find the most correct way to do it, maybe it will be 
-necessary a \textit{push} action from Web community to develop a new
-module that allows to serve in the correct way the content negotiation.
-
-\section{Vapour, a scripting approach to debug content negotiation} %find a better title for this section
+\section{\label{sec:vapour}Vapour, a scripting approach to debug content negotiation} 
+%FIXME: find a better title for this section
 
 As we can see, the Recipes are not perfect. And testing the results of content 
 negotiation can become fairly complex for some of their. Obviously you could do 
@@ -86,35 +88,60 @@ blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-w
 But it is not a very handy way, specially when you need to do intensive tests over your 
 configuration.
 
+\begin{figure}
+ \centering
+ \includegraphics[width=12cm]{images/report-summary.png}
+ \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
+\end{figure}
+
 In order to facilitate the testing of the results of content negotiation on a single 
 URI, we developed a web-based application, called Vapour\footnote{\url{http://vapour.sourceforge.net/}}, 
 that facilitates the task. This service will request a provided URI from a server, 
 run a test suite specifically designed to test the response of the server against 
 the Recipe specifications. According with these tests, the system suggest you the 
-best recipe for your server configuration. It is build upon a RDF Store (in memory) 
+best recipe for your server configuration. It is build upon a RDF store %(in memory)
 where all asserts are stored. It uses a combination of EARL~\cite{EARL}, HTTP
-Vocabulary~\cite{Koch2007}, a RDF representation of the Recipes and three small 
-properties created specifically for this purpose. So Vapour could provide 
-reports both in HTML and in RDF. For (X)HTML view the service displays a 
-pretty and intuitive pass/fail report on each set of tests as  well as a detailed 
-explanation of its  findings (Figure~\ref{fig:report-summary}).
+Vocabulary~\cite{Koch2007} and a RDF representation of the Recipes. So Vapour 
+is able to provide reports both in HTML and in RDF~\cite{RDF}. For (X)HTML view 
+the service displays a pretty and intuitive pass/fail report on each set of tests 
+as  well as a detailed explanation of its  findings (Figure~\ref{fig:report-summary}), 
+and also a graphical representation of the HTTP dialog used in each test.
 For RDF view %,obviously using content negotiation (FIXMEEEEEEEEEEEEEEEEEE)
-the system provide a RDF/XML serialization of the report. So it could be easy 
-to deploy another service that check the compliance of a specific collection 
-of vocabularies published on the Web.
+the system provide a RDF/XML serialization of the same report.
 
-\begin{figure}
- \centering
- \includegraphics[width=12cm]{images/report-summary.png}
- \caption{\label{fig:report-summary}Vapour report summary.}
-\end{figure}
+An online demo\footnote{\url{http://idi.fundacionctic.org/vapour}} of the project
+is available to test it.
 
 The application has been developed in the Python scripting language, using common
 python libraries such as urllib, httplib, web.py and RDFLib, Its source code is 
-also available in the project web page as opensource under the terms of W3C Software 
-License.
+also available in the project web page as open source under the terms of W3C 
+Software License.
+FIXME: more about python and scripting!!!
 
-FIXME: more about python and scripting
+As it can be viewed in the Figure~\ref{fig:arch}, Vapour has a simple and functional
+design that fulfils the concrete objectives of the project. It is composed for three
+main components:
+
+\begin{itemize}
+
+  \item \textbf{cup} is the web front-end. It is built using web.py as framework
+        and Cheetah as template engine. Itself is not part of the application,
+        it only provides a web interface that allows the user to interact with
+        the other components of the platform in a simple way. Obviously, the
+        system has been designed thinking in allow more types of interfaces
+        and for example we also provide a command line interface.
+
+  \item \textbf{teapot} is the core of the application. It implements each
+        recipe, requesting necessaries HTTP dialogs to evaluate each test.
+        FIXME: more about this!
+
+  \item \textbf{strainer} is the module in charge of generate the reports for
+        each test passed. Basically it makes some SPARQL~\cite{SPARQL} queries
+        on the model to obtain the trace of each test, and it generates the
+        report in the format requested. For HTML reports we use Cheetah templates
+        again.
+
+\end{itemize}
 
 \begin{figure}
  \centering
@@ -122,31 +149,30 @@ FIXME: more about python and scripting
  \caption{\label{fig:arch}High level architecture of Vapour.}
 \end{figure}
 
-As it can be viewed in the Figure~\ref{fig:arch}, Vapour is composed for three 
-components: FIXME
+The service could be deployed as a normal CGI, behind Apache using any WSGI or
+using a Python Web Framework. Security has been very much in mind and, for example, 
+we limit the number of requests per client and we block addresses whose inverse 
+resolution is an IP into a private range.
 
-\begin{itemize}
+\section{\label{sec:conclusions}Conclusions}
 
-  \item \textbf{cup:} implements the web interface FIXME
+FIXME: Section TODO, but I have the main ideas
 
-  \item \textbf{teapot:} implementes the Recipes and all the HTTP dialogs FIXME
+Content negotiation is difficult,
 
-  \item \textbf{strainer:} implements the reports FIXME
+something about RDFa~\cite{Birbeck2006}
 
-\end{itemize}
+So it is necessary to solve as soon as possible this important issue. % #58
+But while we do not find the most correct way to do it, maybe it will be 
+necessary a \textit{push} action from Web community to develop a new
+module that allows to serve in the correct way the content negotiation.
 
-FIXME: arch diagram
+scripting languages are useful to solve these kind on tasks, etc... 
 
-FIXME
+So it could be easy 
+to deploy another service that check the compliance of a specific collection 
+of vocabularies published on the Web.
 
-FIXME: something about security?
 
-An online demo of the project it available at: 
-\begin{center}\url{http://idi.fundacionctic.org/vapour}\end{center}
 
-\section{Conclusions}
-
-Content negotiation is difficult, scripting languages are useful to solve these kind on tasks, etc...
-
-FIXME
 
