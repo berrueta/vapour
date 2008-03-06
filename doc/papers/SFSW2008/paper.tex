@@ -141,7 +141,7 @@ main components:
         recipe of the W3C working draft, requesting necessaries HTTP dialogs 
         (with and without content negotiation) to evaluate each test (on the 
         URI of vocabulary URI, but also on the URI of a class and on the URI 
-        of a property) with the mimetype expected. All assert are stored in
+        of a property) with the mime-type expected. All asserts are stored in
         the RDF store to be serialized later in the interface.
 
   \item \textbf{strainer} is the module in charge of generate the reports for
@@ -159,19 +159,25 @@ resolution is an IP into a private range.
 
 \section{\label{sec:conclusions}Conclusions}
 
-FIXME: Section TODO, but I have the main ideas
+Content negotiation is a dangerous technical. Apparently it is something very 
+simple, but as we have seen it is too easy make some mistakes. And the thing is 
+further complicated when we have other formats embedded within other formats,
+such as RDFa~\cite{Birbeck2006}. Scripting languages, and applications as Vapour,
+are very useful to solve some kind on tasks and provide quality assurance in 
+the best possible way.
 
-Content negotiation is difficult,
+As we have seen, it is still necessary to solve as soon as possible this 
+important issue in the actual document of the Recipes. But while we do not 
+find the most correct way to do it, maybe it will be necessary a \textit{push} 
+action from Web community to develop a new module that allows to serve in the 
+correct way the content negotiation.
 
-something about RDFa~\cite{Birbeck2006}
+The application presented in the pages of this paper it is still a prototype.
+But a prototype that helps to debug how we server content negotiation in our
+servers. One of the goals of the project is to provide an RDF serialization 
+of the reports. So, using this machine-readable format, it could be easy to
+deploy another service upon it that uses this data to another task; for 
+example, a service to check the compliance of a specific collection of 
+vocabularies published on the Web. The authors do not rule out continuing 
+for some of these lines of work.
 
-So it is necessary to solve as soon as possible this important issue. % #58
-But while we do not find the most correct way to do it, maybe it will be 
-necessary a \textit{push} action from Web community to develop a new
-module that allows to serve in the correct way the content negotiation.
-
-scripting languages are useful to solve these kind on tasks, etc... 
-
-So it could be easy 
-to deploy another service that check the compliance of a specific collection 
-of vocabularies published on the Web.
