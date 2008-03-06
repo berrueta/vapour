@@ -113,10 +113,16 @@ An online demo\footnote{\url{http://idi.fundacionctic.org/vapour}} of the projec
 is available to test it.
 
 The application has been developed in the Python scripting language, using common
-python libraries such as urllib, httplib, web.py and RDFLib, Its source code is 
-also available in the project web page as open source under the terms of W3C 
-Software License.
-FIXME: more about python and scripting!!!
+python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages as
+Python allow an agile development of applications in record time. Its source code 
+is also available in the project in SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
+as open source, licensed under the terms of the W3C Software License.
+
+\begin{figure}
+ \centering
+ \includegraphics[width=12cm]{images/arch.png}
+ \caption{\label{fig:arch}High level architecture of Vapour.}
+\end{figure}
 
 As it can be viewed in the Figure~\ref{fig:arch}, Vapour has a simple and functional
 design that fulfils the concrete objectives of the project. It is composed for three
@@ -132,8 +138,11 @@ main components:
         and for example we also provide a command line interface.
 
   \item \textbf{teapot} is the core of the application. It implements each
-        recipe, requesting necessaries HTTP dialogs to evaluate each test.
-        FIXME: more about this!
+        recipe of the W3C working draft, requesting necessaries HTTP dialogs 
+        (with and without content negotiation) to evaluate each test (on the 
+        URI of vocabulary URI, but also on the URI of a class and on the URI 
+        of a property) with the mimetype expected. All assert are stored in
+        the RDF store to be serialized later in the interface.
 
   \item \textbf{strainer} is the module in charge of generate the reports for
         each test passed. Basically it makes some SPARQL~\cite{SPARQL} queries
@@ -142,12 +151,6 @@ main components:
         again.
 
 \end{itemize}
-
-\begin{figure}
- \centering
- \includegraphics[width=12cm]{images/arch.png}
- \caption{\label{fig:arch}High level architecture of Vapour.}
-\end{figure}
 
 The service could be deployed as a normal CGI, behind Apache using any WSGI or
 using a Python Web Framework. Security has been very much in mind and, for example, 
@@ -172,7 +175,3 @@ scripting languages are useful to solve these kind on tasks, etc...
 So it could be easy 
 to deploy another service that check the compliance of a specific collection 
 of vocabularies published on the Web.
-
-
-
-
