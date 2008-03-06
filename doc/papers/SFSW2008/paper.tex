@@ -34,7 +34,7 @@ Apache HTTP Server, probably the most used Web server now, mainly provides three
 to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}, 
 each one with a different approach:
 
-\begin{itemize}
+\begin{description}
 
   \item \textbf{Type Map:} explicit handlers described in a file (.var) for each 
         resource. The necessary configuration is quite complicated and tedious, 
@@ -58,7 +58,7 @@ each one with a different approach:
         using HTTP 30X status codes, to the appropriate URI. Obviously it loses 
         some time with the extra HTTP round-trip, but it is negligible.
 
-\end{itemize}
+ \end{description}
 
 The W3C has published \textit{Best Practice Recipes for Publishing RDF Vocabularies}~\cite{Recipes},
 a document with several recipes that show how to publish RDF/OWL Vocabularies using
@@ -128,7 +128,7 @@ As it can be viewed in the Figure~\ref{fig:arch}, Vapour has a simple and functi
 design that fulfils the concrete objectives of the project. It is composed for three
 main components:
 
-\begin{itemize}
+\begin{description}
 
   \item \textbf{cup} is the web front-end. It is built using web.py as framework
         and Cheetah as template engine. Itself is not part of the application,
@@ -150,7 +150,7 @@ main components:
         report in the format requested. For HTML reports we use Cheetah templates
         again.
 
-\end{itemize}
+\end{description}
 
 The service could be deployed as a normal CGI, behind Apache using any WSGI or
 using a Python Web Framework. Security has been very much in mind and, for example, 
