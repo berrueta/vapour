@@ -14,7 +14,7 @@ compile:
 	$(COMPILER) $(NAME).tex
 
 salt:
-	$(SALT) -input $(NAME).tex  -dirty -nocompile $(NAME).pdf -style lncs
+	$(SALT) -input $(NAME).tex  -dirty -nocompile $(NAME).pdf -style llncs
 
 view:	compile
 	$(PDFVIEWER) $(NAME).pdf &
