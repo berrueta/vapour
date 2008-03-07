@@ -7,18 +7,7 @@
 
 \begin{document}
 
-%\title{Vapour, a scripting approach to implement HTTP best practices}
-%funny title???
-%Cooking HTTP content negotiation with Vapour
-%HTTP pressurizing with Vapour
-%Vapour as a HTTP steam engine
-
 \title{Cooking HTTP content negotiation with Vapour}
-
-%TODO list:
-% - decide the final title of the paper
-% - find work related to cite it
-
 
 \author{Diego Berrueta\inst{1}, Sergio Fern\'andez\inst{1} and Iv\'an Frade\inst{2}}
 
@@ -49,14 +38,13 @@ problems of these mechanisms.
 
 The Semantic Web is a big container, a universal medium for data, information
 and knowledge exchange. However the Semantic Web is not only about putting data on
-the Web, it is something more. There are necessary some basic rules to follow
-in order to get a useful knowledge from all this Linked Data. Tim Berners-Lee %review it
-outlined four principles~\cite{TimBL2006} of how to publish linked data on the 
-Web~\cite{PublishLinkedData2007}. Could be summarized as that you must use 
-\texttt{URIs}~\cite{RFC3986} as names and provide useful information where you 
-could be discovered more information. But cool URIs~\cite{Sauermann2007} are 
-not enough, you also need to provide the best representation expected in each
-request for each kind of agent, human or software.
+the Web, it is something more. Tim Berners-Lee outlined some basic 
+principles~\cite{TimBL2006} to publish Linked Data on the Web~\cite{PublishLinkedData2007}.
+Four basic rules about how we must use \texttt{URIs}~\cite{RFC3986} as names 
+and provide useful information where you could be discovered more information. 
+But cool URIs~\cite{Sauermann2007} are not enough, you also need to provide 
+the best representation expected in each request for each kind of agent, human 
+or software.
 
 On the Web, the documents are requested using HTTP~\cite{HTTP} as protocol. It 
 provides a mechanism known as \textit{content negotiation}. Using this mechanism 
