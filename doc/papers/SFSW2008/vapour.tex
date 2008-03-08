@@ -25,11 +25,12 @@ Oviedo, Asturias, Spain\\
 
 \begin{abstract}
 The Semantic Web is built upon a distributed amount of knowledge published on 
-the Web. But this vision can not be implemented without some basic norms and 
-rules of publishing and making machine-understandable all this data. Special 
+the Web. But this vision can not be implemented without some basic publishing
+rules to make machine-understandable all this data. Special 
 mention must be given the publication of RDF vocabularies for the importance that
 they have in the Semantic Web architecture. In this paper we describe a light 
-scripting web-based application that validates some of these rules. We think 
+scripting web-based application that validates the compliance of a published
+vocabulary against these rules. We think 
 that practical experimentation permits illustrating and discussing some
 problems of these mechanisms.
 \end{abstract}
@@ -38,22 +39,23 @@ problems of these mechanisms.
 
 The Semantic Web is a big container, a universal medium for data, information
 and knowledge exchange. However the Semantic Web is not only about putting data on
-the Web, it is something more. Tim Berners-Lee outlined some basic 
+the Web, it is something more. Tim Berners-Lee outlined four basic 
 principles~\cite{TimBL2006} to publish Linked Data on the Web~\cite{PublishLinkedData2007}.
-Four basic rules about how we must use \texttt{URIs}~\cite{RFC3986} as names 
-and provide useful information where you could be discovered more information. 
+These rules describe how \texttt{URIs}~\cite{RFC3986} must be used as names 
+for things, and how to provide useful information on these things and other
+related things. 
 But cool URIs~\cite{Sauermann2007} are not enough, you also need to provide 
-the best representation expected in each request for each kind of agent, human 
+the best representation of the information for each request depending on each kind of agent, human 
 or software.
 
-On the Web, the documents are requested using HTTP~\cite{HTTP} as protocol. It 
+On the Web, the documents are retrieved using mainly the HTTP~\cite{HTTP} protocol. This protocol 
 provides a mechanism known as \textit{content negotiation}. Using this mechanism 
-it is possible to offer Web content in better format or languages requested. 
-Use transparent content negotiation in HTTP~\cite{Holtman1998} has many 
-benefits~\cite{Seshan1998}, but must be implemented carefully if you do 
-not want to make some mistakes, as we could see with more detail in 
+it is possible to offer Web content in the format or language preferred by the requester. 
+Using transparent content negotiation in HTTP~\cite{Holtman1998} has many 
+benefits~\cite{Seshan1998}, but must be implemented carefully to avoid some
+common pitfalls, as described in more detail in 
 Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} presents 
-a scripting application for the Semantic Web that helps in the task of implement 
+a scripting application for the Semantic Web that helps in the task of implementing 
 HTTP content negotiation correctly. Finally, in Section~\ref{sec:conclusions} 
 we present some conclusions and future work.
 
@@ -83,9 +85,9 @@ each one with a different approach:
         to associate concrete handlers to other file extensions. But this solution
         has a quite important problem: it only works in the same directory.
 
-  \item \textbf{Rewrite request:} Probably because the both methods previously 
-        presented do not work as expected, the most currently used is another 
-        that is not designed specifically for content negotiation tasks. This
+  \item \textbf{Rewrite request:} Probably because the two preceding methods 
+        do not work as expected, currently the most used one is another one 
+        that is not designed specifically to implement content negotiation. This
         mechanism uses the module 
         \texttt{mod\_rewrite}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html}}
         to rewrite the request according some mandatory ad-hoc rules and redirect,
@@ -124,7 +126,7 @@ or socat\footnote{\url{http://www.dest-unreach.org/socat/}}
 But it is not a very handy way, specially when you need to do intensive tests over your 
 configuration.
 
-\begin{figure}
+\begin{figure}[t]
  \centering
  \includegraphics[width=12cm]{images/report-summary.png}
  \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
@@ -151,9 +153,9 @@ is available to test it.
 
 The application has been developed in the Python scripting language, using common
 Python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages as
-Python allow an agile development of applications in record time with little resources. 
+Python allow an agile development of applications in short time with little resources. 
 Its source code is also available in the project in SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
-as open source, licensed under the terms of the W3C Software License.
+as open source.
 
 \begin{figure}
  \centering
@@ -161,7 +163,7 @@ as open source, licensed under the terms of the W3C Software License.
  \caption{\label{fig:arch}High level architecture of Vapour.}
 \end{figure}
 
-As can be viewed in the Figure~\ref{fig:arch}, Vapour has a simple and functional
+As depicted in Figure~\ref{fig:arch}, Vapour has a simple and functional
 design that fulfils the concrete objectives of the project. It is composed of three
 main components:
 
@@ -170,20 +172,20 @@ main components:
   \item \textbf{cup} is the web front-end. It is built using web.py as framework
         and Cheetah as template engine. It provides a web interface that allows 
         the user to interact with the other components of the platform in a 
-        simple way. Obviously, the system has been designed to allow more types 
-        of interfaces and, for example, we also provide a command line interface.
+        simple way. The system has been designed to allow more types 
+        of interfaces and, for instance, we also provide a command line interface.
 
-  \item \textbf{teapot} is the core of the application. It implements each
-        recipe of the W3C working draft, requesting necessaries HTTP dialogs 
-        (with and without content negotiation) to evaluate each test with the 
-        mime-types expected. It requests the URI of the vocabulary, and also the 
-        URI of a class and on the URI of a property. All resulting assertions are 
+  \item \textbf{teapot} is the core of the application. It launches
+        HTTP dialogs 
+        (with and without content negotiation) to evaluate the response
+        status code and content-type. It requests the URI of the vocabulary, and also the 
+        URI of a class and the URI of a property. All resulting assertions are 
         stored in the RDF store to be serialized later in the interface.
 
   \item \textbf{strainer} is the module in charge of generating the reports for
-        each test performed. Basically it makes some SPARQL~\cite{SPARQL} queries
-        on the model to obtain the trace of each test, and it generates the
-        report in the format requested. For HTML reports we again use Cheetah 
+        each test performed by teapot. Basically it makes some SPARQL~\cite{SPARQL} queries
+        on the model to obtain the trace of each test, and it generates a
+        report in XHTML or RDF/XML. For XHTML reports we also use Cheetah 
         templates.
 
 \end{description}
@@ -208,8 +210,8 @@ find the most correct way to do it, maybe a \textit{push} action from Web
 community will be necessary to develop a new module that allows to serve 
 Linked Data in the correct way with content negotiation.
 
-The application presented in this paper is still a prototype, but a prototype 
-that helps to debug how we use content negotiation in our servers. One of the 
+The application presented in this paper is still a prototype, but  
+it already helps to debug how content negotiation is implemented in web servers. One of the 
 goals was to provide an RDF serialization of the reports. Using this machine-readable 
 format, it should be easy to deploy another service upon it that uses this data for 
 another task: for example, a service to check the compliance of a specific collection 
