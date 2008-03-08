@@ -7,7 +7,7 @@
 
 \begin{document}
 
-\title{Cooking HTTP content negotiation with Vapour}
+\title{Cooking HTTP content negotiation with Vapour} % FIXME
 
 \author{Diego Berrueta\inst{1}, Sergio Fern\'andez\inst{1} and Iv\'an Frade\inst{2}}
 
@@ -26,13 +26,13 @@ Oviedo, Asturias, Spain\\
 \begin{abstract}
 The Semantic Web is built upon a distributed amount of knowledge published on 
 the Web. But this vision can not be implemented without some basic publishing
-rules to make machine-understandable all this data. Special 
-mention must be given the publication of RDF vocabularies for the importance that
-they have in the Semantic Web architecture. In this paper we describe a light 
-scripting web-based application that validates the compliance of a published
-vocabulary against these rules. We think 
-that practical experimentation permits illustrating and discussing some
-problems of these mechanisms.
+rules to make machine-understandable all this data. Special mention must be 
+given the publication of RDF vocabularies for the importance that they have 
+in the Semantic Web architecture. In this paper we describe a scripting 
+web-based application that validates the compliance of a published vocabulary 
+against these rules. We think that practical experimentation permits 
+illustrating and discussing some problems of how these mechanisms are
+implemented.
 \end{abstract}
 
 \section{Introduction}
@@ -41,23 +41,25 @@ The Semantic Web is a big container, a universal medium for data, information
 and knowledge exchange. However the Semantic Web is not only about putting data on
 the Web, it is something more. Tim Berners-Lee outlined four basic 
 principles~\cite{TimBL2006} to publish Linked Data on the Web~\cite{PublishLinkedData2007}.
-These rules describe how \texttt{URIs}~\cite{RFC3986} must be used as names 
-for things, and how to provide useful information on these things and other
-related things. 
-But cool URIs~\cite{Sauermann2007} are not enough, you also need to provide 
-the best representation of the information for each request depending on each kind of agent, human 
-or software.
+These rules describe how \texttt{URIs} must be used as names for things, 
+and how to provide useful information on these things and other related 
+things. Although there are guidelines to pick adequate URIs for 
+things~\cite{Sauermann2007}, there is still the need to provide the best 
+representation of the information for each request depending on each kind 
+of agent, human or software.
 
-On the Web, the documents are retrieved using mainly the HTTP~\cite{HTTP} protocol. This protocol 
-provides a mechanism known as \textit{content negotiation}. Using this mechanism 
-it is possible to offer Web content in the format or language preferred by the requester. 
-Using transparent content negotiation in HTTP~\cite{Holtman1998} has many 
-benefits~\cite{Seshan1998}, but must be implemented carefully to avoid some
-common pitfalls, as described in more detail in 
+On the Web, the documents are retrieved using mainly the HTTP~\cite{HTTP} 
+protocol. This protocol provides a mechanism known as \textit{content negotiation}. 
+Using this mechanism it is possible to offer Web content in the format or 
+language preferred by the requester. Using transparent content negotiation 
+in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, but must be 
+implemented carefully to avoid some common pitfalls, as described in more detail in 
 Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} presents 
 a scripting application for the Semantic Web that helps in the task of implementing 
-HTTP content negotiation correctly. Finally, in Section~\ref{sec:conclusions} 
-we present some conclusions and future work.
+HTTP content negotiation correctly. In Section~\ref{sec:experimental} we show the
+results of the experiments evaluated with this application on the most commonly used
+vocabularies in the Semantic Web. Finally in Section~\ref{sec:conclusions} we present 
+some conclusions and future work.
 
 
 \section{\label{sec:contentnegotiation}Content negotiation with Apache: Recipes}
@@ -66,8 +68,9 @@ we present some conclusions and future work.
 %an image explaining content negotiation?
 %something like http://www.w3.org/TR/cooluris/img20071212/303.png
 
-Apache HTTP Server, probably the most used Web server now, mainly provides three ways 
-to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}, 
+Apache HTTP Server, the most used Web server
+now\footnote{\url{http://www.netcraft.com/survey/}}, 
+mainly provides three ways to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}, 
 each one with a different approach:
 
 \begin{description}
@@ -80,51 +83,50 @@ each one with a different approach:
         delegates in Apache the task of choosing the best file in the current 
         directory to serve when the resource requested does not exist. It adds 
         an additional header (\texttt{Content-Location}) indicating the direct 
-        location of the file served. Could also be extended using 
-        \texttt{mod\_mime}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_mime.html}}
+        location of the file served. Could also be extended using \texttt{mod\_mime} 
         to associate concrete handlers to other file extensions. But this solution
         has a quite important problem: it only works in the same directory.
 
   \item \textbf{Rewrite request:} Probably because the two preceding methods 
         do not work as expected, currently the most used one is another one 
-        that is not designed specifically to implement content negotiation. This
-        mechanism uses the module 
-        \texttt{mod\_rewrite}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html}}
-        to rewrite the request according some mandatory ad-hoc rules and redirect,
-        using HTTP 30X status codes, to the appropriate URI. Obviously it loses 
-        some time with the extra HTTP round-trip, but it is negligible.
+        that is not designed specifically to implement content negotiation. 
+        This mechanism uses the module \texttt{mod\_rewrite} to rewrite the 
+        request according some imperative ad-hoc rules and redirect, using 
+        HTTP 303 status codes, to the appropriate URI. Obviously it loses 
+        some time with the extra HTTP round-trip, but it is negligible,
+        as well as mandatory according the famous httpRange issue
+        \#14\footnote{\url{http://www.w3.org/2001/tag/issues.html#httpRange-14}}.
 
- \end{description}
+\end{description}
 
-The W3C has published \textit{Best Practice Recipes for Publishing RDF Vocabularies}~\cite{Recipes},
-a document with several recipes that show how to publish RDF/OWL Vocabularies using
-mainly the last mechanism described. It provides step-by-step instructions for publishing 
-vocabularies on the Web, giving example configurations designed to cover the most 
-common cases. It's a really useful document to help to publish the vocabularies.
+There is some ongoing work by W3C on \textit{Best Practice Recipes for Publishing 
+RDF Vocabularies}~\cite{Recipes}, a document with several recipes that show how 
+to publish RDF/OWL Vocabularies using mainly the last mechanism described. It 
+provides step-by-step instructions for publishing vocabularies on the Web, giving 
+example configurations designed to cover the most common cases.
 
 But it is not perfect, and still there is an important issue to 
-solve\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}: 
-``the recipe for responding to an accept header only responds to a header which
-EXACTLY matches''. Consider cases like \texttt{application/rdf+xml;q=0.01} or 
-\texttt{text/*} or combinations of such patterns. This is a very serius problem
-with not an easy solution. Probably might be solved by moving from \texttt{mod\_rewrite}
-to \texttt{mod\_negotiation}\footnote{\url{http://httpd.apache.org/docs/2.0/mod/mod_negotiation.html}},
-or with a combination of both techniques.
+solve\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}.
+Tim Berners-Lee reported that ``the recipe for responding to an accept 
+header only responds to a header which EXACTLY matches''. Consider cases 
+like \texttt{text/*}, \texttt{application/rdf+xml;q=0.01} or combinations 
+of such patterns. This is a very serius problem with not an easy solution. 
+Probably might be solved by moving from \texttt{mod\_rewrite} to 
+\texttt{mod\_negotiation}, or with a combination of both techniques.
 
 %FIXME: solution ISSUE #58 !!!
 %http://lists.w3.org/Archives/Public/public-swd-wg/2007Jul/0177.html
 
-\section{\label{sec:vapour}Vapour, a scripting approach to debugging content negotiation} 
+\section{\label{sec:vapour}Vapour, a scripting approach to debugging content negotiation}
 %FIXME: find a better title for this section
 
-As we can see, the Recipes are not perfect. Futher testing the results of content 
-negotiation can become fairly complex for some of them. Obviously, you could do 
-it manually with help of some tools, such as 
+As we can see, implement correctly content negotiation is not easy. Futher 
+testing the results of content negotiation can become fairly complex for some 
+of them. Obviously, you could do it manually with help of some tools, such as 
 cURL\footnote{Richard Cyganiak's explanation of how to use cURL to debug content negotiation, 
 blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-web-sites-with-curl}}
-or socat\footnote{\url{http://www.dest-unreach.org/socat/}}
-But it is not a very handy way, specially when you need to do intensive tests over your 
-configuration.
+or socat. But it is not a very handy way, specially when you need to do 
+intensive tests over your configuration.
 
 \begin{figure}[t]
  \centering
@@ -154,7 +156,8 @@ is available to test it.
 The application has been developed in the Python scripting language, using common
 Python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages as
 Python allow an agile development of applications in short time with little resources. 
-Its source code is also available in the project in SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
+Its source code is also available in 
+SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
 as open source.
 
 \begin{figure}
@@ -192,8 +195,11 @@ main components:
 
 The service can be deployed as a normal CGI behind Apache or using a Python web 
 framework. We reviewed the security of the application avoiding some common problems
-in this kind of applications, such as limiting requests per client and refusing
-request over resources located in private IP address ranges.
+in this kind of applications, such as limiting requests per client.
+
+\section{\label{sec:experimental}Experimental results}
+
+FIXME: make tests over the most popular vocabulaties (cite index)
 
 \section{\label{sec:conclusions}Conclusions}
 
@@ -204,11 +210,12 @@ such as RDFa~\cite{Birbeck2006}. Scripting languages, and applications such as
 Vapour, are very useful in solving some kind on tasks and provide quality 
 assurance in the best possible way.
 
-As we have seen, it is still necessary to solve as soon as possible some 
-important issues in the actual document of the Recipes. While we do not 
-find the most correct way to do it, maybe a \textit{push} action from Web 
-community will be necessary to develop a new module that allows to serve 
-Linked Data in the correct way with content negotiation.
+%FIXME: delete this (off topic) paragraph???
+%As we have seen, it is still necessary to solve as soon as possible some 
+%important issues in the actual document of the Recipes. While we do not 
+%find the most correct way to do it, maybe a \textit{push} action from Web 
+%community will be necessary to develop a new module that allows to serve 
+%Linked Data in the correct way with content negotiation.
 
 The application presented in this paper is still a prototype, but  
 it already helps to debug how content negotiation is implemented in web servers. One of the 
