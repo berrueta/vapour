@@ -101,17 +101,19 @@ each one with a different approach:
 
 There is some ongoing work by W3C on \textit{Best Practice Recipes for Publishing 
 RDF Vocabularies}~\cite{Recipes}, a document with several recipes that show how 
-to publish RDF/OWL Vocabularies using mainly the last mechanism described. It 
+to publish RDF/OWL Vocabularies using the third mechanism described above. It 
 provides step-by-step instructions for publishing vocabularies on the Web, giving 
 example configurations designed to cover the most common cases.
 
-But it is not perfect, and still there is an important issue to 
-solve\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}.
+However, the Recipes are not perfect, and there is at least one important issue to 
+be solved\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}.
 Tim Berners-Lee reported that ``the recipe for responding to an accept 
-header only responds to a header which EXACTLY matches''. Consider cases 
-like \texttt{text/*}, \texttt{application/rdf+xml;q=0.01} or combinations 
-of such patterns. This is a very serius problem with not an easy solution. 
-Probably might be solved by moving from \texttt{mod\_rewrite} to 
+header only responds to a header which EXACTLY matches [the rule antecedent]''. For those requests which contain values for the Accept header such as 
+\texttt{text/*} or \texttt{application/rdf+xml;q=0.01}, where regular
+expressions or $q$-values are used, the representation served by the
+rules might be different from the expected one.
+This is a very serius problem without an easy solution. 
+Probably it might be solved by moving from \texttt{mod\_rewrite} to 
 \texttt{mod\_negotiation}, or with a combination of both techniques.
 
 %FIXME: solution ISSUE #58 !!!
