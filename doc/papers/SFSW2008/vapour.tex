@@ -4,6 +4,7 @@
 \usepackage{makeidx}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{array}
 
 \begin{document}
 
@@ -130,7 +131,7 @@ blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-w
 or socat. This is not a very handy way, specially when you need to do 
 intensive tests over your configuration.
 
-\begin{figure}[t]
+\begin{figure}
  \centering
  \includegraphics[width=12cm]{images/report-summary.png}
  \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
@@ -187,9 +188,9 @@ main components:
         stored in the RDF store to be serialized later in the interface.
 
   \item \textbf{strainer} is the module in charge of generating the reports for
-        each test performed by teapot. It makes some SPARQL~\cite{SPARQL} queries 
-        on the model to obtain the trace of each test, and it generates a
-        report in XHTML or RDF/XML. For XHTML reports we also use Cheetah 
+        each test performed by teapot. It makes some SPARQL%~\cite{SPARQL} 
+        queries on the model to obtain the trace of each test, and it generates 
+        a report in XHTML or RDF/XML. For XHTML reports we also use Cheetah 
         templates.
 
 \end{description}
@@ -200,7 +201,45 @@ in this kind of applications, such as limiting requests per client.
 
 \section{\label{sec:experimental}Experimental results}
 
-FIXME: make tests over the most popular vocabulaties (cite index)
+As we said, we think that practical experimentation permits illustrating and discussing 
+some problems of how content negotiation are implemented. Therefore we must to do real
+tests with our application on real vocabularies published on the Web. As it is impossible
+to test all of it, we decided to choose a subset of the best populated vocabularies. But 
+the last scientific study about it was over data of 2004~\cite{Li2005}. So, we needed to 
+updated that ranking with others more recent, such the 
+provided\footnote{http://pingthesemanticweb.com/stats/namespaces.php} by 
+PingTheSemanticWeb.com~\cite{Bojars2007}. Then we took ten representative namespaces and,
+as summarized Table~\ref{tab:usage}, we executed Vapour to get an approximation of the
+actual quality of the publication of vocabularies on the Web. 
+
+\begin{table}
+\caption{Tests with Vapour on the most commonly used vocabularies}
+\centering
+\begin{tabular}{lcc}
+\hline
+Namespace & Test \#1 & Test \#2 \\
+\hline\hline
+\texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#} & 6/6 & 6/9 \\
+\texttt{http://www.w3.org/2000/01/rdf-schema\#} & 6/6 & 6/9 \\
+\texttt{http://xmlns.com/foaf/0.1/} & 3/6 & 6/9 \\
+\texttt{http://purl.org/dc/elements/1.1/} & 4/4 & 4/6 \\
+\texttt{http://www.w3.org/2003/01/geo/wgs84\_pos\#} & 6/6 & 6/9 \\
+\texttt{http://rdfs.org/sioc/ns\#} & 6/6 & 6/9 \\
+\texttt{http://www.w3.org/2004/02/skos/core\#} & 6/6 & 9/9 \\
+\texttt{http://usefulinc.com/ns/doap\#} & 6/6 & 6/9 \\
+\texttt{http://purl.org/rss/1.0/} & 0/6 & 3/9 \\
+\texttt{http://semantic-mediawiki.org/swivt/1.0\#} & 0/6 & 0/9 \\ [1ex]
+\hline
+\end{tabular}
+\label{tab:usage}
+\end{table}
+
+The first tests only request the vocabulary as RDF, with and without content 
+negotiation. And the second also request as HTML, becuase provide HTML 
+documentation about a vocabulary is considered an extended requirement. More 
+that half are correct published as RDF. But it is significant that only one 
+vocabulary has passed all tests. A common error is provide the vocabulary with 
+a bad content type, such as \texttt{text/plain} or \texttt{application/xml}.
 
 \section{\label{sec:conclusions}Conclusions}
 
