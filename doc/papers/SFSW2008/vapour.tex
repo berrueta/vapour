@@ -27,7 +27,7 @@ Oviedo, Asturias, Spain\\
 \begin{abstract}
 The Semantic Web is built upon distributed knowledge published on 
 the Web. But this vision cannot be implemented without some basic publishing
-rules to make the data available for machines. Publication of RDF vocabularies
+rules to make the data readable for machines. Publication of RDF vocabularies
 must receive special attention due to their important role 
 in the Semantic Web architecture. In this paper we describe a scripting 
 web-based application that validates the compliance of a vocabulary 
@@ -44,7 +44,7 @@ the Web, there are some publishing rules. Tim Berners-Lee outlined four basic
 principles~\cite{TimBL2006} to publish Linked Data on the Web~\cite{PublishLinkedData2007}.
 These rules describe how \texttt{URIs} must be used as names for things, 
 and how to provide useful information on these things and other related 
-things. Although there are guidelines to pick adequate URIs for 
+ones. Although there are guidelines to coin adequate URIs for 
 things~\cite{Sauermann2007}, there is still the need to provide the best 
 representation of the information for each request depending on each kind 
 of client agent, human or software.
@@ -56,10 +56,10 @@ language preferred by the requester (if it is available, obviously). Using trans
 in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, but it must be 
 implemented carefully in order to avoid some common pitfalls, as we describe in more detail in 
 Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} introduces 
-a scripting application that provides help and guidance to correctly implement and debug
-HTTP content negotiation. In Section~\ref{sec:experimental} we evaluate the
+a scripting application that provides help and guidance to implement correctly and to debug
+HTTP content negotiation. In Section~\ref{sec:experimental} the
 compliance of some of the most used
-vocabularies in the Semantic Web with respect to the publishing rules. Finally, in Section~\ref{sec:conclusions} we present 
+vocabularies in the Semantic Web is evaluated with respect to the publishing rules. Finally, Section~\ref{sec:conclusions} presents 
 some conclusions and future work.
 
 
@@ -69,9 +69,8 @@ some conclusions and future work.
 %an image explaining content negotiation?
 %something like http://www.w3.org/TR/cooluris/img20071212/303.png
 
-The Apache HTTP Server, the most used Web server
-now\footnote{\url{http://www.netcraft.com/survey/}}, 
-provides three different approaches to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}:
+Nowadays, the Apache HTTP Server is the most used Web server\footnote{\url{http://www.netcraft.com/survey/} (retrieved 13/Mar/2008)}, 
+and it provides three different approaches to implement content negotiation\footnote{\url{http://httpd.apache.org/docs/2.0/content-negotiation.html}}:
 
 \begin{description}
 
@@ -83,7 +82,7 @@ provides three different approaches to implement content negotiation\footnote{\u
         in a directory, MultiViews serves the most appropriate file in the current 
         directory when the requested resource does not exist. It returns 
         an additional header (\texttt{Content-Location}) to indicate the actual 
-        location of the file. This method can be extended using \texttt{mod\_mime} 
+        location of the file. This method can be extended using the Apache module \texttt{mod\_mime} 
         to associate handlers to new file extensions. However, this solution
         has a quite important problem: it only works if the files exist in
         the same directory.
@@ -103,13 +102,13 @@ provides three different approaches to implement content negotiation\footnote{\u
 \end{description}
 
 There is some ongoing work by W3C on \textit{Best Practice Recipes for Publishing 
-RDF Vocabularies}~\cite{Recipes}, a document which contains several recipes that provide advice on how 
+RDF Vocabularies}~\cite{Recipes}, a document which contains several recipes that advice on how 
 to publish RDF/OWL Vocabularies using \texttt{mod\_rewrite}. This ``cookbook'' 
 provides step-by-step instructions to publish vocabularies on the Web, and gives
-example configurations designed to address the most frequent scenarios.
+example configurations designed to address the most common scenarios.
 
 However, the Recipes are not perfect, and there is at least one important issue to 
-be solved\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58}}.
+be solved\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58} (retrieved 13/Mar/2008)}.
 Tim Berners-Lee reported that ``the recipe for responding to an accept 
 header only responds to a header which EXACTLY matches [the rule antecedent]''.
 For those requests which contain values for the Accept header such as 
@@ -131,9 +130,7 @@ The previous section has shown that a correct implementation of content negotiat
 is not an easy task. Futhermore, manually testing an implementation is not complex, but
 it is long and cumbersome. Although it can be done with tools such as 
 cURL\footnote{Richard Cyganiak's explanation of how to use cURL to debug content negotiation, 
-blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-web-sites-with-curl}}
-or socat, this process is not handy, specially when intensive or repetitive tests are
-to be run against a vocabulary.
+blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-web-sites-with-curl}}, this process is not handy, specially for intensive or repetitive tests against a vocabulary.
 
 \begin{figure}
  \centering
@@ -141,7 +138,7 @@ to be run against a vocabulary.
  \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
 \end{figure}
 
-In order to ease the task of testing the results of content negotiation on a vocabulary, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}}. This service makes multiple requests to a set of URIs, and it runs a test suite
+In order to facilitate the task of testing the results of content negotiation on a vocabulary, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}}. This application provides a service that makes multiple requests to a set of URIs and runs a test suite
 specifically designed to check the responses 
 of the server against the best practices defined in the \textit{Recipes}.
 Tests are executed against the vocabulary
@@ -159,9 +156,9 @@ includes a graphical representation of the HTTP dialog.
 The application is written in Python, and it uses common
 Python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages such 
 as Python allow an agile development of applications in a short time with little 
-resources. The Vapour source code is available on 
-SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
-as open source, and an online demo of the service is also available\footnote{\url{http://idi.fundacionctic.org/vapour}}.
+resources. Source code of Vapour is available on 
+SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}},
+and an online demo of the service is also available\footnote{\url{http://idi.fundacionctic.org/vapour}}.
 
 \begin{figure}
  \centering
@@ -176,14 +173,14 @@ design that fulfils the objectives of the project. There are three components:
 
   \item \textbf{cup} is the web front-end. It uses the web.py framework
         and the Cheetah template engine, and it provides a web interface that allows 
-        the user to interact with the other components of the application in a 
+        the user to interact with other components of the application in a 
         simple way. The architecture has been designed to allow other kind 
-        of interfaces and, for instance, we also provide a command line interface.
+        of interfaces. For instance, a command line interface is also provided.
 
   \item \textbf{teapot} is the core of the application. It launches
         HTTP dialogs 
         (with and without content negotiation) to evaluate the response
-        status code and content-type. It requests the URI of the vocabulary, and 
+        status code and content-type. Teapot requests the URI of the vocabulary, and 
         also the URIs of a class and a property from the vocabulary. All the resulting assertions are 
         inserted into the RDF store.
 
@@ -247,10 +244,7 @@ such as \texttt{text/plain} or \texttt{application/xml}.
 \section{\label{sec:conclusions}Conclusions}
 
 Content negotiation is a powerful technique. Although the basic mechanism is simple,
-it is often badly implemented. This is 
-further complicated when we have formats embedded within other formats,
-such as RDFa~\cite{Birbeck2006}. Scripting languages, and applications such as 
-Vapour, are very useful to debug and solve common problems, and to provide quality 
+it is often badly implemented. Vapour is useful to debug and to provide advice on how to solve common problems, as well as to provide quality 
 assurance in the best possible way.
 
 %FIXME: delete this (off topic) paragraph???
@@ -262,11 +256,14 @@ assurance in the best possible way.
 
 The application presented in this paper is fairly simple, but  
 it actually helps to debug the implementation of content negotiation in web servers. It
-is particularly interesting that Vapour provides the results also in RDF. Using this machine-readable 
+is particularly interesting that Vapour provides the results also in RDF . Using this machine-readable 
 format, it should be easy to build another service on top of Vapour, and to use these data for 
 other tasks, such as a service to check the compliance of a specific collection 
 of vocabularies published on the Web.
 
+Current best practices (and consequently, Vapour) should probably be
+updated to cover new methods to publish RDF data, such as
+RDFa~\cite{Birbeck2006} embedded in XHTML pages.
 
 % ---- Bibliography ----
 \bibliographystyle{abbrv}
