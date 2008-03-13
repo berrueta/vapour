@@ -124,16 +124,16 @@ without an easy solution for the general case.
 %FIXME: solution ISSUE #58 !!!
 %http://lists.w3.org/Archives/Public/public-swd-wg/2007Jul/0177.html
 
-\section{\label{sec:vapour}Vapour, a scripting approach to debugging content negotiation}
+\section{\label{sec:vapour}Vapour: a scripting approach to debug content negotiation}
 %FIXME: find a better title for this section
 
 The previous section has shown that a correct implementation of content negotiation 
-is not an easy task. Futhermore, testing the results of content negotiation can become 
-fairly complex. You could do it manually with help of tools, such as 
+is not an easy task. Futhermore, manually testing an implementation is not complex, but
+it is long and cumbersome. Although it can be done with tools such as 
 cURL\footnote{Richard Cyganiak's explanation of how to use cURL to debug content negotiation, 
 blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-web-sites-with-curl}}
-or socat. This is not a very handy way, specially when you need to do 
-intensive tests over your configuration.
+or socat, this process is not handy, specially when intensive or repetitive tests are
+to be run against a vocabulary.
 
 \begin{figure}
  \centering
@@ -141,30 +141,27 @@ intensive tests over your configuration.
  \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
 \end{figure}
 
-In order to facilitate the testing of the results of content negotiation on a single 
-URI, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}}
-that facilitates the task. This service will request the provided vocabulary 
-URI from the server and run a test suite specifically designed to test the responses 
-of the server against the Recipe specifications. Tests are performed on the covabulary
-URI, one class and one property. According to these tests, the system suggests the 
-best recipe(s) for your server configuration. It is built upon an in-memory RDF store
-that stores all assertions. It uses a combination of EARL~\cite{EARL}, HTTP
-Vocabulary~\cite{Koch2007} and an RDF representation of the Recipes. Thus Vapour 
-is able to provide reports both in HTML and in RDF. For HTML view the service 
-displays a clean and concise pass/fail report on each set of tests 
-as  well as a detailed explanation of its  findings (Figure~\ref{fig:report-summary}), 
-including a graphical representation of the HTTP dialog used in each test.
-For the RDF view %,obviously using content negotiation (FIXMEEEEEEEEEEEEEEEEEE)
-the system provide a RDF/XML serialization of the same report.
+In order to ease the task of testing the results of content negotiation on a vocabulary, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}}. This service makes multiple requests to a set of URIs, and it runs a test suite
+specifically designed to check the responses 
+of the server against the best practices defined in the \textit{Recipes}.
+Tests are executed against the vocabulary
+URI, a class URI and a property URI (the latter two can be automatically detected).
+According to the tests, the application suggests which is the 
+best recipe(s) for your configuration. Vapour stores all assertions into an in-memory RDF store, using a combination of EARL~\cite{EARL}, HTTP
+Vocabulary~\cite{Koch2007} and an RDF representation of the best practices of the \textit{Recipes}. Thus Vapour 
+can provide the reports both in HTML and in RDF. The HTML view
+displays a clean and concise pass/fail report of each set of tests (Figure~\ref{fig:report-summary}),
+as  well as a detailed explanation of its findings that
+includes a graphical representation of the HTTP dialog.
+%For the RDF view %,obviously using content negotiation (FIXMEEEEEEEEEEEEEEEEEE)
+%the system provide a RDF/XML serialization of the same report.
 
-The project is also available as an online service\footnote{\url{http://idi.fundacionctic.org/vapour}}.
-
-The application has been developed in the Python scripting language, using common
+The application is written in Python, and it uses common
 Python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages such 
-as Python allow an agile development of applications in short time with little 
+as Python allow an agile development of applications in a short time with little 
 resources. The Vapour source code is available on 
 SourceForge\footnote{\url{http://sourceforge.net/projects/vapour/}} 
-as open source.
+as open source, and an online demo of the service is also available\footnote{\url{http://idi.fundacionctic.org/vapour}}.
 
 \begin{figure}
  \centering
@@ -173,28 +170,27 @@ as open source.
 \end{figure}
 
 As depicted in Figure~\ref{fig:arch}, Vapour has a simple and functional
-design that fulfils the objectives of the project. It is composed of three
-main components:
+design that fulfils the objectives of the project. There are three components:
 
 \begin{description}
 
-  \item \textbf{cup} is the web front-end. It is built using the web.py framework
-        and the Cheetah template engine. It provides a web interface that allows 
-        the user to interact with the other components of the platform in a 
-        simple way. The system has been designed to allow more types 
+  \item \textbf{cup} is the web front-end. It uses the web.py framework
+        and the Cheetah template engine, and it provides a web interface that allows 
+        the user to interact with the other components of the application in a 
+        simple way. The architecture has been designed to allow other kind 
         of interfaces and, for instance, we also provide a command line interface.
 
   \item \textbf{teapot} is the core of the application. It launches
         HTTP dialogs 
         (with and without content negotiation) to evaluate the response
         status code and content-type. It requests the URI of the vocabulary, and 
-        also the URIs of a class and a property. All resulting assertions are 
-        stored in the RDF store to be serialized later in the interface.
+        also the URIs of a class and a property from the vocabulary. All the resulting assertions are 
+        inserted into the RDF store.
 
   \item \textbf{strainer} is the module in charge of generating the reports for
-        each test performed by teapot. It makes some SPARQL %~\cite{SPARQL} 
-        queries on the model to obtain the trace of each test, and it generates 
-        a report in XHTML or RDF/XML. For XHTML reports we also use Cheetah 
+        each test performed by the application. It queries the RDF model using SPARQL %~\cite{SPARQL} 
+        to get the result and trace of each test, and it produces 
+        a report in XHTML or RDF/XML. For the XHTML reports, we also use Cheetah 
         templates.
 
 \end{description}
