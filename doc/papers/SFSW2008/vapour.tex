@@ -26,40 +26,40 @@ Oviedo, Asturias, Spain\\
 
 \begin{abstract}
 The Semantic Web is built upon distributed knowledge published on 
-the Web. But this vision can not be implemented without some basic publishing
-rules to make machine-understandable this data. Special mention must be 
-given to the publication of RDF vocabularies for the importance that they have 
+the Web. But this vision cannot be implemented without some basic publishing
+rules to make the data available for machines. Publication of RDF vocabularies
+must receive special attention due to their important role 
 in the Semantic Web architecture. In this paper we describe a scripting 
-web-based application that validates the compliance of a published vocabulary 
-against these rules. We think that practical experimentation permits 
-illustrating and discussing some problems of how these mechanisms are
-implemented.
+web-based application that validates the compliance of a vocabulary 
+against these publication rules. Practical experimentation allows to 
+illustrate and to discuss some common problems in the implementation
+of these rules.
 \end{abstract}
 
 \section{Introduction}
 
 The Semantic Web is a big container, a universal medium for data, information
 and knowledge exchange. However the Semantic Web is not only about putting data on
-the Web, it is something more. Tim Berners-Lee outlined four basic 
+the Web, there are some publishing rules. Tim Berners-Lee outlined four basic 
 principles~\cite{TimBL2006} to publish Linked Data on the Web~\cite{PublishLinkedData2007}.
 These rules describe how \texttt{URIs} must be used as names for things, 
 and how to provide useful information on these things and other related 
 things. Although there are guidelines to pick adequate URIs for 
 things~\cite{Sauermann2007}, there is still the need to provide the best 
 representation of the information for each request depending on each kind 
-of agent, human or software.
+of client agent, human or software.
 
-On the Web, the documents are retrieved using mainly the HTTP~\cite{HTTP} 
+Web documents are retrieved using mainly the HTTP~\cite{HTTP} 
 protocol. This protocol provides a mechanism known as \textit{content negotiation}. 
-Using this mechanism it is possible to offer Web content in the format or 
-language preferred by the requester. Using transparent content negotiation 
-in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, but must be 
-implemented carefully to avoid some common pitfalls, as described in more detail in 
-Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} presents 
-a scripting application for the Semantic Web that helps in the task of implementing 
-HTTP content negotiation correctly. In Section~\ref{sec:experimental} we show the
-results of the experiments evaluated with this application on the most commonly used
-vocabularies in the Semantic Web. Finally in Section~\ref{sec:conclusions} we present 
+By means of content negotiation, it is possible to serve Web content in the format or 
+language preferred by the requester (if it is available, obviously). Using transparent content negotiation 
+in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, but it must be 
+implemented carefully in order to avoid some common pitfalls, as we describe in more detail in 
+Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} introduces 
+a scripting application that provides help and guidance to correctly implement and debug
+HTTP content negotiation. In Section~\ref{sec:experimental} we evaluate the
+compliance of some of the most used
+vocabularies in the Semantic Web with respect to the publishing rules. Finally, in Section~\ref{sec:conclusions} we present 
 some conclusions and future work.
 
 
