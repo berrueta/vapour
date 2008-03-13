@@ -188,7 +188,7 @@ main components:
         stored in the RDF store to be serialized later in the interface.
 
   \item \textbf{strainer} is the module in charge of generating the reports for
-        each test performed by teapot. It makes some SPARQL%~\cite{SPARQL} 
+        each test performed by teapot. It makes some SPARQL %~\cite{SPARQL} 
         queries on the model to obtain the trace of each test, and it generates 
         a report in XHTML or RDF/XML. For XHTML reports we also use Cheetah 
         templates.
@@ -204,7 +204,8 @@ in this kind of applications, such as limiting requests per client.
 \centering
 \begin{tabular}{lccc}
 \hline
-Namespace & Accept RDF & Accept HTML & Default resp. \\
+Namespace & Accept & Accept & Default \\
+ & RDF & HTML & response \\
 \hline\hline
 \texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#} & 3/3 & N/A & RDF/XML \\
 \texttt{http://www.w3.org/2000/01/rdf-schema\#} & 3/3 & N/A & RDF/XML \\
