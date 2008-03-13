@@ -90,8 +90,8 @@ and it provides three different approaches to implement content negotiation\foot
   \item \textbf{Rewrite request:} Probably because the two alternatives above
         do not provide an easy solution, the most widely used method is one 
         which was not specifically designed to implement content negotiation. 
-        This mechanism uses the module \texttt{mod\_rewrite} to rewrite the 
-        request according some imperative ad-hoc rules. As a result, the
+        This mechanism uses the module \texttt{mod\_rewrite} in order to rewrite the 
+        request according to some ad-hoc rules. As a result, the
         request is redirected using
         HTTP 303 status code, to the appropriate URI. Obviously,  
         some time is lost with the extra HTTP round-trip, but it is negligible for
