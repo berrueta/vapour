@@ -238,12 +238,12 @@ Namespace & Accept RDF & Accept HTML & Default resp. \\
 \label{tab:usage}
 \end{table}
 
-The first tests only request the vocabulary as RDF, with and without content 
-negotiation. And the second also request as HTML, becuase provide HTML 
-documentation about a vocabulary is considered an extended requirement. More 
-that half are correct published as RDF. But it is significant that only one 
-vocabulary has passed all tests. A common error is provide the vocabulary with 
-a bad content type, such as \texttt{text/plain} or \texttt{application/xml}.
+For each vocabulary, the vocabulary URI, a class URI and a property URI are tested
+(except for Dublin Core, which does not have any class). The results show that
+most vocabularies are correctly published as RDF. However, it is significant that
+most vocabularies do not correctly serve HTML representations of the resources.
+Additionally, some vocabularies return an incorrect MIME type,
+such as \texttt{text/plain} or \texttt{application/xml}.
 
 \section{\label{sec:conclusions}Conclusions}
 
