@@ -196,10 +196,21 @@ main components:
 \end{description}
 
 The service can be deployed as a normal CGI behind Apache or using a Python web 
-framework. We reviewed the security of the application avoiding some common problems
-in this kind of applications, such as limiting requests per client.
+framework. %We reviewed the security of the application avoiding some common 
+%problems in this kind of applications, such as limiting requests per client
 
-\begin{table}
+\section{\label{sec:experimental}Experimental results}
+
+Practical experimentation illustrates some common problems of how
+content negotiation is implemented, and enables the discussion on 
+these problems. We checked some RDFS and OWL vocabularies published on the web.
+We chose the most frequently used vocabularies, in terms of number of
+instances, according to the last scientific study~\cite{Li2005}. However,
+this ranking is aging (2004), so we also included some newer
+vocabularies, such as SKOS, DOAP and SIOC, which are also popular
+according to more up-to-date sources\footnote{See the ranking at http://pingthesemanticweb.com/stats/namespaces.php (retrieved 12/Mar/2008) by PingTheSemanticWeb.com~\cite{Bojars2007}}.
+
+\begin{table}[t]
 \caption{Ratio of passed tests / total tests for a list of representative vocabularies of the semantic web.}
 \centering
 \begin{tabular}{lccc}
@@ -222,24 +233,10 @@ Namespace & Accept & Accept & Default \\
 \label{tab:usage}
 \end{table}
 
-\section{\label{sec:experimental}Experimental results}
-
-Practical experimentation illustrates some common problems of how
-content negotiation is implemented, and enables the discussion on 
-these problems. We checked some RDFS and OWL vocabularies published on the web.
-We chose the most frequently used vocabularies, in terms of number of
-instances, according to the last scientific study~\cite{Li2005}. However,
-this ranking is aging (2004), so we also included some newer
-vocabularies, such as SKOS, DOAP and SIOC, which are also popular
-according to more up-to-date sources\footnote{See the ranking at http://pingthesemanticweb.com/stats/namespaces.php (retrieved 12/Mar/2008) by PingTheSemanticWeb.com~\cite{Bojars2007}}.
-
 Table~\ref{tab:usage} summarizes the results of running Vapour against a list of
 ten representative vocabularies of the semantic web. These results provide an
-approximation of the
-actual quality of the publication of vocabularies on the web. All the vocabularies
-were retrieved on 12/Mar/2008.
-
-For each vocabulary, the vocabulary URI, a class URI and a property URI are tested
+approximation of the actual quality of the publication of vocabularies on the web. 
+All the vocabularies were retrieved on 12/Mar/2008. For each vocabulary, the vocabulary URI, a class URI and a property URI are tested
 (except for Dublin Core, which does not have any class). The results show that
 most vocabularies are correctly published as RDF. However, it is significant that
 most vocabularies do not correctly serve HTML representations of the resources.
