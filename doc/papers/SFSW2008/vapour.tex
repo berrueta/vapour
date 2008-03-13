@@ -211,7 +211,7 @@ vocabularies, such as SKOS, DOAP and SIOC, which are also popular
 according to more up-to-date sources\footnote{See the ranking at http://pingthesemanticweb.com/stats/namespaces.php (retrieved 12/Mar/2008) by PingTheSemanticWeb.com~\cite{Bojars2007}}.
 
 \begin{table}[t]
-\caption{Ratio of passed tests / total tests for a list of representative vocabularies of the semantic web.}
+\caption{Ratio of passed tests / total tests for a list of widely used vocabularies in the semantic web.}
 \centering
 \begin{tabular}{lccc}
 \hline
@@ -234,22 +234,23 @@ Namespace & Accept & Accept & Default \\
 \end{table}
 
 Table~\ref{tab:usage} summarizes the results of running Vapour against a list of
-ten representative vocabularies of the semantic web. These results provide an
-approximation of the actual quality of the publication of vocabularies on the web. 
-All the vocabularies were retrieved on 12/Mar/2008. For each vocabulary, the vocabulary URI, a class URI and a property URI are tested
+ten popular vocabularies of the semantic web. These results provide an
+approximation to the quality of the publication of vocabularies on the web. 
+All the vocabularies were retrieved on 12/Mar/2008. For each vocabulary, the vocabulary URI, a class URI and a property URI were tested
 (except for Dublin Core, which does not have any class). The results show that
 most vocabularies are correctly published as RDF. However, it is significant that
-most vocabularies do not correctly serve HTML representations of the resources.
+most vocabularies do not correctly provide HTML representations of the resources, even
+if they are available.
 Additionally, some vocabularies return an incorrect MIME type,
 such as \texttt{text/plain} or \texttt{application/xml}.
 
 \section{\label{sec:conclusions}Conclusions}
 
-Content negotiation is a dangerous technique. First it appears as some thing very 
-simple, but as we have seen it is too easy to make certain mistakes. This is 
+Content negotiation is a powerful technique. Although the basic mechanism is simple,
+it is often badly implemented. This is 
 further complicated when we have formats embedded within other formats,
 such as RDFa~\cite{Birbeck2006}. Scripting languages, and applications such as 
-Vapour, are very useful in solving some kind on tasks and provide quality 
+Vapour, are very useful to debug and solve common problems, and to provide quality 
 assurance in the best possible way.
 
 %FIXME: delete this (off topic) paragraph???
@@ -259,11 +260,11 @@ assurance in the best possible way.
 %community will be necessary to develop a new module that allows to serve 
 %Linked Data in the correct way with content negotiation.
 
-The application presented in this paper is still a prototype, but  
-it already helps to debug how content negotiation is implemented in web servers. One of the 
-goals was to provide an RDF serialization of the reports. Using this machine-readable 
-format, it should be easy to deploy another service upon it that uses this data for 
-other tasks, for example, a service to check the compliance of a specific collection 
+The application presented in this paper is fairly simple, but  
+it actually helps to debug the implementation of content negotiation in web servers. It
+is particularly interesting that Vapour provides the results also in RDF. Using this machine-readable 
+format, it should be easy to build another service on top of Vapour, and to use these data for 
+other tasks, such as a service to check the compliance of a specific collection 
 of vocabularies published on the Web.
 
 
