@@ -201,34 +201,38 @@ in this kind of applications, such as limiting requests per client.
 
 \section{\label{sec:experimental}Experimental results}
 
-As we said, we think that practical experimentation permits illustrating and discussing 
-some problems of how content negotiation are implemented. Therefore we must to do real
-tests with our application on real vocabularies published on the Web. As it is impossible
-to test all of it, we decided to choose a subset of the best populated vocabularies. But 
-the last scientific study about it was over data of 2004~\cite{Li2005}. So, we needed to 
-updated that ranking with others more recent, such the 
-provided\footnote{http://pingthesemanticweb.com/stats/namespaces.php} by 
-PingTheSemanticWeb.com~\cite{Bojars2007}. Then we took ten representative namespaces and,
-as summarized Table~\ref{tab:usage}, we executed Vapour to get an approximation of the
-actual quality of the publication of vocabularies on the Web. 
+Practical experimentation illustrates some common problems of how
+content negotiation is implemented, and enables the discussion on 
+these problems. We checked some RDFS and OWL vocabularies published on the web.
+We chose the most frequently used vocabularies, in terms of number of
+instances, according to the last scientific study~\cite{Li2005}. However,
+this ranking is aging (2004), so we also included some newer
+vocabularies, such as SKOS, DOAP and SIOC, which are also popular
+according to more up-to-date sources\footnote{See the ranking at http://pingthesemanticweb.com/stats/namespaces.php (retrieved 12/Mar/2008) by PingTheSemanticWeb.com~\cite{Bojars2007}}.
 
-\begin{table}
-\caption{Tests with Vapour on the most commonly used vocabularies}
+Table~\ref{tab:usage} summarizes the results of running Vapour against a list of
+ten representative vocabularies of the semantic web. These results provide an
+approximation of the
+actual quality of the publication of vocabularies on the web. All the vocabularies
+were retrieved on 12/Mar/2008.
+
+\begin{table}[t]
+\caption{Ratio of passed tests / total tests for a list of representative vocabularies of the semantic web.}
 \centering
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \hline
-Namespace & Test \#1 & Test \#2 \\
+Namespace & Accept RDF & Accept HTML & Default resp. \\
 \hline\hline
-\texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#} & 6/6 & 6/9 \\
-\texttt{http://www.w3.org/2000/01/rdf-schema\#} & 6/6 & 6/9 \\
-\texttt{http://xmlns.com/foaf/0.1/} & 3/6 & 6/9 \\
-\texttt{http://purl.org/dc/elements/1.1/} & 4/4 & 4/6 \\
-\texttt{http://www.w3.org/2003/01/geo/wgs84\_pos\#} & 6/6 & 6/9 \\
-\texttt{http://rdfs.org/sioc/ns\#} & 6/6 & 6/9 \\
-\texttt{http://www.w3.org/2004/02/skos/core\#} & 6/6 & 9/9 \\
-\texttt{http://usefulinc.com/ns/doap\#} & 6/6 & 6/9 \\
-\texttt{http://purl.org/rss/1.0/} & 0/6 & 3/9 \\
-\texttt{http://semantic-mediawiki.org/swivt/1.0\#} & 0/6 & 0/9 \\ [1ex]
+\texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#} & 3/3 & N/A & RDF/XML \\
+\texttt{http://www.w3.org/2000/01/rdf-schema\#} & 3/3 & N/A & RDF/XML \\
+\texttt{http://xmlns.com/foaf/0.1/} & 3/3 & 3/3 & HTML \\
+\texttt{http://purl.org/dc/elements/1.1/} & 2/2 & 0/2 & RDF/XML \\
+\texttt{http://www.w3.org/2003/01/geo/wgs84\_pos\#} & 3/3 & 0/3 & RDF/XML \\
+\texttt{http://rdfs.org/sioc/ns\#} & 3/3 & 0/3 & RDF/XML \\
+\texttt{http://www.w3.org/2004/02/skos/core\#} & 3/3 & 3/3 & RDF/XML \\
+\texttt{http://usefulinc.com/ns/doap\#} & 3/3 & 0/3 & RDF/XML \\
+\texttt{http://purl.org/rss/1.0/} & 1/3 & 0/3 & HTML \\
+\texttt{http://semantic-mediawiki.org/swivt/1.0\#} & 0/3 & 0/3 & text/plain \\ [1ex]
 \hline
 \end{tabular}
 \label{tab:usage}
