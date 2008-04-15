@@ -89,6 +89,7 @@ class cup:
                     web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
             except Exception, e:
                 logger.error(str(e))
+                #FIXME: template
                 web.internalerror()
                 web.output("<p>Vapour was unable to complete the request due to the following exception:</p>")
                 web.output("<pre>" + traceback.format_exc(e) + "</pre>")
