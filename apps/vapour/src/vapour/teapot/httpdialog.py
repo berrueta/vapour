@@ -1,4 +1,5 @@
 from vapour.namespaces import *
+from vapour.common.vapourexceptions import *
 from labeler import labelTestSubjects
 from rdflib import Graph, BNode, Literal
 import httplib
@@ -26,7 +27,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
         url = response.getheader("Location")
         redirectsCount = redirectsCount + 1
         if (redirectsCount > maxRedirects):
-            raise "Too many redirections, aborting"
+            raise TooManyRedirections
 
         r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method)
         response = r[1]
@@ -39,11 +40,13 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
     server = parsedUrl[1]
     path = parsedUrl[2]
+    
     # FIXME: skip DNS resolution if the server is already an IP address
     ipList = dns.resolver.query(server)
     for ip in ipList:
         if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
-            raise "Internal IP address are forbidden"
+            raise ForbiddenAddress(str(ip))
+    
     conn = httplib.HTTPConnection(server)
     headers = {"User-agent": userAgentString}
     if (accept is not None):
