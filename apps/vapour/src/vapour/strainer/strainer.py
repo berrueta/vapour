@@ -8,6 +8,7 @@ import httplib
 import urllib
 from Cheetah.Template import Template
 import datetime
+import traceback
 
 try:
     import Cheetah
@@ -201,6 +202,13 @@ def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "templates"):
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
+def exceptionInHTML(e, resourceBaseUri = "resources", templateDir = "templates"):
+    data = {}
+    data['resourceBaseUri'] = resourceBaseUri
+    data['exceptionDetails'] = traceback.format_exc(e)
+    t = Template(file=templateDir + "/exception.tmpl", searchList=[data])
+    return t
+
 if __name__ == "__main__":
     #
     # Test with local files
@@ -216,3 +224,4 @@ if __name__ == "__main__":
     model = sparqlGraph.SPARQLGraph(store)
     t = resultsModelToHTML(model)
     print t
+
