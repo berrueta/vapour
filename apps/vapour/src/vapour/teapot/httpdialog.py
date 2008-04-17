@@ -99,3 +99,4 @@ if __name__ == "__main__":
     #print "Sequence of testSubjects: ", util.testSubjectsAsList(g, rootTestSubject)
     for s, p, o in g: print s, p, o
     g.save('prueba.rdf')
+
