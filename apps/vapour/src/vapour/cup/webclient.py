@@ -31,18 +31,26 @@ class cup:
                 if propertyUri is "": propertyUri = None
             except KeyError:
                 propertyUri = None
+
             try:
                 format = args["format"]
             except KeyError:
-                format = "html"
+                if ((vocabUri is not None) and (web.ctx.environ.has_key("HTTP_ACCEPT"))):
+                    format = common.getBestFormat(web.ctx.environ["HTTP_ACCEPT"])
+                    logger.info("Using content negotiation to return report in %s" % format.upper())
+                else:
+                    format = "html"
+
             try:
                 htmlVersions = args["htmlVersions"] is "1"
             except KeyError:
                 htmlVersions = False
+
             try:
                 autodetectClassUriIfEmpty = args["autodetectClassUri"] is "1"
             except KeyError:
                 autodetectClassUriIfEmpty = False
+
             try:
                 autodetectPropertyUriIfEmpty = args["autodetectPropertyUri"] is "1"
             except KeyError:
