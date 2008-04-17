@@ -53,8 +53,8 @@ Web documents are retrieved using mainly the HTTP~\cite{HTTP}
 protocol. This protocol provides a mechanism known as \textit{content negotiation}. 
 By means of content negotiation, it is possible to serve Web content in the format or 
 language preferred by the requester (if it is available, obviously). Using transparent content negotiation 
-in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, but it must be 
-implemented carefully in order to avoid some common pitfalls, as we describe in more detail in 
+in HTTP~\cite{Holtman1998} has many benefits~\cite{Seshan1998}, and it can be implemented
+using different techniques in the Apache web server, as we describe in more detail in 
 Section~\ref{sec:contentnegotiation} of this paper. Section~\ref{sec:vapour} introduces 
 a scripting application that provides help and guidance to implement correctly and to debug
 HTTP content negotiation. In Section~\ref{sec:experimental} the
@@ -91,9 +91,11 @@ and it provides three different approaches to implement content negotiation\foot
         do not provide an easy solution, the most widely used method is one 
         which was not specifically designed to implement content negotiation. 
         This mechanism uses the module \texttt{mod\_rewrite} in order to rewrite the 
-        request according to some ad-hoc rules. As a result, the
-        request is redirected using
-        HTTP 303 status code, to the appropriate URI. Obviously,  
+        request according to some ad-hoc rules.
+        As a result, requests (for objects that are not known to be information resources)
+        are redirected using the HTTP 303 status code, to the URI of the appropriate
+        content depending on the format requested.
+        Obviously,  
         some time is lost with the extra HTTP round-trip, but it is negligible for
         many applications,
         as well as mandatory according the httpRange-14 resolution from the
@@ -107,15 +109,15 @@ to publish RDF/OWL Vocabularies using \texttt{mod\_rewrite}. This ``cookbook''
 provides step-by-step instructions to publish vocabularies on the Web, and gives
 example configurations designed to address the most common scenarios.
 
-However, the Recipes are not perfect, and there is at least one important issue to 
+However, the \textit{Recipes} are not perfect, and there is at least one important issue to 
 be solved\footnote{\url{http://www.w3.org/2006/07/SWD/track/issues/58} (retrieved 13/Mar/2008)}.
 Tim Berners-Lee reported that ``the recipe for responding to an accept 
 header only responds to a header which EXACTLY matches [the rule antecedent]''.
 For those requests which contain values for the Accept header such as 
 \texttt{text/*} or \texttt{application/rdf+xml;q=0.01}, where wildcards or
 $q$-values are used, the actual representation served by the
-rules proposed in the \textit{Recipes} might differ from the expected one. This is a serius problem 
-without an easy solution for the general case.
+rules proposed in the \textit{Recipes} might differ from the expected one. This is a serius problem
+of the \textit{Recipes}, but it can be easily solved using a script at server-side.
 
 %Probably it might be solved by moving to another 
 %technique, or with a combination of these commented techniques.
@@ -143,13 +145,14 @@ specifically designed to check the responses
 of the server against the best practices defined in the \textit{Recipes}.
 Tests are executed against the vocabulary
 URI, a class URI and a property URI (the latter two can be automatically detected).
-According to the tests, the application suggests which is the 
-best recipe(s) for your configuration. Vapour stores all assertions into an in-memory RDF store, using a combination of EARL~\cite{EARL}, HTTP
+Based on the input parameters, the application provides a pointer to the specific
+recipe, in case the user wants to learn more on how to configure the web server. Vapour stores all assertions into an in-memory RDF store, using a combination of EARL~\cite{EARL}, HTTP
 Vocabulary~\cite{Koch2007} and an RDF representation of the best practices of the \textit{Recipes}. Thus Vapour 
 can provide the reports both in HTML and in RDF. The HTML view
 displays a clean and concise pass/fail report of each set of tests (Figure~\ref{fig:report-summary}),
 as  well as a detailed explanation of its findings that
-includes a graphical representation of the HTTP dialog.
+includes a graphical representation of the HTTP dialog. Needless to say, the
+examples included in the \textit{Recipes} are successfully validated by Vapour.
 %For the RDF view %,obviously using content negotiation (FIXMEEEEEEEEEEEEEEEEEE)
 %the system provide a RDF/XML serialization of the same report.
 
@@ -263,7 +266,10 @@ of vocabularies published on the Web.
 
 Current best practices (and consequently, Vapour) should probably be
 updated to cover new methods to publish RDF data, such as
-RDFa~\cite{Birbeck2006} embedded in XHTML pages.
+RDFa~\cite{Birbeck2006} embedded in XHTML pages. In the future, we would like
+to extend Vapour to cover more generic validations in Linked
+Open Data scenarios, and to help webmasters to better understand some common
+implementation issues.
 
 % ---- Bibliography ----
 \bibliographystyle{abbrv}
