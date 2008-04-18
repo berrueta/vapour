@@ -140,21 +140,24 @@ blog post available at: \url{http://dowhatimean.net/2007/02/debugging-semantic-w
  \caption{\label{fig:report-summary}Example of a report summary made by Vapour.}
 \end{figure}
 
-In order to facilitate the task of testing the results of content negotiation on a vocabulary, we developed a web-based application called Vapour\footnote{\url{http://vapour.sourceforge.net/}}. This application provides a service that makes multiple requests to a set of URIs and runs a test suite
-specifically designed to check the responses 
+In order to facilitate the task of testing the results of content 
+negotiation on a vocabulary, we developed a web-based application 
+called Vapour\footnote{\url{http://vapour.sourceforge.net/}}. This 
+application provides a service that makes multiple requests to a set 
+of URIs and runs a test suite specifically designed to check the responses 
 of the server against the best practices defined in the \textit{Recipes}.
 Tests are executed against the vocabulary
 URI, a class URI and a property URI (the latter two can be automatically detected).
 Based on the input parameters, the application provides a pointer to the specific
-recipe, in case the user wants to learn more on how to configure the web server. Vapour stores all assertions into an in-memory RDF store, using a combination of EARL~\cite{EARL}, HTTP
-Vocabulary~\cite{Koch2007} and an RDF representation of the best practices of the \textit{Recipes}. Thus Vapour 
-can provide the reports both in HTML and in RDF. The HTML view
-displays a clean and concise pass/fail report of each set of tests (Figure~\ref{fig:report-summary}),
-as  well as a detailed explanation of its findings that
-includes a graphical representation of the HTTP dialog. Needless to say, the
-examples included in the \textit{Recipes} are successfully validated by Vapour.
-%For the RDF view %,obviously using content negotiation (FIXMEEEEEEEEEEEEEEEEEE)
-%the system provide a RDF/XML serialization of the same report.
+recipe, in case the user wants to learn more on how to configure the web server. 
+Vapour stores all assertions into an in-memory RDF store, using a combination of EARL~\cite{EARL}, HTTP
+Vocabulary~\cite{Koch2007} and an RDF representation of the best practices of the \textit{Recipes}. 
+Thus Vapour can provide the reports both in HTML and in RDF, using or not content
+negotiation. The HTML view displays a clean and concise pass/fail report of each 
+set of tests (Figure~\ref{fig:report-summary}), as  well as a detailed explanation 
+of its findings that includes a graphical representation of the HTTP dialog. Needless 
+to say, the examples included in the \textit{Recipes} are successfully validated by 
+Vapour.
 
 The application is written in Python, and it uses common
 Python libraries such as urllib, httplib, web.py and RDFLib. Scripting languages such 
