@@ -3,6 +3,7 @@ from rdflib.Graph import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 from rdflib.sparql import sparqlGraph
 import logging
+from vapour.common.odict import OrderedDict
 
 pathToRdfFiles = "http://vapour.sourceforge.net"
 pathToTemplates = "../strainer/templates" 
@@ -55,6 +56,31 @@ def createLogger(name='vapour'):
 	return logger
 
 def getBestFormat(accceptHeader):
-    #text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+    #Example: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+    mimes = OrderedDict()
+    for one in accceptHeader.split(","):
+        mime = None
+        q = None
+        splitted = one.split(";")
+        if (len(splitted)>1):
+            mime = splitted[0]
+            q = float(splitted[1].split("=")[1])
+        else:
+            mime = splitted[0]
+            q = float("1.0")
+
+        if not mimes.has_key(q):
+            mimes[q] = []
+
+        mimes[q].append(mime)
+
+    mimes.reverse()
+    print mimes
+    for key in mimes.keys():
+        if ("text/html" in mimes[key] or "application/xhtml+xml" in mimes[key]):
+            return "html"
+        if ("application/rdf+xml" in mimes[key]):
+            return "rdf"
+
     return "html" #FIXME
 
