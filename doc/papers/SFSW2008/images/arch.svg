@@ -232,11 +232,11 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="374.67761"
-       y="194.9453"
+       y="188.9453"
        id="text18121"><tspan
          sodipodi:role="line"
          x="374.67761"
-         y="194.9453"
+         y="188.9453"
          id="tspan18127"
          style="font-size:32px;font-weight:bold;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">teapot</tspan></text>
     <text
@@ -253,7 +253,7 @@
     <path
        sodipodi:nodetypes="cccccccc"
        id="path11753"
-       d="M 426.3808,221.41581 C 385.56568,223.39813 344.7506,224.49523 303.93557,221.41581 C 311.44468,234.49441 323.14278,247.41181 349.49659,259.7653 C 333.01781,260.84591 311.0165,258.73903 291.12155,257.84783 C 310.75136,264.63723 342.54704,269.89718 370.85327,275.10511 C 398.53395,270.9704 415.02336,267.34812 434.92345,260.861 C 419.00451,260.94458 405.79905,262.07229 386.51493,260.861 C 391.28083,247.71261 395.7076,234.56421 426.3808,221.41581 z "
+       d="M 426.3808,209.41581 C 385.56568,211.39813 344.7506,212.49523 303.93557,209.41581 C 311.44468,222.49441 323.14278,235.41181 349.49659,247.7653 C 333.01781,248.84591 311.0165,246.73903 291.12155,245.84783 C 310.75136,252.63723 342.54704,257.89718 370.85327,263.10511 C 398.53395,258.9704 415.02336,255.34812 434.92345,248.861 C 419.00451,248.94458 405.79905,250.07229 386.51493,248.861 C 391.28083,235.71261 395.7076,222.56421 426.3808,209.41581 z "
        style="fill:#ebebe0;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.62450707px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccccccc"
@@ -264,20 +264,20 @@
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="361.47214"
-       y="234.28076"
+       y="222.28076"
        id="text18494"><tspan
          sodipodi:role="line"
          id="tspan18496"
          x="361.47214"
-         y="234.28076"
+         y="222.28076"
          style="font-size:12px">http</tspan><tspan
          sodipodi:role="line"
          x="361.47214"
-         y="249.28076"
+         y="237.28076"
          id="tspan18533"
          style="font-size:12px">requests</tspan></text>
     <g
-       transform="matrix(-0.3109899,0,0,-0.1555938,436.2103,319.00773)"
+       transform="matrix(-0.3109899,0,0,-0.1555938,436.2103,307.00773)"
        id="g8835"
        inkscape:label="Layer 1">
       <path
@@ -297,12 +297,12 @@
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="317.14728"
-       y="302.22495"
+       y="290.22495"
        id="text18525"><tspan
          sodipodi:role="line"
          id="tspan18527"
          x="317.14728"
-         y="302.22495"
+         y="290.22495"
          style="font-size:18px;fill:#000000;fill-opacity:1">vocabulary</tspan></text>
     <text
        xml:space="preserve"
@@ -336,7 +336,7 @@
     <path
        sodipodi:nodetypes="cccccccc"
        id="path18619"
-       d="M 266.41034,180.48621 L 293.50709,180.37157 C 293.50709,180.37157 293.58814,176.87568 293.50709,176.87568 C 293.42593,176.87568 301.21417,184.61247 301.21417,184.61247 L 294.39948,192.40663 C 294.39948,192.40663 294.15612,188.96802 294.15612,189.02532 C 294.15612,189.08264 266.41033,189.31187 266.49148,189.25455 L 266.41034,180.48621 z "
+       d="M 266.41034,176.48621 L 293.50709,176.37157 C 293.50709,176.37157 293.58814,172.87568 293.50709,172.87568 C 293.42593,172.87568 301.21417,180.61247 301.21417,180.61247 L 294.39948,188.40663 C 294.39948,188.40663 294.15612,184.96802 294.15612,185.02532 C 294.15612,185.08264 266.41033,185.31187 266.49148,185.25455 L 266.41034,176.48621 z "
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.60943949;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccccccc"
