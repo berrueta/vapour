@@ -74,8 +74,9 @@ def getBestFormat(accceptHeader):
 
         mimes[q].append(mime)
 
+    mimes.sort()
     mimes.reverse()
-    print mimes
+    
     for key in mimes.keys():
         if ("text/html" in mimes[key] or "application/xhtml+xml" in mimes[key]):
             return "html"
