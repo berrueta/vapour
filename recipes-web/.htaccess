@@ -150,3 +150,108 @@ RewriteRule ^example5/ example5-content/2005-10-31.rdf [R=303]
 # and comment out the rewrite rule directly above)
 # RewriteRule ^example5/$ example5-content/2005-10-31-docs/index.html [R=303]
 # RewriteRule ^example5/(.+) example5-content/2005-10-31-docs/$1.html [R=303]
+
+## RECIPE 1a ##################################################
+
+# Directive to ensure *.rdf files served as appropriate content type, 
+# if not present in main apache config
+#AddType application/rdf+xml .rdf
+
+## RECIPE 2a ##################################################
+
+# Turn off MultiViews
+Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+#AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /recipes-web
+
+# Rewrite rule to serve RDF/XML content from all partially redirected URIs
+RewriteRule ^example2a/ example2a.rdf [R=303]
+
+## RECIPE 3a ##################################################
+
+# Turn off MultiViews
+Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+#AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /recipes-web
+
+# Rewrite rule to make sure we serve HTML content from the namespace URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example3a$ example3a-content/2005-10-31.html [R=303]
+
+# Rewrite rule to make sure we serve the RDF/XML content from the namespace URI by default
+RewriteRule ^example3a$ example3a-content/2005-10-31.rdf [R=303]
+
+## RECIPE 4a ##################################################
+
+# Turn off MultiViews
+Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+#AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /recipes-web
+
+# Rewrite rule to serve HTML content from the namespace URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example4a/$ example4a-content/2005-10-31.html [R=303]
+
+# Rewrite rule to serve directed HTML content from class/prop URIs
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example4a/(.+) example4a-content/2005-10-31.html#$1 [R=303,NE]
+
+# Rewrite rule to serve RDF/XML content from the namespace URI by default
+RewriteRule ^example4a/ example4a-content/2005-10-31.rdf [R=303]
+
+## RECIPE 5a ##################################################
+
+# Turn off MultiViews
+Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+#AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /recipes-web
+
+# Rewrite rule to serve HTML content from the namespace URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example5a/$ example5a-content/2005-10-31-docs/index.html [R=303]
+
+# Rewrite rule to serve HTML content from class or prop URIs if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example5a/(.+) example5a-content/2005-10-31-docs/$1.html [R=303]
+
+# Rewrite rule to serve RDF/XML content from the namespace URI by default
+RewriteRule ^example5a/ example5a-content/2005-10-31.rdf [R=303]
