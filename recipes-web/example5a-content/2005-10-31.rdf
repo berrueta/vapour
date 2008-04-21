@@ -1,13 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE owl [
-<!ENTITY dc "http://purl.org/dc/elements/1.1/">
-<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
-<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-<!ENTITY owl "http://www.w3.org/2002/07/owl#">
-<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
-]>
 <rdf:RDF
- xmlns:ex10="http://purl.org/net/swbp-vm/ex10/"
  xmlns:dc="http://purl.org/dc/elements/1.1/"
  xmlns:dcterms="http://purl.org/dc/terms/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
@@ -16,29 +8,27 @@
  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
  xml:base="http://purl.org/net/swbp-vm/ex10/"
 >
-<owl:Ontology rdf:about="http://purl.org/net/swbp-vm/ex10/">
+<owl:Ontology rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/">
 
 <rdfs:comment>An example vocab.</rdfs:comment>
-<rdfs:label>Example 10 Ontology</rdfs:label>
-<dcterms:hasVersion rdf:resource="http://isegserv.itd.rl.ac.uk/VM/http-examples/ex10-content/2005-10-31.rdf"/>
+<rdfs:label>Example 5a Ontology</rdfs:label>
+<dcterms:hasVersion rdf:resource="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a-content/2005-10-31.rdf"/>
 </owl:Ontology>
 
-  <rdf:Description rdf:about="http://isegserv.itd.rl.ac.uk/VM/http-examples/ex10-content/2005-10-31.rdf">
-    <rdfs:label>Example 10 Ontology 2005-10-31 Snapshot</rdfs:label>
+  <rdf:Description rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a-content/2005-10-31.rdf">
+    <rdfs:label>Example 5a Ontology 2005-10-31 Snapshot</rdfs:label>
     <dcterms:issued>2005-10-31</dcterms:issued>
-    <dcterms:isVersionOf rdf:resource="http://purl.org/net/swbp-vm/ex10/"/>
+    <dcterms:isVersionOf rdf:resource="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/"/>
   </rdf:Description>
 
-<owl:Class rdf:about="http://purl.org/net/swbp-vm/ex10/classA">
+<owl:Class rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/classA">
 </owl:Class>
-<owl:Class rdf:about="http://purl.org/net/swbp-vm/ex10/classB">
+<owl:Class rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/classB">
 </owl:Class>
-<owl:Class rdf:about="http://www.w3.org/2002/07/owl#Thing">
-</owl:Class>
-<owl:ObjectProperty rdf:about="http://purl.org/net/swbp-vm/ex10/propA">
-</owl:ObjectProperty>
 
-<owl:DatatypeProperty rdf:about="http://purl.org/net/swbp-vm/ex10/propB">
+<owl:ObjectProperty rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/propA">
+</owl:ObjectProperty>
+<owl:DatatypeProperty rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example5a/propB">
 </owl:DatatypeProperty>
 
 
