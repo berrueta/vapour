@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF
- xmlns:example1a="http://purl.oclc.org/NET/SWD/recipes/examples-A/example1a#"
  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
  xmlns:owl="http://www.w3.org/2002/07/owl#"
  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
  xml:base="http://purl.oclc.org/NET/SWD/recipes/examples-A/example1a"
 >
-<owl:Ontology rdf:about="">
+<owl:Ontology rdf:about="http://purl.oclc.org/NET/SWD/recipes/examples-A/example1a">
 <rdfs:comment>An example vocab for minimal hash setup with PURLs.</rdfs:comment>
-<rdfs:label>Example 1A Ontology</rdfs:label>
+<rdfs:label>Example 1a Ontology</rdfs:label>
 </owl:Ontology>
 <owl:Class rdf:about="#classA">
 </owl:Class>
