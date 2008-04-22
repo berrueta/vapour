@@ -8,6 +8,7 @@ import httplib
 import urllib
 from Cheetah.Template import Template
 import datetime
+import sys
 import traceback
 
 try:
@@ -154,7 +155,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "", printForm = False, autodetectClassUri = False, autodetectPropertyUri = False, htmlVersions = False, namespaceFlavour = None, validRecipes = []):
+def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", printForm=False, autodetectClassUri=False, autodetectPropertyUri=False, validateRDF=False, htmlVersions=False, namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
@@ -165,6 +166,7 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "",
     data['propertyUri'] = propertyUri
     data['autodetectClassUri'] = autodetectClassUri
     data['autodetectPropertyUri'] = autodetectPropertyUri
+    data['validateRDF'] = validateRDF
     data['htmlVersions'] = htmlVersions
     data['namespaceFlavour'] = namespaceFlavour
     data['validRecipes'] = validRecipes
@@ -175,18 +177,18 @@ def prepareData(resourceBaseUri, vocabUri = "", classUri = "", propertyUri = "",
     data['testResults'] = {}
     data['httpTraces'] = {}
     data['finalUris'] = {}
-    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri,'classUri':classUri,'autodetectClassUri':str(int(autodetectClassUri)),'propertyUri':propertyUri,'autodetectPropertyUri':str(int(autodetectPropertyUri)),'htmlVersions':str(int(htmlVersions)),'format':'rdf'}))
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri,'classUri':classUri,'autodetectClassUri':str(int(autodetectClassUri)),'propertyUri':propertyUri,'autodetectPropertyUri':str(int(autodetectPropertyUri)),'validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf'}))
     return data
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
-                       autodetectClassUri, autodetectPropertyUri, htmlVersions,
-                       namespaceFlavour, validRecipes,
+                       autodetectClassUri, autodetectPropertyUri, 
+                       validateRDF, htmlVersions, namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, htmlVersions, namespaceFlavour, validRecipes)
+    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, validateRDF, htmlVersions, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
@@ -205,7 +207,10 @@ def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "templates"):
 def exceptionInHTML(e, resourceBaseUri = "resources", templateDir = "templates"):
     data = {}
     data['resourceBaseUri'] = resourceBaseUri
-    data['exceptionDetails'] = traceback.format_exc(e)
+    data['exceptionDescription'] = str(e)
+    data['exceptionDetails'] = ""
+    for msg in traceback.format_tb(sys.exc_info()[2]):
+        data['exceptionDetails'] += str(msg)
     t = Template(file=templateDir + "/exception.tmpl", searchList=[data])
     return t
 

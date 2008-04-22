@@ -7,7 +7,7 @@
 import web
 import random, traceback
 from vapour.strainer import strainer
-from vapour.teapot import recipes, autodetect
+from vapour.teapot import recipes, validation, autodetect
 from vapour.cup import common
 
 resourceBaseUri = "http://vapour.sf.net/resources"
@@ -42,6 +42,11 @@ class cup:
                     format = "html"
 
             try:
+                validateRDF = args["validateRDF"] is "1"
+            except KeyError:
+                validateRDF = False
+
+            try:
                 htmlVersions = args["htmlVersions"] is "1"
             except KeyError:
                 htmlVersions = False
@@ -70,6 +75,8 @@ class cup:
                             propertyUri = random.choice(propertyUris)
                     
                     recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
+                    if validateRDF:
+                        validation.validateRDF(store, vocabUri, classUri, propertyUri)
                     if classUri is not None:
                         namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
                         validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
@@ -84,8 +91,9 @@ class cup:
                         model = common.createModel(store)
                         web.header("Content-Type", "application/xhtml+xml", unique=True)
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, True,
-                                                               autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, htmlVersions,
-                                                               namespaceFlavour, validRecipes, resourceBaseUri, common.pathToTemplates))
+                                                               autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, 
+                                                               validateRDF, htmlVersions, namespaceFlavour, 
+                                                               validRecipes, resourceBaseUri, common.pathToTemplates))
                     elif format == "rdf":
                         web.header("Content-Type", "application/rdf+xml", unique=True)
                         web.output(store.serialize(format="pretty-xml"))
