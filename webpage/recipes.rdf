@@ -47,6 +47,26 @@
     <!-- dc:identifier -->
   </earl:TestCase>
 
+  <earl:TestCase rdf:about="#TestValidRdfData">
+    <dc:title xml:lang="en">Content should be parseable as RDF data</dc:title>
+    <dc:description xml:lang="en">
+      The content of the response should be valid RDF
+    </dc:description>
+    <!--<vapour:propertyUnderTest rdf:resource="&http;content-type"/>-->
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
+    <!-- dc:identifier -->
+  </earl:TestCase>
+
+  <earl:TestCase rdf:about="#TestContainsResourceDefinition">
+    <dc:title xml:lang="en">Content should contain a resource definition</dc:title>
+    <dc:description xml:lang="en">
+      The content of the response should contain a definition of this resource
+    </dc:description>
+     <!--<vapour:propertyUnderTest rdf:resource="&http;content-type"/>-->
+    <!-- dct:isPartOf rdf:resource="#Recipe1Suite" /-->
+    <!-- dc:identifier -->
+  </earl:TestCase>
+
   <earl:TestCase rdf:about="#TestResponseCode303">
     <dc:title xml:lang="en">HTTP response code should be 303 (redirect)</dc:title>
     <dc:description xml:lang="en">

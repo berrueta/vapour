@@ -203,7 +203,7 @@ label.uri {
   margin-right: 0.3em;
 }
 
-input#htmlVersions {
+input#validateRDF, input#htmlVersions {
   margin-left: 13em;
 }
 
