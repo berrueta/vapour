@@ -90,3 +90,4 @@ if __name__ == "__main__":
     for s, p, o in store: 
         print s, p, o
     store.save('recipe1-test.rdf')
+

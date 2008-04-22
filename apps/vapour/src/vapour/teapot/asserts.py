@@ -37,6 +37,16 @@ def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     result = (mimetypes.rdfXml in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
+def assertLastResponseValidRdfData(graph, rootTestSubject, testRequirement):
+    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
+    result = (mimetypes.rdfXml in getContentType(graph, testSubject))
+    addAssertion(graph, testSubject, RECIPES["TestValidRdfData"], result, testRequirement)
+
+def assertLastResponseContainsResourceDefinition(graph, rootTestSubject, testRequirement):
+    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
+    result = (mimetypes.rdfXml in getContentType(graph, testSubject))
+    addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], result, testRequirement)
+
 def getResponseCode(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
     return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
@@ -88,3 +98,4 @@ def addTestRequirement(graph, title):
     titleLiteral.language = "en"
     graph.add((testRequirement, DC["title"], titleLiteral))    
     return testRequirement
+

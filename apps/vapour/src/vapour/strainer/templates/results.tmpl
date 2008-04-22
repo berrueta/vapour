@@ -58,6 +58,15 @@
           </p>
 
           <p>
+	        #if $validateRDF:
+	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" />
+	        #end if
+	        <label for="validateRDF" class="check">Validate RDF responses</label>
+          </p>
+
+          <p>
 	        #if $htmlVersions:
 	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" checked="checked" />
 	        #else:
