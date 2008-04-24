@@ -42,7 +42,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     path = parsedUrl[2]
     
     # FIXME: skip DNS resolution if the server is already an IP address
-    ipList = dns.resolver.query(server)
+    ipList = dns.resolver.query(str(server))
     for ip in ipList:
         if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
             raise ForbiddenAddress(str(ip))
