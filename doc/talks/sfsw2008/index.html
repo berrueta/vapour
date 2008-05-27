@@ -50,19 +50,20 @@
 </div>
 
 <div class="slide">
-<h1><span><span><span>Motivation and Objectives</span></span></span></h1>
+<h1><span><span><span>Motivation</span></span></span></h1>
 
 <ul class="incremental">
   <li>
-    <p>
-      FIXME
-    </p>
+   The Semantic Web is a big container, a universal medium for data, information and knowledge exchange.
   </li>
   <li>
-   <p>Objectives:</p>
-    <ul class="incremental">
-      <li>FIXME</li>
-    </ul>
+    Web documents are retrieved using mainly HTTP
+  </li>
+  <li>
+    Content negotiation is a difficult thing to implement (in the correct way) and to debug
+  </li>
+  <li>
+    So we need <strong>a tool that helps to do it</strong>
   </li>
 </ul>
 <div class="handout">
@@ -70,19 +71,148 @@
 </div>
 
 <div class="slide">
-<h1><span><span><span>Content negotiation with Apache: Recipes</span></span></span></h1>
+<h1><span><span><span>Content negotiation</span></span></span></h1>
+<p>
+  <img src="images/content-negotiation.png" alt="content negotiation" style="float:right;" />
+</p>
+<ul class="incremental">
+  <li> 
+    Content negotiation is a HTTP mechanism that makes it possible to 
+    <strong>serve different versions of a document</strong>
+  <li>
+    Attending to some details of the requester, such as language or 
+    format preferred
+  </li>
+  <li>
+    Obiously if more than one version is available...
+  </li>
+</ul>
+<div class="handout">
+</div>
+</div>
 
-<p>FIXME</p>
+<div class="slide">
+<h1><span><span><span>Content negotiation in Apache</span></span></span></h1>
+<p>
+  Apache HTTP Server provides three different approaches to implement content negotiation:
+</p>
+<ol class="incremental">
+  <li> 
+    Type Map
+  <li>
+    MultiViews
+  </li>
+  <li>
+    Rewrite request
+  </li>
+</ol>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Content negotiation in the Semantic Web</span></span></span></h1>
+<p>
+  Common used for the Semantic Web purposes:
+</p>
+<p>
+  <a href="http://www.w3.org/TR/cooluris/#semweb"><img src="images/semantic-content-negotiation.png" alt="content negotiation" style="display:block; margin-left:auto; margin-right:auto; margin-top:1em;" /></a>
+</p>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Content negotiation for vocabularies</span></span></span></h1>
+<p>
+  Publication of RDF vocabularies must receive special attention due 
+  to their important role in the Semantic Web architecture
+</p>
+<p>
+  FIXME
+</p>
 
 <div class="handout">
 </div>
 </div>
 
 <div class="slide">
+<h1><span><span><span>Recipes</span></span></span></h1>
+<ul class="incremental">
+  <li> 
+    W3C is working in a document titled 
+    <strong><a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing RDF Vocabularies</a></strong>
+  </li>
+  <li>
+    It contains several recipes that advice on how to publish RDF/OWL Vocabularies using <tt>mod_rewrite</tt>
+  </li>
+  <li>
+    This <em>cookbook</em> provides step-by-step instructions to publish vocabularies on the Web
+  </li>
+</ul>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Recipes (II)</span></span></span></h1>
+<ul style="font-size:0.7em;">
+  <li> 
+    Recipe 1. Minimal configuration for a <em>hash namespace</em>
+  </li>
+  <li>
+    Recipe 2. Minimal configuration for a <em>slash namespace</em>
+  </li>
+  <li>
+    Recipe 3. Extended configuration for a <em>hash namespace</em>
+  </li>
+  <li>
+    Recipe 4. Extended configuration for a <em>slash namespace</em>, using a single HTML document
+  </li>
+  <li>
+    Recipe 5. Extended configuration for a <em>slash namespace</em>, using multiple HTML documents
+  </li>
+  <li>
+    Recipe 6. Extended configuration for a <em>slash namespace</em>, using multiple HTML documents and a query service 
+  </li>
+</ul>
+<div class="handout">
+</div>
+</div>
+<div class="slide">
 <h1><span><span><span>Vapour</span></span></span></h1>
 
-<p>Vapour, a scripting approach to debug content negotiation, FIXME</p>
+<p>Vapour, a scripting approach to debug content negotiation</p>
 
+<p>foo</p>
+
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Vapour: architecture</span></span></span></h1>
+<p>
+  <img src="images/vapour-arch.png" alt="architecture of vapour" style="display:block; margin-left:auto; margin-right:auto; margin-top:1em;" />
+</p>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Vapour: architecture (II)</span></span></span></h1>
+<p>
+  FIXME: describe it
+</p>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Vapour RDF schema</span></span></span></h1>
+<pre>
+  FIXME
+</pre>
 <div class="handout">
 </div>
 </div>
