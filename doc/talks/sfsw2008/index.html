@@ -209,9 +209,72 @@
 </div>
 
 <div class="slide">
-<h1><span><span><span>Vapour RDF schema</span></span></span></h1>
+<h1><span><span><span>Vapour RDF model</span></span></span></h1>
+<ul class="incremental">
+  <li> 
+    Vapour works on a RDF model
+  </li>
+  <li>
+    Where it stores all test and its results
+  </li>
+  <li>
+    Some SPARQL queries fill the reports generated
+  </li>
+</ul>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Vapour RDF model: example I</span></span></span></h1>
+<p>An example of a test over SIOC ontology's namespace:</p>
 <pre>
-  FIXME
+ #req12 a earl:TestRequirement ;
+   dct:hasPart a earl:Assertion ;
+     earl:mode http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic ;
+     earl:assertedBy #vapour ;
+     earl:test #TestResponseCode200 ;
+     earl:subject :rFmCDRcX137 .
+
+ :rFmCDRcX137 a earl:TestSubject ;
+   dc:title "1st request while dereferencing vocabulary URI" ;
+   dc:date "2008-05-27T20:36:21.318143" ;
+   earl:httpRequest a http:GetRequest ;
+     http:accept application/rdf+xml ;
+     uri:uri http://rdfs.org/sioc/ns# .
+   earl:httpResponse a http:Response ;
+     http:responseCode "200" ;
+     http:content-type "application/rdf+xml" .
+</pre>
+<div class="handout">
+</div>
+</div>
+
+<div class="slide">
+<h1><span><span><span>Vapour RDF model: example II</span></span></span></h1>
+<p>Another example of a test over foaf:Person class:</p>
+<pre>
+ :FmCDRcX51 a earl:TestSubject ;
+   dc:title "1st request while dereferencing class URI" ;
+   dc:date "2008-05-27T20:38:34.433181" ;
+   earl:httpRequest a http:GetRequest ;
+     http:accept application/rdf+xml ;
+     uri:uri http://xmlns.com/foaf/0.1/Person .
+   earl:httpResponse a http:Response ;
+     http:responseCode "303" ;
+     http:location http://xmlns.com/foaf/spec/ ;
+   vapour:nextSubject :FmCDRcX52 .
+
+ :FmCDRcX52 a earl:TestSubject ;
+   dc:title "2nd request while dereferencing vocabulary URI" ;
+   dc:date "2008-05-27T20:36:24.318251" ;
+   vapour:previousSubject :FmCDRcX51;
+   earl:httpRequest a http:GetRequest ;
+     http:accept application/rdf+xml ;
+     uri:uri http://xmlns.com/foaf/spec/ .
+   earl:httpResponse a http:Response ;
+     http:responseCode "200" ;
+     http:content-type "application/rdf+xml" .
 </pre>
 <div class="handout">
 </div>

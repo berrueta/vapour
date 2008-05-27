@@ -195,14 +195,14 @@ img.withBorder {
   padding: 4px;
 }
 pre {
- font-size: 80%;
- font-weight: bold;
+ font-size: 70%;
+ font-family: monospace;
  line-height: 120%;
  padding: .2em 1em;
  border-style: solid;
  border-width: thin thin thin 1em;
- border-color: #95ABD0;
- color: #00428C;
+ border-color: #F60;;
+ color: #000000;
  background-color: #E4E5E7;
 }
 li pre { margin-left: 0; }
