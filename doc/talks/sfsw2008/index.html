@@ -54,16 +54,16 @@
 
 <ul class="incremental">
   <li>
-   The Semantic Web is a big container, a universal medium for data, information and knowledge exchange.
+   The Semantic Web is a big container, a universal medium for data, information and knowledge exchange
   </li>
   <li>
-    Web documents are retrieved using mainly HTTP
+    Web documents are retrieved mainly using HTTP
   </li>
   <li>
     Content negotiation is a difficult thing to implement (in the correct way) and to debug
   </li>
   <li>
-    So we need <strong>a tool that helps to do it</strong>
+    So we need <strong>a tool that helps us to debug it</strong>
   </li>
 </ul>
 <div class="handout">
@@ -72,11 +72,9 @@
 
 <div class="slide">
 <h1><span><span><span>Content negotiation</span></span></span></h1>
-<p>
-  <img src="images/content-negotiation.png" alt="content negotiation" style="float:right;" />
-</p>
 <ul class="incremental">
-  <li> 
+  <li>
+    <img src="images/content-negotiation.png" alt="content negotiation" style="float:right;" />
     Content negotiation is a HTTP mechanism that makes it possible to 
     <strong>serve different versions of a document</strong>
   <li>
@@ -127,6 +125,9 @@
 <ul class="incremental">
   <li>
     Vocabularies (and ontologies) have an important role in the Semantic Web architecture
+  </li>
+  <li>
+    Due they provide logical elements to describe resources in a concrete domain
   </li>
   <li> 
     So their publication must receive special attention
@@ -195,6 +196,9 @@
   <li>
     It makes multiple requests to a set of URIs and runs a test suite specifically designed to check the responses of the server
   </li>
+  <li>
+    The results of these tests are showed in pretty reports
+  </li>
 </ul>
 <div class="handout">
 </div>
@@ -216,7 +220,7 @@
   <dd>provides the web interface</dd>
 
   <dt>teapot</dt>
-  <dd>is the core of the application that launches HTTP dialogs to evaluate the response and store the results into the RDF store
+  <dd>is the core of the application that launches HTTP dialogs to evaluate the responses and stores the results into the RDF store
 </dd>
 
   <dt>strainer</dt>
@@ -378,19 +382,20 @@
 
 <div class="slide">
 <h1><span><span><span>Conclusions and future work</span></span></span></h1>
-<ul class="incremental">
+<ul>
   <li>
     Conclusions:
-    <ul>
-      <li>Content negotiation is easier and faster to debug with Vapour</li>
+    <ul class="incremental">
+      <li>Content negotiation is now easier and faster to debug with Vapour</li>
+      <li>Scripting languages are a good way to automatize this kind of things</li>
     </ul>
   </li>
   <li>
     Future work:
-    <ul>
+    <ul class="incremental">
       <li>Cover new methods to publish RDF data, such as RDFa</li>
 	  <li>Extend Vapour to be a Linked Data validator</li>
-	  <li>Re-use the information in the (RDF) reports in other/s applications</li>
+	  <li>Re-use the information in the (RDF) reports in other/s application/s</li>
     </ul>
   </li>
 </ul>
