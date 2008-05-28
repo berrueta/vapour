@@ -195,12 +195,12 @@ img.withBorder {
   padding: 4px;
 }
 pre {
- font-size: 70%;
+ font-size: 65%;
  font-family: monospace;
- line-height: 120%;
- padding: .2em 1em;
+ line-height: 100%;
+ padding: .5em .5em;
  border-style: solid;
- border-width: thin thin thin 1em;
+ border-width: thin thin thin .3em;
  border-color: #F60;;
  color: #000000;
  background-color: #E4E5E7;
