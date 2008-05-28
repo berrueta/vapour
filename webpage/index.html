@@ -15,21 +15,21 @@
     <link rel="transformation" href="http://www-sop.inria.fr/acacia/soft/RDFa2RDFXML.xsl"/>
     <link rel="stylesheet" type="text/css" href="resources/style.css" />
     <link rel="meta" type="application/rdf+xml" title="DOAP" href="resources/doap.rdf#vapour" />
-    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://berrueta.net/foaf.rdf#m" />
-    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.wikier.org/foaf.rdf#wikier" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://berrueta.net/foaf.rdf#me" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.wikier.org/foaf#wikier" />
     <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://frade.no-ip.info:2080/~ivan/foaf.rdf#me" />
     <meta name="DC.title" content="vapour" />
     <meta name="DC.description" content="a web-based validator tool to check the compliance of a web site against the recipes described in the Best Practices Recipes for Publishing RDF Vocabularies" />
   </head>
 
-  <body instanceof="doap:Project" about="http://vapour.sourceforge.net/resources/doap.rdf#vapour">
+  <body typeof="doap:Project" about="http://vapour.sourceforge.net/resources/doap#vapour">
 
     <div class="accessibility">
       <a href="#content">Go to the content</a>
     </div>
 
     <h1>
-      <a href="http://vapour.sourceforge.net/" title="go to the home page" accesskey="0">
+      <a href="http://vapour.sourceforge.net/" rel="doap:homepage" title="go to the home page" accesskey="0">
         <abbr title="VAlidation Process Of Uri Response" property="doap:name">vapour</abbr>
       </a>
     </h1>
@@ -48,8 +48,10 @@
         to check the compliance of a web site against the <em>recipes</em> described in the 
         <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
         <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
-        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft). This work is 
-        <strong>not</strong> endorsed by <acronym title="World Wide Web Consortium">W3C</acronym>.
+        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft). It's written in
+        <span property="doap:programming-language">Python</span> and it's available as open source under
+        <a href="http://www.w3.org/Consortium/Legal/copyright-software" property="doap:license">W3C License</a>.
+        This work is <strong>not</strong> endorsed by <acronym title="World Wide Web Consortium">W3C</acronym>.
       </p>
 
       <h3 id="demo">Demo</h3>
@@ -69,7 +71,7 @@
         </li>
         <li>
           <a href="http://www.wikier.org/">Sergio Fernández</a>
-          (<a href="http://www.wikier.org/foaf.rdf#wikier" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
+          (<a href="http://www.wikier.org/foaf#wikier" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
         </li>
         <li>
           <a href="http://www.ifrade.es/">Iván Frade</a>
@@ -80,8 +82,9 @@
       <h3 id="dev">Development</h3>
 
       <p>
-        Please, send any comment to the <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel">development mailing list</a> 
-        or report bugs to the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865">project's bug tracker</a>. 
+        Please, send any comment to the 
+        <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel" rel="doap:mailing-list">development mailing list</a> 
+        or report bugs to the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865" rel="doap:bug-database">project's bug tracker</a>. 
         
       </p>
 
