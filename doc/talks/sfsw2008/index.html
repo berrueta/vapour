@@ -124,14 +124,17 @@
 
 <div class="slide">
 <h1><span><span><span>Content negotiation for vocabularies</span></span></span></h1>
-<p>
-  Publication of RDF vocabularies must receive special attention due 
-  to their important role in the Semantic Web architecture
-</p>
-<p>
-  FIXME
-</p>
-
+<ul class="incremental">
+  <li>
+    Vocabularies (and ontologies) have an important role in the Semantic Web architecture
+  </li>
+  <li> 
+    So their publication must receive special attention
+  </li>
+  <li> 
+    That's the reason because the recipes document has been started
+  </li>
+</ul>
 <div class="handout">
 </div>
 </div>
@@ -182,10 +185,17 @@
 <div class="slide">
 <h1><span><span><span>Vapour</span></span></span></h1>
 
-<p>Vapour, a scripting approach to debug content negotiation</p>
-
-<p>foo</p>
-
+<ul class="incremental">
+  <li>
+    Vapour, a scripting approach to debug content negotiation
+  </li>
+  <li>
+    A web-based validator tool to check the compliance of a web site against the recipes
+  </li>
+  <li>
+    It makes multiple requests to a set of URIs and runs a test suite specifically designed to check the responses of the server
+  </li>
+</ul>
 <div class="handout">
 </div>
 </div>
@@ -201,9 +211,17 @@
 
 <div class="slide">
 <h1><span><span><span>Vapour: architecture (II)</span></span></span></h1>
-<p>
-  FIXME: describe it
-</p>
+<dl class="incremental" style="font-size: 0.8em;">
+  <dt>cup</dt>
+  <dd>provides the web interface</dd>
+
+  <dt>teapot</dt>
+  <dd>is the core of the application that launches HTTP dialogs to evaluate the response and store the results into the RDF store
+</dd>
+
+  <dt>strainer</dt>
+  <dd>generates the reports, both in XHTML and RDF/XML</dd>
+</dl>
 <div class="handout">
 </div>
 </div>
@@ -212,13 +230,13 @@
 <h1><span><span><span>Vapour RDF model</span></span></span></h1>
 <ul class="incremental">
   <li> 
-    Vapour works on a RDF model
+    Vapour works on a (in-memory) RDF store
   </li>
   <li>
-    Where it stores all test and its results
+    Where it stores all done tests and its results
   </li>
   <li>
-    Some SPARQL queries fill the reports generated
+    Just SPARQL is necessary to generated reports (both XHTML and RDF/XML)
   </li>
 </ul>
 <div class="handout">
@@ -226,55 +244,55 @@
 </div>
 
 <div class="slide">
-<h1><span><span><span>Vapour RDF model: example I</span></span></span></h1>
+<h1><span><span><span>Vapour RDF model: example (I)</span></span></span></h1>
 <p>An example of a test over SIOC ontology's namespace:</p>
 <pre>
- #req12 a earl:TestRequirement ;
-   dct:hasPart a earl:Assertion ;
-     earl:mode http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic ;
-     earl:assertedBy #vapour ;
-     earl:test #TestResponseCode200 ;
-     earl:subject :rFmCDRcX137 .
+#req12 a earl:TestRequirement ;
+  dct:hasPart a earl:Assertion ;
+    earl:mode http://www.w3.org/WAI/ER/EARL/nmg-strawman#automatic ;
+    earl:assertedBy #vapour ;
+    earl:test #TestResponseCode200 ;
+    earl:subject :rFmCDRcX137 .
 
- :rFmCDRcX137 a earl:TestSubject ;
-   dc:title "1st request while dereferencing vocabulary URI" ;
-   dc:date "2008-05-27T20:36:21.318143" ;
-   earl:httpRequest a http:GetRequest ;
-     http:accept application/rdf+xml ;
-     uri:uri http://rdfs.org/sioc/ns# .
-   earl:httpResponse a http:Response ;
-     http:responseCode "200" ;
-     http:content-type "application/rdf+xml" .
+:rFmCDRcX137 a earl:TestSubject ;
+  dc:title "1st request while dereferencing vocabulary URI" ;
+  dc:date "2008-05-27T20:36:21.318143" ;
+  earl:httpRequest a http:GetRequest ;
+    http:accept application/rdf+xml ;
+    uri:uri http://rdfs.org/sioc/ns# .
+  earl:httpResponse a http:Response ;
+    http:responseCode "200" ;
+    http:content-type "application/rdf+xml" .
 </pre>
 <div class="handout">
 </div>
 </div>
 
 <div class="slide">
-<h1><span><span><span>Vapour RDF model: example II</span></span></span></h1>
+<h1><span><span><span>Vapour RDF model: example (II)</span></span></span></h1>
 <p>Another example of a test over foaf:Person class:</p>
 <pre>
- :FmCDRcX51 a earl:TestSubject ;
-   dc:title "1st request while dereferencing class URI" ;
-   dc:date "2008-05-27T20:38:34.433181" ;
-   earl:httpRequest a http:GetRequest ;
-     http:accept application/rdf+xml ;
-     uri:uri http://xmlns.com/foaf/0.1/Person .
-   earl:httpResponse a http:Response ;
-     http:responseCode "303" ;
-     http:location http://xmlns.com/foaf/spec/ ;
-   vapour:nextSubject :FmCDRcX52 .
+:FmCDRcX51 a earl:TestSubject ;
+  dc:title "1st request while dereferencing class URI" ;
+  dc:date "2008-05-27T20:38:34.433181" ;
+  earl:httpRequest a http:GetRequest ;
+    http:accept application/rdf+xml ;
+    uri:uri http://xmlns.com/foaf/0.1/Person .
+  earl:httpResponse a http:Response ;
+    http:responseCode "303" ;
+    http:location http://xmlns.com/foaf/spec/ ;
+  vapour:nextSubject :FmCDRcX52 .
 
- :FmCDRcX52 a earl:TestSubject ;
-   dc:title "2nd request while dereferencing vocabulary URI" ;
-   dc:date "2008-05-27T20:36:24.318251" ;
-   vapour:previousSubject :FmCDRcX51;
-   earl:httpRequest a http:GetRequest ;
-     http:accept application/rdf+xml ;
-     uri:uri http://xmlns.com/foaf/spec/ .
-   earl:httpResponse a http:Response ;
-     http:responseCode "200" ;
-     http:content-type "application/rdf+xml" .
+:FmCDRcX52 a earl:TestSubject ;
+  dc:title "2nd request while dereferencing vocabulary URI" ;
+  dc:date "2008-05-27T20:36:24.318251" ;
+  vapour:previousSubject :FmCDRcX51;
+  earl:httpRequest a http:GetRequest ;
+    http:accept application/rdf+xml ;
+    uri:uri http://xmlns.com/foaf/spec/ .
+  earl:httpResponse a http:Response ;
+    http:responseCode "200" ;
+    http:content-type "application/rdf+xml" .
 </pre>
 <div class="handout">
 </div>
