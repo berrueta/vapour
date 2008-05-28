@@ -547,6 +547,22 @@ div.slide.cover a:active {
   text-decoration: underline;
 }
 
+table#experiment {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0.5em;
+  font-size: 0.4em;
+  line-height: normal;
+  border-top: #ff6600 solid 2px;
+  border-bottom: #ff6600 solid 2px;
+}
+
+table#experiment th {
+  text-align: left;
+  background-color: #E4E5E7;
+}
+
 /* for Bert as an ardent user of the old W3C slidemaker tool */
 
 div.comment { display: none; visibility: hidden }
@@ -595,3 +611,4 @@ div a#TB_closeWindowButton {
 	font-weight: bold;
 }
 @media print { div.comment { display: block; visibility: visible } }
+

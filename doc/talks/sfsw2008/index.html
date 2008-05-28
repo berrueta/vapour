@@ -301,7 +301,76 @@
 <div class="slide">
 <h1><span><span><span>Experimental results</span></span></span></h1>
 
-<p>FIXME</p>
+<p>Vapour against a list of ten popular vocabularies (retrieved 12/Mar/2008):</p>
+
+<table id="experiment">
+  <tr>
+    <th id="namespace">Namespace</th>
+    <th id="acceptrdf">Acccept RDF/XML</th>
+    <th id="accepthtml">Accept HTML</th>
+    <th id="defaultresponse">Default response</th>
+  </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://www.w3.org/1999/02/22-rdf-syntax-ns#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">N/A</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://www.w3.org/2000/01/rdf-schema#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">N/A</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://xmlns.com/foaf/0.1/</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">3/3</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://purl.org/dc/elements/1.1/</tt></td>
+      <td hreaders="acceptrdf">2/2</td>
+      <td hreaders="accepthtml">0/2</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://www.w3.org/2003/01/geo/wgs84 pos#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">0/3</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://rdfs.org/sioc/ns#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">0/3</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://www.w3.org/2004/02/skos/core#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">3/3</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://usefulinc.com/ns/doap#</tt></td>
+      <td hreaders="acceptrdf">3/3</td>
+      <td hreaders="accepthtml">0/3</td>
+      <td hreaders="defaultresponse">RDF/XML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://purl.org/rss/1.0/</tt></td>
+      <td hreaders="acceptrdf">1/3</td>
+      <td>0/3</td>
+      <td hreaders="defaultresponse">HTML</td>
+    </tr>
+    <tr>
+      <td hreaders="namespace"><tt>http://semantic-mediawiki.org/swivt/1.0#</tt></td>
+      <td hreaders="acceptrdf">0/3</td>
+      <td hreaders="accepthtml">0/3</td>
+      <td hreaders="defaultresponse">text/plain</td>
+    </tr>
+</table>
 
 <div class="handout">
 </div>
@@ -313,13 +382,15 @@
   <li>
     Conclusions:
     <ul>
-      <li>FIXME</li>
+      <li>Content negotiation is easier and faster to debug with Vapour</li>
     </ul>
   </li>
   <li>
     Future work:
     <ul>
-	  <li>FIXME</li>
+      <li>Cover new methods to publish RDF data, such as RDFa</li>
+	  <li>Extend Vapour to be a Linked Data validator</li>
+	  <li>Re-use the information in the (RDF) reports in other/s applications</li>
     </ul>
   </li>
 </ul>
