@@ -31,7 +31,7 @@
   <img class="note" src="images/bullet-nofold-dim.gif" alt="" />
   <img class="note" src="images/bullet-unfold-dim.gif" alt="" />
 
-<h1>Cooking HTTP content<br/>negotiation with Vapour</h1><br/><br/><br/>
+<h1>Cooking HTTP<br/>content negotiation<br>	with Vapour</h1><br/><br/><br/>
 
 <p>
   <a href="http://berrueta.net/">Diego Berrueta</a>,
@@ -143,15 +143,17 @@
 <div class="slide">
 <h1><span><span><span>Recipes</span></span></span></h1>
 <ul class="incremental">
-  <li> 
-    W3C is working in a document titled 
-    <strong><a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing RDF Vocabularies</a></strong>
+  <li>
+    <strong><a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing RDF Vocabularies</a></strong> (W3C Working Draft)
   </li>
   <li>
-    It contains several recipes that advice on how to publish RDF/OWL Vocabularies using <tt>mod_rewrite</tt>
+    Recipes about how to publish RDF/OWL Vocabularies using <tt>mod_rewrite</tt>
   </li>
   <li>
-    This <em>cookbook</em> provides step-by-step instructions to publish vocabularies on the Web
+    Step-by-step instructions
+  </li>
+  <li>
+    Still some open issues
   </li>
 </ul>
 <div class="handout">
@@ -160,7 +162,7 @@
 
 <div class="slide">
 <h1><span><span><span>Recipes (II)</span></span></span></h1>
-<ul style="font-size:0.7em;">
+<ul style="font-size:0.6em;">
   <li> 
     Recipe 1. Minimal configuration for a <em>hash namespace</em>
   </li>
@@ -183,12 +185,33 @@
 <div class="handout">
 </div>
 </div>
+
+<div class="slide">
+<h1><span><span><span>Recipes: example recipe 3</span></span></span></h1>
+<pre>
+# Rewrite rule to serve HTML content if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^example3$ example3.html [R=303]
+
+# Rewrite rule to serve RDF/XML content if requested
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^example3$ example3.rdf [R=303]
+
+# Rewrite rule to serve the RDF/XML content by default 
+RewriteRule ^example3$ example3.rdf [R=303]
+</pre>
+<div class="handout">
+</div>
+</div>
+
 <div class="slide">
 <h1><span><span><span>Vapour</span></span></span></h1>
-
 <ul class="incremental">
   <li>
-    Vapour, a scripting approach to debug content negotiation
+    Vapour, a scripting approach (written in Python) to debug content negotiation
   </li>
   <li>
     A web-based validator tool to check the compliance of a web site against the recipes
@@ -237,7 +260,7 @@
     Vapour works on a (in-memory) RDF store
   </li>
   <li>
-    Where it stores all done tests and its results
+    Where it stores all tests and its results
   </li>
   <li>
     Just SPARQL is necessary to generated reports (both XHTML and RDF/XML)
@@ -305,7 +328,9 @@
 <div class="slide">
 <h1><span><span><span>Experimental results</span></span></span></h1>
 
-<p>Vapour against a list of ten popular vocabularies (retrieved 12/Mar/2008):</p>
+<p>
+  Vapour against a list of ten popular vocabularies
+  <small>(retrieved on 12/Mar/2008)</small>:</p>
 
 <table id="experiment">
   <tr>
@@ -339,7 +364,7 @@
       <td hreaders="defaultresponse">RDF/XML</td>
     </tr>
     <tr>
-      <td hreaders="namespace"><tt>http://www.w3.org/2003/01/geo/wgs84 pos#</tt></td>
+      <td hreaders="namespace"><tt>http://www.w3.org/2003/01/geo/wgs84_pos#</tt></td>
       <td hreaders="acceptrdf">3/3</td>
       <td hreaders="accepthtml">0/3</td>
       <td hreaders="defaultresponse">RDF/XML</td>
@@ -407,9 +432,9 @@
 <div>
 <h1><span><span><span>Thank you</span></span></span></h1>
 <p style="text-align: center; margin: 2em 0 2em 0;"><big><strong>Thank you!</strong></big></p>
-<p style="text-align: center;">Diego Berrueta &lt;<a href="mailto:sergio.fernandez@fundacionctic.org">diego.berrueta@fundacionctic.org</a>&gt;</p>
-<p style="text-align: center;">Sergio Fernández &lt;<a href="mailto:sergio.fernandez@fundacionctic.org">sergio.fernandez@fundacionctic.org</a>&gt;</p>
-<p style="text-align: center;">Iván Frade &lt;<a href="mailto:ivan.frade@gmail.com">ivan.frade@gmail.com</a>&gt;</p>
+<p style="text-align: center;"><small>Diego Berrueta &lt;<a href="mailto:sergio.fernandez@fundacionctic.org">diego.berrueta@fundacionctic.org</a>&gt;</small></p>
+<p style="text-align: center;"><small>Sergio Fernández &lt;<a href="mailto:sergio.fernandez@fundacionctic.org">sergio.fernandez@fundacionctic.org</a>&gt;</small></p>
+<p style="text-align: center;"><small>Iván Frade &lt;<a href="mailto:ivan.frade@gmail.com">ivan.frade@gmail.com</a>&gt;</small></p>
 <p style="text-align: center; margin-top: 2em;"><big><a href="http://vapour.sourceforge.net/">http://vapour.sourceforge.net/</a></big></p>
 </div>
 </div>
