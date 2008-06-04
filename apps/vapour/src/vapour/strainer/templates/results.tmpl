@@ -9,6 +9,11 @@
     #if len($testAgent) > 0:
 	    <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
 	#end if
+	#if $isThereAnyFailingTest:
+	    <meta name="icon" href="$resourceBaseUri/redFavicon.png" type="image/png"/>
+	#else:
+	    <meta name="icon" href="$resourceBaseUri/greenFavicon.png" type="image/png"/>
+	#end if
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
@@ -85,6 +90,11 @@
     <h1>Vapour Report</h1>
     <div class="summary">
       <h2>Summary</h2>
+      #if $isThereAnyFailingTest:
+        <p class="overallResultFail">Some tests failed!</p>
+      #else:
+        <p class="overallResultPass">All tests passed!</p>
+      #end if
       <table class="summaryTable">
         <thead>
           <tr>
