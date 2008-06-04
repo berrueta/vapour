@@ -39,6 +39,15 @@ def getTestRequirements(model):
     resultSet.sort(sortByTitleFunc)
     return resultSet
 
+def isThereAnyFailingTest(model):
+    sparqlGr = SPARQLGraph(model)
+    where = GraphPattern([
+        ("?assertion", RDF["type"], EARL["Assertion"]),
+        ("?assertion", EARL["result"], "?result"),
+        ("?result", EARL["validity"], EARL["fail"])
+        ])
+    return Query.queryObject(sparqlGr, where).ask()
+
 def getResultsFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
     select = ("?assertion", #0
@@ -195,6 +204,7 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
         data['httpTraces'][testRequirementUri] = sortTrace(getHttpTracesFromModel(model, testRequirementUri))
         data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
+    data['isThereAnyFailingTest'] = isThereAnyFailingTest(model)
     data['reportDate'] = str(datetime.datetime.now())
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
