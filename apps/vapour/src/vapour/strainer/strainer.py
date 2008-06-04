@@ -14,13 +14,13 @@ import traceback
 try:
     import Cheetah
 except ImportError:
-    print >> stderr, "This program REQUIRE cheetah. Please install the library"
+    print >> stderr, "This program REQUIRES cheetah. Please install the library"
     sys.exit(-1)
 
 try:
     import rdflib
 except ImportError:
-    print >>stderr, "This program REQUIRE rdflib. Please install the library"
+    print >>stderr, "This program REQUIRES rdflib. Please install the library"
     sys.exit(-1)
 
 
