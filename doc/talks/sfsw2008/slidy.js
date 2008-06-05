@@ -675,8 +675,7 @@ function keyDown(event)
 	}
     if (key == 34) // Page Down
     {
-       //nextSlide(false);
-       nextSlide(true);
+       nextSlide(false);
        return cancel(event);
     }
     else if (key == 33) // Page Up
