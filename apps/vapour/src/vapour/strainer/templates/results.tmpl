@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="content-type" content="text/xhtml+xml; charset=utf-8" />
     #if len($testAgent) > 0:
-	    <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
+    <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
 	#end if
     #if len($testRequirements) > 0:
 	    #if $isThereAnyFailingTest:
-	        <meta name="icon" href="$resourceBaseUri/redFavicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="$resourceBaseUri/redFavicon.png" type="image/png"/>
 	    #else:
-	        <meta name="icon" href="$resourceBaseUri/greenFavicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="$resourceBaseUri/greenFavicon.png" type="image/png"/>
 	    #end if
     #end if
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
