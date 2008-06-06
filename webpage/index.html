@@ -81,12 +81,16 @@
       <h3 id="dev">Development</h3>
 
       <p>
-        Please, send any comment to the 
+        All the development material of the project (code, documentation, etc.) is stored in 
+        <a href="https://vapour.svn.sourceforge.net/svnroot/vapour/trunk/">its svn repository</a>
+        in SourceForge. Please, send any comment to the 
         <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel" rel="doap:mailing-list">development mailing list</a> 
         or report bugs to the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865" rel="doap:bug-database">project's bug tracker</a>. 
       </p>
 
       <h3 id="doc">Documentation</h3>
+
+      <h4>Papers</h4>
 
       <ul>
         <li>
@@ -97,6 +101,50 @@
           Tenerife, Spain, June 2, 2008.
         </li>
       </ul>
+
+      <h4>Talks</h4>
+
+      <ul>
+        <li>
+          <a href="http://vapour.sourceforge.net/resources/doc/talks/sfsw2008/">Cooking HTTP content negotiation with Vapour</a>.
+          Talk presenting the paper with the same title published in the
+          <a href="http://www.eswc2008.org/">ESWC2008</a> workshop on Scripting for the Semantic Web 
+          (<a href="http://www.semanticscripting.org/SFSW2008/">SFSW2008</a>), 
+          Tenerife, Spain, June 2, 2008.
+        </li>
+      </ul>
+
+      <h4>Architecture</h4>
+
+      <p>Vapour has the following high level architecture:</p>
+
+      <p>
+        <img src="resources/images/arch.png" width="484" height="316" alt="Vapour's architecture"/>
+      </p>
+
+      <p>With three main modules:</p>
+
+      <dl id="arch">
+        <dt>
+          cup
+        </dt>
+        <dd>
+          provides the web interface of the application
+        </dd>
+        <dt>
+          teapot
+        </dt>
+        <dd>
+          is the core of the application that launches HTTP dialogs, evaluates 
+          the responses and stores the results into the (in-memory) RDF store
+        </dd>
+        <dt>
+          strainer
+        </dt>
+        <dd>
+          generates the reports, both in XHTML and RDF/XML
+        </dd>
+      </dl>
 
       <h3 id="references">References</h3>
       <ul>
