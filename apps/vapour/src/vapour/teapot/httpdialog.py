@@ -10,10 +10,21 @@ import dns.resolver
 userAgentString = "vapour.sourceforge.net"
 maxRedirects = 3
 
+###########################################################
+
 def launchHttpDialog(graph, what, url, accept = None, method = "GET"):
+    '''Convenience wrapper for followRedirects.
+    
+    Returns the first test subject resource.'''
     return followRedirects(graph, what, url, accept, method)[0]
 
+###########################################################
+
 def followRedirects(graph, what, url, accept = None, method = "GET"):
+    '''Executes a multi-stage HTTP dialog following the redirects.
+    
+    Returns an array with two elements: firstly, the first
+    test subject resource; secondly, the HTTP response object.'''
     redirectsCount = 0
     r = simpleRequest(graph, url, accept, redirectsCount, method)
     firstTestSubjectResource = r[0]
@@ -35,8 +46,14 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
     labelTestSubjects(graph, firstTestSubjectResource, what)                
     return (firstTestSubjectResource, response)
     
+###########################################################
         
 def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None, method="GET"):    
+    '''Executes a single HTTP request and receives a response.
+    
+    Returns a duple containing: firstly, the test subject resource
+    (note that there is only one, because this function does not
+     handle HTTP redirects); secondly, the HTTP response object.'''
     parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
     server = parsedUrl[1]
     path = parsedUrl[2]
@@ -55,43 +72,62 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     response = conn.getresponse()
     
     testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount)
+    
+    # makes a cross-link between the previous subject resource
+    # and the new one
     if (previousTestSubjectResource is not None):
         graph.add((previousTestSubjectResource, VAPOUR_VOCAB["nextSubject"], testSubjectResource))
         graph.add((testSubjectResource, VAPOUR_VOCAB["previousSubject"], previousTestSubjectResource))
 
     return (testSubjectResource, response)
     
+###########################################################
+
 def addToGraph(graph, url, accept, response, previousRequestCount):
-    httpStatus = response.status
-    location = response.getheader("Location")
+    '''Creates a new test subject resource and fills its properties.
+    
+    The new test subject resource is a blank node, and
+    it is added to the graph. This function returns the new
+    test subject resource.'''
+    httpStatus  = response.status
+    location    = response.getheader("Location")
     contentType = response.getheader("Content-Type")
 
+    # creates the new resources
     testSubjectResource = BNode()
-    requestResource = BNode()
-    responseResource = BNode()
+    requestResource     = BNode()
+    responseResource    = BNode()
     
     # link the resources
     graph.add((testSubjectResource, EARL["httpRequest"], requestResource))
     graph.add((testSubjectResource, EARL["httpResponse"], responseResource))
     
+    # properties of the testSubjectResource
     graph.add((testSubjectResource, RDF["type"], EARL["TestSubject"]))
     graph.add((testSubjectResource, DC["date"], Literal(datetime.datetime.now()))) # FIXME: use standard format
     graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
     
-    graph.add((responseResource, RDF["type"], HTTP["GetRequest"]))
+    # properties of the requestResource
+    graph.add((requestResource, RDF["type"], HTTP["GetRequest"]))
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
     graph.add((requestResource, HTTP["user-agent"], Literal(userAgentString)))
-
+        
+    # properties of the responseResource
     graph.add((responseResource, RDF["type"], HTTP["Response"]))
     graph.add((responseResource, HTTP["responseCode"], Literal(httpStatus)))
     if (location is not None): 
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):
         graph.add((responseResource, HTTP["content-type"], Literal(contentType)))
-        
+    
     return testSubjectResource
+
+
+###########################################################
+# debug code
+#
 
 if __name__ == "__main__":
     g = Graph()
