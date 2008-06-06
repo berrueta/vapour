@@ -12,15 +12,17 @@
 	#end if
     #if len($testRequirements) > 0:
 	    #if $isThereAnyFailingTest:
-    <link rel="shortcut icon" href="$resourceBaseUri/redFavicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="$resourceBaseUri/redFavicon.png" type="image/png" />
 	    #else:
-    <link rel="shortcut icon" href="$resourceBaseUri/greenFavicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="$resourceBaseUri/greenFavicon.png" type="image/png" />
 	    #end if
+    #else:
+    <link rel="shortcut icon" href="$resourceBaseUri/images/favicon.png" type="image/png" />
     #end if
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
-    <link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />
+    <!--<link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />-->
     <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
     <title>Vapour Report</title>
   </head>
