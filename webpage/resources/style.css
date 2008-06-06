@@ -44,6 +44,11 @@ h3 {
   font-size: 1.4em;
 }
 
+h4 {
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
 p {
   text-align: justify;
 }
@@ -66,6 +71,21 @@ div#content {
 
 div#content ul {
   list-style-type: none;
+}
+
+div#content dl#arch {
+  margin-left: 50px;
+}
+
+div#content dl#arch dt {
+  font-weight: bold;
+  clear: both;
+  float: left;
+}
+
+div#content dl#arch dd {
+  margin-left: 80px;
+  margin-bottom: 10px;
 }
 
 .accessibility {
