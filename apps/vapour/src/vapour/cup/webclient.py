@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.4
+#!/usr/bin/python
 
 #path to work inside apache (uncomment these lines)
 #import sys
