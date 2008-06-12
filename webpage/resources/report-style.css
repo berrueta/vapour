@@ -265,13 +265,23 @@ h2
   border: 1px #5674bc solid;
 }
 
-.allTestsOk
+.overallResultPass
 {
-  color:green;
+  background-color: green;
 }
 
-.someTestsFail
-{ 
-  font-weight: bold;  
-  color: red;
+.overallResultFail
+{  
+  background-color: red;
 }
+
+.overallResultPass .overallResultFail 
+{
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
