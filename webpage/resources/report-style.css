@@ -275,7 +275,7 @@ h2
   background-color: red;
 }
 
-.overallResultPass .overallResultFail 
+.overallResultPass, .overallResultFail
 {
   width: 100%;
   color: white;
