@@ -265,6 +265,14 @@ h2
   border: 1px #5674bc solid;
 }
 
+.allTestsOk {
+  color: green;
+}
+
+.someTestsFail {
+  color: red;
+}
+
 .overallResultPass
 {
   background-color: green;
