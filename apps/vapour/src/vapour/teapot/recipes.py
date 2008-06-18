@@ -21,72 +21,60 @@ assertLastResponseContentTypeFunctions = {
 
 # it needs a refactor into OOP
 
-def checkRecipes(graph, htmlVersions, vocabUri, classUri = None, propertyUri = None):
-    checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri)
-    checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri)
-    if htmlVersions:
-        #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-        #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
-        checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri)
+def checkRecipes(graph, htmlVersions, resourcesToCheck):
+    for resource in resourcesToCheck:
+        # FIXME
+        checkWithoutAcceptHeader(graph, resource)
+        checkWithAcceptRdf(graph, resource)
+        if htmlVersions:
+            #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
+            #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
+            checkWithAcceptXhtmlOrHtml(graph, resource)
     
-    #for i in range(0,8):
-     #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
+        #for i in range(0,8):
+         #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
-def checkWithoutAcceptHeader(graph, vocabUri, classUri, propertyUri):
+def checkWithoutAcceptHeader(graph, resource):
     scenarioDescription = " (without content negotiation)"
     contentType = None
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType)
     
-def checkWithAcceptRdf(graph, vocabUri, classUri, propertyUri):
+def checkWithAcceptRdf(graph, resource):
     scenarioDescription = " (requesting RDF/XML)"
     contentType = mimetypes.rdfXml
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType)
     
-def checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri):
+def checkWithAcceptHtml(graph, resource):
     scenarioDescription = " (requesting HTML)"
     contentType = mimetypes.html
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType)
     
-def checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri):
+def checkWithAcceptXhtml(graph, resource):
     scenarioDescription = " (requesting XHTML)"
     contentType = mimetypes.xhtml
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType)
     
-def checkWithAcceptXhtmlOrHtml(graph, vocabUri, classUri, propertyUri):
+def checkWithAcceptXhtmlOrHtml(graph, resource):
     scenarioDescription = " (requesting (X)HTML)"
     contentType = mimetypes.xhtmlOrHtml
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType)
     
-def checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, mixNum):
+def checkWithMixedAccept(graph, resource, mixNum):
     scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
     contentType = mimetypes.mixed[mixNum]
-    runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType)    
+    runScenario(graph, resource, scenarioDescription, contentType)    
     
-def runScenario(graph, vocabUri, classUri, propertyUri, scenarioDescription, contentType):
-    testRequirement = addTestRequirement(graph, "Dereferencing the vocabulary URI" + scenarioDescription)
-    rootTestSubject = launchHttpDialog(graph, "dereferencing vocabulary URI", vocabUri, contentType, method = "HEAD")
+def runScenario(graph, resource, scenarioDescription, contentType):
+    testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, method = "HEAD")
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
     assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
 
-    if classUri is not None:
-        testRequirement = addTestRequirement(graph, "Dereferencing class URI" + scenarioDescription)
-        rootTestSubject = launchHttpDialog(graph, "dereferencing class URI", classUri, contentType, method = "HEAD")
-        assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-        assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-        assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
-    
-    if propertyUri is not None:
-        testRequirement = addTestRequirement(graph, "Dereferencing property URI" + scenarioDescription)
-        rootTestSubject = launchHttpDialog(graph, "dereferencing property URI", propertyUri, contentType, method = "HEAD")    
-        assertLastResponseCode200(graph, rootTestSubject, testRequirement)
-        assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-        assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)    
-
 if __name__ == "__main__":
     store = Graph()
     example = "http://vapour.sourceforge.net/recipes-web/example1"
-    recipe1(g, example, example, example)
+    checkRecipes(g, True, [{'uri': example, 'description': "Demo URI", 'priority': 1}])
     for s, p, o in store: 
         print s, p, o
     store.save('recipe1-test.rdf')

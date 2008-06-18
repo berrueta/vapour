@@ -13,7 +13,8 @@ if __name__ == "__main__":
     
     vocabUri = sys.argv[1]
     classUri = sys.argv[2]
-    propUri = sys.argv[3]
+    propertyUri = sys.argv[3]
+    instanceUri = None # FIXME
     outputFileName = sys.argv[4]
     outputRdfFileName = sys.argv[5]
     
@@ -27,8 +28,20 @@ if __name__ == "__main__":
         if propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
             propertyUri = random.choice(propertyUris)
     
+    resourcesToCheck = []
+    if classUri is None and propertyUri is None and instanceUri is None:
+        resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'priority': 1})
+    else:
+        resourcesToCheck.append({'uri': vocabUri, 'description': "vocabulary URI", 'priority': 1})
+        if classUri is not None:
+            resourcesToCheck.append({'uri': classUri, 'description': "class URI", 'priority': 2})
+        if propertyUri is not None:
+            resourcesToCheck.append({'uri': propertyUri, 'description': "property URI", 'priority': 3})
+        if instanceUri is not None:
+            resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'priority': 4})
+    
     htmlVersions = True
-    recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propUri)
+    recipes.checkRecipes(store, htmlVersions, resourcesToCheck)
     if classUri is not None:
         namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
         validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
@@ -46,7 +59,7 @@ if __name__ == "__main__":
     store.parse(common.pathToRdfFiles + "/earl.rdf")
 
     model = common.createModel(store)
-    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propUri, 
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, 
                                        False, False, False, False,
                                        namespaceFlavour, validRecipes,
                                        resourceBaseUri, common.pathToTemplates)

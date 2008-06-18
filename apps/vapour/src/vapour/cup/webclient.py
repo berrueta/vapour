@@ -31,6 +31,11 @@ class cup:
                 if propertyUri is "": propertyUri = None
             except KeyError:
                 propertyUri = None
+            try:
+                instanceUri = args["instanceUri"]
+                if instanceUri is "": instanceUri = None
+            except KeyError:
+                instanceUri = None
 
             try:
                 format = args["format"]
@@ -74,7 +79,19 @@ class cup:
                         if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                             propertyUri = random.choice(propertyUris)
                     
-                    recipes.checkRecipes(store, htmlVersions, vocabUri, classUri, propertyUri)
+                    resourcesToCheck = []
+                    if classUri is None and propertyUri is None and instanceUri is None:
+                        resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'priority': 1})
+                    else:
+                        resourcesToCheck.append({'uri': vocabUri, 'description': "vocabulary URI", 'priority': 1})
+                        if classUri is not None:
+                            resourcesToCheck.append({'uri': classUri, 'description': "class URI", 'priority': 2})
+                        if propertyUri is not None:
+                            resourcesToCheck.append({'uri': propertyUri, 'description': "property URI", 'priority': 3})
+                        if instanceUri is not None:
+                            resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'priority': 4})
+                    
+                    recipes.checkRecipes(store, htmlVersions, resourcesToCheck)
                     if validateRDF:
                         validation.validateRDF(store, vocabUri, classUri, propertyUri)
                     if classUri is not None:
