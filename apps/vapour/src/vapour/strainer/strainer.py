@@ -173,6 +173,7 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", print
     data['vocabUri'] = vocabUri
     data['classUri'] = classUri
     data['propertyUri'] = propertyUri
+    data['instanceUri'] = ""  # FIXME!!
     data['autodetectClassUri'] = autodetectClassUri
     data['autodetectPropertyUri'] = autodetectPropertyUri
     data['validateRDF'] = validateRDF

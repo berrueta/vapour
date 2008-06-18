@@ -45,6 +45,19 @@
             <span class="small">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080331/example3</tt>)</span>
           </p>
 
+          <div class="vocabularyValidationSubform">
+          <!-- FIXME: this div should be visible by default only if at least one of
+                   {classUri, propertyUri, instanceUri} is not empty. Otherwise, it should
+                   be invisible. The user should be able to "unroll" this part of the
+                   form by clicking somewhere -->  
+                   
+          <p>
+            <!-- FIXME: we may want to add some links to this paragraph -->
+            If you want to validate an RDF or OWL vocabulary or ontology, you can enter
+            here the URIs of a class, a property and an instance, to have them checked
+            as well as the namespace (vocabulary) URI above.
+          </p>
+                  
           <p>
             <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
 	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
@@ -68,6 +81,15 @@
           </p>
 
           <p>
+            <label title="URI of an instance in the vocabulary" for="instanceUri" class="uri">Instance URI:</label>
+	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="$instanceUri" />
+          </p>
+          </div>
+
+          <div class="advancedOptionsSubform">
+          <!-- FIXME: this div should be visible only when at least one of the
+                  checkboxes is active -->
+          <p>
 	        #if $validateRDF:
 	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
 	        #else:
@@ -84,8 +106,9 @@
 	        #end if
 	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
           </p>
+          </div>
 
-	      <p class="submit"><input type="submit" value="Run tests" /></p>      
+	      <p class="submit"><input type="submit" value="Validate!" /></p>      
 
 	    </form>
     </div>
