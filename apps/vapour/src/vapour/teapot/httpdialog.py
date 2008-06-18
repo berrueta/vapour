@@ -6,6 +6,7 @@ import httplib
 import urlparse
 import datetime
 import dns.resolver
+from common import allowIntranet # FIXME: horrible hack, global variable!
 
 userAgentString = "vapour.sourceforge.net"
 maxRedirects = 3
@@ -58,11 +59,12 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     server = parsedUrl[1]
     path = parsedUrl[2]
     
-    # FIXME: skip DNS resolution if the server is already an IP address
-    ipList = dns.resolver.query(str(server))
-    for ip in ipList:
-        if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
-            raise ForbiddenAddress(str(ip))
+    if allowIntranet is False:
+        # FIXME: skip DNS resolution if the server is already an IP address
+        ipList = dns.resolver.query(str(server))
+        for ip in ipList:
+            if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
+                raise ForbiddenAddress(str(ip))
     
     conn = httplib.HTTPConnection(server)
     headers = {"User-agent": userAgentString}

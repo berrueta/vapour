@@ -8,6 +8,7 @@ from vapour.common.odict import OrderedDict
 pathToRdfFiles = "http://vapour.sourceforge.net"
 pathToTemplates = "../strainer/templates" 
 pathToLog = "../../../log/vapour.log"  
+allowIntranet = False
 
 def createStore():
     store = Graph()
@@ -31,12 +32,19 @@ def readEnvironment():
     global pathToRdfFiles
     if os.environ.get("VAPOUR_RDF_FILES"):
         pathToRdfFiles = os.environ.get("VAPOUR_RDF_FILES")        
+    print "Path to RDF files (VAPOUR_RDF_FILES):", pathToRdfFiles
     global pathToTemplates
     if os.environ.get("VAPOUR_TEMPLATES"):
         pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
+    print "Path to templates (VAPOUR_TEMPLATES):", pathToTemplates
     global pathToLog
     if os.environ.get("VAPOUR_LOG"):
         pathToLog = os.environ.get("VAPOUR_LOG")
+    print "Path to log file (VAPOUR_LOG):", pathToLog
+    global allowIntranet
+    if os.environ.get("VAPOUR_ALLOW_INTRANET"):
+        allowIntranet = os.environ.get("VAPOUR_ALLOW_INTRANET") is "1"
+    print "Allow intranet addresses? (VAPOUR_ALLOW_INTRANET):", allowIntranet
 
 def clearLoggerHandlers(logger):
 	#because logger prints duplicate message, and I don't know how to fix it
