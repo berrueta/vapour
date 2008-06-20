@@ -2,6 +2,7 @@
 
 VAPOUR_BASE_DIR=`pwd`
 
+export PYTHON=python2.5
 export PYTHONPATH=$VAPOUR_BASE_DIR/src:$PYTHONPATH
 
 export VAPOUR_RDF_FILES=$VAPOUR_BASE_DIR/../../webpage
@@ -10,4 +11,4 @@ export VAPOUR_LOG=$VAPOUR_BASE_DIR/log/vapour.log
 
 #export OUTPUT_DIR=../../webpage
 
-python2.4 src/vapour/cup/webclient.py
+$PYTHON src/vapour/cup/webclient.py $@
