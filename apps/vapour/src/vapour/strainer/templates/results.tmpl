@@ -265,7 +265,7 @@
     </ul>
     
     #if len($finalUris[$testRequirement[0]]) > 0:
-    <h3>Further validation</h3>
+    <h3>Further options</h3>
     <ul>
     #from urllib import quote
     #for $finalUri in $finalUris[$testRequirement[0]]:
@@ -275,11 +275,20 @@
           Check the response with the W3C HTTP validator
         </a>
       </li>
-      #else if $finalUri[1] == 'application/rdf+xml':
+      #else if  'application/rdf+xml' in $finalUri[1]:
       <li>
         <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
          Check the response with the W3C RDF validator
         </a>
+      </li>
+      <li>
+        <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Browse the RDF data using Zitgist</a>
+      </li>
+      <li>
+        Browse the RDF data using Disco (not available now)
+      </li>
+      <li>
+        <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
       </li>
       #end if
     #end for
