@@ -106,6 +106,17 @@
 	        #end if
 	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
           </p>
+          
+          <p>
+            <!-- FIXME: this field depends on the previous checkbox (i.e.: it only makes
+            sense when there are HTML descriptions of the symbols). It would be nice
+            if it could be "disabled" if the checkbox above is not checked -->
+            <label for="defaultResponse">Expected default response (without content negotiation)</label>
+            <select name="defaultResponse" id="defaultResponse">
+              <option value="rdfxml">RDF/XML</option>
+              <option value="html">(X)HTML</option>
+            </select>
+          </p>
           </div>
 
 	      <p class="submit"><input type="submit" value="Validate!" /></p>      
