@@ -123,6 +123,11 @@
               #else:
                 <option value="html">(X)HTML</option>
               #end if
+              #if $defaultResponse == "dontmind":
+                <option value="dontmind" selected="selected">I don't mind</option>
+              #else:
+                <option value="dontmind">I don't mind</option>
+              #end if
             </select>
           </p>
           </div>

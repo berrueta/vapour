@@ -38,7 +38,7 @@ class cup:
                 instanceUri = None
             try:
                 defaultResponse = args["defaultResponse"]
-                if defaultResponse != "rdfxml" and defaultResponse != "html":
+                if defaultResponse != "rdfxml" and defaultResponse != "html" and defaultResponse != "dontmind":
                     defaultResponse = "rdfxml" # default value
             except KeyError:
                 defaultResponse = None
