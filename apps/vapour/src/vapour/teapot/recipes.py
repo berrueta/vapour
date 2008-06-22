@@ -16,15 +16,15 @@ assertLastResponseContentTypeFunctions = {
                                           mimetypes.mixed[5] :  assertLastResponseContentTypeRdf,
                                           mimetypes.mixed[6] : assertLastResponseContentTypeHtml,
                                           mimetypes.mixed[7] : assertLastResponseContentTypeXhtml,
-                                          None : assertLastResponseContentTypeRdf
+#                                          None : assertLastResponseContentTypeRdf
                                 }    
 
 # it needs a refactor into OOP
 
-def checkRecipes(graph, htmlVersions, resourcesToCheck):
+def checkRecipes(graph, htmlVersions, resourcesToCheck, defaultResponse):
     for resource in resourcesToCheck:
         # FIXME
-        checkWithoutAcceptHeader(graph, resource)
+        checkWithoutAcceptHeader(graph, resource, defaultResponse)
         checkWithAcceptRdf(graph, resource)
         if htmlVersions:
             #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
@@ -34,10 +34,10 @@ def checkRecipes(graph, htmlVersions, resourcesToCheck):
         #for i in range(0,8):
          #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
-def checkWithoutAcceptHeader(graph, resource):
+def checkWithoutAcceptHeader(graph, resource, defaultResponse):
     scenarioDescription = " (without content negotiation)"
     contentType = None
-    runScenario(graph, resource, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType, defaultResponse)
     
 def checkWithAcceptRdf(graph, resource):
     scenarioDescription = " (requesting RDF/XML)"
@@ -64,12 +64,18 @@ def checkWithMixedAccept(graph, resource, mixNum):
     contentType = mimetypes.mixed[mixNum]
     runScenario(graph, resource, scenarioDescription, contentType)    
     
-def runScenario(graph, resource, scenarioDescription, contentType):
+def runScenario(graph, resource, scenarioDescription, contentType, defaultResponse = "rdfxml"):
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription)
     rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, method = "HEAD")
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
+    if contentType is None:
+        if defaultResponse == "rdfxml":
+            assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
+        elif defaultResponse == "html":
+            assertLastResponseContentTypeXhtmlOrHtml(graph, rootTestSubject, testRequirement)
+    else:
+        assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
 
 if __name__ == "__main__":
     store = Graph()
