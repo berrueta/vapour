@@ -27,16 +27,18 @@ except ImportError:
 def getTestRequirements(model):
     sparqlGr = SPARQLGraph(model)
     select = ("?testRequirement", # 0
-              "?testRequirementTitle" # 1
+              "?testRequirementTitle", # 1
+              "?testRequirementOrder", # 2 
               )
     where = GraphPattern([
          ("?testRequirement", RDF["type"], EARL["TestRequirement"]),
-         ("?testRequirement", DC["title"], "?testRequirementTitle")
+         ("?testRequirement", DC["title"], "?testRequirementTitle"),
+         ("?testRequirement", VAPOUR_VOCAB["order"], "?testRequirementOrder")
          ])
     resultSet = Query.query(sparqlGr, select, where)
     # manually sorting the results
-    sortByTitleFunc = lambda x, y : cmp(x[1],y[1]) 
-    resultSet.sort(sortByTitleFunc)
+    sortByOrderAndTitleFunc = lambda x, y : cmp(x[2],y[2]) or cmp(x[1],y[1]) 
+    resultSet.sort(sortByOrderAndTitleFunc)
     return resultSet
 
 def isThereAnyFailingTest(model):

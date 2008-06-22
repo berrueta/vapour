@@ -32,4 +32,15 @@
     <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestCase"/>
   </rdfs:Property>
 
+  <rdfs:Property rdf:about="#order">
+    <rdfs:label xml:lang="en">
+      Order (priority, position) of the test requirement
+    </rdfs:label>
+    <rdfs:comment xml:lang="en">
+      This property is used for presentational purposes, just to define an
+      convenient order for the test requirements
+    </rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestRequirement"/>
+  </rdfs:Property>
+
 </rdf:RDF>
