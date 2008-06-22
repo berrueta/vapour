@@ -275,6 +275,11 @@
           Check the response with the W3C HTTP validator
         </a>
       </li>
+      <li>
+        <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=#echo quote($finalUri[0], '') #">
+          Run the RDFa Distiller service
+        </a>
+      </li>
       #else if  'application/rdf+xml' in $finalUri[1]:
       <li>
         <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
