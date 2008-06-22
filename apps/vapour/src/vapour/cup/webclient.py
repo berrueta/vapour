@@ -113,7 +113,7 @@ class cup:
                         store.parse(common.pathToRdfFiles + "/earl.rdf")        
                         model = common.createModel(store)
                         web.header("Content-Type", "application/xhtml+xml", unique=True)
-                        web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, True,
+                        web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
                                                                autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, 
                                                                validateRDF, htmlVersions, defaultResponse, namespaceFlavour, 
                                                                validRecipes, resourceBaseUri, common.pathToTemplates))

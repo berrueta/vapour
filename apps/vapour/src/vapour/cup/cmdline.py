@@ -61,8 +61,8 @@ if __name__ == "__main__":
     store.parse(common.pathToRdfFiles + "/earl.rdf")
 
     model = common.createModel(store)
-    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, 
-                                       False, False, False, False,
+    html = strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, 
+                                       False, False, False, False, defaultResponse,
                                        namespaceFlavour, validRecipes,
                                        resourceBaseUri, common.pathToTemplates)
     if outputFileName is not None:
