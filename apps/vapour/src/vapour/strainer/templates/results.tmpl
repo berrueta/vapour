@@ -204,7 +204,7 @@
 		          <a href="$trace[2]">
 		          #if ($trace[4].startswith(mimetypes.rdfXml)):
 			        <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
-			      #else if ($trace[4].startswith(mimetypes.html)):
+			      #else if ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml)):
 			        <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
 			      #else:
 			        <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
