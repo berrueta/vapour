@@ -115,7 +115,7 @@ class cup:
                         web.header("Content-Type", "application/xhtml+xml", unique=True)
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, True,
                                                                autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, 
-                                                               validateRDF, htmlVersions, namespaceFlavour, 
+                                                               validateRDF, htmlVersions, defaultResponse, namespaceFlavour, 
                                                                validRecipes, resourceBaseUri, common.pathToTemplates))
                     elif format == "rdf":
                         web.header("Content-Type", "application/rdf+xml", unique=True)
