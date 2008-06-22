@@ -36,6 +36,12 @@ class cup:
                 if instanceUri is "": instanceUri = None
             except KeyError:
                 instanceUri = None
+            try:
+                defaultResponse = args["defaultResponse"]
+                if defaultResponse != "rdfxml" and defaultResponse != "html":
+                    defaultResponse = "rdfxml" # default value
+            except KeyError:
+                defaultResponse = None
 
             try:
                 format = args["format"]
@@ -91,7 +97,7 @@ class cup:
                         if instanceUri is not None:
                             resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'priority': 4})
                     
-                    recipes.checkRecipes(store, htmlVersions, resourcesToCheck)
+                    recipes.checkRecipes(store, htmlVersions, resourcesToCheck, defaultResponse)
                     if validateRDF:
                         validation.validateRDF(store, vocabUri, classUri, propertyUri)
                     if classUri is not None:
