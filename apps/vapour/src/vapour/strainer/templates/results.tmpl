@@ -113,8 +113,16 @@
             if it could be "disabled" if the checkbox above is not checked -->
             <label for="defaultResponse">Expected default response (without content negotiation)</label>
             <select name="defaultResponse" id="defaultResponse">
-              <option value="rdfxml">RDF/XML</option>
-              <option value="html">(X)HTML</option>
+              #if $defaultResponse == "rdfxml":
+                <option value="rdfxml" selected="selected">RDF/XML</option>
+             #else:
+                <option value="rdfxml">RDF/XML</option> 
+              #end if
+              #if $defaultResponse == "html":
+                <option value="html" selected="selected">(X)HTML</option>
+              #else:
+                <option value="html">(X)HTML</option>
+              #end if
             </select>
           </p>
           </div>

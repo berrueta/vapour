@@ -164,7 +164,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", printForm=False, autodetectClassUri=False, autodetectPropertyUri=False, validateRDF=False, htmlVersions=False, namespaceFlavour=None, validRecipes=[]):
+def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", printForm=False, autodetectClassUri=False, autodetectPropertyUri=False, validateRDF=False, htmlVersions=False, defaultResponse = "rdfxml", namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
@@ -178,6 +178,7 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", print
     data['autodetectPropertyUri'] = autodetectPropertyUri
     data['validateRDF'] = validateRDF
     data['htmlVersions'] = htmlVersions
+    data['defaultResponse'] = defaultResponse
     data['namespaceFlavour'] = namespaceFlavour
     data['validRecipes'] = validRecipes
     
@@ -192,13 +193,13 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", print
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, printForm,
                        autodetectClassUri, autodetectPropertyUri, 
-                       validateRDF, htmlVersions, namespaceFlavour, validRecipes,
+                       validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, validateRDF, htmlVersions, namespaceFlavour, validRecipes)
+    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, printForm, autodetectClassUri, autodetectPropertyUri, validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
