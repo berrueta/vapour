@@ -87,15 +87,15 @@ class cup:
                     
                     resourcesToCheck = []
                     if classUri is None and propertyUri is None and instanceUri is None:
-                        resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'priority': 1})
+                        resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'order': 1})
                     else:
-                        resourcesToCheck.append({'uri': vocabUri, 'description': "vocabulary URI", 'priority': 1})
+                        resourcesToCheck.append({'uri': vocabUri, 'description': "vocabulary URI", 'order': 1})
                         if classUri is not None:
-                            resourcesToCheck.append({'uri': classUri, 'description': "class URI", 'priority': 2})
+                            resourcesToCheck.append({'uri': classUri, 'description': "class URI", 'order': 2})
                         if propertyUri is not None:
-                            resourcesToCheck.append({'uri': propertyUri, 'description': "property URI", 'priority': 3})
+                            resourcesToCheck.append({'uri': propertyUri, 'description': "property URI", 'order': 3})
                         if instanceUri is not None:
-                            resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'priority': 4})
+                            resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
                     
                     recipes.checkRecipes(store, htmlVersions, resourcesToCheck, defaultResponse)
                     if validateRDF:

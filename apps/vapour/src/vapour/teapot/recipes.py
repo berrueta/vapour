@@ -65,7 +65,7 @@ def checkWithMixedAccept(graph, resource, mixNum):
     runScenario(graph, resource, scenarioDescription, contentType)    
     
 def runScenario(graph, resource, scenarioDescription, contentType, defaultResponse = "rdfxml"):
-    testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription)
+    testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
     rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, method = "HEAD")
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)

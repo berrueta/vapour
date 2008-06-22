@@ -89,11 +89,12 @@ def addAssertion(graph, testSubject, test, validity, testRequirement):
     
     return assertion
 
-def addTestRequirement(graph, title):
+def addTestRequirement(graph, title, order):
     global reqCount
     testRequirement = URIRef("req" + str(reqCount))
     reqCount += 1
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
+    graph.add((testRequirement, VAPOUR_VOCAB["order"], Literal(order)))
     titleLiteral = Literal(title)
     titleLiteral.language = "en"
     graph.add((testRequirement, DC["title"], titleLiteral))    
