@@ -99,7 +99,7 @@ class cup:
                     
                     recipes.checkRecipes(store, htmlVersions, resourcesToCheck, defaultResponse)
                     if validateRDF:
-                        validation.validateRDF(store, vocabUri, classUri, propertyUri)
+                        validation.validateRDF(store, resourcesToCheck)
                     if classUri is not None:
                         namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
                         validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
