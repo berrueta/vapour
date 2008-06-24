@@ -12,3 +12,19 @@ VAPOUR_VOCAB = Namespace("http://vapour.sourceforge.net/vocab.rdf#")
 VAPOUR_SOFT = Namespace("http://vapour.sourceforge.net/vapour.rdf#")
 RECIPES = Namespace("http://vapour.sourceforge.net/recipes.rdf#")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
+
+bindings = { 
+                u"earl":EARL,
+                u"rdf":RDF,
+                u"rdfs":RDFS,
+                u"owl":OWL,
+                u"dc":DC,
+                u"dct":DCT,
+                u"uri":URI,
+                u"http":HTTP,
+                u"vapourv":VAPOUR_VOCAB,
+                u"vapours":VAPOUR_SOFT,
+                u"recipes":RECIPES,
+                u"foaf":FOAF,
+            }
+
