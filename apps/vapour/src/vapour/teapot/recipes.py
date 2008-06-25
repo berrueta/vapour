@@ -36,47 +36,47 @@ def checkRecipes(graph, resourcesToCheck, validatorOptions):
 
 def checkWithoutAcceptHeader(graph, resource, validatorOptions):
     scenarioDescription = " (without content negotiation)"
-    contentType = None
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
+    requestedContentType = None
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)
     
 def checkWithAcceptRdf(graph, resource, validatorOptions):
     scenarioDescription = " (requesting RDF/XML)"
-    contentType = mimetypes.rdfXml
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
+    requestedContentType = mimetypes.rdfXml
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)
     
 def checkWithAcceptHtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting HTML)"
-    contentType = mimetypes.html
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
+    requestedContentType = mimetypes.html
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)
     
 def checkWithAcceptXhtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting XHTML)"
-    contentType = mimetypes.xhtml
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
+    requestedContentType = mimetypes.xhtml
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)
     
 def checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting (X)HTML)"
-    contentType = mimetypes.xhtmlOrHtml
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
+    requestedContentType = mimetypes.xhtmlOrHtml
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)
     
 def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
     scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
-    contentType = mimetypes.mixed[mixNum]
-    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)    
+    requestedContentType = mimetypes.mixed[mixNum]
+    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)    
     
-def runScenario(graph, resource, scenarioDescription, contentType, validatorOptions):
+def runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions):
     httpMethod = "HEAD"
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
-    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, httpMethod)
+    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
-    if contentType is None:
+    if requestedContentType is None:
         if validatorOptions.defaultResponse == "rdfxml":
             assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
         elif validatorOptions.defaultResponse == "html":
             assertLastResponseContentTypeXhtmlOrHtml(graph, rootTestSubject, testRequirement)
     else:
-        assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
+        assertLastResponseContentTypeFunctions[requestedContentType](graph, rootTestSubject, testRequirement)
 
 if __name__ == "__main__":
     store = Graph()
