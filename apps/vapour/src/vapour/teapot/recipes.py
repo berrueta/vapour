@@ -21,12 +21,12 @@ assertLastResponseContentTypeFunctions = {
 
 # it needs a refactor into OOP
 
-def checkRecipes(graph, htmlVersions, resourcesToCheck, defaultResponse):
+def checkRecipes(graph, resourcesToCheck, validatorOptions):
     for resource in resourcesToCheck:
         # FIXME
-        checkWithoutAcceptHeader(graph, resource, defaultResponse)
+        checkWithoutAcceptHeader(graph, resource, validatorOptions.defaultResponse)
         checkWithAcceptRdf(graph, resource)
-        if htmlVersions:
+        if validatorOptions.htmlVersions:
             #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
             #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
             checkWithAcceptXhtmlOrHtml(graph, resource)

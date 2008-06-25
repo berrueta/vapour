@@ -7,7 +7,7 @@
 import web
 import random, traceback
 from vapour.strainer import strainer
-from vapour.teapot import recipes, validation, autodetect
+from vapour.teapot import recipes, validation, autodetect, options
 from vapour.cup import common
 
 resourceBaseUri = "http://vapour.sf.net/resources"
@@ -84,7 +84,8 @@ class cup:
                             classUri = random.choice(classUris)
                         if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                             propertyUri = random.choice(propertyUris)
-                    
+
+                    # defines the resources to be checked  
                     resourcesToCheck = []
                     if classUri is None and propertyUri is None and instanceUri is None:
                         resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'order': 1})
@@ -97,7 +98,10 @@ class cup:
                         if instanceUri is not None:
                             resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
                     
-                    recipes.checkRecipes(store, htmlVersions, resourcesToCheck, defaultResponse)
+                    # defines the options of the validator
+                    validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF)
+                    
+                    recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
                     if validateRDF:
                         validation.validateRDF(store, resourcesToCheck)
                     if classUri is not None:
