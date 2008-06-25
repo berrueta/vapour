@@ -40,10 +40,12 @@ if __name__ == "__main__":
         if instanceUri is not None:
             resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
     
-    htmlVersions = True
-    defaultResponse = "rdfxml"
+    # defines the options of the validator
+    validatorOptions = options.ValidatorOptions()
+    validatorOptions.htmlVersions = True
+    validatorOptions.defaultResponse = "rdfxml"
     
-    recipes.checkRecipes(store, htmlVersions, resourcesToCheck, defaultResponse)
+    recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
     if classUri is not None:
         namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
         validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
