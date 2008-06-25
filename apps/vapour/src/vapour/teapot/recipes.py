@@ -1,7 +1,7 @@
 from rdflib import Graph
 from httpdialog import launchHttpDialog
 from asserts import *
-import mimetypes
+import mimetypes, options
 
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
@@ -24,55 +24,56 @@ assertLastResponseContentTypeFunctions = {
 def checkRecipes(graph, resourcesToCheck, validatorOptions):
     for resource in resourcesToCheck:
         # FIXME
-        checkWithoutAcceptHeader(graph, resource, validatorOptions.defaultResponse)
-        checkWithAcceptRdf(graph, resource)
+        checkWithoutAcceptHeader(graph, resource, validatorOptions)
+        checkWithAcceptRdf(graph, resource, validatorOptions)
         if validatorOptions.htmlVersions:
             #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
             #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
-            checkWithAcceptXhtmlOrHtml(graph, resource)
+            checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions)
     
         #for i in range(0,8):
          #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
 
-def checkWithoutAcceptHeader(graph, resource, defaultResponse):
+def checkWithoutAcceptHeader(graph, resource, validatorOptions):
     scenarioDescription = " (without content negotiation)"
     contentType = None
-    runScenario(graph, resource, scenarioDescription, contentType, defaultResponse)
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
     
-def checkWithAcceptRdf(graph, resource):
+def checkWithAcceptRdf(graph, resource, validatorOptions):
     scenarioDescription = " (requesting RDF/XML)"
     contentType = mimetypes.rdfXml
-    runScenario(graph, resource, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
     
-def checkWithAcceptHtml(graph, resource):
+def checkWithAcceptHtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting HTML)"
     contentType = mimetypes.html
-    runScenario(graph, resource, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
     
-def checkWithAcceptXhtml(graph, resource):
+def checkWithAcceptXhtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting XHTML)"
     contentType = mimetypes.xhtml
-    runScenario(graph, resource, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
     
-def checkWithAcceptXhtmlOrHtml(graph, resource):
+def checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting (X)HTML)"
     contentType = mimetypes.xhtmlOrHtml
-    runScenario(graph, resource, scenarioDescription, contentType)
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)
     
-def checkWithMixedAccept(graph, resource, mixNum):
+def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
     scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
     contentType = mimetypes.mixed[mixNum]
-    runScenario(graph, resource, scenarioDescription, contentType)    
+    runScenario(graph, resource, scenarioDescription, contentType, validatorOptions)    
     
-def runScenario(graph, resource, scenarioDescription, contentType, defaultResponse = "rdfxml"):
+def runScenario(graph, resource, scenarioDescription, contentType, validatorOptions):
+    httpMethod = "HEAD"
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
-    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, method = "HEAD")
+    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], contentType, httpMethod)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
     if contentType is None:
-        if defaultResponse == "rdfxml":
+        if validatorOptions.defaultResponse == "rdfxml":
             assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement)
-        elif defaultResponse == "html":
+        elif validatorOptions.defaultResponse == "html":
             assertLastResponseContentTypeXhtmlOrHtml(graph, rootTestSubject, testRequirement)
     else:
         assertLastResponseContentTypeFunctions[contentType](graph, rootTestSubject, testRequirement)
@@ -80,7 +81,7 @@ def runScenario(graph, resource, scenarioDescription, contentType, defaultRespon
 if __name__ == "__main__":
     store = Graph()
     example = "http://vapour.sourceforge.net/recipes-web/example1"
-    checkRecipes(g, True, [{'uri': example, 'description': "Demo URI", 'priority': 1}])
+    checkRecipes(g, [{'uri': example, 'description': "Demo URI", 'priority': 1}], options.ValidatorOptions())
     for s, p, o in store: 
         print s, p, o
     store.save('recipe1-test.rdf')
