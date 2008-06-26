@@ -13,21 +13,13 @@ maxRedirects = 3
 
 ###########################################################
 
-def launchHttpDialog(graph, what, url, accept = None, method = "GET"):
-    '''Convenience wrapper for followRedirects.
-    
-    Returns the first test subject resource.'''
-    return followRedirects(graph, what, url, accept, method)[0]
-
-###########################################################
-
 def followRedirects(graph, what, url, accept = None, method = "GET"):
     '''Executes a multi-stage HTTP dialog following the redirects.
     
     Returns an array with two elements: firstly, the first
     test subject resource; secondly, the HTTP response object.'''
     redirectsCount = 0
-    r = simpleRequest(graph, url, accept, redirectsCount, method)
+    r = simpleRequest(graph, url, accept, redirectsCount, None, method)
     firstTestSubjectResource = r[0]
 
     response = r[1]
@@ -49,7 +41,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
     
 ###########################################################
         
-def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource = None, method="GET"):    
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource, method):    
     '''Executes a single HTTP request and receives a response.
     
     Returns a duple containing: firstly, the test subject resource
@@ -136,7 +128,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method):
 
 if __name__ == "__main__":
     g = Graph()
-    rootTestSubject = launchHttpDialog(g, "dereferencing vocabulary URI", "http://www.google.com")
+    (rootTestSubject, httpResponse) = followRedirects(g, "dereferencing vocabulary URI", "http://www.google.com")
     #print "Sequence of testSubjects: ", util.testSubjectsAsList(g, rootTestSubject)
     for s, p, o in g: print s, p, o
     g.save('prueba.rdf')
