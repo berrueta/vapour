@@ -91,6 +91,8 @@ def getHttpTracesFromModel(model, testRequirementUri):
               
               "?requestAccept", # 10
               "?previousRequestCount", # 11
+              "?requestType", # 12
+              "?requestTypeLabel", #13
               )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
@@ -101,6 +103,8 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?request", URI["uri"], "?uri"),
         ("?testSub", EARL["httpResponse"], "?response"),
         ("?response", HTTP["responseCode"], "?responseCode"),
+        ("?request", RDF["type"], "?requestType"),
+        ("?requestType", RDFS["label"], "?requestTypeLabel"),
         ("?testSub", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
