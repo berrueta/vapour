@@ -73,7 +73,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     conn.request(method, path, headers = headers)
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method)
     
     # makes a cross-link between the previous subject resource
     # and the new one
@@ -85,7 +85,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     
 ###########################################################
 
-def addToGraph(graph, url, accept, response, previousRequestCount):
+def addToGraph(graph, url, accept, response, previousRequestCount, method):
     '''Creates a new test subject resource and fills its properties.
     
     The new test subject resource is a blank node, and
@@ -110,7 +110,10 @@ def addToGraph(graph, url, accept, response, previousRequestCount):
     graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
     
     # properties of the requestResource
-    graph.add((requestResource, RDF["type"], HTTP["GetRequest"]))
+    if method == "GET":
+        graph.add((requestResource, RDF["type"], HTTP["GetRequest"]))
+    else:
+        graph.add((requestResource, RDF["type"], HTTP["HeadRequest"]))        
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
