@@ -1,5 +1,5 @@
 from rdflib import Graph
-from httpdialog import launchHttpDialog
+from httpdialog import followRedirects
 from asserts import *
 import mimetypes, options
 
@@ -65,9 +65,13 @@ def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions)    
     
 def runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions):
-    httpMethod = "HEAD"
+    if validatorOptions.validateRdf:
+        httpMethod = "GET"
+    else:
+        httpMethod = "HEAD"
+
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
-    rootTestSubject = launchHttpDialog(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod)
+    (rootTestSubject, httpResponse) = followRedirects(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
     if requestedContentType is None:
