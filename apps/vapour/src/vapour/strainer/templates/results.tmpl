@@ -23,7 +23,10 @@
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
     <!--<link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />-->
-    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
+    <script type="text/javascript" src="$resourceBaseUri/prototype.js" ><!--  --></script>
+    <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js" ><!--  --></script>
+    <script type="text/javascript" src="$resourceBaseUri/effects.js" ><!--  --></script>
     <title>Vapour Report</title>
   </head>
   <body>    
@@ -45,7 +48,9 @@
             <span class="small">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080331/example3</tt>)</span>
           </p>
 
-          <div class="vocabularyValidationSubform">
+	  <h3 onclick="showHide(this,document.getElementById('vocabularyValidationSubform'))" class="shoHideTitle">Validation of vocabularies / ontologies</h3>
+
+          <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
           <!-- FIXME: this div should be visible by default only if at least one of
                    {classUri, propertyUri, instanceUri} is not empty. Otherwise, it should
                    be invisible. The user should be able to "unroll" this part of the
@@ -86,7 +91,9 @@
           </p>
           </div>
 
-          <div class="advancedOptionsSubform">
+          <h3 onclick="showHide(this,document.getElementById('advancedOptionsSubform'))" class="shoHideTitle">Advanced options</h3>   
+
+          <div id="advancedOptionsSubform" class="advancedOptionsSubform">
           <!-- FIXME: this div should be visible only when at least one of the
                   checkboxes is active -->
           <p>
