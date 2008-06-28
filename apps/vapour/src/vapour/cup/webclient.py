@@ -7,7 +7,7 @@
 import web
 import random, traceback
 from vapour.strainer import strainer
-from vapour.teapot import recipes, validation, autodetect, options
+from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 
 resourceBaseUri = "http://vapour.sf.net/resources"
@@ -102,8 +102,6 @@ class cup:
                     validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF)
                     
                     recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
-                    if validateRDF:
-                        validation.validateRDF(store, resourcesToCheck)
                     if classUri is not None:
                         namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
                         validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
