@@ -118,20 +118,3 @@ div#foot ul li {
   margin-left: 2em;
   display: inline;
 }
-
-/* from Miguel */
-
-.shoHideTitle
-{
-	clear: both;
-	background-image: url("arrow-open.png");
-	background-position:left;
-	background-repeat:no-repeat;
-	padding-left: 15px;
-	cursor: pointer;	
-}
-
-.shoHideTitle:hover
-{
-	color: #000000;
-}

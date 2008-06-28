@@ -292,3 +292,20 @@ h2
   padding: 0.3em;
 }
 
+
+/* from Miguel */
+
+.shoHideTitle
+{
+	clear: both;
+	background-image: url("arrow-open.png");
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 15px;
+	cursor: pointer;	
+}
+
+.shoHideTitle:hover
+{
+	color: #000000;
+}
