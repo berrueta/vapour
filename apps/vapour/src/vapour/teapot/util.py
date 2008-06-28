@@ -12,6 +12,10 @@ def lastTestSubjectOfSequence(graph, rootTestSubject):
 
 ###########################################################
 
+def getRequestUri(graph, testSubject):
+    httpRequest = getHttpRequest(graph, testSubject)
+    return str(getLiteralProperty(graph, httpRequest, URI["uri"]))
+
 def getResponseCode(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
     return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
@@ -19,6 +23,10 @@ def getResponseCode(graph, testSubject):
 def getContentType(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
     return str(getLiteralProperty(graph, httpResponse, HTTP["content-type"]))
+
+def getHttpRequest(graph, testSubject):
+    l = [x for x in graph.objects(testSubject, EARL["httpRequest"])]
+    return l[0]
 
 def getHttpResponse(graph, testSubject):
     l = [x for x in graph.objects(testSubject, EARL["httpResponse"])]
