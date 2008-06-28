@@ -5,7 +5,7 @@
     xml:base="http://vapour.sourceforge.net/vocab.rdf"    
     >
 
-  <rdfs:Property rdf:about="#previousSubject">
+  <rdf:Property rdf:about="#previousSubject">
     <rdfs:label xml:lang="en">The previous HTTP dialogue</rdfs:label>
     <rdfs:comment xml:lang="en">Some dereferences require more than
     one HTTP request/response dialogue, because the first response
@@ -13,16 +13,16 @@
     dialogue fragment with the inmediate previous one.</rdfs:comment>
     <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
     <rdfs:range rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
-  </rdfs:Property>
+  </rdf:Property>
 
-  <rdfs:Property rdf:about="#previousRequestCount">
+  <rdf:Property rdf:about="#previousRequestCount">
     <rdfs:label xml:lang="en">Number of previous request</rdfs:label>
     <rdfs:comment xml:lang="en">The number of HTTP requests previous to this one (i.e.: hop-count)</rdfs:comment>
     <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
     <!--rdfs:range rdf:resource=""/-->  <!-- FIXME: xs:integer -->
-  </rdfs:Property>
+  </rdf:Property>
 
-  <rdfs:Property rdf:about="#propertyUnderTest">
+  <rdf:Property rdf:about="#propertyUnderTest">
     <rdfs:label xml:lang="en">
       Property under test
     </rdfs:label>
@@ -30,9 +30,9 @@
       The property of the HTTP which value is checked in this test.
     </rdfs:comment>
     <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestCase"/>
-  </rdfs:Property>
+  </rdf:Property>
 
-  <rdfs:Property rdf:about="#order">
+  <rdf:Property rdf:about="#order">
     <rdfs:label xml:lang="en">
       Order (priority, position) of the test requirement
     </rdfs:label>
@@ -41,6 +41,30 @@
       convenient order for the test requirements
     </rdfs:comment>
     <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestRequirement"/>
-  </rdfs:Property>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="#httpRange14ConclusionOn">
+    <rdfs:label xml:lang="en">
+      Derives a conclusion on the type of
+    </rdfs:label>
+    <rdfs:comment xml:lang="en">
+      This property relates a TestSubject with a web resource which type
+      can be inferred as per httpRange-14 TAG finding
+    </rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+  </rdf:Property>
+
+  <rdfs:Class rdf:about="#AnyResource">
+    <rdfs:label xml:lang="en">
+      Any kind of web resource
+    </rdfs:label>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="#InformationResource">
+    <rdfs:subClassOf rdf:resource="#AnyResource"/>
+    <rdfs:label xml:lang="en">
+      Information resource
+    </rdfs:label>
+  </rdfs:Class>
 
 </rdf:RDF>
