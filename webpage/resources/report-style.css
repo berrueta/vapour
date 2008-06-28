@@ -224,7 +224,7 @@ p.submit_button input {
 	border-right: 2px solid #444;
 	border-top: 1px solid #aaa;
 	border-left: 1px solid #aaa;
-	background: #eee url(./resources/grad.png) repeat-x top left;
+	background: #eee url("grad.png") repeat-x top left;
 	cursor: pointer;
 }
 
