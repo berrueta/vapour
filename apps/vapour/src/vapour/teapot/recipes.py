@@ -2,6 +2,7 @@ from rdflib import Graph
 from httpdialog import followRedirects
 from asserts import *
 from validation import assertLastResponseBodyContainsDefinitionForResource
+from httprange14 import httpRange14Conclusions
 from util import lastTestSubjectOfSequence
 import mimetypes, options
 
@@ -84,6 +85,7 @@ def runScenario(graph, resource, scenarioDescription, requestedContentType, vali
         assertLastResponseContentTypeFunctions[requestedContentType](graph, rootTestSubject, testRequirement)
     if validatorOptions.validateRdf and (mimetypes.rdfXml in getContentType(graph, lastTestSubjectOfSequence(graph, rootTestSubject))):
         assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpResponse, rootTestSubject, testRequirement)
+    httpRange14Conclusions(graph, rootTestSubject)
     return httpResponse
 
 if __name__ == "__main__":
