@@ -39,16 +39,16 @@
       </a>
     </h1>
     <div class="inputData">
-	    <h2>Input data</h2>
+	    <h2>Validate by URI</h2>
 	    <form action="" method="get">
 
           <p>
-            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">Vocabulary URI:</label>
+            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">URI:</label>
 	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" />
             <span class="small">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080331/example3</tt>)</span>
           </p>
 
-	  <h3 onclick="showHide(this,document.getElementById('vocabularyValidationSubform'))" class="shoHideTitle">Validation of vocabularies / ontologies</h3>
+	  <h3 onclick="showHide(this,document.getElementById('vocabularyValidationSubform'))" class="shoHideTitle">Specific options for vocabularies / ontologies</h3>
 
           <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
           <!-- FIXME: this div should be visible by default only if at least one of
@@ -91,7 +91,7 @@
           </p>
           </div>
 
-          <h3 onclick="showHide(this,document.getElementById('advancedOptionsSubform'))" class="shoHideTitle">Advanced options</h3>   
+          <h3 onclick="showHide(this,document.getElementById('advancedOptionsSubform'))" class="shoHideTitle">More options</h3>   
 
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
           <!-- FIXME: this div should be visible only when at least one of the
