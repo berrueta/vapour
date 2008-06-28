@@ -18,7 +18,6 @@ def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpRes
         except Exception, e:
             addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], False, testRequirement)
             return False
-        print g.predicate_objects(resource)
         bindings = { u"rdf":RDF }
         query = "SELECT * WHERE { <%s> ?p ?o }" % resource['uri']
         definitionTriples = g.query(Parse(query), initNs=bindings).serialize('python')
