@@ -2,66 +2,27 @@
 from rdflib.Graph import ConjunctiveGraph
 from rdflib.sparql.bison import Parse
 from vapour.namespaces import *
-from asserts import *
-import socket
+from asserts import addAssertion
+from util import *
+import httplib
+from StringIO import StringIO
 
-socket.setdefaulttimeout(5)
-
-def validateRDF(graph, resourcesToCheck):
-    for resource in resourcesToCheck:
-        uri = resource["uri"]
-        url = getFinalUrl(graph, uri)
-        if (url != None):
-            valid = validateRDFRepresentation(url, uri)
-            #FIXME: it should be a different thing than a TestRequirement
-            #testRequirement = addTestRequirement(graph, "Validating RDF representation of the vocabulary")
-            #addAssertion(graph, vocabUri, RECIPES["TestValidRdfData"], validVocab, testRequirement)
-
-def getFinalUrl(graph, uri):
-    query= """
-                SELECT ?url
-                WHERE {
-                    ?test dct:hasPart ?firstAssertion .
-                    ?firstAssertion earl:subject ?firstSubject .
-                    ?firstAssertion vapourv:previousSubject "HEAD" .
-                    ?firstSubject earl:httpRequest ?firstRequest .
-                    ?firstRequest uri:uri "%s" .
-                    ?firstRequest http:accept "application/rdf+xml" .
-                    ?test dct:hasPart ?lastAssertion .
-                    ?lastAssertion earl:subject ?lastSubject .
-                    ?lastSubject earl:httpRequest ?lastRequest .
-                    ?lastResquest uri:uri ?url .
-                    ?lastSubject earl:httpResponse ?lastResponse .
-                    ?lastReponse http:responseCode "200" .
-                }
-            """ % uri 
-    #FIXME: this query doesn't work
-    results = graph.query(Parse(query), initNs=bindings).serialize('python')
-    if (len(results)>0):
-        return results[0]
-    else:
-        return None
-
-def validateRDFRepresentation(url, uri):
-    return (validateRDF(url) and validateRDFObject(url, uri))
-
-def validateRDFContent(url):
-    g = ConjunctiveGraph()
-    try:
-        g.parse(url)
-    except Exception:
-        return False
-    return (len(g)>0)
-
-def validateRDFObject(url, uri):
-    g = ConjunctiveGraph()
-    try:
-        g.parse(url)
-    except Exception:
-        return False
-    #len([x for x in graph.predicate_objects(uri)])
-    bindings = { u"rdf":RDF }
-    query = "SELECT ?type WHERE { <%s> rdf:type ?type }" % uri
-    results = g.query(Parse(query), initNs=bindings).serialize('python')
-    return (len(results)>0)
-
+def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpResponse, rootTestSubject, testRequirement):
+    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
+    if getResponseCode(graph, testSubject) == httplib.OK:
+        body = httpResponse.read()
+        g = ConjunctiveGraph()
+        try:
+            g.parse(StringIO(body))
+            addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], True, testRequirement)
+        except Exception, e:
+            addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], False, testRequirement)
+            return False
+        print g.predicate_objects(resource)
+        bindings = { u"rdf":RDF }
+        query = "SELECT * WHERE { <%s> ?p ?o }" % resource['uri']
+        definitionTriples = g.query(Parse(query), initNs=bindings).serialize('python')
+#        definitionTriples = [(p,o) for (p,o) in g.predicate_objects(resource)]
+        isThereADefinitionForTheResource = len(definitionTriples) > 0
+        addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], isThereADefinitionForTheResource, testRequirement)
+        return isThereADefinitionForTheResource

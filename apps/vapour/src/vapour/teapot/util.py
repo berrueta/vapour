@@ -1,4 +1,4 @@
-from vapour.namespaces import VAPOUR_VOCAB
+from vapour.namespaces import *
 
 def testSubjectsAsList(graph, rootTestSubject):
     list = [rootTestSubject]
@@ -9,3 +9,23 @@ def testSubjectsAsList(graph, rootTestSubject):
 
 def lastTestSubjectOfSequence(graph, rootTestSubject):    
     return testSubjectsAsList(graph, rootTestSubject)[-1]
+
+###########################################################
+
+def getResponseCode(graph, testSubject):
+    httpResponse = getHttpResponse(graph, testSubject)
+    return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
+
+def getContentType(graph, testSubject):
+    httpResponse = getHttpResponse(graph, testSubject)
+    return str(getLiteralProperty(graph, httpResponse, HTTP["content-type"]))
+
+def getHttpResponse(graph, testSubject):
+    l = [x for x in graph.objects(testSubject, EARL["httpResponse"])]
+    return l[0]
+
+def getLiteralProperty(graph, resource, property):
+    l = [x for x in graph.objects(resource, property)]
+    if len(l) == 0: return None
+    else: return l[0]
+    

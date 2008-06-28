@@ -37,33 +37,8 @@ def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     result = (mimetypes.rdfXml in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
-def assertLastResponseValidRdfData(graph, rootTestSubject, testRequirement):
-    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    result = (mimetypes.rdfXml in getContentType(graph, testSubject))
-    addAssertion(graph, testSubject, RECIPES["TestValidRdfData"], result, testRequirement)
+#########################################################
 
-def assertLastResponseContainsResourceDefinition(graph, rootTestSubject, testRequirement):
-    testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
-    result = (mimetypes.rdfXml in getContentType(graph, testSubject))
-    addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], result, testRequirement)
-
-def getResponseCode(graph, testSubject):
-    httpResponse = getHttpResponse(graph, testSubject)
-    return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
-
-def getContentType(graph, testSubject):
-    httpResponse = getHttpResponse(graph, testSubject)
-    return str(getLiteralProperty(graph, httpResponse, HTTP["content-type"]))
-
-def getHttpResponse(graph, testSubject):
-    l = [x for x in graph.objects(testSubject, EARL["httpResponse"])]
-    return l[0]
-
-def getLiteralProperty(graph, resource, property):
-    l = [x for x in graph.objects(resource, property)]
-    if len(l) == 0: return None
-    else: return l[0]
-    
 def addAssertion(graph, testSubject, test, validity, testRequirement):
     assertion = BNode()
     resultSubject = BNode()

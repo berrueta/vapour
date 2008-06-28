@@ -1,6 +1,8 @@
 from rdflib import Graph
 from httpdialog import followRedirects
 from asserts import *
+from validation import assertLastResponseBodyContainsDefinitionForResource
+from util import lastTestSubjectOfSequence
 import mimetypes, options
 
 assertLastResponseContentTypeFunctions = {
@@ -46,7 +48,7 @@ def checkWithAcceptRdf(graph, resource, validatorOptions):
         httpMethod = "GET"
     else:
         httpMethod = "HEAD"
-    runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, httpMethod)
+    httpResponse = runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, httpMethod)
     
 def checkWithAcceptHtml(graph, resource, validatorOptions):
     scenarioDescription = " (requesting HTML)"
@@ -80,6 +82,9 @@ def runScenario(graph, resource, scenarioDescription, requestedContentType, vali
             assertLastResponseContentTypeXhtmlOrHtml(graph, rootTestSubject, testRequirement)
     else:
         assertLastResponseContentTypeFunctions[requestedContentType](graph, rootTestSubject, testRequirement)
+    if validatorOptions.validateRdf and (mimetypes.rdfXml in getContentType(graph, lastTestSubjectOfSequence(graph, rootTestSubject))):
+        assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpResponse, rootTestSubject, testRequirement)
+    return httpResponse
 
 if __name__ == "__main__":
     store = Graph()
