@@ -5,12 +5,13 @@ from rdflib import URIRef
 
 # NOTE: The resolution of the httpRange-14 issue [1] covers just
 # HTTP 'GET' requests. Nothing is said about 'HEAD' requests. However
-# the HTTP specification says that 'HEAD' requests are "identical to
+# the HTTP specification [2] says that 'HEAD' requests are "identical to
 # GET except that the server MUST NOT return a message-body in
 #Êthe response". Therefore, we assume that the conclusions of
 # httpRange-14 still hold for 'HEAD' requests.
 #
 #Ê[1] http://lists.w3.org/Archives/Public/www-tag/2005Jun/0039.html
+# [2] http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4
 
 def httpRange14Conclusions(graph, rootTestSubject):
     testSubjects = testSubjectsAsList(graph, rootTestSubject)
