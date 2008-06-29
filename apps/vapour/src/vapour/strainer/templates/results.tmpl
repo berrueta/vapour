@@ -284,6 +284,15 @@
 	#end for
     </ul>
     
+    <h3>Conclusions on the type of the resources</h3>
+    <ul>
+    #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
+      <li>
+        <a href="$resource[0]">$resource[0]</a> is $resource[2]
+      </li>
+    #end for
+    </ul>
+    
     #if len($finalUris[$testRequirement[0]]) > 0:
     <h3>Further options</h3>
     <ul>

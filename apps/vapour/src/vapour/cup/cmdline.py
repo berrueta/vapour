@@ -62,6 +62,7 @@ if __name__ == "__main__":
     store.parse(common.pathToRdfFiles + "/recipes.rdf")
     store.parse(common.pathToRdfFiles + "/earl.rdf")
     store.parse(common.pathToRdfFiles + "/http.rdf")        
+    store.parse(common.pathToRdfFiles + "/vocab.rdf")        
 
     model = common.createModel(store)
     html = strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, 
