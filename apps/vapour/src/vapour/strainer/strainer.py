@@ -70,8 +70,11 @@ def getResultsFromModel(model, testRequirementUri):
         ("?assertion", EARL["subject"], "?subject"),
         ("?subject", DC["title"], "?subjectTitle")
         ])
-    resultSet = Query.query(sparqlGr, select, where)
-    return resultSet
+    results = Query.query(sparqlGr, select, where)
+    # manually sorting the results
+    sortBySubjectAndTestCase = lambda x, y : cmp(x[6],y[6]) or cmp(x[2],y[2])
+    results.sort(sortBySubjectAndTestCase)    
+    return results
 
 def getHttpTracesFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
@@ -147,6 +150,25 @@ def getFinalUriFromModel(model, testRequirementUri):
     ])
     return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]
 
+def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
+    sparqlGr = SPARQLGraph(model)
+    select = ("?resource", # 0
+              "?resourceType", #1
+              "?resourceTypeLabel" # 2
+    )
+    where = GraphPattern([
+        (testRequirementUri, DCT["hasPart"], "?assertion"),
+        ("?assertion", EARL["subject"], "?testSubject"),
+        ("?testSubject", VAPOUR_VOCAB["httpRange14ConclusionOn"], "?resource"),
+        ("?resource", RDF["type"], "?resourceType"),
+        ("?resourceType", RDFS["label"], "?resourceTypeLabel")
+    ])
+    results = [x for x in Query.query(sparqlGr, select, where)]
+    # manually sorting the results
+    sortByUri = lambda x, y : cmp(x[0],y[0]) 
+    results.sort(sortByUri)    
+    return results
+
 def getTestAgent(model):
     """
     Determine the software agent that was used to execute the tests
@@ -194,6 +216,7 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['testResults'] = {}
     data['httpTraces'] = {}
     data['finalUris'] = {}
+    data['httpRange14Conclusions'] = {}
     data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri,'classUri':classUri,'autodetectClassUri':str(int(autodetectClassUri)),'propertyUri':propertyUri,'autodetectPropertyUri':str(int(autodetectPropertyUri)),'validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf'}))
     return data
 
@@ -211,6 +234,7 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, prin
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
         data['httpTraces'][testRequirementUri] = sortTrace(getHttpTracesFromModel(model, testRequirementUri))
         data['finalUris'][testRequirementUri] = getFinalUriFromModel(model, testRequirementUri)
+        data['httpRange14Conclusions'][testRequirementUri] = getHttpRange14ConclusionsFromModel(model, testRequirementUri)
     data['testAgent'] = getTestAgent(model)
     data['isThereAnyFailingTest'] = isThereAnyFailingTest(model)
     data['reportDate'] = str(datetime.datetime.now())
