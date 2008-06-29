@@ -22,7 +22,9 @@
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
-    <!--<link rel="alternate" type="application/rss+xml" title="RDF version of this report" href="FIXME" />-->
+    #if len($testRequirements) > 0:
+    <link rel="alternate" type="application/rdf+xml" title="RDF version of this report" href="$rdfReportUrl" />
+    #end if
     <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
     <script type="text/javascript" src="$resourceBaseUri/prototype.js" ><!--  --></script>
     <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js" ><!--  --></script>
