@@ -2,7 +2,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xml:base="http://vapour.sourceforge.net/vocab.rdf"    
+    xml:base="http://vapour.sourceforge.net/vocab.rdf"
     >
 
   <rdf:Property rdf:about="#previousSubject">
@@ -63,7 +63,7 @@
   <rdfs:Class rdf:about="#InformationResource">
     <rdfs:subClassOf rdf:resource="#AnyResource"/>
     <rdfs:label xml:lang="en">
-      Information resource
+      An information resource
     </rdfs:label>
   </rdfs:Class>
 
