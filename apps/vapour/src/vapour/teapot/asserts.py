@@ -15,7 +15,7 @@ def assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement):
     l = testSubjectsAsList(graph, rootTestSubject)
     for testSubject in l[0:len(l)-1]:
         result = (getResponseCode(graph, testSubject) == 303)
-        addAssertion(graph, testSubject, RECIPES["TestResponseCode302"], result, testRequirement)
+        addAssertion(graph, testSubject, RECIPES["TestResponseCode303"], result, testRequirement)
 
 def assertLastResponseContentTypeHtml(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
