@@ -192,7 +192,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectClassUri=False, autodetectPropertyUri=False, validateRDF=False, htmlVersions=False, defaultResponse = "rdfxml", namespaceFlavour=None, validRecipes=[]):
+def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, validateRDF=False, htmlVersions=False, defaultResponse = "rdfxml", namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
@@ -202,8 +202,7 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['classUri'] = classUri
     data['propertyUri'] = propertyUri
     data['instanceUri'] = instanceUri
-    data['autodetectClassUri'] = autodetectClassUri
-    data['autodetectPropertyUri'] = autodetectPropertyUri
+    data['autodetectUris'] = autodetectUris
     data['validateRDF'] = validateRDF
     data['htmlVersions'] = htmlVersions
     data['defaultResponse'] = defaultResponse
@@ -217,18 +216,18 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['httpTraces'] = {}
     data['finalUris'] = {}
     data['httpRange14Conclusions'] = {}
-    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectClassUri':str(int(autodetectClassUri)),'propertyUri':propertyUri or '','autodetectPropertyUri':str(int(autodetectPropertyUri)),'validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf', 'defaultResponse':defaultResponse}))
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf', 'defaultResponse':defaultResponse}))
     return data
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, printForm,
-                       autodetectClassUri, autodetectPropertyUri, 
+                       autodetectUris, 
                        validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, instanceUri, printForm, autodetectClassUri, autodetectPropertyUri, validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes)
+    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, instanceUri, printForm, autodetectUris, validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
