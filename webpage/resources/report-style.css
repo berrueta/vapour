@@ -5,10 +5,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.2em;
   font-weight: bold;
   display: block;
   color: #5674bc;
+  margin-bottom:1%;
+  margin-top:2%;
 }
 
 h1 a, h1 a:active, h1 a:hover, h1 a:visited {
@@ -23,10 +25,6 @@ h1 a abbr {
 
 img {
   border: 0;
-}
-
-span.small {
-  font-size: 0.8em;
 }
 
 div#logo {
@@ -161,6 +159,31 @@ float:left;
 
 /* input form =================================================== */
 
+#linkToResults {
+}
+
+fieldset {
+  border: 1px outset;
+  margin-top: 1.4em;
+  background-color:#eeeedd;
+  margin-left:1em;
+  margin-right:1em;
+}
+
+legend {
+  font-size:larger;
+  color:#5674bc;
+  border:1px #b0b0c0 solid;
+  padding:0.1em;
+  padding-right:0.5em;
+  background-color:#fefeed;
+}
+.moreOptions {
+  margin-bottom: 0px;
+  padding-left:1em;
+  padding-right:1em;
+}
+
 form > p {
   clear: left;
   margin-bottom: 1em;
@@ -187,28 +210,34 @@ input:hover {
 }
 
 input.uri {
-  display: block;
-  float: left;
-  margin-right: 10px;
   font-family: Monaco, "Courier New", Monospace;
   font-size: 0.9em;
-  width: 40%;
+  width: 75%;
 }
 
 label.uri {
   display: block;
-  float: left;
-  width: 10em;
-  text-align: right;
+  width:7em;
+  float:left;
+  text-align: left;
   margin-right: 0.3em;
 }
 
+#uriHint {
+  font-size: 0.8em;
+  display: block;
+  clear: left;
+}
+
 input#validateRDF, input#htmlVersions {
-  margin-left: 13em;
+}
+
+#defaultResponse {
+  margin-left:1em;
 }
 
 p.submit_button {
-  margin-left: 10.3em;
+  text-align:center;
 }
 
 p.submit_button input {
@@ -263,6 +292,7 @@ p.submit_button input:active {
 h2
 { 
   margin-top: 0.2em;
+  font-size:1.5em;
 }
 
 .summary
