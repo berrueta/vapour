@@ -216,7 +216,7 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['httpTraces'] = {}
     data['finalUris'] = {}
     data['httpRange14Conclusions'] = {}
-    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf', 'defaultResponse':defaultResponse}))
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf', 'defaultResponse':defaultResponse})).replace("&","&amp;")
     return data
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, printForm,
