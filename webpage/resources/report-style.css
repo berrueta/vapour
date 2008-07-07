@@ -279,14 +279,29 @@ p.submit_button input:active {
   color: red;
 }
 
-.testResultCorrect
+li.testResultCorrect {
+  list-style-image: url(fwdi4/001_06.png);
+}
+
+li.testResultFail {
+  list-style-image: url(fwdi4/001_05.png);
+}
+
+span.testResultCorrect
 { 
   color: green;
 }
 
-.testResultFail
+span.testResultFail
 { 
   color: red;
+}
+
+li.httpRange14Conc {
+}
+
+li.futherOption {
+  list-style-image: url(fwdi4/001_60.png);
 }
 
 h2
