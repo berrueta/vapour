@@ -279,12 +279,18 @@ p.submit_button input:active {
   color: red;
 }
 
+ul.testResultChecklist {
+  list-style-type:none;
+  padding-left: 0;
+  margin-left: 1em;
+}
+
 li.testResultCorrect {
-  list-style-image: url(fwdi4/001_06.png);
+  background: url(fwdi4/001_06.png) left center no-repeat;
 }
 
 li.testResultFail {
-  list-style-image: url(fwdi4/001_05.png);
+  background: url(fwdi4/001_05.png) left center no-repeat;
 }
 
 span.testResultCorrect
@@ -299,6 +305,8 @@ span.testResultFail
 
 ul.httpRange14Conc {
   list-style-type:none;
+  padding-left: 0;
+  margin-left: 1em;
 } 
 
 ul.httpRange14Conc li {
@@ -307,7 +315,7 @@ ul.httpRange14Conc li {
 ul.futherOptions {
   list-style-type:none;
   padding-left: 0;
-  margin-left: 0;
+  margin-left: 1em;
 }
 
 ul.futherOptions li {

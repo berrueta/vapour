@@ -280,7 +280,7 @@
       </div> <!-- /httpDialog -->
 
     <h3>Test results</h3>
-    <ul>
+    <ul class="testResultChecklist">
 	#for $test in $testResults[$testRequirement[0]]:
       #if $test[3] == EARL["pass"]:
         #set $testResultCssClass = "correctValue"
