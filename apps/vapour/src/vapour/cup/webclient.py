@@ -63,26 +63,21 @@ class cup:
                 htmlVersions = False
 
             try:
-                autodetectClassUriIfEmpty = args["autodetectClassUri"] is "1"
+                autodetectUrisIfEmpty = args["autodetectUris"] is "1"
             except KeyError:
-                autodetectClassUriIfEmpty = False
-
-            try:
-                autodetectPropertyUriIfEmpty = args["autodetectPropertyUri"] is "1"
-            except KeyError:
-                autodetectPropertyUriIfEmpty = False
+                autodetectUrisIfEmpty = False
 
             try:
                 store = common.createStore()
                     
                 if vocabUri is not None:
                     logger.info("request over vocabulary on " + vocabUri)
-                    if (classUri is None and autodetectClassUriIfEmpty) or (propertyUri is None and autodetectPropertyUriIfEmpty):
+                    if (classUri is None and autodetectUrisIfEmpty) or (propertyUri is None and autodetectUrisIfEmpty):
                         (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
                         random.seed()
-                        if autodetectClassUriIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
+                        if autodetectUrisIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
                             classUri = random.choice(classUris)
-                        if autodetectPropertyUriIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
+                        if autodetectUrisIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                             propertyUri = random.choice(propertyUris)
 
                     # defines the resources to be checked  
@@ -118,7 +113,7 @@ class cup:
                         model = common.createModel(store)
                         web.header("Content-Type", "application/xhtml+xml", unique=True)
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
-                                                               autodetectClassUriIfEmpty, autodetectPropertyUriIfEmpty, 
+                                                               autodetectUrisIfEmpty, 
                                                                validateRDF, htmlVersions, defaultResponse, namespaceFlavour, 
                                                                validRecipes, resourceBaseUri, common.pathToTemplates))
                     elif format == "rdf":
