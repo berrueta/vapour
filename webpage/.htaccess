@@ -1,0 +1,4 @@
+
+AddType application/xhtml+xml .html
+AddType application/rdf+xml .rdf
+
