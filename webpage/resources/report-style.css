@@ -268,17 +268,6 @@ p.submit_button input:active {
 
 /* summary ====================================================== */
 
-.correctValue
-{ 
-  color: green;
-}
-
-.badValue
-{
-  font-weight: bold;
-  color: red;
-}
-
 ul.testResultChecklist {
   list-style-type:none;
   padding-left: 0;
@@ -290,9 +279,18 @@ li.correctValue {
   padding-left: 25px;
 }
 
+li.correctValue > span {
+  color: green;
+}
+
 li.badValue {
   background: url(fwdi4/001_05.png) left center no-repeat;
   padding-left: 25px;
+}
+
+li.badValue > span {
+  font-weight: bold;
+  color: red;
 }
 
 span.testResultCorrect
