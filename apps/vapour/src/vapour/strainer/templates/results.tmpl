@@ -40,17 +40,25 @@
         <abbr title="VAlidation Process Of Uri Response">vapour</abbr>
       </a>
     </h1>
+
+    #if len($testRequirements) > 0:
+    <p id="linkToResults">
+      <a href="#report">Jump to results &gt;&gt;&gt;</a>
+    </p>
+    #end if
+
     <div class="inputData">
 	    <h2>Validate by URI</h2>
 	    <form action="" method="get">
 
           <p>
             <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">URI:</label>
-	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" />
-            <span class="small">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080331/example3</tt>)</span>
+	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
+            <span id="uriHint">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080331/example3</tt>)</span>
           </p>
 
-	  <h3 onclick="showHide(this,document.getElementById('vocabularyValidationSubform'))" class="shoHideTitle">Specific options for vocabularies / ontologies</h3>
+          <fieldset id="vocabularyValidationFieldset">
+	  <legend onclick="showHide(this,document.getElementById('vocabularyValidationSubform'))" class="shoHideTitle">Specific options for vocabularies / ontologies</legend>
 
           <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
           <!-- FIXME: this div should be visible by default only if at least one of
@@ -68,32 +76,32 @@
           <p>
             <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
 	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
-	        #if $autodetectClassUri:
-	          <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1" checked="checked" />
-	        #else:
-	          <input type="checkbox" name="autodetectClassUri" id="autodetectClassUri" value="1" />
-	        #end if
-            <label for="autodetectClassUri">Autodetect if empty</label>
           </p>
 
           <p>
             <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
 	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri" />
-	        #if $autodetectPropertyUri:
-	          <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1" checked="checked" />
-	        #else:
-	          <input type="checkbox" name="autodetectPropertyUri" id="autodetectPropertyUri" value="1" />
-	        #end if
-	        <label for="autodetectPropertyUri" class="check">Autodetect if empty</label>
           </p>
 
           <p>
             <label title="URI of an instance in the vocabulary" for="instanceUri" class="uri">Instance URI:</label>
 	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="$instanceUri" />
           </p>
-          </div>
 
-          <h3 onclick="showHide(this,document.getElementById('advancedOptionsSubform'))" class="shoHideTitle">More options</h3>   
+          <p>
+	        #if $autodetectUris:
+	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" />
+	        #end if
+            <label for="autodetectUris">Autodetect if empty</label>            
+          </p>
+
+          </div>
+          </fieldset>
+
+          <fieldset id="advancedOptionsFieldset">
+          <legend onclick="showHide(this,document.getElementById('advancedOptionsSubform'))" class="shoHideTitle">More options</legend>   
 
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
           <!-- FIXME: this div should be visible only when at least one of the
@@ -140,15 +148,15 @@
             </select>
           </p>
           </div>
+          </fieldset>
 
-	      <p class="submit_button"><input type="submit" value="Check" /></p>      
-
-	    </form>
+          <p class="submit_button"><input type="submit" value="Check" /></p>      
+        </form>
     </div>
     #end if
     
     #if len($testRequirements) > 0:
-    <h1>Vapour Report</h1>
+    <h1><a name="report">Vapour Report</a></h1>
     <div class="summary">
       <h2>Summary</h2>
       #if $isThereAnyFailingTest:
