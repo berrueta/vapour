@@ -295,9 +295,9 @@
     </ul>
     
     <h3>Conclusions on the type of the resources</h3>
-    <ul>
+    <ul class="httpRange14Conc">
     #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
-      <li class="httpRange14Conc">
+      <li>
         <a href="$resource[0]">$resource[0]</a> is $resource[2]
       </li>
     #end for
@@ -305,7 +305,7 @@
     
     #if len($finalUris[$testRequirement[0]]) > 0:
     <h3>Further options</h3>
-    <ul>
+    <ul class="futherOptions">
     #from urllib import quote
     #for $finalUri in $finalUris[$testRequirement[0]]:
       #if 'text/html' in $finalUri[1] or 'application/xhtml+xml' in $finalUri[1]:

@@ -297,11 +297,22 @@ span.testResultFail
   color: red;
 }
 
-li.httpRange14Conc {
+ul.httpRange14Conc {
+  list-style-type:none;
+} 
+
+ul.httpRange14Conc li {
 }
 
-li.futherOption {
-  list-style-image: url(fwdi4/001_60.png);
+ul.futherOptions {
+  list-style-type:none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ul.futherOptions li {
+  background: url(fwdi4/001_60.png) left center no-repeat;
+  padding-left: 25px;
 }
 
 h2
