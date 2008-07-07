@@ -287,7 +287,7 @@
       #else
         #set $testResultCssClass = "badValue"
       #end if
-	<li>
+	<li class="$testResultCssClass">
 	  $test[6] ($test[2]):
 	  <span class="$testResultCssClass">$test[4]</span>
 	</li>
@@ -297,7 +297,7 @@
     <h3>Conclusions on the type of the resources</h3>
     <ul>
     #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
-      <li>
+      <li class="httpRange14Conc">
         <a href="$resource[0]">$resource[0]</a> is $resource[2]
       </li>
     #end for
