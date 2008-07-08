@@ -25,10 +25,10 @@
     #if len($testRequirements) > 0:
     <link rel="alternate" type="application/rdf+xml" title="RDF version of this report" href="$rdfReportUrl" />
     #end if
-    <script type="text/javascript" src="$resourceBaseUri/prototype.js" ><!--  --></script>
-    <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js" ><!--  --></script>
-    <script type="text/javascript" src="$resourceBaseUri/effects.js" ><!--  --></script>
-    <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
+    <script type="text/javascript" src="$resourceBaseUri/prototype.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/effects.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
     #if len($testRequirements) > 0:
     <title>Vapour Report</title>
     #else:
@@ -47,7 +47,7 @@
 
     #if len($testRequirements) > 0:
     <p id="linkToResults">
-      <a href="#report">Jump to results &gt;&gt;&gt;</a>
+      <a href="#report">Jump to the results</a>
     </p>
     #end if
 
@@ -56,7 +56,7 @@
 	    <form action="" method="get">
 
           <p>
-            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri">URI:</label>
+            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri" id="labelVocabUri">URI:</label>
 	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
             <span id="uriHint">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080421/example3</tt>)</span>
           </p>
@@ -163,14 +163,16 @@
     #end if
     
     #if len($testRequirements) > 0:
-    <h1><a name="report">Vapour Report</a></h1>
+    <h2><a name="report">Vapour Report</a></h2>
+
+    #if $isThereAnyFailingTest:
+    <p class="overallResultFail">Some tests failed!</p>
+    #else:
+    <p class="overallResultPass">All tests passed!</p>
+    #end if
+
     <div class="summary">
-      <h2>Summary</h2>
-      #if $isThereAnyFailingTest:
-        <p class="overallResultFail">Some tests failed!</p>
-      #else:
-        <p class="overallResultPass">All tests passed!</p>
-      #end if
+      <h3>Summary:</h3>
       <table class="summaryTable">
         <thead>
           <tr>
@@ -224,12 +226,10 @@
     #for $testRequirement in $testRequirements:
     <div class="testRequirement">
       <div class="httpDialog">
-        <h2 id="$testRequirement[0]">
-          $testRequirement[1]
-         </h2>
+        <h3 id="$testRequirement[0]">$testRequirement[1]</h3>
          <div class="clientIcon">
            <img src="$resourceBaseUri/computer.png" alt="A computer on the client-side"/>
-           <p>Client</p>
+           <p class="httpDialogIconLegend">Client</p>
          </div> <!-- /clientIcon -->
          <div class="dialogArea">
 	       #for $trace in $httpTraces[$testRequirement[0]]:
@@ -289,71 +289,66 @@
          
          <div class="serverIcon">
 		   <img src="$resourceBaseUri/apacheconf.png" alt="A web server" />
-		   <p>Web server</p>
+		   <p class="httpDialogIconLegend">Web server</p>
          </div>
          <div class="dummyR"></div>
       </div> <!-- /httpDialog -->
 
-    <h3>Test results</h3>
-    <ul class="testResultChecklist">
-	#for $test in $testResults[$testRequirement[0]]:
-      #if $test[3] == EARL["pass"]:
-        #set $testResultCssClass = "correctValue"
-      #else
-        #set $testResultCssClass = "badValue"
-      #end if
-	<li class="$testResultCssClass">
-	  $test[6] ($test[2]): <span>$test[4]</span>
-	</li>
-	#end for
-    </ul>
+      <h4>Test results</h4>
+      <ul class="testResultChecklist">
+	  #for $test in $testResults[$testRequirement[0]]:
+        #if $test[3] == EARL["pass"]:
+          #set $testResultCssClass = "correctValue"
+        #else
+          #set $testResultCssClass = "badValue"
+        #end if
+	  <li class="$testResultCssClass">
+	    $test[6] ($test[2]): <span>$test[4]</span>
+	  </li>
+	  #end for
+      </ul>
     
-    <h3>Conclusions on the type of the resources</h3>
-    <ul class="httpRange14Conc">
-    #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
-      <li>
-        <a href="$resource[0]">$resource[0]</a> is $resource[2]
-      </li>
-    #end for
-    </ul>
+      <h4>Conclusions on the type of the resources</h4>
+      <ul class="httpRange14Conc">
+      #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
+        <li>
+          <a href="$resource[0]">$resource[0]</a> is $resource[2]
+        </li>
+      #end for
+      </ul>
     
-    #if len($finalUris[$testRequirement[0]]) > 0:
-    <h3>Further options</h3>
-    <ul class="futherOptions">
-    #from urllib import quote
-    #for $finalUri in $finalUris[$testRequirement[0]]:
-      #if 'text/html' in $finalUri[1] or 'application/xhtml+xml' in $finalUri[1]:
-      <li>
-        <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">
-          Check the response with the W3C HTTP validator
-        </a>
-      </li>
-      <li>
-        <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=#echo quote($finalUri[0], '') #">
-          Run the RDFa Distiller service
-        </a>
-      </li>
-      #else if  'application/rdf+xml' in $finalUri[1]:
-      <li>
-        <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">
-         Check the response with the W3C RDF validator
-        </a>
-      </li>
-      <li>
-        Browse the data using an RDF browser: 
-        <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Zitgist</a>, 
-        <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=#echo quote($finalUri[0], '') #">Disco</a>,
-        <a href="http://beckr.org/marbles?uri=#echo quote($finalUri[0], '') #">Marbles</a>, 
-        <a href="http://demo.openlinksw.com/rdfbrowser/?uri=#echo quote($finalUri[0], '') #">OpenLink</a>
-      </li>
-      <li>
-        <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
-      </li>
+      #if len($finalUris[$testRequirement[0]]) > 0:
+      <h4>Further options</h4>
+      <ul class="futherOptions">
+      #from urllib import quote
+      #for $finalUri in $finalUris[$testRequirement[0]]:
+        #if 'text/html' in $finalUri[1] or 'application/xhtml+xml' in $finalUri[1]:
+        <li>
+          <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">Check the response with the W3C HTTP validator</a>
+        </li>
+        <li>
+          <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=#echo quote($finalUri[0], '') #">Run the RDFa Distiller service</a>
+        </li>
+        #else if  'application/rdf+xml' in $finalUri[1]:
+        <li>
+          <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">Check the response with the W3C RDF validator</a>
+        </li>
+        <li>
+          Browse the data using an RDF browser: 
+          <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Zitgist</a>, 
+          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=#echo quote($finalUri[0], '') #">Disco</a>,
+          <a href="http://beckr.org/marbles?uri=#echo quote($finalUri[0], '') #">Marbles</a>, 
+          <a href="http://demo.openlinksw.com/rdfbrowser/?uri=#echo quote($finalUri[0], '') #">OpenLink</a>
+        </li>
+        <li>
+          <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
+        </li>
+        #end if
+      #end for
+      </ul>
       #end if
-    #end for
-    </ul>
-    #end if
-
+      
+      <p class="backtotop"><a href="#report">back to top</a></p>
 
     </div> <!-- /testRequirement -->
     #end for

@@ -1,26 +1,34 @@
 /* CSS style for reports */
 
-h1, h2, h3, h4, h5, h6 {
-  color: #5674bc;
-}
 
 h1 {
-  font-size: 2.2em;
+  background-color: #5674bc;
+  font-size: 2.4em;
   font-weight: bold;
+  text-align: left;
+  vertical-align: top;
   display: block;
-  color: #5674bc;
-  margin-bottom:1%;
-  margin-top:2%;
+  color: #ffffff;
+  padding: 0.3em 2em 0.3em 0.5em;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+  background-image: url(images/ctic-white.png);
+  background-repeat: no-repeat;
+  background-position: bottom right; 
 }
 
 h1 a, h1 a:active, h1 a:hover, h1 a:visited {
-  color: #5674bc;
+  color: #ffffff;
   text-decoration: none;
 }
 
 h1 a abbr {
   border-bottom: 0;
   text-transform: uppercase
+}
+
+h2, h3, h4, h5, h6 {
+  color: #5674bc;
 }
 
 img {
@@ -159,7 +167,15 @@ float:left;
 
 /* input form =================================================== */
 
-#linkToResults {
+p#linkToResults {
+  border-top: 1px #5674bc solid;
+  border-bottom: 1px #5674bc solid;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  font-size: 0.8em;
+  text-align: center;
 }
 
 fieldset {
@@ -193,6 +209,7 @@ form > p {
   border: 1px #b0b0c0 solid;
   padding: .6em;
   background-color: #e0e0d0;
+  margin-bottom: 2em;
 }
 
 input { 
@@ -217,16 +234,22 @@ input.uri {
 
 label.uri {
   display: block;
-  width:7em;
+  width: 7em;
   float:left;
   text-align: left;
   margin-right: 0.3em;
+}
+
+label#labelVocabUri {
+  width: 3em;
+  margin-left: 2em;
 }
 
 #uriHint {
   font-size: 0.8em;
   display: block;
   clear: left;
+  margin-left: 7em;
 }
 
 input#validateRDF, input#htmlVersions {
@@ -275,7 +298,7 @@ ul.testResultChecklist {
 }
 
 li.correctValue {
-  background: url(fwdi4/001_06.png) left center no-repeat;
+  background: url(fwdi4/001_06.png) left top no-repeat;
   padding-left: 25px;
 }
 
@@ -284,7 +307,7 @@ li.correctValue > span {
 }
 
 li.badValue {
-  background: url(fwdi4/001_05.png) left center no-repeat;
+  background: url(fwdi4/001_05.png) left top no-repeat;
   padding-left: 25px;
 }
 
@@ -310,7 +333,7 @@ ul.httpRange14Conc {
 } 
 
 ul.httpRange14Conc li {
-  background: url(fwdi4/001_35.png) left center no-repeat;
+  background: url(fwdi4/001_35.png) left top no-repeat;
   padding-left: 25px;
 }
 
@@ -321,14 +344,14 @@ ul.futherOptions {
 }
 
 ul.futherOptions li {
-  background: url(fwdi4/001_60.png) left center no-repeat;
+  background: url(fwdi4/001_60.png) left top no-repeat;
   padding-left: 25px;
 }
 
-h2
+h3
 { 
   margin-top: 0.2em;
-  font-size:1.5em;
+  font-size:1.3em;
 }
 
 .summary
@@ -384,6 +407,16 @@ h2
   padding: 0.3em;
 }
 
+.backtotop {
+  text-align: right;
+  margin-right: 0.8em;
+  font-size: 0.7em;
+}
+
+.httpDialogIconLegend {
+  font-size: 0.8em;
+  color: #888888;
+}
 
 /* from Miguel */
 
@@ -401,3 +434,4 @@ h2
 {
 	color: #000000;
 }
+
