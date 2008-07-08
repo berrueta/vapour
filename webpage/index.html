@@ -44,28 +44,18 @@
 
       <p>
         <strong class="vapour"><abbr title="VAlidation Process Of Uri Response" property="doap:name">Vapour</abbr></strong> 
-        is a web-based validator tool developed by <a href="http://www.fundacionctic.org/">CTIC Foundation</a> 
-        to check if an <abbr title="Uniform Resource Identifier">URI</abbr> responses according to the
-        <a href="http://linkeddata.org/">Linked Data</a> principles.
+        is a validation service
+        to check whether semantic web data is correctly published according to the current best practices, as defined by the <a href="http://www.w3.org/DesignIssues/LinkedData.html">Linked Data</a> principles, the <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a> and the <a href="http://www.w3.org/TR/cooluris/">Cool <abbr title="Uniform Resource Identifier">URIs</abbr></a>.
       </p>
 
       <p>
-        Originally developed to check the compliance of a web site against the <em>recipes</em> described
-        in the <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
-        <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
-        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft), but later extender to
-        be more generic to any kind of resources. This work is <strong>not</strong> endorsed by 
-        <acronym title="World Wide Web Consortium">W3C</acronym>.
-      </p>
-
-      <p>
-        Written in <a href="http://www.python.org/" property="doap:programming-language">Python</a>, Vapour is
-        available as a <a href="http://idi.fundacionctic.org/vapour">public service</a>, but also as open source 
+        Vapour is
+        available as a <a href="http://idi.fundacionctic.org/vapour">public web service</a>, but also as open source 
         software under the terms of the 
-        <a href="http://www.w3.org/Consortium/Legal/copyright-software" rel="doap:license">W3C License</a>.
+        <a href="http://www.w3.org/Consortium/Legal/copyright-software" rel="doap:license">W3C License</a>, so you can set up your own service or modify the source code in <span resource="http://www.python.org/" property="doap:programming-language">Python</a>, if needed.
       </p>
 
-      <h3 id="demo">Demo</h3>
+      <h3 id="demo">Public web service</h3>
 
       <p>
         <a href="http://idi.fundacionctic.org/vapour" title="try our online demo">
@@ -73,44 +63,9 @@
         </a>
       </p>
 
-      <h3 id="people">People involved</h3>
+      <h3 id="publications">Publications</h3>
 
-      <ul>
-        <li>
-          <a href="http://berrueta.net/">Diego Berrueta</a>
-          (<a href="http://berrueta.net/foaf.rdf#me" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
-        </li>
-        <li>
-          <a href="http://www.wikier.org/">Sergio Fernández</a>
-          (<a href="http://www.wikier.org/foaf#wikier" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
-        </li>
-        <li>
-          <a href="http://www.ifrade.es/">Iván Frade</a>
-          (<a href="http://frade.no-ip.info:2080/~ivan/foaf.rdf#me" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
-        </li>
-        <li>
-          <a href="http://www.ivanminguez.net/">Iván Minguez</a>
-          (<a href="http://www.ivanminguez.net/foaf.rdf#me" rel="doap:helper"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
-        </li>
-        <li>
-          <a href="http://www.kagueto.net/">Miguel García</a>
-          (<a href="http://www.kagueto.net/files/foaf.rdf#me" rel="doap:helper"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>)
-        </li>
-      </ul>
-
-      <h3 id="dev">Development</h3>
-
-      <p>
-        All the development material of the project (code, documentation, etc.) is stored in 
-        <a href="https://vapour.svn.sourceforge.net/svnroot/vapour/trunk/">its svn repository</a>
-        in SourceForge. Please, send any comment to the 
-        <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel" rel="doap:mailing-list">development mailing list</a> 
-        or report bugs to the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865" rel="doap:bug-database">project's bug tracker</a>. 
-      </p>
-
-      <h3 id="doc">Documentation</h3>
-
-      <h4>Papers</h4>
+      <h4>Papers at workshops</h4>
 
       <ul>
         <li>
@@ -134,7 +89,55 @@
         </li>
       </ul>
 
-      <h4>Architecture</h4>
+      <h3 id="dev">Development</h3>
+
+      <h4>Team</h4>
+
+      <ul>
+        <li>
+          <a href="http://berrueta.net/">Diego Berrueta</a>
+          (<a href="http://berrueta.net/foaf.rdf#me" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>), Fundación CTIC.
+        </li>
+        <li>
+          <a href="http://www.wikier.org/">Sergio Fernández</a>
+          (<a href="http://www.wikier.org/foaf#wikier" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>), Fundación CTIC.
+        </li>
+        <li>
+          <a href="http://www.ifrade.es/">Iván Frade</a>
+          (<a href="http://frade.no-ip.info:2080/~ivan/foaf.rdf#me" rel="doap:developer"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>).
+        </li>
+        <li>
+          <a href="http://www.ivanminguez.net/">Iván Minguez</a>
+          (<a href="http://www.ivanminguez.net/foaf.rdf#me" rel="doap:helper"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>), Fundación CTIC.
+        </li>
+        <li>
+          <a href="http://www.kagueto.net/">Miguel García</a>
+          (<a href="http://www.kagueto.net/files/foaf.rdf#me" rel="doap:helper"><img src="resources/images/foaf.gif" width="26" height="14" alt="foaf" /></a>), Fundación CTIC.
+        </li>
+      </ul>
+
+      <h4>Become involved</h4>
+
+      <p>
+        All the development material of the project (code, documentation, etc.) is stored in 
+        <a href="https://vapour.svn.sourceforge.net/svnroot/vapour/trunk/">its svn repository</a>
+        in SourceForge. Don't hesitate to post comments to the 
+        <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel" rel="doap:mailing-list">development mailing list</a> 
+        or to report bugs using the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865" rel="doap:bug-database">project's bug tracker</a>. 
+      </p>
+
+      <h4>History</h4>
+
+      <p>
+        Vapour was originally created to check the compliance of a web site against the <em>recipes</em> described
+        in the <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
+        <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
+        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft), but later it was extended to
+        be more generic to any kind of resources. This work is <strong>not</strong> endorsed by 
+        <acronym title="World Wide Web Consortium">W3C</acronym>.
+      </p>
+
+      <h4>High-level architecture</h4>
 
       <p>Vapour has the following high level architecture:</p>
 
@@ -142,7 +145,7 @@
         <img src="resources/images/arch.png" width="484" height="316" alt="Vapour's architecture"/>
       </p>
 
-      <p>With three main modules:</p>
+      <p>Vapour contains three modules:</p>
 
       <dl id="arch">
         <dt>
