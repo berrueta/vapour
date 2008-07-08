@@ -11,21 +11,23 @@
 >
 
   <head>
-    <title property="dct:title">Vapour, a web-based validator tool to check best practices for publishing RDF vocabularies</title>
-    <meta http-equiv="content-type" content="text/xhtml+xml; charset=utf-8" />
+    <title property="dct:title">Vapour, a Linked Data validator</title>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
     <link rel="transformation" href="http://www-sop.inria.fr/acacia/soft/RDFa2RDFXML.xsl"/>
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="resources/style.css" />
-    <link rel="meta" type="application/rdf+xml" title="DOAP" href="resources/doap.rdf#vapour" />
+    <link rel="meta" type="application/rdf+xml" title="DOAP" href="doap#vapour" />
     <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://berrueta.net/foaf.rdf#me" />
     <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.wikier.org/foaf#wikier" />
     <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://frade.no-ip.info:2080/~ivan/foaf.rdf#me" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.ivanminguez.net/foaf.rdf#me" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.kagueto.net/files/foaf.rdf#me" />
   </head>
 
   <body typeof="doap:Project" about="http://vapour.sourceforge.net/doap#vapour">
 
     <div class="accessibility">
-      <a href="#content">Go to the content</a>
+      <a href="#content">Go directly to the content</a>
     </div>
 
     <h1>
@@ -35,9 +37,7 @@
     </h1>
 
     <h2 property="doap:description">
-      a web-based validator tool to check the compliance of a web site against the <em>recipes</em> 
-      described in the <em>Best Practices Recipes for Publishing 
-      <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em>
+      a Linked Data validator
     </h2>
 
     <div id="content">
@@ -45,13 +45,24 @@
       <p>
         <strong class="vapour"><abbr title="VAlidation Process Of Uri Response" property="doap:name">Vapour</abbr></strong> 
         is a web-based validator tool developed by <a href="http://www.fundacionctic.org/">CTIC Foundation</a> 
-        to check the compliance of a web site against the <em>recipes</em> described in the 
-        <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
+        to check if an <abbr title="Uniform Resource Identifier">URI</abbr> responses according to the
+        <a href="http://linkeddata.org/">Linked Data</a> principles.
+      </p>
+
+      <p>
+        Originally developed to check the compliance of a web site against the <em>recipes</em> described
+        in the <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
         <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
-        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft). It's written in
-        <span property="doap:programming-language">Python</span> and it's available as open source under
+        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft), but later extender to
+        be more generic to any kind of resources. This work is <strong>not</strong> endorsed by 
+        <acronym title="World Wide Web Consortium">W3C</acronym>.
+      </p>
+
+      <p>
+        Written in <a href="http://www.python.org/" property="doap:programming-language">Python</a>, Vapour is
+        available as a <a href="http://idi.fundacionctic.org/vapour">public service</a>, but also as open source 
+        software under the terms of the 
         <a href="http://www.w3.org/Consortium/Legal/copyright-software" rel="doap:license">W3C License</a>.
-        This work is <strong>not</strong> endorsed by <acronym title="World Wide Web Consortium">W3C</acronym>.
       </p>
 
       <h3 id="demo">Demo</h3>

@@ -4,7 +4,8 @@
          xmlns:doap="http://usefulinc.com/ns/doap#" 
          xmlns:foaf="http://xmlns.com/foaf/0.1/" 
          xmlns:admin="http://webns.net/mvcb/" 
-         xml:lang="en">
+         xml:lang="en"
+>
 
   <rdf:Description rdf:about="">
     <admin:generatorAgent rdf:resource="http://doapy.bonjourlesmouettes.org/doap-a-matic"/>
@@ -13,45 +14,61 @@
   <doap:Project rdf:about="http://vapour.sourceforge.net/resources/doap.rdf#vapour">
 
     <doap:name>Vapour</doap:name>
+    <doap:description xml:lang="en">a Linked Data validator</doap:description>
     <doap:homepage rdf:resource="http://vapour.sourceforge.net/"/>
     <doap:created>2007-01-31</doap:created>
-
-    <doap:description xml:lang="en">
-      A web-based validator tool to check the compliance of a web site against the recipes 
-      described in the Best Practices for Publishing RDF Vocabularies (W3C Working Draft).
-    </doap:description>
-
     <doap:programming-language>python</doap:programming-language>
     <doap:license rdf:resource="http://usefulinc.com/doap/licenses/w3c"/>
 
     <doap:category rdf:resource="http://rdflib.net/projects#using_rdflib" />
 
     <doap:maintainer>
-      <foaf:Person>
+      <foaf:Person rdf:about="http://www.berrueta.net/foaf.rdf#me">
         <foaf:name>Diego Berrueta</foaf:name>
         <foaf:mbox_sha1sum>98a99390f2fe9395041bddc41e933f50e59a5ecb</foaf:mbox_sha1sum>
-        <rdfs:seeAlso rdf:resource="http://www.berrueta.net/foaf.rdf#me"/>
         <foaf:homepage rdf:resource="http://www.berrueta.net/"/>
+        <rdfs:seeAlso rdf:resource="http://www.berrueta.net/foaf.rdf"/>
       </foaf:Person>
     </doap:maintainer>
 
     <doap:developer>
-      <foaf:Person>
+      <foaf:Person rdf:about="http://www.wikier.org/foaf#wikier">
+        <foaf:name>Sergio Fernández</foaf:name>
+        <foaf:nick>Wikier</foaf:nick>
+        <foaf:mbox_sha1sum>d0fd987214f56f70b4c47fb96795f348691f93ab</foaf:mbox_sha1sum>
+        <foaf:homepage rdf:resource="http://www.wikier.org/" />
+        <rdfs:seeAlso rdf:resource="http://www.wikier.org/foaf.rdf"/>
+      </foaf:Person>
+    </doap:developer>
+
+    <doap:developer>
+      <foaf:Person rdf:about="http://frade.no-ip.info:2080/~ivan/foaf.rdf#me">
         <foaf:name>Iván Frade</foaf:name>
         <foaf:nick>frade</foaf:nick>
         <foaf:nick>asjas</foaf:nick>
         <foaf:mbox_sha1sum>84d076726727b596b08198e26ef37e4817353e97</foaf:mbox_sha1sum>
+        <foaf:homepage rdf:resource="http://www.ifrade.es/" />
         <rdfs:seeAlso rdf:resource="http://frade.no-ip.info:2080/~ivan/foaf.rdf"/>
       </foaf:Person>
     </doap:developer>
 
     <doap:developer>
-      <foaf:Person>
-        <foaf:name>Sergio Fernández</foaf:name>
-        <foaf:nick>Wikier</foaf:nick>
-        <foaf:mbox_sha1sum>d0fd987214f56f70b4c47fb96795f348691f93ab</foaf:mbox_sha1sum>
-        <rdfs:seeAlso rdf:resource="http://www.wikier.org/foaf.rdf#wikier"/>
-        <foaf:homepage rdf:resource="http://www.wikier.org/" />
+      <foaf:Person rdf:about="http://www.ivanminguez.net/foaf.rdf#me">
+        <foaf:name>Iván Minguez</foaf:name>
+        <foaf:nick>pyro</foaf:nick>
+        <foaf:mbox_sha1sum>057048f30557d8e26f71fdec6ef43542166ca932</foaf:mbox_sha1sum>
+        <foaf:homepage rdf:resource="http://www.ivanminguez.net/" />
+        <rdfs:seeAlso rdf:resource="http://www.ivanminguez.net/foaf.rdf"/>
+      </foaf:Person>
+    </doap:developer>
+
+    <doap:developer>
+      <foaf:Person rdf:about="http://www.kagueto.net/files/foaf.rdf#me">
+        <foaf:name>Miguel García</foaf:name>
+        <foaf:nick>kagueto</foaf:nick>
+        <foaf:mbox_sha1sum>0363c58a9ec61db68e3fa37cfcd38b301deaab97</foaf:mbox_sha1sum>
+        <foaf:homepage rdf:resource="http://www.kagueto.net/" />
+        <rdfs:seeAlso rdf:resource="http://www.kagueto.net/files/foaf.rdf"/>
       </foaf:Person>
     </doap:developer>
 
@@ -66,3 +83,4 @@
   </doap:Project>
 
 </rdf:RDF>
+
