@@ -29,7 +29,11 @@
     <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js" ><!--  --></script>
     <script type="text/javascript" src="$resourceBaseUri/effects.js" ><!--  --></script>
     <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
+    #if len($testRequirements) > 0:
     <title>Vapour Report</title>
+    #else:
+    <title>Vapour, a Linked Data validator</title>
+    #end if
   </head>
   <body>    
     <div class="all">
