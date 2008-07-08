@@ -10,12 +10,12 @@ function example() {
 
 function showHideForm() {
     //vocabulary validation legend
-	var vocabularyValidationLegend = document.getElementById("vocabularyValidationLegend");
-	vocabularyValidationLegend.onclick = function() { showHide(vocabularyValidationLegend ,document.getElementById('vocabularyValidationSubform')); };
+    var vocabularyValidationLegend = document.getElementById("vocabularyValidationLegend");
+    vocabularyValidationLegend.onclick = function() { showHide(vocabularyValidationLegend, document.getElementById('vocabularyValidationSubform')); };
 
     //vocabulary validation legend
-	var advancedOptionsLegend = document.getElementById("advancedOptionsLegend");
-	advancedOptionsLegend.onclick = function() { showHide(advancedOptionsLegend ,document.getElementById('advancedOptionsSubform')); };
+    var advancedOptionsLegend = document.getElementById("advancedOptionsLegend");
+    advancedOptionsLegend.onclick = function() { showHide(advancedOptionsLegend, document.getElementById('advancedOptionsSubform')); };
 }
 
 function addLoadEvent(func) {

@@ -976,10 +976,12 @@ Element.Methods.visualEffect = function(element, effect, options) {
 
 Element.addMethods();
 
-function showHide(element,div){     			        
+//custom hack by Miguel
+function showHide(element, div) {
     new Effect.toggle(div,'blind',{duration:.4});      
     if(element.getAttribute('style') == 'background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);')
         element.setAttribute('style','background-image: url(http://vapour.sourceforge.net/resources/arrow-open.png);');        
     else        
     	element.setAttribute('style','background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);');		    
 };
+
