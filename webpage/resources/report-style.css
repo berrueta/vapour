@@ -1,5 +1,5 @@
-/* CSS style for reports */
 
+/* CSS style for reports of Vapour */
 
 h1 {
   background-color: #5674bc;
@@ -33,12 +33,6 @@ h2, h3, h4, h5, h6 {
 
 img {
   border: 0;
-}
-
-div#logo {
-  margin-top: 2em;
-  margin-bottom: 2em;
-  text-align: right;
 }
 
 .all{
@@ -416,6 +410,26 @@ h3
 .httpDialogIconLegend {
   font-size: 0.8em;
   color: #888888;
+}
+
+div#footer {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3em;
+  padding-bottom: 3em;
+  border-top: 1px #5674bc solid;
+}
+
+div#footer p {
+  font-size: 0.8em;
+  text-align: left;
+  padding-top: 1em;
+}
+
+div#footer p#logo {
+  float: left;
+  margin-right: 2em;
+  padding-top: 0;
 }
 
 /* from Miguel */
