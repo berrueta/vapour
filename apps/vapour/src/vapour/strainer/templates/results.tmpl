@@ -25,10 +25,10 @@
     #if len($testRequirements) > 0:
     <link rel="alternate" type="application/rdf+xml" title="RDF version of this report" href="$rdfReportUrl" />
     #end if
-    <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
     <script type="text/javascript" src="$resourceBaseUri/prototype.js" ><!--  --></script>
     <script type="text/javascript" src="$resourceBaseUri/scriptaculous.js" ><!--  --></script>
     <script type="text/javascript" src="$resourceBaseUri/effects.js" ><!--  --></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts.js"><!-- --></script>
     <title>Vapour Report</title>
   </head>
   <body>    
@@ -58,14 +58,10 @@
           </p>
 
           <fieldset id="vocabularyValidationFieldset">
-	  <legend class="shoHideTitle" id="vocabularyValidationLegend">Specific options for vocabularies / ontologies</legend>
+	      <legend class="shoHideTitle" id="vocabularyValidationLegend">Specific options for vocabularies / ontologies</legend>
 
           <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
-          <!-- FIXME: this div should be visible by default only if at least one of
-                   {classUri, propertyUri, instanceUri} is not empty. Otherwise, it should
-                   be invisible. The user should be able to "unroll" this part of the
-                   form by clicking somewhere -->  
-                   
+      
           <p>
             <!-- FIXME: we may want to add some links to this paragraph -->
             If you want to validate an RDF or OWL vocabulary or ontology, you can enter
@@ -94,18 +90,21 @@
 	        #else:
 	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" />
 	        #end if
-            <label for="autodetectUris">Autodetect if empty</label>            
+            <label for="autodetectUris">Autodetect if empty</label>        
           </p>
 
           </div>
+
           </fieldset>
+
+          #if not ($classUri or $propertyUri or $instanceUri or $autodetectUris):
+          <script type="text/javascript">document.getElementById("vocabularyValidationSubform").setAttribute("style", document.getElementById("vocabularyValidationSubform").getAttribute("style") + "; display:none;");</script>
+	      #end if
 
           <fieldset id="advancedOptionsFieldset">
           <legend class="shoHideTitle" id="advancedOptionsLegend">More options</legend>   
 
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
-          <!-- FIXME: this div should be visible only when at least one of the
-                  checkboxes is active -->
           <p>
 	        #if $validateRDF:
 	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
@@ -149,6 +148,10 @@
           </p>
           </div>
           </fieldset>
+
+          #if not ($validateRDF or $htmlVersions or $defaultResponse!="rdfxml"):
+          <script type="text/javascript">document.getElementById("advancedOptionsSubform").setAttribute("style", document.getElementById("advancedOptionsSubform").getAttribute("style") + "; display:none;");</script>
+	      #end if
 
           <p class="submit_button"><input type="submit" value="Check" /></p>      
         </form>
