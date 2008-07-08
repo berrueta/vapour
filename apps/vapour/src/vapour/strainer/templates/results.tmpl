@@ -193,16 +193,24 @@
           #end for
         </tbody>
       </table>
+      <p>
       #if $namespaceFlavour:
-        <p>It is a $namespaceFlavour['name'].</p>
+        It is a $namespaceFlavour['name'].
       #end if
       #if len($validRecipes) > 0:
-         <p>To learn more about this configuration:</p>
-         <ul>
-           #for $validRecipe in $validRecipes:
-             <li><a href="$validRecipe['link']">$validRecipe['name']</a></li>
-           #end for
-         </ul>
+         To learn more about how to set up Apache to serve RDF using this configuration, please check:
+         #if len($validRecipes)>1:
+           </p>
+           <ul>
+             #for $validRecipe in $validRecipes:
+               <li><a href="$validRecipe['link']">$validRecipe['name']</a></li>
+             #end for
+           </ul>
+         #else:
+           <a href="$validRecipes[0]['link']">$validRecipes[0]['name']</a></p>
+         #end if
+      #else:
+         </p>
       #end if
     </div> <!-- /summary -->
 
