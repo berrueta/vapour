@@ -1,20 +1,24 @@
 
 /* CSS style for reports of Vapour */
 
-h1 {
+div#header {
   background-color: #5674bc;
-  font-size: 2.4em;
-  font-weight: bold;
   text-align: left;
   vertical-align: top;
   display: block;
-  color: #ffffff;
-  padding: 0.3em 2em 0.3em 0.5em;
-  margin-bottom: 0.3em;
+  padding: 0.3em 2em 1em 0.5em;
+  margin-bottom: 0.5em;
   margin-top: 0.3em;
   background-image: url(images/ctic-white.png);
   background-repeat: no-repeat;
-  background-position: bottom right; 
+  background-position: bottom right;
+}
+
+h1 {
+  font-size: 2.4em;
+  font-weight: bold;
+  color: #ffffff;
+  display: inline;
 }
 
 h1 a, h1 a:active, h1 a:hover, h1 a:visited {
@@ -29,6 +33,13 @@ h1 a abbr {
 
 h2, h3, h4, h5, h6 {
   color: #5674bc;
+}
+
+div#header h2 {
+  font-size: 1.4em;
+  color: #dddddd;
+  display: inline;
+  padding-left: 0.4em;
 }
 
 img {
@@ -421,7 +432,8 @@ div#footer {
 }
 
 div#footer p {
-  font-size: 0.8em;
+  font-size: 0.7em;
+  color: #888888;
   text-align: left;
   padding-top: 1em;
 }
