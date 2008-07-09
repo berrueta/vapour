@@ -73,12 +73,14 @@ class cup:
                 if vocabUri is not None:
                     logger.info("request over vocabulary on " + vocabUri)
                     if (classUri is None and autodetectUrisIfEmpty) or (propertyUri is None and autodetectUrisIfEmpty):
-                        (classUris, propertyUris) = autodetect.autodetectUris(store, vocabUri)    
+                        (classUris, propertyUris, instanceUris) = autodetect.autodetectUris(store, vocabUri)    
                         random.seed()
                         if autodetectUrisIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
                             classUri = random.choice(classUris)
                         if autodetectUrisIfEmpty and propertyUri is None and propertyUris is not None and len(propertyUris) > 0:
                             propertyUri = random.choice(propertyUris)
+                        if autodetectUrisIfEmpty and instanceUri is None and instanceUris is not None and len(instanceUris) > 0:
+                            instanceUri = random.choice(instanceUris)
 
                     # defines the resources to be checked  
                     resourcesToCheck = []
