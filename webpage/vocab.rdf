@@ -55,12 +55,12 @@
   </rdf:Property>
 
   <rdfs:Class rdf:about="#AnyResource">
-    <rdfs:label xml:lang="en">Any kind of web resource</rdfs:label>
+    <rdfs:label xml:lang="en">any kind of web resource</rdfs:label>
   </rdfs:Class>
 
   <rdfs:Class rdf:about="#InformationResource">
     <rdfs:subClassOf rdf:resource="#AnyResource"/>
-    <rdfs:label xml:lang="en">An information resource</rdfs:label>
+    <rdfs:label xml:lang="en">an information resource</rdfs:label>
   </rdfs:Class>
 
 </rdf:RDF>
