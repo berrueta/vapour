@@ -2,6 +2,7 @@ from rdflib import ConjunctiveGraph, URIRef
 from httpdialog import followRedirects
 import mimetypes
 import httplib
+from sets import Set
 from vapour.namespaces import RDF, RDFS, OWL
 from vapour.cup import common
 
@@ -32,13 +33,20 @@ def autodetectUris(graph, vocabUri):
             objectProperties = [x for x in tempGraph.subjects( RDF["type"], OWL["ObjectProperty"] )]
             datatypeProperties = [x for x in tempGraph.subjects( RDF["type"], OWL["DatatypeProperty"] )]
             annotationProperties = [x for x in tempGraph.subjects( RDF["type"], OWL["AnnotationProperty"] )]
+            owlOntologies = [x for x in tempGraph.subjects( RDF["type"], OWL["Ontology"] )]
+            definedResources = [x for (x,y) in tempGraph.subject_objects( RDF["type"] ) ]
             
             # remove unwanted URIs
             owlClasses = filter( lambda x : not x.startswith( OWL ), owlClasses )
     
-            classes = pickFromNamespaceIfPossible(rdfsClasses + owlClasses, vocabUri)
-            properties = pickFromNamespaceIfPossible(rdfProperties + objectProperties + datatypeProperties + annotationProperties, vocabUri)
-            return ( classes, properties )
+            allClasses = rdfsClasses + owlClasses
+            allProperties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
+            allInstances = Set(definedResources) - Set(allClasses + allProperties + owlOntologies)
+    
+            classes = pickFromNamespaceIfPossible(allClasses, vocabUri)
+            properties = pickFromNamespaceIfPossible(allProperties, vocabUri)
+            instances = pickFromNamespaceIfPossible(allInstances, vocabUri)
+            return ( classes, properties, instances )
     else:
             raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (response code=" + str( response.status ) + ")")
 
