@@ -41,10 +41,10 @@ class IlegalLocationValue(VapourException):
     Ilegal location value exception
     """
 
-    def __init__(self, value=None):
+    def __init__(self, value):
         VapourException.__init__(self)
         self.value = value
 
     def __str__(self):
-        return "IlegalLocationValue: the value (%s) of the location header in the response is not a valid URL, it should be absolute (see section 14.30 in RFC2616)" % self.value
+        return "IlegalLocationValue: the value of the location header in the response (%s) is not an absolute URI (see section 14.30 in RFC2616)" % self.value
 
