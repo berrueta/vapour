@@ -10,23 +10,41 @@ class VapourException(exceptions.Exception):
         Exception.__init__(self)
 	
     def __str__(self):
-        return ": an exception has occured"
+        return "VapourException: an exception has occured"
 
 class TooManyRedirections(VapourException):
+    """
+    Too many redirections exception
+    """
 
     def __init__(self, ip):
         VapourException.__init__(self)
         self.ip = str(ip)
 
     def __str__(self):
-        return ": too many redirections, aborting"
+        return "TooManyRedirections: too many redirections, aborting"
 
 class ForbiddenAddress(VapourException):
+    """
+    Forbidden address exception
+    """
 
     def __init__(self, ip):
         VapourException.__init__(self)
         self.ip = str(ip)
 
     def __str__(self):
-        return ": request over %s, internal IP address are forbidden" % self.ip
+        return "ForbiddenAddress: request over %s, internal IP address are forbidden" % self.ip
+
+class IlegalLocationValue(VapourException):
+    """
+    Ilegal location value exception
+    """
+
+    def __init__(self, value=None):
+        VapourException.__init__(self)
+        self.value = value
+
+    def __str__(self):
+        return "IlegalLocationValue: the value (%s) of the location header in the response is not a valid URL, it should be absolute (see section 14.30 in RFC2616)" % self.value
 
