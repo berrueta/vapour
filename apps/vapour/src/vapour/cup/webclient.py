@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#path to work inside apache (uncomment these lines)
+#patch to work inside apache (uncomment these lines)
 #import sys
 #sys.path.append('../..')
 
