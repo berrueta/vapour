@@ -39,11 +39,14 @@
     <div class="all">
     
     #if $printForm:
-    <h1>
-      <a href="http://vapour.sourceforge.net/" title="go to vapour project home page">
-        <abbr title="VAlidation Process Of Uri Response">vapour</abbr>
-      </a>
-    </h1>
+    <div id="header">
+      <h1>
+        <a href="http://vapour.sourceforge.net/"title="go to vapour project home page">
+          <abbr title="VAlidation Process Of Uri Response">vapour</abbr>
+        </a>
+      </h1>
+      <h2 property="doap:description">a Linked Data validator</h2>
+    </div>
 
     #if len($testRequirements) > 0:
     <p id="linkToResults">
