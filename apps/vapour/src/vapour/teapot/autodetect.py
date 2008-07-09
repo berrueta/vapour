@@ -41,7 +41,7 @@ def autodetectUris(graph, vocabUri):
     
             allClasses = rdfsClasses + owlClasses
             allProperties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
-            allInstances = Set(definedResources) - Set(allClasses + allProperties + owlOntologies)
+            allInstances = list(Set(definedResources) - Set(allClasses + allProperties + owlOntologies))
     
             classes = pickFromNamespaceIfPossible(allClasses, vocabUri)
             properties = pickFromNamespaceIfPossible(allProperties, vocabUri)
