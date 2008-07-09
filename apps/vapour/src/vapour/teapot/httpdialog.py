@@ -29,6 +29,8 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
                response.status == httplib.MOVED_PERMANENTLY):
         previousSubjectResource = r[0]        
         url = response.getheader("Location")
+        if (not urlparse.urlparse(url)[1].startswith("http://")):
+            raise IlegalLocationValue(url)
         redirectsCount = redirectsCount + 1
         if (redirectsCount > maxRedirects):
             raise TooManyRedirections
