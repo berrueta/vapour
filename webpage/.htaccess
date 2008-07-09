@@ -1,4 +1,6 @@
 
+RewriteCond %{HTTP_USER_AGENT} !^Mozilla/.*
 AddType application/xhtml+xml .html
+
 AddType application/rdf+xml .rdf
 
