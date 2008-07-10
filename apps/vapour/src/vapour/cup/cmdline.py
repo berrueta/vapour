@@ -43,7 +43,7 @@ if __name__ == "__main__":
     # defines the options of the validator
     validatorOptions = options.ValidatorOptions()
     validatorOptions.htmlVersions = True
-    validatorOptions.defaultResponse = "rdfxml"
+    validatorOptions.defaultResponse = "dontmind"
     
     recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
     if classUri is not None:
@@ -75,4 +75,4 @@ if __name__ == "__main__":
         outputFile.close()
     else:
         print html
-        
+

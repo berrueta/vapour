@@ -192,7 +192,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, validateRDF=False, htmlVersions=False, defaultResponse = "rdfxml", namespaceFlavour=None, validRecipes=[]):
+def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, validateRDF=False, htmlVersions=False, defaultResponse = "dontmind", namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri

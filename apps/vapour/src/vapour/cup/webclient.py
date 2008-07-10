@@ -39,9 +39,9 @@ class cup:
             try:
                 defaultResponse = args["defaultResponse"]
                 if defaultResponse != "rdfxml" and defaultResponse != "html" and defaultResponse != "dontmind":
-                    defaultResponse = "rdfxml" # default value
+                    defaultResponse = "dontmind" # default value
             except KeyError:
-                defaultResponse = None
+                defaultResponse = "dontmind"
 
             try:
                 format = args["format"]
