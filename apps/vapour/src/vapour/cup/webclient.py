@@ -18,22 +18,22 @@ class cup:
             args = web.input()
             try:
                 vocabUri = args["vocabUri"]
-                if vocabUri is "": vocabUri = None
+                if (vocabUri == "" or vocabUri == "http://"): vocabUri = None
             except KeyError:
                 vocabUri = None
             try:
                 classUri = args["classUri"]
-                if classUri is "": classUri = None
+                if (classUri == "" or classUri == "http://"): classUri = None
             except KeyError:
                 classUri = None                
             try:
                 propertyUri = args["propertyUri"]
-                if propertyUri is "": propertyUri = None
+                if (propertyUri == "" or propertyUri == "http://"): propertyUri = None
             except KeyError:
                 propertyUri = None
             try:
                 instanceUri = args["instanceUri"]
-                if instanceUri is "": instanceUri = None
+                if (instanceUri == "" or instanceUri == "http://"): instanceUri = None
             except KeyError:
                 instanceUri = None
             try:

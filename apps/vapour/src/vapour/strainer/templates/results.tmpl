@@ -61,7 +61,11 @@
 
           <p>
             <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri" id="labelVocabUri">URI:</label>
-	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
+            #if $vocabUri:
+            <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
+            #else:
+	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="http://" /><br/>
+            #end if
             <span id="uriHint">(example: <tt id="example">http://www.w3.org/2006/07/SWD/recipes/examples-20080421/example3</tt>)</span>
           </p>
 
@@ -79,17 +83,29 @@
                   
           <p>
             <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
+            #if $classUri:
 	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
+            #else:
+            <input class="uri" type="text" size="50" name="classUri" id="classUri" value="http://" />
+            #end if
           </p>
 
           <p>
             <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
+            #if $propertyUri:
 	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri" />
+            #else:
+	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="http://" />
+            #end if
           </p>
 
           <p>
             <label title="URI of an instance in the vocabulary" for="instanceUri" class="uri">Instance URI:</label>
+            #if $instanceUri:
 	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="$instanceUri" />
+            #else:
+	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="http://" />
+            #end if
           </p>
 
           <p>
