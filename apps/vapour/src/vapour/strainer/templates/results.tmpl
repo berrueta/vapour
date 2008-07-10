@@ -156,9 +156,14 @@
             if it could be "disabled" if the checkbox above is not checked -->
             <label for="defaultResponse">Expected default response (without content negotiation)</label>
             <select name="defaultResponse" id="defaultResponse">
+              #if $defaultResponse == "dontmind":
+                <option value="dontmind" selected="selected">I don't mind</option>
+              #else:
+                <option value="dontmind">I don't mind</option>
+              #end if
               #if $defaultResponse == "rdfxml":
                 <option value="rdfxml" selected="selected">RDF/XML</option>
-             #else:
+              #else:
                 <option value="rdfxml">RDF/XML</option> 
               #end if
               #if $defaultResponse == "html":
@@ -166,17 +171,12 @@
               #else:
                 <option value="html">(X)HTML</option>
               #end if
-              #if $defaultResponse == "dontmind":
-                <option value="dontmind" selected="selected">I don't mind</option>
-              #else:
-                <option value="dontmind">I don't mind</option>
-              #end if
             </select>
           </p>
           </div>
           </fieldset>
 
-          #if not ($validateRDF or $htmlVersions or $defaultResponse!="rdfxml"):
+          #if not ($validateRDF or $htmlVersions or $defaultResponse!="dontmind"):
           <script type="text/javascript">
             document.getElementById("advancedOptionsSubform").setAttribute("style", document.getElementById("advancedOptionsSubform").getAttribute("style") + "; display:none;");
             document.getElementById("advancedOptionsLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
