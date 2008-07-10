@@ -122,7 +122,10 @@
           </fieldset>
 
           #if not ($classUri or $propertyUri or $instanceUri or $autodetectUris):
-          <script type="text/javascript">document.getElementById("vocabularyValidationSubform").setAttribute("style", document.getElementById("vocabularyValidationSubform").getAttribute("style") + "; display:none;");</script>
+          <script type="text/javascript">
+            document.getElementById("vocabularyValidationSubform").setAttribute("style", document.getElementById("vocabularyValidationSubform").getAttribute("style") + "; display:none;");
+            document.getElementById("vocabularyValidationLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
+          </script>
 	      #end if
 
           <fieldset id="advancedOptionsFieldset">
@@ -174,7 +177,10 @@
           </fieldset>
 
           #if not ($validateRDF or $htmlVersions or $defaultResponse!="rdfxml"):
-          <script type="text/javascript">document.getElementById("advancedOptionsSubform").setAttribute("style", document.getElementById("advancedOptionsSubform").getAttribute("style") + "; display:none;");</script>
+          <script type="text/javascript">
+            document.getElementById("advancedOptionsSubform").setAttribute("style", document.getElementById("advancedOptionsSubform").getAttribute("style") + "; display:none;");
+            document.getElementById("advancedOptionsLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
+          </script>
 	      #end if
 
           <p class="submit_button"><input type="submit" value="Check" /></p>      
