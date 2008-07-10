@@ -449,7 +449,7 @@ div#footer p#logo {
 .shoHideTitle
 {
 	clear: both;
-	background-image: url("arrow-closed.png");
+	background-image: url("arrow-open.png");
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
