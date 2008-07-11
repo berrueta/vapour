@@ -108,10 +108,13 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method):
         graph.add((requestResource, RDF["type"], HTTP["GetRequest"]))
     else:
         graph.add((requestResource, RDF["type"], HTTP["HeadRequest"]))        
+    # FIXME: the next property may be deprecated
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
+    graph.add((requestResource, HTTP["absoluteURI"], Literal(url)))
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
     graph.add((requestResource, HTTP["user-agent"], Literal(userAgentString)))
+    graph.add((requestResource, HTTP["version"], Literal("1.1")))
         
     # properties of the responseResource
     graph.add((responseResource, RDF["type"], HTTP["Response"]))
@@ -120,6 +123,9 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method):
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):
         graph.add((responseResource, HTTP["content-type"], Literal(contentType)))
+    
+    # links the requestResource to the responseResource
+    graph.add((requestResource, HTTP["response"], responseResource))
     
     return testSubjectResource
 
