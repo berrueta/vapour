@@ -8,6 +8,15 @@ function example() {
 	node.onclick = function() { document.getElementById("vocabUri").value=this.innerHTML };
 }
 
+function cleanInputs() {
+    var inputs = new Array("vocabUri", "classUri", "propertyUri", "instanceUri");
+    for (var i=0; i<inputs.length; i++) {
+	    var input = document.getElementById(inputs[i]);
+        input.onfocus = function() { if(this.value==this.defaultValue) this.value=''; };
+	    input.onblur = function() { if(this.value=='') this.value=this.defaultValue; };
+    }
+}
+
 function showHideForm() {
     //vocabulary validation legend
     var vocabularyValidationLegend = document.getElementById("vocabularyValidationLegend");
@@ -34,5 +43,6 @@ function addLoadEvent(func) {
 }
 
 addLoadEvent(example);
+addLoadEvent(cleanInputs);
 addLoadEvent(showHideForm);
 
