@@ -111,7 +111,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
     # FIXME: the next property may be deprecated
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
     graph.add((requestResource, HTTP["absoluteURI"], Literal(url)))
-    graph.add((requestResource, HTTP["abs_path"], Literal(path)))
+    graph.add((requestResource, HTTP["abs_path"], Literal(getPathParamsAndQuery(url))))
     graph.add((requestResource, HTTP["host"], Literal(host)))
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
@@ -130,6 +130,11 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
     graph.add((requestResource, HTTP["response"], responseResource))
     
     return testSubjectResource
+
+def getPathParamsAndQuery(url):
+    parsedUrl = urlparse.urlparse(url) # (protocol,server,path,params,query,fragment)
+    newUrl = ("", "", parsedUrl[2], parsedUrl[3], parsedUrl[4], "")
+    return urlparse.urlunparse(newUrl)
 
 
 ###########################################################
