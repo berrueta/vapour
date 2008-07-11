@@ -125,6 +125,8 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):
         graph.add((responseResource, HTTP["content-type"], Literal(contentType)))
+    if (httpStatus >= 400):
+        addFormattedBody(graph, responseResource, response)
     
     # links the requestResource to the responseResource
     graph.add((requestResource, HTTP["response"], responseResource))
@@ -136,6 +138,12 @@ def getPathParamsAndQuery(url):
     newUrl = ("", "", parsedUrl[2], parsedUrl[3], parsedUrl[4], "")
     return urlparse.urlunparse(newUrl)
 
+def addFormattedBody(graph, responseResource, response):
+    object = None
+    if response.getheader("Content-Type").startswith("text/plain"):
+        object = Literal(str(response.read()))
+    if object is not None:
+        graph.add((responseResource, HTTP["body"], object))
 
 ###########################################################
 # debug code
