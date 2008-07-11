@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
-         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
-         xmlns:doap="http://usefulinc.com/ns/doap#" 
-         xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-         xmlns:admin="http://webns.net/mvcb/" 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:doap="http://usefulinc.com/ns/doap#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xml:lang="en"
 >
 
   <rdf:Description rdf:about="">
-    <admin:generatorAgent rdf:resource="http://doapy.bonjourlesmouettes.org/doap-a-matic"/>
+    <rdfs:label>Vapour's DOAP document</rdfs:label>
+    <foaf:primaryTopic rdf:resource="http://vapour.sourceforge.net/doap#vapour"/>
   </rdf:Description>
 
-  <doap:Project rdf:about="http://vapour.sourceforge.net/resources/doap.rdf#vapour">
+  <doap:Project rdf:about="http://vapour.sourceforge.net/doap#vapour">
 
     <doap:name>Vapour</doap:name>
     <doap:description xml:lang="en">a Linked Data validator</doap:description>
