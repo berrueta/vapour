@@ -2,6 +2,8 @@
 RewriteEngine On
 RewriteRule ^doap$ /resources/doap.rdf [R=303]
 
-AddType application/xhtml+xml .html
+#FIXME: conditionals in mod_mime
+#AddType application/xhtml+xml .html
+
 AddType application/rdf+xml .rdf
 
