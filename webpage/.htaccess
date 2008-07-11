@@ -2,8 +2,11 @@
 RewriteEngine On
 RewriteRule ^doap$ /resources/doap.rdf [R=303]
 
-#FIXME: conditionals in mod_mime
-#AddType application/xhtml+xml .html
-
+AddType application/xhtml+xml .html
 AddType application/rdf+xml .rdf
+
+RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml
+RewriteCond %{HTTP_ACCEPT} (text/html|\*/\*)
+RewriteCond %{REQUEST_FILENAME} .*\.html
+RewriteRule ^.*$ - "[T=text/html,L]"
 
