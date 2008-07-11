@@ -81,7 +81,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
     select = (
               "?testSub", # 0
               "?testSubTitle", # 1
-              "?uri", # 2
+              "?absoluteUri", # 2
 
               "?responseCode", # 3
               "?responseContentType", # 4
@@ -96,6 +96,8 @@ def getHttpTracesFromModel(model, testRequirementUri):
               "?previousRequestCount", # 11
               "?requestType", # 12
               "?requestTypeLabel", #13
+              "?requestAbsPath", #14
+              "?requestHost", #15
               )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
@@ -103,11 +105,13 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?testSub", RDF["type"], EARL["TestSubject"]),
         ("?testSub", DC["title"], "?testSubTitle"),
         ("?testSub", EARL["httpRequest"], "?request"),
-        ("?request", URI["uri"], "?uri"),
+        ("?request", HTTP["absoluteURI"], "?absoluteUri"),
         ("?testSub", EARL["httpResponse"], "?response"),
         ("?response", HTTP["responseCode"], "?responseCode"),
         ("?request", RDF["type"], "?requestType"),
         ("?requestType", RDFS["label"], "?requestTypeLabel"),
+        ("?request", HTTP["abs_path"], "?requestAbsPath"),
+        ("?request", HTTP["host"], "?requestHost"),
         ("?testSub", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
@@ -146,7 +150,7 @@ def getFinalUriFromModel(model, testRequirementUri):
         ("?testSubject", EARL["httpResponse"], "?httpResponse"),
         ("?httpResponse", HTTP["content-type"], "?contentType"),
         ("?httpResponse", HTTP["responseCode"], "?responseCode"),
-        ("?getRequest", URI["uri"], "?finalUri")
+        ("?getRequest", HTTP["absoluteURI"], "?finalUri")
     ])
     return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]
 
