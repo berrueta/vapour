@@ -49,25 +49,25 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     Returns a duple containing: firstly, the test subject resource
     (note that there is only one, because this function does not
      handle HTTP redirects); secondly, the HTTP response object.'''
-    parsedUrl = urlparse.urlparse(url)   # (_,server,path,_,_,_)
-    server = parsedUrl[1]
+    parsedUrl = urlparse.urlparse(url)   # (_,host,path,_,_,_)
+    host = parsedUrl[1]
     path = parsedUrl[2]
     
     if allowIntranet is False:
-        # FIXME: skip DNS resolution if the server is already an IP address
-        ipList = dns.resolver.query(str(server))
+        # FIXME: skip DNS resolution if the host is already an IP address
+        ipList = dns.resolver.query(str(host))
         for ip in ipList:
             if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
                 raise ForbiddenAddress(str(ip))
     
-    conn = httplib.HTTPConnection(server)
+    conn = httplib.HTTPConnection(host)
     headers = {"User-agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
     conn.request(method, path, headers = headers)
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, host, path)
     
     # makes a cross-link between the previous subject resource
     # and the new one
@@ -79,7 +79,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     
 ###########################################################
 
-def addToGraph(graph, url, accept, response, previousRequestCount, method):
+def addToGraph(graph, url, accept, response, previousRequestCount, method, host, path):
     '''Creates a new test subject resource and fills its properties.
     
     The new test subject resource is a blank node, and
@@ -111,6 +111,8 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method):
     # FIXME: the next property may be deprecated
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
     graph.add((requestResource, HTTP["absoluteURI"], Literal(url)))
+    graph.add((requestResource, HTTP["abs_path"], Literal(path)))
+    graph.add((requestResource, HTTP["host"], Literal(host)))
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
     graph.add((requestResource, HTTP["user-agent"], Literal(userAgentString)))
