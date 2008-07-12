@@ -64,7 +64,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     headers = {"User-agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
-    conn.request(method, path, headers = headers)
+    conn.request(method, getPathParamsAndQuery(url), headers = headers)
     response = conn.getresponse()
     
     testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, host, path)
