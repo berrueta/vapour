@@ -79,20 +79,22 @@ def getBestFormat(accceptHeader):
         else:
             mime = splitted[0]
             q = float("1.0")
-
+        while (mime[0]==" "):
+            mime = mime[1:]
+        while (mime[-1]==" "):
+            mime = mime[:-1]
         if not mimes.has_key(q):
             mimes[q] = []
-
         mimes[q].append(mime)
 
     mimes.sort()
     mimes.reverse()
     
-    for key in mimes.keys():
-        if ("text/html" in mimes[key] or "application/xhtml+xml" in mimes[key]):
+    for q, mime in mimes.items():
+        print mime
+        if ("application/xhtml+xml" in mime or "text/html" in mime):
             return "html"
-        if ("application/rdf+xml" in mimes[key]):
+        if ("application/rdf+xml" in mime):
             return "rdf"
-
-    return "html" #FIXME
+    return "html"
 
