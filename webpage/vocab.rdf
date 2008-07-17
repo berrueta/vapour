@@ -55,7 +55,7 @@
   </rdf:Property>
 
   <rdfs:Class rdf:about="#AnyResource">
-    <rdfs:label xml:lang="en">any kind of web resource</rdfs:label>
+    <rdfs:label xml:lang="en">any kind of resource</rdfs:label>
   </rdfs:Class>
 
   <rdfs:Class rdf:about="#InformationResource">
