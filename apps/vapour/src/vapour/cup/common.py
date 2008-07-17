@@ -1,4 +1,5 @@
 import os
+import sys
 from rdflib.Graph import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 from rdflib.sparql import sparqlGraph
@@ -10,7 +11,7 @@ pathToTemplates = "../strainer/templates"
 pathToLog = "../../../log/vapour.log"  
 allowIntranet = False
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s", filename=pathToLog, filemode="w+")
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s", stream=sys.stderr)
 
 def createStore():
     store = Graph()
@@ -46,7 +47,7 @@ def readEnvironment():
     global allowIntranet
     if os.environ.get("VAPOUR_ALLOW_INTRANET"):
         allowIntranet = os.environ.get("VAPOUR_ALLOW_INTRANET") is "1"
-    logging.debug("Allow intranet addresses? (VAPOUR_ALLOW_INTRANET): " + allowIntranet)
+    logging.debug("Allow intranet addresses? (VAPOUR_ALLOW_INTRANET): " + str(allowIntranet))
 
 def clearLoggerHandlers(logger):
 	#because logger prints duplicate message, and I don't know how to fix it
