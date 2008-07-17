@@ -91,7 +91,6 @@ def getBestFormat(accceptHeader):
     mimes.reverse()
     
     for q, mime in mimes.items():
-        print mime
         if ("application/xhtml+xml" in mime or "text/html" in mime):
             return "html"
         if ("application/rdf+xml" in mime):
