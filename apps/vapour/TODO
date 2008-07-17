@@ -1,3 +1,0 @@
-- implements content negotiation on webpy for reports
-- autodetect only classes and properties defined in the vocabulary analized (non external)
-
