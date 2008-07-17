@@ -14,7 +14,6 @@ resourceBaseUri = "http://vapour.sf.net/resources"
 
 class cup:
       def GET(self, getArgs):
-            web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
             args = web.input()
             try:
                 vocabUri = args["vocabUri"]
@@ -113,22 +112,24 @@ class cup:
                         store.parse(common.pathToRdfFiles + "/http.rdf")        
                         store.parse(common.pathToRdfFiles + "/vocab.rdf")        
                         model = common.createModel(store)
-                        web.header("Content-Type", "application/xhtml+xml", unique=True)
+                        web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
                                                                autodetectUrisIfEmpty, 
                                                                validateRDF, htmlVersions, defaultResponse, namespaceFlavour, 
                                                                validRecipes, resourceBaseUri, common.pathToTemplates))
                     elif format == "rdf":
-                        web.header("Content-Type", "application/rdf+xml", unique=True)
+                        web.header("Content-Type", "application/rdf+xml; charset=utf-8")
                         web.output(store.serialize(format="pretty-xml"))
                     else:
+                        web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                         web.ctx.status = "400 Bad Request"
                         web.output("<p>Unknown format " + format + "</p>")
                 else:  # vocabUri is None
-                    web.header("Content-Type", "application/xhtml+xml", unique=True)
+                    web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                     web.output(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
             except Exception, e:
                 logger.error(str(e))
+                web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                 #web.internalerror()
                 web.output(strainer.exceptionInHTML(e, resourceBaseUri, common.pathToTemplates))
 
