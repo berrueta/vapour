@@ -1,8 +1,8 @@
-#!/usr/bin/python2.4
+#!/usr/bin/python
 
 #patch to work inside apache (uncomment these lines)
-import sys
-sys.path.append('../..')
+#import sys
+#sys.path.append('../..')
 
 import web
 import random, traceback
@@ -10,7 +10,7 @@ from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 
-resourceBaseUri = "http://localhost/vapourweb/resources"
+resourceBaseUri = "http://vapour.sf.net/resources"
 
 class cup:
       def GET(self, getArgs):
