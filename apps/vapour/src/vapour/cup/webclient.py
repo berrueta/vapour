@@ -105,6 +105,7 @@ class cup:
                         namespaceFlavour = None
                         validRecipes = []
                     
+                    web.header("Vary", "Accept")
                     if format == "html":        
                         store.parse(common.pathToRdfFiles + "/vapour.rdf")
                         store.parse(common.pathToRdfFiles + "/recipes.rdf")
