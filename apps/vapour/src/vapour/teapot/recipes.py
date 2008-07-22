@@ -1,3 +1,6 @@
+from rdflib.sparql.bison import Parse
+from vapour.namespaces import *
+from rdflib.sparql import Query
 from rdflib import Graph
 from httpdialog import followRedirects
 from asserts import *
@@ -36,6 +39,8 @@ def checkRecipes(graph, resourcesToCheck, validatorOptions):
     
         #for i in range(0,8):
          #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
+    if validatorOptions.htmlVersions:
+        checkVary(graph, validatorOptions)
 
 def checkWithoutAcceptHeader(graph, resource, validatorOptions):
     scenarioDescription = " (without content negotiation)"
@@ -70,7 +75,7 @@ def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
     scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
     requestedContentType = mimetypes.mixed[mixNum]
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, "GET")    
-    
+
 def runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, httpMethod):
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
     (rootTestSubject, httpResponse) = followRedirects(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod)
@@ -87,6 +92,44 @@ def runScenario(graph, resource, scenarioDescription, requestedContentType, vali
         assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpResponse, rootTestSubject, testRequirement)
     httpRange14Conclusions(graph, rootTestSubject)
     return httpResponse
+
+def checkVary(graph, validatorOptions):
+    query = """
+    SELECT DISTINCT ?testSubject1 ?testSubject2 ?vary1 ?vary2 ?testReq1 ?testReq2 
+    WHERE {
+      ?testReq1     dct:hasPart       ?assert1 .
+      ?testReq2     dct:hasPart       ?assert2 .
+      ?assert1      earl:subject      ?testSubject1 .
+      ?assert2      earl:subject      ?testSubject2 .
+      ?testSubject1 earl:httpRequest  ?request1 .
+      ?testSubject2 earl:httpRequest  ?request2 .
+      ?request1     http:response     ?response1 .
+      ?request2     http:response     ?response2 .
+      ?request1     uri:uri           ?uri1 .
+      ?request2     uri:uri           ?uri2 .
+      ?request1     http:accept       ?accept1 .
+      ?request2     http:accept       ?accept2 .
+      ?response1    rdf:type          http:Response .
+      ?response2    rdf:type          http:Response .
+      ?response1    http:content-type ?contentType1 .
+      ?response2    http:content-type ?contentType2 .
+      ?response1    http:responseCode ?responseCode1 .
+      ?response2    http:responseCode ?responseCode2 .
+      FILTER (?uri1 = ?uri2) .
+      FILTER (regex(?contentType1, '^application/rdf')) .
+      FILTER (regex(?contentType2, '^(text/html)|(application/xhtml)')) .
+      FILTER (?responseCode1 = 200) .
+      FILTER (?responseCode2 = 200) .
+      OPTIONAL {
+        ?response1 http:vary ?vary1 .
+        ?response2 http:vary ?vary2 .
+      } .
+    }"""
+    tuples = graph.query(Parse(query), initNs=bindings).serialize('python')
+    for t in tuples:
+        testResult = t[2] is not None and t[3] is not None and ("Accept" in t[2]) and ("Accept" in t[3])
+        assertVaryHeader(graph, t[0], testResult, t[4])
+        assertVaryHeader(graph, t[1], testResult, t[5])
 
 if __name__ == "__main__":
     store = Graph()

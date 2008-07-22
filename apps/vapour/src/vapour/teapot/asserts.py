@@ -37,6 +37,10 @@ def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     result = (mimetypes.rdfXml in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
+def assertVaryHeader(graph, testSubject, validity, testRequirement):
+    addAssertion(graph, testSubject, RECIPES["TestResponseContainsVary"], validity, testRequirement)
+    
+
 #########################################################
 
 def addAssertion(graph, testSubject, test, validity, testRequirement):
@@ -58,11 +62,9 @@ def addAssertion(graph, testSubject, test, validity, testRequirement):
     else:
         validityResource = EARL["fail"]
     graph.add((resultSubject, EARL["validity"], validityResource))
-    
-    graph.add((assertion, DCT["isPartOf"], testRequirement))
+
+    #graph.add((assertion, DCT["isPartOf"], testRequirement))
     graph.add((testRequirement, DCT["hasPart"], assertion))
-    
-    return assertion
 
 def addTestRequirement(graph, title, order):
     global reqCount
