@@ -308,6 +308,9 @@
 			    #if $trace[3] == 303 or $trace[3] == 302:
 			    <span class="httpHeader">Location: $trace[5]</span>
 			    #end if
+                            #if $trace[3] == 200 and $trace[16] is not None:
+                            <span class="httpHeader">Vary: $trace[16]</span>
+                            #end if
 	         </div> <!-- /responseInner -->
 	       </div> <!-- /response -->
 	       #end for
