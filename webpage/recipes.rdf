@@ -97,4 +97,15 @@
     <!-- dc:identifier -->
   </earl:TestCase>
 
+  <earl:TestCase rdf:about="#TestResponseContainsVary">
+    <dc:title xml:lang="en">The response should contain a 'Vary' header</dc:title>
+    <dc:description xml:lang="en">
+      The response should contain a 'Vary: Accept' header to
+      inform the requester that more than one representation is
+      available from the same URI.
+    </dc:description>
+    <!-- FIXME: There is no definition for Vary in the HTTP vocab -->
+    <vapour:propertyUnderTest rdf:resource="&http;vary"/>
+  </earl:TestCase>
+
 </rdf:RDF>
