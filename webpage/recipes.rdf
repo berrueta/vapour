@@ -11,21 +11,6 @@
     xml:base="http://vapour.sourceforge.net/recipes.rdf"
     >
 
-  <!-- RECIPE 1 ************************************************** -->
-  
-  <!--
-  <earl:TestRequirement rdf:about="#Recipe1Suite">
-    <dc:title xml:lang="en">Recipe 1 test suite</dc:title>
-    <dc:description xml:lang="en">Recipe 1 as specified in the Recipes document</dc:description>
-    <dct:hasPart rdf:resource="#Recipe1TestVocabularyResponseCode" />
-    <dct:hasPart rdf:resource="#Recipe1TestVocabularyContentType" />
-    <dct:hasPart rdf:resource="#Recipe1TestClassResponseCode" />
-    <dct:hasPart rdf:resource="#Recipe1TestClassContentType" />
-    <dct:hasPart rdf:resource="#Recipe1TestPropertyResponseCode" />
-    <dct:hasPart rdf:resource="#Recipe1TestPropertyContentType" />
-  </earl:TestRequirement>
-  -->
-
   <earl:TestCase rdf:about="#TestResponseCode200">
     <dc:title xml:lang="en">HTTP response code should be 200</dc:title>
     <dc:description xml:lang="en">
