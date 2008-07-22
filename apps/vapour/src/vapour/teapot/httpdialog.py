@@ -52,7 +52,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     parsedUrl = urlparse.urlparse(url)   # (_,host,path,_,_,_)
     host = parsedUrl[1]
     path = parsedUrl[2]
-    
+
     if allowIntranet is False:
         # FIXME: skip DNS resolution if the host is already an IP address
         ipList = dns.resolver.query(str(host))
@@ -88,6 +88,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
     httpStatus  = response.status
     location    = response.getheader("Location")
     contentType = response.getheader("Content-Type")
+    vary        = response.getheader("Vary")
 
     # creates the new resources
     testSubjectResource = BNode()
@@ -125,6 +126,8 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):
         graph.add((responseResource, HTTP["content-type"], Literal(contentType)))
+    if (vary is not None):
+        graph.add((responseResource, HTTP["vary"], Literal(vary)))
     if (httpStatus >= 400):
         addFormattedBody(graph, responseResource, response)
     
