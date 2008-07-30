@@ -87,6 +87,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
     test subject resource.'''
     httpStatus  = response.status
     location    = response.getheader("Location")
+    contentLocation = response.getheader("Content-Location")
     contentType = response.getheader("Content-Type")
     vary        = response.getheader("Vary")
 
@@ -126,6 +127,8 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):
         graph.add((responseResource, HTTP["content-type"], Literal(contentType)))
+    if (contentLocation is not None):
+        graph.add((responseResource, HTTP["content-location"], Literal(contentLocation)))
     if (vary is not None):
         graph.add((responseResource, HTTP["vary"], Literal(vary)))
     if (httpStatus >= 400):
