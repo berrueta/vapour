@@ -13,7 +13,7 @@ def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpRes
         body = httpResponse.read()
         g = ConjunctiveGraph()
         try:
-            g.parse(StringIO(body))
+            g.parse(StringIO(body), getRequestUri(graph, testSubject))
             addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], True, testRequirement)
         except Exception, e:
             addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], False, testRequirement)
