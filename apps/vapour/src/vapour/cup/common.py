@@ -11,7 +11,7 @@ pathToTemplates = "../strainer/templates"
 pathToLog = "../../../log/vapour.log"  
 allowIntranet = False
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s", stream=sys.stderr)
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
 
 def createStore():
     store = Graph()
