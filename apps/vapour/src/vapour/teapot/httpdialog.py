@@ -55,7 +55,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
 
     if allowIntranet is False:
         # FIXME: skip DNS resolution if the host is already an IP address
-        ipList = dns.resolver.query(str(host))
+        ipList = dns.resolver.query(str(host).split(":")[0])
         for ip in ipList:
             if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
                 raise ForbiddenAddress(str(ip))
