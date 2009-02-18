@@ -8,18 +8,18 @@ import datetime
 import dns.resolver
 from common import allowIntranet # FIXME: horrible hack, global variable!
 
-userAgentString = "vapour.sourceforge.net"
 maxRedirects = 3
+defaultUserAgent = "vapour.sourceforge.net"
 
 ###########################################################
 
-def followRedirects(graph, what, url, accept = None, method = "GET"):
+def followRedirects(graph, what, url, accept = None, method = "GET", userAgent = defaultUserAgent):
     '''Executes a multi-stage HTTP dialog following the redirects.
     
     Returns an array with two elements: firstly, the first
     test subject resource; secondly, the HTTP response object.'''
     redirectsCount = 0
-    r = simpleRequest(graph, url, accept, redirectsCount, None, method)
+    r = simpleRequest(graph, url, accept, redirectsCount, None, method, userAgent)
     firstTestSubjectResource = r[0]
 
     response = r[1]
@@ -35,7 +35,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
         if (redirectsCount > maxRedirects):
             raise TooManyRedirections
 
-        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method)
+        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method, userAgent)
         response = r[1]
         
     labelTestSubjects(graph, firstTestSubjectResource, what)                
@@ -43,7 +43,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET"):
     
 ###########################################################
         
-def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource, method):    
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource, method, userAgent):    
     '''Executes a single HTTP request and receives a response.
     
     Returns a duple containing: firstly, the test subject resource
@@ -61,13 +61,13 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
                 raise ForbiddenAddress(str(ip))
     
     conn = httplib.HTTPConnection(host)
-    headers = {"User-Agent": userAgentString}
+    headers = {"User-Agent": userAgent}
     if (accept is not None):
         headers["Accept"] = accept
     conn.request(method, getPathParamsAndQuery(url), headers = headers)
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, host, path)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path)
     
     # makes a cross-link between the previous subject resource
     # and the new one
@@ -79,7 +79,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     
 ###########################################################
 
-def addToGraph(graph, url, accept, response, previousRequestCount, method, host, path):
+def addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path):
     '''Creates a new test subject resource and fills its properties.
     
     The new test subject resource is a blank node, and
@@ -117,7 +117,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, host,
     graph.add((requestResource, HTTP["host"], Literal(host)))
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
-    graph.add((requestResource, HTTP["user-agent"], Literal(userAgentString)))
+    graph.add((requestResource, HTTP["user-agent"], Literal(userAgent)))
     graph.add((requestResource, HTTP["version"], Literal("1.1")))
         
     # properties of the responseResource
