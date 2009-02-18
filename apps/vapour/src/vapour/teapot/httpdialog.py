@@ -61,7 +61,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
                 raise ForbiddenAddress(str(ip))
     
     conn = httplib.HTTPConnection(host)
-    headers = {"User-agent": userAgentString}
+    headers = {"User-Agent": userAgentString}
     if (accept is not None):
         headers["Accept"] = accept
     conn.request(method, getPathParamsAndQuery(url), headers = headers)
