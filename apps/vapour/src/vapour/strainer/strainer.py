@@ -99,6 +99,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
               "?requestAbsPath", #14
               "?requestHost", #15
               "?responseVary", #16
+              "?userAgent" #17
               )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
@@ -117,6 +118,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
     ])
     optional = [
         GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
+        GraphPattern([("?request", HTTP["user-agent"], "?userAgent")]),
         GraphPattern([("?response", HTTP["content-type"], "?responseContentType")]),
         GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
         GraphPattern([("?response", HTTP["vary"], "?responseVary")]),
