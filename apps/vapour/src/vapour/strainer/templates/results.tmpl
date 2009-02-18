@@ -266,6 +266,9 @@
 	  	         #if $trace[10] != None:
 		  	     <span class="httpHeader">Accept: $trace[10]</span>
 		         #end if
+	  	         #if $trace[17] != None:
+		  	     <span class="httpHeader">User-Agent: $trace[17]</span>
+		         #end if
 	  	      </div> <!-- /requestInner -->
            </div> <!-- /request -->
 	       <div class="response">
