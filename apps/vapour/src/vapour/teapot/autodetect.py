@@ -16,10 +16,10 @@ RECIPE4 = { "name": "Recipe 4", "link": "http://www.w3.org/TR/swbp-vocab-pub/#re
 RECIPE5 = { "name": "Recipe 5", "link": "http://www.w3.org/TR/swbp-vocab-pub/#recipe5" }
 RECIPE6 = { "name": "Recipe 6", "link": "http://www.w3.org/TR/swbp-vocab-pub/#recipe6" }
 
-def autodetectUris(graph, vocabUri):
+def autodetectUris(graph, vocabUri, userAgent):
     contentType = mimetypes.rdfXml
     try:
-        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET" )
+        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET", userAgent = userAgent)
     except Exception, e:
         raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")")
 

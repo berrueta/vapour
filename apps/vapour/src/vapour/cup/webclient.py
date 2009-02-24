@@ -41,6 +41,12 @@ class cup:
                     defaultResponse = "dontmind" # default value
             except KeyError:
                 defaultResponse = "dontmind"
+            try:
+                userAgent = args["userAgent"]
+                if userAgent == "":
+                    userAgent = options.defaultUserAgent
+            except KeyError:
+                userAgent = options.defaultUserAgent
 
             try:
                 format = args["format"]
@@ -72,7 +78,7 @@ class cup:
                 if vocabUri is not None:
                     logger.info("request over vocabulary on " + vocabUri)
                     if (classUri is None and autodetectUrisIfEmpty) or (propertyUri is None and autodetectUrisIfEmpty):
-                        (classUris, propertyUris, instanceUris) = autodetect.autodetectUris(store, vocabUri)    
+                        (classUris, propertyUris, instanceUris) = autodetect.autodetectUris(store, vocabUri, userAgent)    
                         random.seed()
                         if autodetectUrisIfEmpty and classUri is None and classUris is not None and len(classUris) > 0:
                             classUri = random.choice(classUris)
@@ -95,7 +101,7 @@ class cup:
                             resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
                     
                     # defines the options of the validator
-                    validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF)
+                    validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent)
                     
                     recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
                     if classUri is not None:
@@ -116,7 +122,7 @@ class cup:
                         web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                         web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
                                                                autodetectUrisIfEmpty, 
-                                                               validateRDF, htmlVersions, defaultResponse, namespaceFlavour, 
+                                                               validatorOptions, namespaceFlavour, 
                                                                validRecipes, resourceBaseUri, common.pathToTemplates))
                     elif format == "rdf":
                         web.header("Content-Type", "application/rdf+xml; charset=utf-8")

@@ -4,6 +4,7 @@ from rdflib.sparql.sparqlGraph import SPARQLGraph
 from rdflib.sparql.graphPattern import GraphPattern
 from rdflib.sparql import Query
 from vapour.namespaces import *
+from vapour.teapot import options
 import httplib
 import urllib
 from Cheetah.Template import Template
@@ -200,7 +201,7 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, validateRDF=False, htmlVersions=False, defaultResponse = "dontmind", namespaceFlavour=None, validRecipes=[]):
+def prepareData(resourceBaseUri, validatorOptions, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
@@ -211,9 +212,10 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['propertyUri'] = propertyUri
     data['instanceUri'] = instanceUri
     data['autodetectUris'] = autodetectUris
-    data['validateRDF'] = validateRDF
-    data['htmlVersions'] = htmlVersions
-    data['defaultResponse'] = defaultResponse
+    data['validateRDF'] = validatorOptions.validateRdf
+    data['htmlVersions'] = validatorOptions.htmlVersions
+    data['defaultResponse'] = validatorOptions.defaultResponse
+    data['userAgent'] = validatorOptions.userAgent
     data['namespaceFlavour'] = namespaceFlavour
     data['validRecipes'] = validRecipes
     
@@ -224,18 +226,18 @@ def prepareData(resourceBaseUri, vocabUri="", classUri="", propertyUri="", insta
     data['httpTraces'] = {}
     data['finalUris'] = {}
     data['httpRange14Conclusions'] = {}
-    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validateRDF)),'htmlVersions':str(int(htmlVersions)),'format':'rdf', 'defaultResponse':defaultResponse})).replace("&","&amp;")
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validatorOptions.validateRdf)),'htmlVersions':str(int(validatorOptions.htmlVersions)),'format':'rdf', 'defaultResponse':validatorOptions.defaultResponse})).replace("&","&amp;")
     return data
 
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, printForm,
                        autodetectUris, 
-                       validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes,
+                       validatorOptions, namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = "templates"):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, vocabUri, classUri, propertyUri, instanceUri, printForm, autodetectUris, validateRDF, htmlVersions, defaultResponse, namespaceFlavour, validRecipes)
+    data = prepareData(resourceBaseUri, validatorOptions, vocabUri, classUri, propertyUri, instanceUri, printForm, autodetectUris, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
@@ -249,7 +251,8 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, prin
     return t
 
 def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "templates"):    
-    data = prepareData(resourceBaseUri, printForm = True)
+    validatorOptions = options.ValidatorOptions()
+    data = prepareData(resourceBaseUri, printForm = True, validatorOptions = validatorOptions)
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
