@@ -1,7 +1,7 @@
 
 import sys
 from vapour.strainer import strainer
-from vapour.teapot import recipes, autodetect
+from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 import random
 
