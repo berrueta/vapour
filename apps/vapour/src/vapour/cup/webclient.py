@@ -45,6 +45,8 @@ class cup:
                 userAgent = args["userAgent"]
                 if userAgent == "":
                     userAgent = options.defaultUserAgent
+                elif "\n" in userAgent:
+                    userAgent = options.defaultUserAgent # prevent HTTP header injection
             except KeyError:
                 userAgent = options.defaultUserAgent
 
