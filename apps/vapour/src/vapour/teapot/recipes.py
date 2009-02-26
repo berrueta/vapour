@@ -33,12 +33,12 @@ def checkRecipes(graph, resourcesToCheck, validatorOptions):
         checkWithoutAcceptHeader(graph, resource, validatorOptions)
         checkWithAcceptRdf(graph, resource, validatorOptions)
         if validatorOptions.htmlVersions:
-            #checkWithAcceptHtml(graph, vocabUri, classUri, propertyUri)
-            #checkWithAcceptXhtml(graph, vocabUri, classUri, propertyUri)
+            #checkWithAcceptHtml(graph, resource, classUri, propertyUri)
+            #checkWithAcceptXhtml(graph, resource, classUri, propertyUri)
             checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions)
     
         #for i in range(0,8):
-         #   checkWithMixedAccept(graph, vocabUri, classUri, propertyUri, i)
+        #    checkWithMixedAccept(graph, resource, i, validatorOptions)
     if validatorOptions.htmlVersions:
         checkVary(graph, validatorOptions)
 
