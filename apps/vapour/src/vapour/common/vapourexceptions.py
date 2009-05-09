@@ -29,12 +29,13 @@ class ForbiddenAddress(VapourException):
     Forbidden address exception
     """
 
-    def __init__(self, ip):
+    def __init__(self, ip, url):
         VapourException.__init__(self)
-        self.ip = str(ip)
+        self.ip = ip
+        sef.url = url
 
     def __str__(self):
-        return "ForbiddenAddress: request over %s, internal IP address are forbidden" % self.ip
+        return "ForbiddenAddress: request to %s (resolves to IP: %s), internal IP address are forbidden" % (self.url, str(self.ip))
 
 class IlegalLocationValue(VapourException):
     """
