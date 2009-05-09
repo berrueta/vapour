@@ -36,6 +36,10 @@ def autodetectUris(graph, vocabUri, userAgent):
             owlOntologies = [x for x in tempGraph.subjects( RDF["type"], OWL["Ontology"] )]
             definedResources = [x for (x,y) in tempGraph.subject_objects( RDF["type"] ) ]
             
+            # remove blank nodes
+            owlClasses = filter ( lambda x : isinstance(x, URIRef), owlClasses)
+            definedResources = filter ( lambda x : isinstance(x, URIRef), definedResources)
+            
             # remove unwanted URIs
             owlClasses = filter( lambda x : not x.startswith( OWL ), owlClasses )
     
