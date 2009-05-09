@@ -58,7 +58,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
         ipList = dns.resolver.query(str(host).split(":")[0])
         for ip in ipList:
             if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
-                raise ForbiddenAddress(str(ip))
+                raise ForbiddenAddress(str(ip), url)
     
     conn = httplib.HTTPConnection(host)
     headers = {"User-Agent": userAgent}
