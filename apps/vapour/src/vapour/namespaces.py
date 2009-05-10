@@ -1,6 +1,6 @@
 from rdflib import Namespace
 
-EARL = Namespace("http://www.w3.org/ns/earl#")
+EARL = Namespace("http://www.w3.org/WAI/ER/EARL/nmg-strawman#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 OWL = Namespace("http://www.w3.org/2002/07/owl#")
