@@ -121,7 +121,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     if (accept is not None):
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
     graph.add((requestResource, HTTP["user-agent"], Literal(userAgent)))
-    graph.add((requestResource, HTTP["version"], Literal("1.1")))
+    graph.add((requestResource, HTTP["httpVersion"], Literal("1.1")))
         
     # properties of the responseResource
     graph.add((responseResource, RDF["type"], HTTP["Response"]))
