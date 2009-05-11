@@ -84,19 +84,19 @@ def getHttpTracesFromModel(model, testRequirementUri):
               "?testSubTitle", # 1
               "?absoluteUri", # 2
 
-              "?responseCode", # 3
+              "?statusCodeNumber", # 3
               "?responseContentType", # 4
               "?responseLocation",  # 5
 
-              "?responseCodeTest", # 6
-              "?responseCodeValidity", # 7
+              "?statusCodeTest", # 6
+              "?statusCodeValidity", # 7
               "?responseContentTypeTest", # 8
               "?responseContentTypeValidity", # 9
               
               "?requestAccept", # 10
               "?previousRequestCount", # 11
-              "?requestType", # 12
-              "?requestTypeLabel", #13
+              "?requestType", # 12 <-- unused
+              "?requestMethodName", #13
               "?requestAbsPath", #14
               "?requestHost", #15
               "?responseVary", #16
@@ -110,9 +110,9 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?testSub", EARL["httpRequest"], "?request"),
         ("?request", HTTP["absoluteURI"], "?absoluteUri"),
         ("?testSub", EARL["httpResponse"], "?response"),
-        ("?response", HTTP["responseCode"], "?responseCode"),
+        ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
         ("?request", RDF["type"], "?requestType"),
-        ("?requestType", RDFS["label"], "?requestTypeLabel"),
+        ("?request", HTTP["methodName"], "?requestMethodName"),
         ("?request", HTTP["abs_path"], "?requestAbsPath"),
         ("?request", HTTP["host"], "?requestHost"),
         ("?testSub", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
@@ -124,11 +124,11 @@ def getHttpTracesFromModel(model, testRequirementUri):
         GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
         GraphPattern([("?response", HTTP["vary"], "?responseVary")]),
         GraphPattern([
-                      ("?responseCodeAssertion", EARL["subject"], "?testSub"),
-                      ("?responseCodeAssertion", EARL["test"], "?responseCodeTest"),
-                      ("?responseCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["responseCode"]),
-                      ("?responseCodeAssertion", EARL["result"], "?responseCodeResult"),
-                      ("?responseCodeResult", EARL["validity"], "?responseCodeValidity")
+                      ("?statusCodeAssertion", EARL["subject"], "?testSub"),
+                      ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
+                      ("?statusCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["statusCodeNumber"]),
+                      ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
+                      ("?statusCodeResult", EARL["validity"], "?statusCodeValidity")
         ]),
         GraphPattern([
                       ("?responseContentTypeAssertion", EARL["subject"], "?testSub"),
@@ -146,15 +146,15 @@ def getHttpTracesFromModel(model, testRequirementUri):
 
 def getFinalUriFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
-    select = ("?finalUri", "?contentType", "?responseCode")
-    # FIXME: a FILTER clause should be added to check the responseCode == 200
+    select = ("?finalUri", "?contentType", "?statusCodeNumber")
+    # FIXME: a FILTER clause should be added to check the statusCodeNumber == 200
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
         ("?assertion", EARL["subject"], "?testSubject"),
         ("?testSubject", EARL["httpRequest"], "?getRequest"),
         ("?testSubject", EARL["httpResponse"], "?httpResponse"),
         ("?httpResponse", HTTP["content-type"], "?contentType"),
-        ("?httpResponse", HTTP["responseCode"], "?responseCode"),
+        ("?httpResponse", HTTP["statusCodeNumber"], "?statusCodeNumber"),
         ("?getRequest", HTTP["absoluteURI"], "?finalUri")
     ])
     return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]

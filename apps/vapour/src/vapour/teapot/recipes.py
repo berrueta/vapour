@@ -113,13 +113,13 @@ def checkVary(graph, validatorOptions):
       ?response2    rdf:type          http:Response .
       ?response1    http:content-type ?contentType1 .
       ?response2    http:content-type ?contentType2 .
-      ?response1    http:responseCode ?responseCode1 .
-      ?response2    http:responseCode ?responseCode2 .
+      ?response1    http:statusCodeNumber ?statusCodeNumber1 .
+      ?response2    http:statusCodeNumber ?statusCodeNumber2 .
       FILTER (?uri1 = ?uri2) .
       FILTER (regex(?contentType1, '^application/rdf')) .
       FILTER (regex(?contentType2, '^(text/html)|(application/xhtml)')) .
-      FILTER (?responseCode1 = 200) .
-      FILTER (?responseCode2 = 200) .
+      FILTER (?statusCodeNumber1 = 200) .
+      FILTER (?statusCodeNumber2 = 200) .
       OPTIONAL {
         ?response1 http:vary ?vary1 .
         ?response2 http:vary ?vary2 .

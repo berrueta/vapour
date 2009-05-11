@@ -22,9 +22,9 @@ def httpRange14Conclusions(graph, rootTestSubject):
         if parsedUri[5] is not "":
             graph.add( (testSubject, VAPOUR_VOCAB["httpRange14ConclusionOn"], URIRef(requestUri) ) )
             graph.add( (URIRef(requestUri), RDF["type"], VAPOUR_VOCAB["AnyResource"] ) )
-        responseCode = getResponseCode(graph, testSubject)
+        statusCodeNumber = getResponseCode(graph, testSubject)
         graph.add((testSubject, VAPOUR_VOCAB["httpRange14ConclusionOn"], URIRef(actuallyRequestedUri)))
-        if responseCode == httplib.OK:
+        if statusCodeNumber == httplib.OK:
             graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR_VOCAB["InformationResource"]))
-        elif responseCode == httplib.SEE_OTHER:
+        elif statusCodeNumber == httplib.SEE_OTHER:
             graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR_VOCAB["AnyResource"]))
