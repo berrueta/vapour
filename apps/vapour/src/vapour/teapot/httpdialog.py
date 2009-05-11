@@ -64,10 +64,12 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     headers = {"User-Agent": userAgent}
     if (accept is not None):
         headers["Accept"] = accept
+    dateRequest = datetime.datetime.now()
     conn.request(method, getPathParamsAndQuery(url), headers = headers)
+    dateResponse = datetime.datetime.now()
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path, dateRequest, dateResponse)
     
     # makes a cross-link between the previous subject resource
     # and the new one
@@ -79,7 +81,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     
 ###########################################################
 
-def addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path):
+def addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path, dateRequest, dateResponse):
     '''Creates a new test subject resource and fills its properties.
     
     The new test subject resource is a blank node, and
@@ -122,9 +124,11 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
         graph.add((requestResource, HTTP["accept"], Literal(accept)))
     graph.add((requestResource, HTTP["user-agent"], Literal(userAgent)))
     graph.add((requestResource, HTTP["httpVersion"], Literal("1.1")))
+    graph.add((requestResource, DC["date"], Literal(dateRequest))) # FIXME: use standard format
         
     # properties of the responseResource
     graph.add((responseResource, RDF["type"], HTTP["Response"]))
+    graph.add((responseResource, DC["date"], Literal(dateResponse))) # FIXME: use standard format
     graph.add((responseResource, HTTP["responseCode"], Literal(httpStatus)))
     if (location is not None): 
         graph.add((responseResource, HTTP["location"], Literal(location)))
