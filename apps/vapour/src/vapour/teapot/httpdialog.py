@@ -111,10 +111,9 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
     
     # properties of the requestResource
-    if method == "GET":
-        graph.add((requestResource, RDF["type"], HTTP["GetRequest"]))
-    else:
-        graph.add((requestResource, RDF["type"], HTTP["HeadRequest"]))        
+    graph.add((requestResource, RDF["type"], HTTP["Request"]))
+    graph.add((requestResource, HTTP["methodName"], method))
+    graph.add((requestResource, HTTP["method"], HTTP_METHODS[method]))
     # FIXME: the next property may be deprecated
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
     graph.add((requestResource, HTTP["absoluteURI"], Literal(url)))
@@ -129,7 +128,8 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     # properties of the responseResource
     graph.add((responseResource, RDF["type"], HTTP["Response"]))
     graph.add((responseResource, DC["date"], Literal(dateResponse))) # FIXME: use standard format
-    graph.add((responseResource, HTTP["responseCode"], Literal(httpStatus)))
+    graph.add((responseResource, HTTP["statusCodeNumber"], Literal(httpStatus)))
+    graph.add((responseResource, HTTP["statusCode"], HTTP_STATUS_CODES["statusCode%d" % httpStatus]))
     if (location is not None): 
         graph.add((responseResource, HTTP["location"], Literal(location)))
     if (contentType is not None):

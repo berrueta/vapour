@@ -18,7 +18,7 @@ def getRequestUri(graph, testSubject):
 
 def getResponseCode(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
-    return int(getLiteralProperty(graph, httpResponse, HTTP["responseCode"]))
+    return int(getLiteralProperty(graph, httpResponse, HTTP["statusCodeNumber"]))
 
 def getContentType(graph, testSubject):
     httpResponse = getHttpResponse(graph, testSubject)
