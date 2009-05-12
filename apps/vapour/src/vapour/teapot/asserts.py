@@ -37,13 +37,13 @@ def assertLastResponseContentTypeRdf(graph, rootTestSubject, testRequirement):
     result = (mimetypes.rdfXml in getContentType(graph, testSubject))
     addAssertion(graph, testSubject, RECIPES["TestContentTypeRdf"], result, testRequirement)
 
-def assertVaryHeader(graph, testSubject, validity, testRequirement):
-    addAssertion(graph, testSubject, RECIPES["TestResponseContainsVary"], validity, testRequirement)
+def assertVaryHeader(graph, testSubject, outcome, testRequirement):
+    addAssertion(graph, testSubject, RECIPES["TestResponseContainsVary"], outcome, testRequirement)
     
 
 #########################################################
 
-def addAssertion(graph, testSubject, test, validity, testRequirement):
+def addAssertion(graph, testSubject, test, outcome, testRequirement):
     assertion = BNode()
     resultSubject = BNode()
     
@@ -57,11 +57,11 @@ def addAssertion(graph, testSubject, test, validity, testRequirement):
     graph.add((assertion, EARL["test"], test))
     
     graph.add((resultSubject, RDF["type"], EARL["TestResult"]))
-    if (validity == True):
-        validityResource = EARL["passed"]
+    if (outcome == True):
+        outcomeResource = EARL["passed"]
     else:
-        validityResource = EARL["failed"]
-    graph.add((resultSubject, EARL["validity"], validityResource))
+        outcomeResource = EARL["failed"]
+    graph.add((resultSubject, EARL["outcome"], outcomeResource))
 
     #graph.add((assertion, DCT["isPartOf"], testRequirement))
     graph.add((testRequirement, DCT["hasPart"], assertion))

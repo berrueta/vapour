@@ -47,7 +47,7 @@ def isThereAnyFailingTest(model):
     where = GraphPattern([
         ("?assertion", RDF["type"], EARL["Assertion"]),
         ("?assertion", EARL["result"], "?result"),
-        ("?result", EARL["validity"], EARL["fail"])
+        ("?result", EARL["outcome"], EARL["fail"])
         ])
     return Query.queryObject(sparqlGr, where).ask()
 
@@ -56,8 +56,8 @@ def getResultsFromModel(model, testRequirementUri):
     select = ("?assertion", #0
               "?test", # 1
               "?testTitle", # 2
-              "?validity", # 3
-              "?validityLabel", # 4
+              "?outcome", # 3
+              "?outcomeLabel", # 4
               "?subject", # 5
               "?subjectTitle") # 6
     where = GraphPattern([          
@@ -66,8 +66,8 @@ def getResultsFromModel(model, testRequirementUri):
         ("?assertion", EARL["test"], "?test"),
         ("?test", DC["title"], "?testTitle"),
         ("?assertion", EARL["result"], "?result"),
-        ("?result", EARL["validity"], "?validity"),
-        ("?validity", DC["title"], "?validityLabel"),
+        ("?result", EARL["outcome"], "?outcome"),
+        ("?outcome", DC["title"], "?outcomeLabel"),
         ("?assertion", EARL["subject"], "?subject"),
         ("?subject", DC["title"], "?subjectTitle")
         ])
@@ -127,14 +127,14 @@ def getHttpTracesFromModel(model, testRequirementUri):
                       ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
                       ("?statusCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["statusCodeNumber"]),
                       ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
-                      ("?statusCodeResult", EARL["validity"], "?statusCodeValidity")
+                      ("?statusCodeResult", EARL["outcome"], "?statusCodeValidity")
         ]),
         GraphPattern([
                       ("?responseContentTypeAssertion", EARL["subject"], "?response"),
                       ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
                       ("?responseContentTypeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["content-type"]),
                       ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
-                      ("?responseContentTypeResult", EARL["validity"], "?responseContentTypeValidity")
+                      ("?responseContentTypeResult", EARL["outcome"], "?responseContentTypeValidity")
         ])
     ]
     results = [x for x in Query.query(sparqlGr, select, where, optional)]
