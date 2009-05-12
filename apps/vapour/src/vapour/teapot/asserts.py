@@ -58,9 +58,9 @@ def addAssertion(graph, testSubject, test, validity, testRequirement):
     
     graph.add((resultSubject, RDF["type"], EARL["TestResult"]))
     if (validity == True):
-        validityResource = EARL["pass"]
+        validityResource = EARL["passed"]
     else:
-        validityResource = EARL["fail"]
+        validityResource = EARL["failed"]
     graph.add((resultSubject, EARL["validity"], validityResource))
 
     #graph.add((assertion, DCT["isPartOf"], testRequirement))
