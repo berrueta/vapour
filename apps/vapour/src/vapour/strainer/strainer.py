@@ -80,8 +80,8 @@ def getResultsFromModel(model, testRequirementUri):
 def getHttpTracesFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
     select = (
-              "?testSub", # 0
-              "?testSubTitle", # 1
+              "?testSubject", # 0
+              "?testSubjectTitle", # 1
               "?absoluteUri", # 2
 
               "?statusCodeNumber", # 3
@@ -104,18 +104,18 @@ def getHttpTracesFromModel(model, testRequirementUri):
               )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?testSub"),
-        ("?testSub", RDF["type"], EARL["TestSubject"]),
-        ("?testSub", DC["title"], "?testSubTitle"),
-        ("?testSub", EARL["httpRequest"], "?request"),
+        ("?assertion", EARL["subject"], "?testSubject"),
+        ("?testSubject", RDF["type"], EARL["TestSubject"]),
+        ("?testSubject", DC["title"], "?testSubjectTitle"),
+        ("?testSubject", EARL["httpRequest"], "?request"),
         ("?request", HTTP["absoluteURI"], "?absoluteUri"),
-        ("?testSub", EARL["httpResponse"], "?response"),
+        ("?testSubject", EARL["httpResponse"], "?response"),
         ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
         ("?request", RDF["type"], "?requestType"),
         ("?request", HTTP["methodName"], "?requestMethodName"),
         ("?request", HTTP["abs_path"], "?requestAbsPath"),
         ("?request", HTTP["host"], "?requestHost"),
-        ("?testSub", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
+        ("?testSubject", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
         GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
@@ -124,14 +124,14 @@ def getHttpTracesFromModel(model, testRequirementUri):
         GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
         GraphPattern([("?response", HTTP["vary"], "?responseVary")]),
         GraphPattern([
-                      ("?statusCodeAssertion", EARL["subject"], "?testSub"),
+                      ("?statusCodeAssertion", EARL["subject"], "?testSubject"),
                       ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
                       ("?statusCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["statusCodeNumber"]),
                       ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
                       ("?statusCodeResult", EARL["validity"], "?statusCodeValidity")
         ]),
         GraphPattern([
-                      ("?responseContentTypeAssertion", EARL["subject"], "?testSub"),
+                      ("?responseContentTypeAssertion", EARL["subject"], "?testSubject"),
                       ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
                       ("?responseContentTypeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["content-type"]),
                       ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
