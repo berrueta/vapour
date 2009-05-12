@@ -95,14 +95,12 @@ def runScenario(graph, resource, scenarioDescription, requestedContentType, vali
 
 def checkVary(graph, validatorOptions):
     query = """
-    SELECT DISTINCT ?testSubject1 ?testSubject2 ?vary1 ?vary2 ?testReq1 ?testReq2 
+    SELECT DISTINCT ?response1 ?response2 ?vary1 ?vary2 ?testReq1 ?testReq2 
     WHERE {
       ?testReq1     dct:hasPart       ?assert1 .
       ?testReq2     dct:hasPart       ?assert2 .
-      ?assert1      earl:subject      ?testSubject1 .
-      ?assert2      earl:subject      ?testSubject2 .
-      ?testSubject1 earl:httpRequest  ?request1 .
-      ?testSubject2 earl:httpRequest  ?request2 .
+      ?assert1      earl:subject      ?response1 .
+      ?assert2      earl:subject      ?response2 .
       ?request1     http:response     ?response1 .
       ?request2     http:response     ?response2 .
       ?request1     uri:uri           ?uri1 .

@@ -80,8 +80,8 @@ def getResultsFromModel(model, testRequirementUri):
 def getHttpTracesFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
     select = (
-              "?testSubject", # 0
-              "?testSubjectTitle", # 1
+              "?response", # 0
+              "?responseTitle", # 1
               "?absoluteUri", # 2
 
               "?statusCodeNumber", # 3
@@ -104,18 +104,17 @@ def getHttpTracesFromModel(model, testRequirementUri):
               )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?testSubject"),
-        ("?testSubject", RDF["type"], EARL["TestSubject"]),
-        ("?testSubject", DC["title"], "?testSubjectTitle"),
-        ("?testSubject", EARL["httpRequest"], "?request"),
-        ("?request", HTTP["absoluteURI"], "?absoluteUri"),
-        ("?testSubject", EARL["httpResponse"], "?response"),
+        ("?assertion", EARL["subject"], "?response"),  # testSubject = response
+        ("?response", RDF["type"], EARL["TestSubject"]),
+        ("?response", DC["title"], "?responseTitle"),
         ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
+        ("?request", HTTP["response"], "?response"),
+        ("?request", HTTP["absoluteURI"], "?absoluteUri"),
         ("?request", RDF["type"], "?requestType"),
         ("?request", HTTP["methodName"], "?requestMethodName"),
         ("?request", HTTP["abs_path"], "?requestAbsPath"),
         ("?request", HTTP["host"], "?requestHost"),
-        ("?testSubject", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
+        ("?response", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
         GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
@@ -124,14 +123,14 @@ def getHttpTracesFromModel(model, testRequirementUri):
         GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
         GraphPattern([("?response", HTTP["vary"], "?responseVary")]),
         GraphPattern([
-                      ("?statusCodeAssertion", EARL["subject"], "?testSubject"),
+                      ("?statusCodeAssertion", EARL["subject"], "?response"),
                       ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
                       ("?statusCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["statusCodeNumber"]),
                       ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
                       ("?statusCodeResult", EARL["validity"], "?statusCodeValidity")
         ]),
         GraphPattern([
-                      ("?responseContentTypeAssertion", EARL["subject"], "?testSubject"),
+                      ("?responseContentTypeAssertion", EARL["subject"], "?response"),
                       ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
                       ("?responseContentTypeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["content-type"]),
                       ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
@@ -150,11 +149,10 @@ def getFinalUriFromModel(model, testRequirementUri):
     # FIXME: a FILTER clause should be added to check the statusCodeNumber == 200
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?testSubject"),
-        ("?testSubject", EARL["httpRequest"], "?getRequest"),
-        ("?testSubject", EARL["httpResponse"], "?httpResponse"),
-        ("?httpResponse", HTTP["content-type"], "?contentType"),
-        ("?httpResponse", HTTP["statusCodeNumber"], "?statusCodeNumber"),
+        ("?assertion", EARL["subject"], "?response"), # testSubject = response
+        ("?getRequest", HTTP["response"], "?response"),
+        ("?response", HTTP["content-type"], "?contentType"),
+        ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
         ("?getRequest", HTTP["absoluteURI"], "?finalUri")
     ])
     return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]
@@ -167,8 +165,8 @@ def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     )
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?testSubject"),
-        ("?testSubject", VAPOUR_VOCAB["httpRange14ConclusionOn"], "?resource"),
+        ("?assertion", EARL["subject"], "?response"),
+        ("?response", VAPOUR_VOCAB["httpRange14ConclusionOn"], "?resource"),
         ("?resource", RDF["type"], "?resourceType"),
         ("?resourceType", RDFS["label"], "?resourceTypeLabel")
     ])
