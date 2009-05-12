@@ -25,12 +25,11 @@ def getContentType(graph, testSubject):
     return str(getLiteralProperty(graph, httpResponse, HTTP["content-type"]))
 
 def getHttpRequest(graph, testSubject):
-    l = [x for x in graph.objects(testSubject, EARL["httpRequest"])]
+    l = [x for x in graph.subjects(HTTP["response"], testSubject)]
     return l[0]
 
 def getHttpResponse(graph, testSubject):
-    l = [x for x in graph.objects(testSubject, EARL["httpResponse"])]
-    return l[0]
+    return testSubject # testSubject = response
 
 def getLiteralProperty(graph, resource, property):
     l = [x for x in graph.objects(resource, property)]

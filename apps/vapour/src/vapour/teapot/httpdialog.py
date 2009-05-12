@@ -96,18 +96,15 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     # creates the new resources
     testSubjectResource = BNode()
     requestResource     = BNode()
-    responseResource    = BNode()
+    responseResource    = testSubjectResource # they are the same resource
     
     # link the resources
-    graph.add((testSubjectResource, EARL["httpRequest"], requestResource))
-    graph.add((testSubjectResource, EARL["httpResponse"], responseResource))
+    graph.add((requestResource, HTTP["response"], testSubjectResource))
     
     # properties of the testSubjectResource
     # Not sure about adding this triple, the response is a different
     # resource...
-    # graph.add((testSubjectResource, RDF["type"], HTTP["HttpResponse"]))
     graph.add((testSubjectResource, RDF["type"], EARL["TestSubject"]))
-    graph.add((testSubjectResource, DC["date"], Literal(datetime.datetime.now()))) # FIXME: use standard format
     graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
     
     # properties of the requestResource
@@ -140,9 +137,6 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
         graph.add((responseResource, HTTP["vary"], Literal(vary)))
     if (httpStatus >= 400):
         addFormattedBody(graph, responseResource, response)
-    
-    # links the requestResource to the responseResource
-    graph.add((requestResource, HTTP["response"], responseResource))
     
     return testSubjectResource
 
