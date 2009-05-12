@@ -221,7 +221,7 @@
               </a>
              </td>
              #set $totalTests = len($testResults[$testRequirement[0]])
-             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["fail"]])
+             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["failed"]])
              #if $failedTests == 0:
                #set $cssClass = "allTestsOk"
              #else:
@@ -293,9 +293,9 @@
 			    </div> <!-- /fileIcon -->
 	            #end if
 	      
-                #if $trace[7] == EARL["pass"]:
+                #if $trace[7] == EARL["passed"]:
                   #set $additionalCssClass = "goodHttpHeader"
-			    #else if $trace[7] == EARL["fail"]:
+			    #else if $trace[7] == EARL["failed"]:
 			      #set $additionalCssClass = "badHttpHeader"
 			    #else:
 			      #set $additionalCssClass = ""
@@ -304,9 +304,9 @@
                 <span class="httpHeader $additionalCssClass">$trace[3]</span>
 			      
 			    #if $trace[3] == 200:
-			      #if $trace[9] == EARL["pass"]:
+			      #if $trace[9] == EARL["passed"]:
 			        #set $additionalCssClass = "goodHttpHeader"
-			      #else if $trace[9] == EARL["fail"]:
+			      #else if $trace[9] == EARL["failed"]:
 			        #set $additionalCssClass = "badHttpHeader"
 			      #else:
 			        #set $additionalCssClass = ""
@@ -335,7 +335,7 @@
       <h4>Test results</h4>
       <ul class="testResultChecklist">
 	  #for $test in $testResults[$testRequirement[0]]:
-        #if $test[3] == EARL["pass"]:
+        #if $test[3] == EARL["passed"]:
           #set $testResultCssClass = "correctValue"
         #else
           #set $testResultCssClass = "badValue"

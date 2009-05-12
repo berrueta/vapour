@@ -67,7 +67,7 @@ def getResultsFromModel(model, testRequirementUri):
         ("?test", DC["title"], "?testTitle"),
         ("?assertion", EARL["result"], "?result"),
         ("?result", EARL["validity"], "?validity"),
-        ("?validity", RDFS["label"], "?validityLabel"),
+        ("?validity", DC["title"], "?validityLabel"),
         ("?assertion", EARL["subject"], "?subject"),
         ("?subject", DC["title"], "?subjectTitle")
         ])
