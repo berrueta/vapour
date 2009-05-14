@@ -47,7 +47,7 @@ def isThereAnyFailingTest(model):
     where = GraphPattern([
         ("?assertion", RDF["type"], EARL["Assertion"]),
         ("?assertion", EARL["result"], "?result"),
-        ("?result", EARL["outcome"], EARL["fail"])
+        ("?result", EARL["outcome"], EARL["failed"])
         ])
     return Query.queryObject(sparqlGr, where).ask()
 
