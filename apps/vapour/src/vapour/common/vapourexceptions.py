@@ -32,7 +32,7 @@ class ForbiddenAddress(VapourException):
     def __init__(self, ip, url):
         VapourException.__init__(self)
         self.ip = ip
-        sef.url = url
+        self.url = url
 
     def __str__(self):
         return "ForbiddenAddress: request to %s (resolves to IP: %s), internal IP address are forbidden" % (self.url, str(self.ip))
