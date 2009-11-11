@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.4
 
 #patch to work inside apache (uncomment these lines)
 #import sys
@@ -10,9 +10,10 @@ from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 
-resourceBaseUri = "http://vapour.sf.net/resources"
+resourceBaseUri = "http://idi.fundacionctic.org/vapourres"
 
 class cup:
+
       def GET(self, getArgs):
             args = web.input()
             try:
@@ -60,6 +61,11 @@ class cup:
                     format = "html"
 
             try:
+                client = web.ctx.environ["REMOTE_ADDR"]
+            except KeyError:
+                client = None
+
+            try:
                 validateRDF = args["validateRDF"] is "1"
             except KeyError:
                 validateRDF = False
@@ -103,7 +109,7 @@ class cup:
                             resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
                     
                     # defines the options of the validator
-                    validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent)
+                    validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent, client)
                     
                     recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
                     if classUri is not None:

@@ -1,25 +1,25 @@
 from vapour.namespaces import *
 from vapour.common.vapourexceptions import *
+from vapour.teapot import options
+from vapour.common.security import isLocatedAtIntranet
 from labeler import labelTestSubjects
 from rdflib import Graph, BNode, Literal
 import httplib
 import urlparse
 import datetime
-import dns.resolver
-from common import allowIntranet # FIXME: horrible hack, global variable!
 
 maxRedirects = 3
 defaultUserAgent = "vapour.sourceforge.net"
 
 ###########################################################
 
-def followRedirects(graph, what, url, accept = None, method = "GET", userAgent = defaultUserAgent):
+def followRedirects(graph, what, url, accept = None, method = "GET", options = options.ValidatorOptions()):
     '''Executes a multi-stage HTTP dialog following the redirects.
     
     Returns an array with two elements: firstly, the first
     test subject resource; secondly, the HTTP response object.'''
     redirectsCount = 0
-    r = simpleRequest(graph, url, accept, redirectsCount, None, method, userAgent)
+    r = simpleRequest(graph, url, accept, redirectsCount, None, method, options)
     firstTestSubjectResource = r[0]
 
     response = r[1]
@@ -35,7 +35,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET", userAgent =
         if (redirectsCount > maxRedirects):
             raise TooManyRedirections
 
-        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method, userAgent)
+        r = simpleRequest(graph, url, accept, redirectsCount, previousSubjectResource, method, options)
         response = r[1]
         
     labelTestSubjects(graph, firstTestSubjectResource, what)                
@@ -43,7 +43,7 @@ def followRedirects(graph, what, url, accept = None, method = "GET", userAgent =
     
 ###########################################################
         
-def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource, method, userAgent):    
+def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectResource, method, options):    
     '''Executes a single HTTP request and receives a response.
     
     Returns a duple containing: firstly, the test subject resource
@@ -53,15 +53,12 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     host = parsedUrl[1]
     path = parsedUrl[2]
 
-    if allowIntranet is False:
-        # FIXME: skip DNS resolution if the host is already an IP address
-        ipList = dns.resolver.query(str(host).split(":")[0])
-        for ip in ipList:
-            if str(ip).startswith("192.") or str(ip) is "127.0.0.1":
-                raise ForbiddenAddress(str(ip), url)
+    locatedAtIntranet, ip = isLocatedAtIntranet(str(host), options)
+    if locatedAtIntranet:
+        raise ForbiddenAddress(str(ip), url)
     
     conn = httplib.HTTPConnection(host)
-    headers = {"User-Agent": userAgent}
+    headers = {"User-Agent": options.userAgent}
     if (accept is not None):
         headers["Accept"] = accept
     dateRequest = datetime.datetime.now()
@@ -69,7 +66,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     dateResponse = datetime.datetime.now()
     response = conn.getresponse()
     
-    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, userAgent, host, path, dateRequest, dateResponse)
+    testSubjectResource = addToGraph(graph, url, accept, response, previousRequestCount, method, options.userAgent, host, path, dateRequest, dateResponse)
     
     # makes a cross-link between the previous subject resource
     # and the new one

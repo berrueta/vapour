@@ -78,7 +78,7 @@ def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
 
 def runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, httpMethod):
     testRequirement = addTestRequirement(graph, "Dereferencing " + resource['description'] + scenarioDescription, resource['order'])
-    (rootTestSubject, httpResponse) = followRedirects(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod, validatorOptions.userAgent)
+    (rootTestSubject, httpResponse) = followRedirects(graph, "dereferencing " + resource['description'], resource['uri'], requestedContentType, httpMethod, validatorOptions)
     assertLastResponseCode200(graph, rootTestSubject, testRequirement)
     assertIntermediateResponseCode303(graph, rootTestSubject, testRequirement)
     if requestedContentType is None:
