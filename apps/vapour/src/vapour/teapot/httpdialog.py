@@ -55,7 +55,7 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
 
     locatedAtIntranet, ip = isLocatedAtIntranet(str(host), options)
     if locatedAtIntranet:
-        raise ForbiddenAddress(str(ip), url)
+        raise ForbiddenAddress(str(ip), url, options.client)
     
     conn = httplib.HTTPConnection(host)
     headers = {"User-Agent": options.userAgent}
