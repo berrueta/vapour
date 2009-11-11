@@ -84,7 +84,10 @@ class cup:
                 store = common.createStore()
                     
                 if vocabUri is not None:
-                    logger.info("request over vocabulary on " + vocabUri)
+                    if (client):
+                        logger.info("Request from %s over URI: %s" % (client, vocabUri))
+                    else:
+                        logger.info("Request over URI: " + vocabUri)
                     if (classUri is None and autodetectUrisIfEmpty) or (propertyUri is None and autodetectUrisIfEmpty):
                         (classUris, propertyUris, instanceUris) = autodetect.autodetectUris(store, vocabUri, userAgent)    
                         random.seed()
