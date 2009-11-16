@@ -1,7 +1,7 @@
 from vapour.namespaces import *
 from vapour.common.vapourexceptions import *
 from vapour.teapot import options
-from vapour.common.security import isLocatedAtIntranet
+from vapour.common.security import isLocatedAtIntranet, isValidUrl
 from labeler import labelTestSubjects
 from rdflib import Graph, BNode, Literal
 import httplib
@@ -49,11 +49,15 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     Returns a duple containing: firstly, the test subject resource
     (note that there is only one, because this function does not
      handle HTTP redirects); secondly, the HTTP response object.'''
+
+    if (not isValidUrl(url)):
+        raise NotWellFormedURL(url)
+
     parsedUrl = urlparse.urlparse(url)   # (_,host,path,_,_,_)
     host = parsedUrl[1]
     path = parsedUrl[2]
 
-    locatedAtIntranet, ip = isLocatedAtIntranet(str(host), options)
+    locatedAtIntranet, ip = isLocatedAtIntranet(host, options)
     if locatedAtIntranet:
         raise ForbiddenAddress(str(ip), url, options.client)
     
