@@ -1,13 +1,14 @@
 
 import urlparse
-import dns.resolver
+from dns.resolver import Resolver, NXDOMAIN
 from common import allowIntranet # FIXME: horrible hack, global variable!
+from vapour.cup import common
 
-def isLocatedAtIntranet(url, options=None):
+def isLocatedAtIntranet(host, options=None):
 
-    parsedUrl = urlparse.urlparse(url) # (_,host,path,_,_,_)
-    host = str(parsedUrl[1])
-    path = parsedUrl[2]
+    logger = common.createLogger()
+
+    logger.debug("security check for host: %s" % host)
 
     requestFromIntranet = False
     if (options and options.client):
@@ -15,19 +16,28 @@ def isLocatedAtIntranet(url, options=None):
 
     if (not allowIntranet and not requestFromIntranet):
         try:
-            ipList = dns.resolver.query(host.split(":")[0])
+            resolver = Resolver()
+            ipList = resolver.query(host.split(":")[0])
             for ip in ipList:
                 if isIntranet(str(ip)):
                     return True, str(ip)
             return False, None
-        except dns.resolver.NXDOMAIN:
+        except NXDOMAIN, e:
+            logger.error("%s looks not be a valid hostname: %s" % (host, str(e)))
             return isIntranet(host), host
     else:
         return False, None
             
 def isIntranet(ip):
-    if ip.startswith("192.") or ip.startswith("10.") or str(ip) is "127.0.0.1":
+    if ((ip.startswith("192.")) or (ip.startswith("10.")) or (str(ip) is "127.0.0.1")):
         return True
     else:
         return False
+
+def isValidUrl(url):
+    parsedUrl = urlparse.urlparse(url)
+    if (len(parsedUrl[1])==0 or len(parsedUrl[2])==0):
+        return False
+    else:
+        return True
 
