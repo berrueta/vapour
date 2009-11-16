@@ -53,3 +53,15 @@ class IlegalLocationValue(VapourException):
     def __str__(self):
         return "IlegalLocationValue: the value of the location header in the response (%s) is not an absolute URI (see section 14.30 in RFC2616)" % self.value
 
+class NotWellFormedURL(VapourException):
+    """
+    Ilegal location value exception
+    """
+
+    def __init__(self, url):
+        VapourException.__init__(self)
+        self.url = url
+
+    def __str__(self):
+        return "NotWellFormedURL: the requested URL (%s) is not well formed" % self.url
+
