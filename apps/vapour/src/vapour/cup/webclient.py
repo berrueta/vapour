@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4
+#!/usr/bin/python
 
 #patch to work inside apache (uncomment these lines)
 #import sys
