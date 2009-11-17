@@ -36,7 +36,7 @@ class Stats:
         self.hosts = {}
 
     def addHostRequest(self, host):
-        if (len(host.split("."))>2):
+        if (len(host.split("."))>1):
             if self.hosts.has_key(host):
                 self.hosts[host] += 1
             else:
