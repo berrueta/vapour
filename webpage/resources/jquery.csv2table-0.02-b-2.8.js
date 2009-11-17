@@ -118,7 +118,7 @@
 			}
 		});
 
-		$(contents).before('<div class="csv2table-loading"><img src="'+op.nowloadingImg+'"> '+op.nowloadingMsg+' </div>' )
+		$(contents).before('<div class="csv2table-loading"><img src="'+op.nowloadingImg+'" /> '+op.nowloadingMsg+' </div>' )
 
 		$.get(url+"?"+(new Date()).getTime(),"",function(data,textStatus){
 			if(op.appendThead)data=op.appendThead.join(op.col_sep)+op.row_sep+data;
