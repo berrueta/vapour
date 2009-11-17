@@ -316,7 +316,7 @@
 				   + rowsAry[op.col_midasi][k];
 
 				if(op.sortable)
-				htm+= "<img id='"+id+"-sortimg-"+k+"' class='sortimg' src='"+sortimgsrc+"' border='0'>"
+				htm+= "<img id='"+id+"-sortimg-"+k+"' class='sortimg' src='"+sortimgsrc+"' border='0' />"
 				htm+= "</th>";
 
 				if(!op['th'+k])op['th'+k]=null;//memo of sortType
@@ -591,3 +591,4 @@
 	}
 
 })(jQuery);
+
