@@ -44,12 +44,14 @@
 
       <script type="text/javascript">
       $(function(){
-      $('#vapour-stats').csv2table('resources/stats.csv');
+      $('#vapour-stats').csv2table('./resources/stats.csv');
       });
       </script>
 
       <p style="text-align: right; margin-right: 2em; font-family: monospace; font-size: 0.9em;">
-        Powered by <a href="http://plugins.jquery.com/project/csv2table">cvs2table</a> <a href="http://jquery.com/">jQuery</a> plugin
+        Powered by <a href="http://plugins.jquery.com/project/csv2table">cvs2table</a> <a href="http://jquery.com/">jQuery</a> plugin.
+        <br/>
+        Data extracted from <a href="http://validator.linkeddata.org/">vapour</a> (<a href="resources/stats.csv">stats.csv</a>),
         <br/><br/>
         Last update: $Date:2009-11-27$
       </p>
