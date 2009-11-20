@@ -5,6 +5,7 @@ import httplib
 from sets import Set
 from vapour.namespaces import RDF, RDFS, OWL
 from vapour.cup import common
+from vapour.teapot import options
 
 HASH_NAMESPACE = { "name": "hash namespace" }
 SLASH_NAMESPACE = { "name": "slash namespace" }
@@ -19,7 +20,7 @@ RECIPE6 = { "name": "Recipe 6", "link": "http://www.w3.org/TR/swbp-vocab-pub/#re
 def autodetectUris(graph, vocabUri, userAgent):
     contentType = mimetypes.rdfXml
     try:
-        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, method = "GET", userAgent = userAgent)
+        ( rootTestSubject, response ) = followRedirects( graph, "Derreferencing the vocabulary URI", vocabUri, contentType, "GET", options.ValidatorOptions(userAgent=userAgent))
     except Exception, e:
         raise Exception("Unable to autodetect URIs, the vocabulary cannot be retrieved (inner exception=" + str(e) + ")")
 
