@@ -8,6 +8,7 @@ from validation import assertLastResponseBodyContainsDefinitionForResource
 from httprange14 import httpRange14Conclusions
 from util import lastTestSubjectOfSequence
 import mimetypes, options
+from string import lower
 
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
@@ -125,7 +126,7 @@ def checkVary(graph, validatorOptions):
     }"""
     tuples = graph.query(Parse(query), initNs=bindings).serialize('python')
     for t in tuples:
-        testResult = t[2] is not None and t[3] is not None and ("Accept" in t[2]) and ("Accept" in t[3])
+        testResult = t[2] is not None and t[3] is not None and ("Accept" in lower(t[2])) and ("Accept" in lower(t[3]))
         assertVaryHeader(graph, t[0], testResult, t[4])
         assertVaryHeader(graph, t[1], testResult, t[5])
 
