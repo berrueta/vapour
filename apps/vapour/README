@@ -1,12 +1,31 @@
-Vapour
-======
+Vapour (VAlidation Process Of Uri Response)
+===========================================
 
-Dependencies:
-*************
+Vapour is a validation service to check whether semantic web data is correctly 
+published according to the current best practices, as defined by the Linked 
+Data principles, the Best Practice Recipes and the Cool URIs.
 
-- python (>=2.4)
-- python-dnspython
-- python-rdflib
-- python-httplib
-- python-cheetah
-- python-webpy
+Dependencies
+------------
+
+    - python (>=2.4)
+    - python-django (>=1.0)
+    - google-app-engine-django (>=r109)
+    - python-rdflib
+    - python-httplib
+    - python-dnspython
+
+
+Running
+-------
+
+if you want to install this application by yourself, once your've installed 
+all dependencies, you must link the Google App Engine SDK for Python by
+running: 
+
+    ln -s /path/to/google_appengine .google_appengine
+
+And then you'd be able launch Vapour:
+
+    python manage.py runserver
+

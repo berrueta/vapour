@@ -1,5 +1,8 @@
 
-from rdflib.Graph import ConjunctiveGraph
+try:
+    from rdflib.graph import ConjunctiveGraph, Graph
+except ImportError:
+    from rdflib import ConjunctiveGraph, Graph
 from rdflib.sparql.sparqlGraph import SPARQLGraph
 from rdflib.sparql.graphPattern import GraphPattern
 from rdflib.sparql import Query
@@ -268,9 +271,6 @@ if __name__ == "__main__":
     #
     # Test with local files
     #
-    from rdflib.Graph import ConjunctiveGraph, Graph
-    from rdflib.sparql import sparqlGraph
-    
     store = Graph()
     store.parse("../../../../../webpage/vapour.rdf")
     store.parse("../../../../../webpage/recipes.rdf")
