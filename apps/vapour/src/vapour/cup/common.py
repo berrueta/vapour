@@ -1,6 +1,9 @@
 import os
 import sys
-from rdflib.Graph import ConjunctiveGraph, Graph
+try:
+    from rdflib.graph import ConjunctiveGraph, Graph
+except ImportError:
+    from rdflib import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 from rdflib.sparql import sparqlGraph
 import logging
