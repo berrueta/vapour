@@ -163,7 +163,7 @@ def describe(terms,bindings,graph):
 
 from rdflib.namespace import RDF, RDFS
 
-from rdflib import plugin, exceptions, query
+from rdflib import exceptions, query
 #, sparql
 
 from rdflib.term import Node
@@ -264,11 +264,7 @@ class Graph(Node):
                  namespace_manager=None):
         super(Graph, self).__init__()
         self.__identifier = identifier or BNode()
-        if not isinstance(store, Store):
-            # TODO: error handling
-            self.__store = store = plugin.get(store, Store)()
-        else:
-            self.__store = store
+        self.__store = store
         self.__namespace_manager = namespace_manager
         self.context_aware = False
         self.formula_aware = False
