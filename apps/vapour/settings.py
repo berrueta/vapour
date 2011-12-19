@@ -17,7 +17,6 @@
 import os
 import sys
 sys.path.append(os.path.abspath("src"))
-print sys.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
