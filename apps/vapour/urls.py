@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import settings
 from django.conf.urls.defaults import *
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from vapour.cup.django.cup import GET
 
 urlpatterns = patterns('',
-    (r"^$", lambda request: HttpResponsePermanentRedirect("/vapour")),
-    (r"^vapour$", "vapour.cup.django.cup.GET"),
+    (r"^favicon.ico",   lambda request: HttpResponseRedirect(settings.MEDIA_URL+"images/favicon.ico")),
+    (r"^$",             lambda request: HttpResponsePermanentRedirect("/vapour")),
+    (r"^vapour$",       GET)
 )
 
