@@ -6,7 +6,6 @@ import sys
 ROOT_PATH = os.path.dirname(__file__)
 
 sys.path.append(os.path.abspath("lib"))
-sys.path.append(os.path.abspath("src"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -89,7 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = "urls"
+ROOT_URLCONF = "vapour.urls"
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -99,36 +98,14 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-     'appengine_django',
      'django.contrib.staticfiles',
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',
-#    'django.contrib.sites',    
+#    'django.contrib.sites', 
+     "vapour.common",   
+     "vapour.cup",
+     "vapour.strainer",
+     "vapour.teapot",
 )
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-
 
