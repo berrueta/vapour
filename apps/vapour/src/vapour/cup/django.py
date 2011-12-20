@@ -1,7 +1,8 @@
 
 import random
 import traceback
-from django.http import HttpResponse
+#from django.http import HttpResponse
+from google.appengine._internal.django.http import HttpResponse
 #from vapour.strainer import strainer
 #from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
