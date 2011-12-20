@@ -1,11 +1,8 @@
+
 import os
 import sys
-try:
-    from rdflib.graph import ConjunctiveGraph, Graph
-except ImportError:
-    from rdflib import ConjunctiveGraph, Graph
+from rdflib import ConjunctiveGraph, Graph
 from vapour.namespaces import *
-from rdflib.sparql import sparqlGraph
 import logging
 from vapour.common.odict import OrderedDict
 
@@ -59,7 +56,7 @@ def clearLoggerHandlers(logger):
 		logger.removeHandler(handler)
 	return logger
 
-def createLogger(name='vapour'):
+def oldCreateLogger(name='vapour'):
 	logger = logging.getLogger(name)
 	logger = clearLoggerHandlers(logger) #FIXME
 	hdlr = logging.FileHandler(pathToLog)
@@ -68,6 +65,10 @@ def createLogger(name='vapour'):
 	logger.addHandler(hdlr)
 	logger.setLevel(logging.INFO)
 	return logger
+
+#FIXME: check how log on disk (required for the public service)
+def createLogger(name='vapour'): 
+	return logging.getLogger(name)
 
 def getBestFormat(accceptHeader):
     #Example: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
