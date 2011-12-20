@@ -1,7 +1,7 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
-from vapour.cup.django.cup import GET
+from vapour.cup.djng.cup import GET
 import settings
 
 # Uncomment the next two lines to enable the admin:
