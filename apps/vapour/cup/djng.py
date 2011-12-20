@@ -2,7 +2,7 @@
 import random
 import traceback
 from django.http import HttpResponse
-#from vapour.strainer import strainer
+from vapour.strainer import strainer
 #from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 
