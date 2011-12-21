@@ -20,11 +20,11 @@ def httpRange14Conclusions(graph, rootTestSubject):
         parsedUri = urlparse.urlparse(requestUri) # (protocol,server,path,params,query,fragment)
         actuallyRequestedUri = urlparse.urlunparse((parsedUri[0], parsedUri[1], parsedUri[2], parsedUri[3], parsedUri[4], ""))
         if parsedUri[5] is not "":
-            graph.add( (testSubject, VAPOUR_VOCAB["httpRange14ConclusionOn"], URIRef(requestUri) ) )
-            graph.add( (URIRef(requestUri), RDF["type"], VAPOUR_VOCAB["AnyResource"] ) )
+            graph.add( (testSubject, VAPOUR["httpRange14ConclusionOn"], URIRef(requestUri) ) )
+            graph.add( (URIRef(requestUri), RDF["type"], VAPOUR["AnyResource"] ) )
         statusCodeNumber = getResponseCode(graph, testSubject)
-        graph.add((testSubject, VAPOUR_VOCAB["httpRange14ConclusionOn"], URIRef(actuallyRequestedUri)))
+        graph.add((testSubject, VAPOUR["httpRange14ConclusionOn"], URIRef(actuallyRequestedUri)))
         if statusCodeNumber == httplib.OK:
-            graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR_VOCAB["InformationResource"]))
+            graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR["InformationResource"]))
         elif statusCodeNumber == httplib.SEE_OTHER:
-            graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR_VOCAB["AnyResource"]))
+            graph.add((URIRef(actuallyRequestedUri), RDF["type"], VAPOUR["AnyResource"]))

@@ -2,7 +2,7 @@ from vapour.namespaces import *
 
 def testSubjectsAsList(graph, rootTestSubject):
     list = [rootTestSubject]
-    nextSubjects  = [x for x in graph.objects(rootTestSubject, VAPOUR_VOCAB["nextSubject"])]
+    nextSubjects  = [x for x in graph.objects(rootTestSubject, VAPOUR["nextSubject"])]
     if (len(nextSubjects) == 1):
         list.extend(testSubjectsAsList(graph, nextSubjects[0]))
     return list

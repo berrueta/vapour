@@ -7,7 +7,7 @@ import logging
 from vapour.common.odict import OrderedDict
 
 pathToRdfFiles = "http://vapour.sourceforge.net"
-pathToTemplates = "../strainer/templates" 
+pathToTemplates = "strainer/templates" 
 pathToLog = "../../../log/vapour.log"  
 allowIntranet = False
 
@@ -22,8 +22,7 @@ def createStore():
     store.bind('dct', DCT)
     store.bind('uri', URI)
     store.bind('http', HTTP)
-    store.bind('vapourv', VAPOUR_VOCAB)
-    store.bind('vapour', VAPOUR_SOFT)
+    store.bind('vapour', VAPOUR)
     store.bind('recipes', RECIPES)
     store.bind('foaf', FOAF)
     return store

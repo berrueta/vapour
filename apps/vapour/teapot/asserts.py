@@ -51,7 +51,7 @@ def addAssertion(graph, testSubject, test, outcome, testRequirement):
     graph.add((assertion, EARL["result"], resultSubject))
         
     graph.add((assertion, RDF["type"], EARL["Assertion"]))
-    graph.add((assertion, EARL["assertedBy"], VAPOUR_SOFT["vapour2-0"]))
+    graph.add((assertion, EARL["assertedBy"], VAPOUR["vapour2-0"]))
     graph.add((assertion, EARL["subject"], testSubject));
     graph.add((assertion, EARL["mode"], EARL["automatic"]))
     graph.add((assertion, EARL["test"], test))
@@ -71,7 +71,7 @@ def addTestRequirement(graph, title, order):
     testRequirement = URIRef("req" + str(reqCount))
     reqCount += 1
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
-    graph.add((testRequirement, VAPOUR_VOCAB["order"], Literal(order)))
+    graph.add((testRequirement, VAPOUR["order"], Literal(order)))
     titleLiteral = Literal(title)
     titleLiteral.language = "en"
     graph.add((testRequirement, DC["title"], titleLiteral))    

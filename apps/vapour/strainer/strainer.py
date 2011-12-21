@@ -1,11 +1,8 @@
 
-try:
-    from rdflib.graph import ConjunctiveGraph, Graph
-except ImportError:
-    from rdflib import ConjunctiveGraph, Graph
-from rdflib.sparql.sparqlGraph import SPARQLGraph
-from rdflib.sparql.graphPattern import GraphPattern
-from rdflib.sparql import Query
+import rdflib
+from rdflib.graph import ConjunctiveGraph, Graph
+rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
+rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
 from vapour.namespaces import *
 from vapour.teapot import options
 import httplib
@@ -15,35 +12,19 @@ import datetime
 import sys
 import traceback
 
-try:
-    import Cheetah
-except ImportError:
-    print >> stderr, "This program REQUIRES cheetah. Please install the library"
-    sys.exit(-1)
-
-try:
-    import rdflib
-except ImportError:
-    print >>stderr, "This program REQUIRES rdflib. Please install the library"
-    sys.exit(-1)
-
+templateDir = "vapour/strainer/templates/" #FIXME
 
 def getTestRequirements(model):
-    sparqlGr = SPARQLGraph(model)
-    select = ("?testRequirement", # 0
-              "?testRequirementTitle", # 1
-              "?testRequirementOrder", # 2 
-              )
-    where = GraphPattern([
-         ("?testRequirement", RDF["type"], EARL["TestRequirement"]),
-         ("?testRequirement", DC["title"], "?testRequirementTitle"),
-         ("?testRequirement", VAPOUR_VOCAB["order"], "?testRequirementOrder")
-         ])
-    resultSet = Query.query(sparqlGr, select, where)
-    # manually sorting the results
-    sortByOrderAndTitleFunc = lambda x, y : cmp(x[2],y[2]) or cmp(x[1],y[1]) 
-    resultSet.sort(sortByOrderAndTitleFunc)
-    return resultSet
+    query = """
+        SELECT ?testRequirement ?testRequirementTitle ?testRequirementOrder
+        WHERE {
+            ?testRequirement rdf:type earl:TestRequirement .
+            ?testRequirement", dc:title ?testRequirementTitle .
+            ?testRequirement vapour:order ?testRequirementOrder .            
+        }
+        ORDER BY ?testRequirementOrder ?testRequirementTitle
+    """
+    return model.query(query, initNs=bindings)
 
 def isThereAnyFailingTest(model):
     sparqlGr = SPARQLGraph(model)
@@ -84,7 +65,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
     sparqlGr = SPARQLGraph(model)
     select = (
               "?response", # 0
-              "?responseTitle", # 1
+              "?responseTitle", # 1VAPOUR
               "?absoluteUri", # 2
 
               "?statusCodeNumber", # 3
@@ -117,7 +98,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
         ("?request", HTTP["methodName"], "?requestMethodName"),
         ("?request", HTTP["abs_path"], "?requestAbsPath"),
         ("?request", HTTP["host"], "?requestHost"),
-        ("?response", VAPOUR_VOCAB["previousRequestCount"], "?previousRequestCount")
+        ("?response", VAPOUR["previousRequestCount"], "?previousRequestCount")
     ])
     optional = [
         GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
@@ -128,14 +109,14 @@ def getHttpTracesFromModel(model, testRequirementUri):
         GraphPattern([
                       ("?statusCodeAssertion", EARL["subject"], "?response"),
                       ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
-                      ("?statusCodeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["statusCodeNumber"]),
+                      ("?statusCodeTest", VAPOUR["propertyUnderTest"], HTTP["statusCodeNumber"]),
                       ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
                       ("?statusCodeResult", EARL["outcome"], "?statusCodeValidity")
         ]),
         GraphPattern([
                       ("?responseContentTypeAssertion", EARL["subject"], "?response"),
                       ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
-                      ("?responseContentTypeTest", VAPOUR_VOCAB["propertyUnderTest"], HTTP["content-type"]),
+                      ("?responseContentTypeTest", VAPOUR["propertyUnderTest"], HTTP["content-type"]),
                       ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
                       ("?responseContentTypeResult", EARL["outcome"], "?responseContentTypeValidity")
         ])
@@ -169,7 +150,7 @@ def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     where = GraphPattern([
         (testRequirementUri, DCT["hasPart"], "?assertion"),
         ("?assertion", EARL["subject"], "?response"),
-        ("?response", VAPOUR_VOCAB["httpRange14ConclusionOn"], "?resource"),
+        ("?response", VAPOUR["httpRange14ConclusionOn"], "?resource"),
         ("?resource", RDF["type"], "?resourceType"),
         ("?resourceType", RDFS["label"], "?resourceTypeLabel")
     ])
@@ -233,7 +214,7 @@ def prepareData(resourceBaseUri, validatorOptions, vocabUri="", classUri="", pro
 def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, printForm,
                        autodetectUris, 
                        validatorOptions, namespaceFlavour, validRecipes,
-                       resourceBaseUri = "resources", templateDir = "templates"):
+                       resourceBaseUri = "resources", templateDir = templateDir):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
@@ -251,13 +232,13 @@ def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, prin
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
-def justTheFormInHTML(resourceBaseUri = "resources", templateDir = "templates"):    
+def justTheFormInHTML(resourceBaseUri = "resources", templateDir = templateDir):    
     validatorOptions = options.ValidatorOptions()
     data = prepareData(resourceBaseUri, printForm = True, validatorOptions = validatorOptions)
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
-def exceptionInHTML(e, resourceBaseUri = "resources", templateDir = "templates"):
+def exceptionInHTML(e, resourceBaseUri = "resources", templateDir = templateDir):
     data = {}
     data['resourceBaseUri'] = resourceBaseUri
     data['exceptionDescription'] = str(e)

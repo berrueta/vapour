@@ -75,8 +75,8 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     # makes a cross-link between the previous subject resource
     # and the new one
     if (previousTestSubjectResource is not None):
-        graph.add((previousTestSubjectResource, VAPOUR_VOCAB["nextSubject"], testSubjectResource))
-        graph.add((testSubjectResource, VAPOUR_VOCAB["previousSubject"], previousTestSubjectResource))
+        graph.add((previousTestSubjectResource, VAPOUR["nextSubject"], testSubjectResource))
+        graph.add((testSubjectResource, VAPOUR["previousSubject"], previousTestSubjectResource))
 
     return (testSubjectResource, response)
     
@@ -106,7 +106,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     # Not sure about adding this triple, the response is a different
     # resource...
     graph.add((testSubjectResource, RDF["type"], EARL["TestSubject"]))
-    graph.add((testSubjectResource, VAPOUR_VOCAB["previousRequestCount"], Literal(previousRequestCount)))
+    graph.add((testSubjectResource, VAPOUR["previousRequestCount"], Literal(previousRequestCount)))
     
     # properties of the requestResource
     graph.add((requestResource, RDF["type"], HTTP["Request"]))
