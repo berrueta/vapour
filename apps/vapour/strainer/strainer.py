@@ -1,8 +1,6 @@
 
-import rdflib
-from rdflib.graph import ConjunctiveGraph, Graph
-rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
-rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
+from rdflib.graph import ConjunctiveGraph
+from vapour.common.rdf import performSparqlQuery
 from vapour.namespaces import *
 from vapour.teapot import options
 import httplib
@@ -24,7 +22,7 @@ def getTestRequirements(model):
         }
         ORDER BY ?testRequirementOrder ?testRequirementTitle
     """
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def isThereAnyFailingTest(model):
     query = """
@@ -35,7 +33,7 @@ def isThereAnyFailingTest(model):
             ?result earl:outcome earl:failed .
         }
     """
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def getResultsFromModel(model, testRequirementUri):
     query = """
@@ -53,7 +51,7 @@ def getResultsFromModel(model, testRequirementUri):
         }
         ORDER BY ?subjectTitle ?testTitle
     """ % testRequirementUri
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def getHttpTracesFromModel(model, testRequirementUri):
     query = """
@@ -96,7 +94,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
         }
         ORDER BY ?previousRequestCount
     """ % testRequirementUri
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def getFinalUriFromModel(model, testRequirementUri):
     query = """
@@ -111,7 +109,7 @@ def getFinalUriFromModel(model, testRequirementUri):
           FILTER (?statusCodeNumber = 200)
     }
     """ % testRequirementUri
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     query = """
@@ -125,7 +123,7 @@ def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
         }
         ORDER BY ?resource
     """ % testRequirementUri
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def getTestAgent(model):
     """
@@ -140,7 +138,7 @@ def getTestAgent(model):
             foaf:homepage ?agentHomepage .
         }
     """
-    return model.query(query, initNs=bindings)
+    return performSparqlQuery(model, query)
 
 def sortTrace(trace):    
     # FIXME
