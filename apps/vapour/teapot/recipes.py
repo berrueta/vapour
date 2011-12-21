@@ -1,6 +1,5 @@
-from rdflib.sparql.bison import Parse
+
 from vapour.namespaces import *
-from rdflib.sparql import Query
 from rdflib import Graph
 from httpdialog import followRedirects
 from asserts import *
@@ -96,34 +95,35 @@ def runScenario(graph, resource, scenarioDescription, requestedContentType, vali
 
 def checkVary(graph, validatorOptions):
     query = """
-    SELECT DISTINCT ?response1 ?response2 ?vary1 ?vary2 ?testReq1 ?testReq2 
-    WHERE {
-      ?testReq1     dct:hasPart       ?assert1 .
-      ?testReq2     dct:hasPart       ?assert2 .
-      ?assert1      earl:subject      ?response1 .
-      ?assert2      earl:subject      ?response2 .
-      ?request1     http:response     ?response1 .
-      ?request2     http:response     ?response2 .
-      ?request1     uri:uri           ?uri1 .
-      ?request2     uri:uri           ?uri2 .
-      ?request1     http:accept       ?accept1 .
-      ?request2     http:accept       ?accept2 .
-      ?response1    rdf:type          http:Response .
-      ?response2    rdf:type          http:Response .
-      ?response1    http:content-type ?contentType1 .
-      ?response2    http:content-type ?contentType2 .
-      ?response1    http:statusCodeNumber ?statusCodeNumber1 .
-      ?response2    http:statusCodeNumber ?statusCodeNumber2 .
-      FILTER (?uri1 = ?uri2) .
-      FILTER (regex(?contentType1, '^application/rdf')) .
-      FILTER (regex(?contentType2, '^(text/html)|(application/xhtml)')) .
-      FILTER (?statusCodeNumber1 = 200) .
-      FILTER (?statusCodeNumber2 = 200) .
-      OPTIONAL {
-        ?response1 http:vary ?vary1 .
-        ?response2 http:vary ?vary2 .
-      } .
-    }"""
+        SELECT DISTINCT ?response1 ?response2 ?vary1 ?vary2 ?testReq1 ?testReq2 
+        WHERE {
+          ?testReq1     dct:hasPart       ?assert1 .
+          ?testReq2     dct:hasPart       ?assert2 .
+          ?assert1      earl:subject      ?response1 .
+          ?assert2      earl:subject      ?response2 .
+          ?request1     http:response     ?response1 .
+          ?request2     http:response     ?response2 .
+          ?request1     uri:uri           ?uri1 .
+          ?request2     uri:uri           ?uri2 .
+          ?request1     http:accept       ?accept1 .
+          ?request2     http:accept       ?accept2 .
+          ?response1    rdf:type          http:Response .
+          ?response2    rdf:type          http:Response .
+          ?response1    http:content-type ?contentType1 .
+          ?response2    http:content-type ?contentType2 .
+          ?response1    http:statusCodeNumber ?statusCodeNumber1 .
+          ?response2    http:statusCodeNumber ?statusCodeNumber2 .
+          OPTIONAL {
+            ?response1 http:vary ?vary1 .
+            ?response2 http:vary ?vary2 .
+          } 
+          FILTER (?uri1 = ?uri2) 
+          FILTER (regex(?contentType1, '^application/rdf')) 
+          FILTER (regex(?contentType2, '^(text/html)|(application/xhtml)')) 
+          FILTER (?statusCodeNumber1 = 200) 
+          FILTER (?statusCodeNumber2 = 200) 
+        }
+    """
     tuples = graph.query(Parse(query), initNs=bindings).serialize('python')
     for t in tuples:
         testResult = t[2] is not None and t[3] is not None and ("accept" in lower(t[2])) and ("accept" in lower(t[3]))

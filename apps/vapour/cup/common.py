@@ -5,11 +5,7 @@ from rdflib import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 import logging
 from vapour.common.odict import OrderedDict
-
-pathToRdfFiles = "http://vapour.sourceforge.net"
-pathToTemplates = "strainer/templates" 
-pathToLog = "../../../log/vapour.log"  
-allowIntranet = False
+from vapour.settings import PATH_LOG
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
 
@@ -30,24 +26,6 @@ def createStore():
 def createModel(store):
     return sparqlGraph.SPARQLGraph(store)
 
-def readEnvironment():
-    global pathToRdfFiles
-    if os.environ.get("VAPOUR_RDF_FILES"):
-        pathToRdfFiles = os.environ.get("VAPOUR_RDF_FILES")        
-    logging.debug("Path to RDF files (VAPOUR_RDF_FILES): " + pathToRdfFiles)
-    global pathToTemplates
-    if os.environ.get("VAPOUR_TEMPLATES"):
-        pathToTemplates = os.environ.get("VAPOUR_TEMPLATES")
-    logging.debug("Path to templates (VAPOUR_TEMPLATES): " + pathToTemplates)
-    global pathToLog
-    if os.environ.get("VAPOUR_LOG"):
-        pathToLog = os.environ.get("VAPOUR_LOG")
-    logging.debug("Path to log file (VAPOUR_LOG): " + pathToLog)
-    global allowIntranet
-    if os.environ.get("VAPOUR_ALLOW_INTRANET"):
-        allowIntranet = os.environ.get("VAPOUR_ALLOW_INTRANET") is "1"
-    logging.debug("Allow intranet addresses? (VAPOUR_ALLOW_INTRANET): " + str(allowIntranet))
-
 def clearLoggerHandlers(logger):
 	#because logger prints duplicate message, and I don't know how to fix it
 	handlers = logger.handlers
@@ -58,7 +36,7 @@ def clearLoggerHandlers(logger):
 def oldCreateLogger(name='vapour'):
 	logger = logging.getLogger(name)
 	logger = clearLoggerHandlers(logger) #FIXME
-	hdlr = logging.FileHandler(pathToLog)
+	hdlr = logging.FileHandler(PATH_LOG)
 	formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
 	hdlr.setFormatter(formatter)
 	logger.addHandler(hdlr)

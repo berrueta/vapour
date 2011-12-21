@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
+from vapour.settings import PATH_TEMPLATES, PATH_RDF_FILES
 
 resourceBaseUri = "http://idi.fundacionctic.org/vapourres"
 
@@ -123,17 +124,17 @@ class cup:
                 
                 web.header("Vary", "Accept")
                 if format == "html":        
-                    store.parse(common.pathToRdfFiles + "/vapour.rdf")
-                    store.parse(common.pathToRdfFiles + "/recipes.rdf")
-                    store.parse(common.pathToRdfFiles + "/earl.rdf")        
-                    store.parse(common.pathToRdfFiles + "/http.rdf")        
-                    store.parse(common.pathToRdfFiles + "/vocab.rdf")        
+                    store.parse(PATH_RDF_FILES + "/vapour.rdf")
+                    store.parse(PATH_RDF_FILES + "/recipes.rdf")
+                    store.parse(PATH_RDF_FILES + "/earl.rdf")        
+                    store.parse(PATH_RDF_FILES + "/http.rdf")        
+                    store.parse(PATH_RDF_FILES + "/vocab.rdf")        
                     model = common.createModel(store)
                     web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
                     web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
                                                            autodetectUrisIfEmpty, 
                                                            validatorOptions, namespaceFlavour, 
-                                                           validRecipes, resourceBaseUri, common.pathToTemplates))
+                                                           validRecipes, resourceBaseUri, PATH_TEMPLATES))
                 elif format == "rdf":
                     web.header("Content-Type", "application/rdf+xml; charset=utf-8")
                     web.output(store.serialize(format="pretty-xml"))
@@ -142,8 +143,8 @@ class cup:
                     web.ctx.status = "400 Bad Request"
                     web.output("<p>Unknown format " + format + "</p>")
             else:  # vocabUri is None
-                return HttpResponse(strainer.justTheFormInHTML(resourceBaseUri, common.pathToTemplates))
+                return HttpResponse(strainer.justTheFormInHTML(resourceBaseUri, PATH_TEMPLATES))
         except Exception, e:
             logger.error(str(e))
-            return HttpResponse(strainer.exceptionInHTML(e, resourceBaseUri, common.pathToTemplates), status=500)
+            return HttpResponse(strainer.exceptionInHTML(e, resourceBaseUri, PATH_TEMPLATES), status=500)
 

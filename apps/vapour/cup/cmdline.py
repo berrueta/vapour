@@ -1,5 +1,8 @@
 
 import sys
+sys.path.append(os.path.abspath("../.."))
+
+from vapour.settings import PATH_RDF_FILES, PATH_TEMPLATES
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
@@ -58,17 +61,17 @@ if __name__ == "__main__":
         outputRdfFile.write(store.serialize(format="pretty-xml"))
         outputRdfFile.close()
 
-    store.parse(common.pathToRdfFiles + "/vapour.rdf")
-    store.parse(common.pathToRdfFiles + "/recipes.rdf")
-    store.parse(common.pathToRdfFiles + "/earl.rdf")
-    store.parse(common.pathToRdfFiles + "/http.rdf")        
-    store.parse(common.pathToRdfFiles + "/vocab.rdf")        
+    store.parse(PATH_RDF_FILES + "/vapour.rdf")
+    store.parse(PATH_RDF_FILES + "/recipes.rdf")
+    store.parse(PATH_RDF_FILES + "/earl.rdf")
+    store.parse(PATH_RDF_FILES + "/http.rdf")        
+    store.parse(PATH_RDF_FILES + "/vocab.rdf")        
 
     model = common.createModel(store)
     html = strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, 
                                        False, False, False, False, defaultResponse,
                                        namespaceFlavour, validRecipes,
-                                       resourceBaseUri, common.pathToTemplates)
+                                       resourceBaseUri, PATH_TEMPLATES)
     if outputFileName is not None:
         outputFile = open(outputFileName,'w')
         outputFile.write(str(html))
