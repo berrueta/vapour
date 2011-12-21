@@ -19,7 +19,7 @@ def getTestRequirements(model):
         SELECT ?testRequirement ?testRequirementTitle ?testRequirementOrder
         WHERE {
             ?testRequirement rdf:type earl:TestRequirement .
-            ?testRequirement", dc:title ?testRequirementTitle .
+            ?testRequirement dc:title ?testRequirementTitle .
             ?testRequirement vapour:order ?testRequirementOrder .            
         }
         ORDER BY ?testRequirementOrder ?testRequirementTitle
@@ -49,7 +49,7 @@ def getResultsFromModel(model, testRequirementUri):
             ?result  earl:outcome ?outcome .
             ?outcome dc:title ?outcomeLabel .
             ?assertion earl:subject ?subject .
-            ?subject dc:title ?subjectTitle" .
+            ?subject dc:title ?subjectTitle .
         }
         ORDER BY ?subjectTitle ?testTitle
     """ % testRequirementUri
@@ -59,7 +59,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
     query = """
         SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
                ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity
-               ?requestAccept "?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
+               ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
                ?requestHost ?responseVary ?userAgent
         WHERE {
             <%s> dct:hasPart ?assertion .
@@ -67,7 +67,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
             ?response rdf:type earl:TestSubject ;
               dc:title ?responseTitle ;
               http:statusCodeNumber ?statusCodeNumber ;
-              vapour:previousRequestCount"], "?previousRequestCount .
+              vapour:previousRequestCount ?previousRequestCount .
             ?request http:response ?response ;
               http:absoluteURI ?absoluteUri ;
               http:type ?requestType ;
@@ -87,7 +87,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
                         ?statusCodeResult earl:outcome ?statusCodeValidity .
             }
             OPTIONAL {
-                        ?responseContentTypeAssertion earl:"subject ?response" .
+                        ?responseContentTypeAssertion earl:subject ?response .
                         ?responseContentTypeAssertion earl:test ?responseContentTypeTest .
                         ?responseContentTypeTest vapour:propertyUnderTest http:content-type .
                         ?responseContentTypeAssertion earl:result ?responseContentTypeResult .
@@ -104,7 +104,7 @@ def getFinalUriFromModel(model, testRequirementUri):
         WHERE {
           <%s> dct:hasPart ?assertion .
           ?assertion earl:subject ?response .
-          ?getRequest http:response ?response 
+          ?getRequest http:response ?response .
           ?response http:content-type ?contentType .
           ?response http:statusCodeNumber ?statusCodeNumber .
           ?getRequest http:absoluteURI ?finalUri .
@@ -118,7 +118,7 @@ def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
         SELECT ?resource ?resourceType ?resourceTypeLabel
         WHERE {
           <%s> dct:hasPart ?assertion .
-          ?assertion earl:subject"], "?response .
+          ?assertion earl:subject ?response .
           ?response vapour:httpRange14ConclusionOn ?resource .
           ?resource rdf:type ?resourceType .
           ?resourceType rdfs:label ?resourceTypeLabel .
