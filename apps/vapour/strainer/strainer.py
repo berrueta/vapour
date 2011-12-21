@@ -25,15 +25,17 @@ def getTestRequirements(model):
     return performSparqlQuery(model, query)
 
 def isThereAnyFailingTest(model):
+    #FIXME: ASK query
     query = """
-        ASK
+        SELECT *
         WHERE {
             ?assertion rdf:type earl:Assertion .
             ?assertion earl:result ?result .
             ?result earl:outcome earl:failed .
         }
     """
-    return performSparqlQuery(model, query)
+    results = performSparqlQuery(model, query)
+    return (len(results)>0)
 
 def getResultsFromModel(model, testRequirementUri):
     query = """
