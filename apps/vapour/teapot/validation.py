@@ -1,9 +1,5 @@
 
-try:
-    from rdflib.graph import ConjunctiveGraph, Graph
-except ImportError:
-    from rdflib import ConjunctiveGraph, Graph
-from rdflib.sparql.bison import Parse
+from rdflib.graph import ConjunctiveGraph, Graph
 from vapour.namespaces import *
 from asserts import addAssertion
 from util import *

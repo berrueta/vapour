@@ -120,3 +120,9 @@ INSTALLED_APPS = (
      "vapour.teapot",
 )
 
+#Custom stuff for vapour
+PATH_RDF_FILES = "http://vapour.sourceforge.net"
+PATH_TEMPLATES = os.path.join(ROOT_PATH, "strainer/templates/")
+PATH_LOG = os.path.join(ROOT_PATH, "log/vapour.log")
+ALLOW_INTRANET = True
+

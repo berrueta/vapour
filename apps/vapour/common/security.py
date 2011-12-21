@@ -1,7 +1,7 @@
 
 import urlparse
 from dns.resolver import Resolver, NXDOMAIN
-from common import allowIntranet # FIXME: horrible hack, global variable!
+from vapour.settings import ALLOW_INTRANET
 from vapour.cup import common
 
 def isLocatedAtIntranet(host, options=None):
@@ -14,7 +14,7 @@ def isLocatedAtIntranet(host, options=None):
     if (options and options.client):
         requestFromIntranet = isIntranet(options.client)
 
-    if (not allowIntranet and not requestFromIntranet):
+    if (not ALLOW_INTRANET and not requestFromIntranet):
         try:
             resolver = Resolver()
             ipList = resolver.query(host.split(":")[0])
