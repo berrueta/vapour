@@ -70,7 +70,6 @@ def getHttpTracesFromModel(model, testRequirementUri):
               vapour:previousRequestCount ?previousRequestCount .
             ?request http:response ?response ;
               http:absoluteURI ?absoluteUri ;
-              http:type ?requestType ;
               http:methodName ?requestMethodName ;
               http:abs_path ?requestAbsPath ;
               http:host ?requestHost .
