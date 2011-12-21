@@ -139,6 +139,10 @@ class cup:
                 elif format == "rdf":
                     response = HttpResponse(store.serialize(format="pretty-xml"), mimetype="application/rdf+xml")
                     response["Vary"] = "Accept"
+                    response["Content-Disposition"] = "attachment; filename=vapour.rdf"
+                    response["Expires"] = "0"
+                    response["Cache-Control"] = "must-revalidate, post-check=0, pre-check=0"
+                    response["Pragma"] = "public"
                     return response
                 else:
                     return HttpResponseBadRequest("<h1>Unknown format</h1> <p>Requested format '+ " + format + "'</p>")
