@@ -1,7 +1,7 @@
 
 import random
 import traceback
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
@@ -57,8 +57,8 @@ class cup:
             if ((vocabUri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
                 format = common.getBestFormat(request.META["HTTP_ACCEPT"])
                 logger.info("Using content negotiation to return report in %s" % format.upper())
-            else:
-                format = "html"
+        if format == None:
+            format = "html"
 
         try:
             client = request.META.get('REMOTE_ADDR')
@@ -122,7 +122,6 @@ class cup:
                     namespaceFlavour = None
                     validRecipes = []
                 
-                web.header("Vary", "Accept")
                 if format == "html":        
                     store.parse(PATH_RDF_FILES + "/vapour.rdf")
                     store.parse(PATH_RDF_FILES + "/recipes.rdf")
@@ -130,18 +129,19 @@ class cup:
                     store.parse(PATH_RDF_FILES + "/http.rdf")        
                     store.parse(PATH_RDF_FILES + "/vocab.rdf")        
                     model = common.createModel(store)
-                    web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
-                    web.output(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
-                                                           autodetectUrisIfEmpty, 
-                                                           validatorOptions, namespaceFlavour, 
-                                                           validRecipes, resourceBaseUri, PATH_TEMPLATES))
+                    response = HttpResponse(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
+                                                                    autodetectUrisIfEmpty, 
+                                                                    validatorOptions, namespaceFlavour, 
+                                                                    validRecipes, resourceBaseUri, PATH_TEMPLATES),
+                                            mimetype="text/html") #IE sucks
+                    response["Vary"] = "Accept"
+                    return response
                 elif format == "rdf":
-                    web.header("Content-Type", "application/rdf+xml; charset=utf-8")
-                    web.output(store.serialize(format="pretty-xml"))
+                    response = HttpResponse(store.serialize(format="pretty-xml"), mimetype="application/rdf+xml")
+                    response["Vary"] = "Accept"
+                    return response
                 else:
-                    web.header("Content-Type", "text/html; charset=utf-8") #IE sucks
-                    web.ctx.status = "400 Bad Request"
-                    web.output("<p>Unknown format " + format + "</p>")
+                    return HttpResponseBadRequest("<h1>Unknown format</h1> <p>Requested format '+ " + format + "'</p>")
             else:  # vocabUri is None
                 return HttpResponse(strainer.justTheFormInHTML(resourceBaseUri, PATH_TEMPLATES))
         except Exception, e:
