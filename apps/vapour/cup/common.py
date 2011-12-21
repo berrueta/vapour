@@ -24,7 +24,7 @@ def createStore():
     return store
 
 def createModel(store):
-    return sparqlGraph.SPARQLGraph(store)
+    return store
 
 def clearLoggerHandlers(logger):
 	#because logger prints duplicate message, and I don't know how to fix it
