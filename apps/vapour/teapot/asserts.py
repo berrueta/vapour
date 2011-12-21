@@ -3,6 +3,7 @@ from util import *
 from vapour.namespaces import *
 from rdflib import BNode, Literal, URIRef
 import mimetypes
+from vapour.settings import REQ_BASE_URL
 
 reqCount = 1
 
@@ -68,7 +69,7 @@ def addAssertion(graph, testSubject, test, outcome, testRequirement):
 
 def addTestRequirement(graph, title, order):
     global reqCount
-    testRequirement = URIRef("req" + str(reqCount))
+    testRequirement = URIRef(REQ_BASE_URL + str(reqCount))
     reqCount += 1
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
     graph.add((testRequirement, VAPOUR["order"], Literal(order)))
