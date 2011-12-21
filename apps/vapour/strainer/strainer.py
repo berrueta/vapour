@@ -27,157 +27,120 @@ def getTestRequirements(model):
     return model.query(query, initNs=bindings)
 
 def isThereAnyFailingTest(model):
-    sparqlGr = SPARQLGraph(model)
-    where = GraphPattern([
-        ("?assertion", RDF["type"], EARL["Assertion"]),
-        ("?assertion", EARL["result"], "?result"),
-        ("?result", EARL["outcome"], EARL["failed"])
-        ])
-    return Query.queryObject(sparqlGr, where).ask()
+    query = """
+        ASK
+        WHERE {
+            ?assertion rdf:type earl:Assertion .
+            ?assertion earl:result ?result .
+            ?result earl:outcome earl:failed .
+        }
+    """
+    return model.query(query, initNs=bindings)
 
 def getResultsFromModel(model, testRequirementUri):
-    sparqlGr = SPARQLGraph(model)
-    select = ("?assertion", #0
-              "?test", # 1
-              "?testTitle", # 2
-              "?outcome", # 3
-              "?outcomeLabel", # 4
-              "?subject", # 5
-              "?subjectTitle") # 6
-    where = GraphPattern([          
-        ("?assertion", RDF["type"], EARL["Assertion"]),
-        (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["test"], "?test"),
-        ("?test", DC["title"], "?testTitle"),
-        ("?assertion", EARL["result"], "?result"),
-        ("?result", EARL["outcome"], "?outcome"),
-        ("?outcome", DC["title"], "?outcomeLabel"),
-        ("?assertion", EARL["subject"], "?subject"),
-        ("?subject", DC["title"], "?subjectTitle")
-        ])
-    results = Query.query(sparqlGr, select, where)
-    # manually sorting the results
-    sortBySubjectAndTestCase = lambda x, y : cmp(x[6],y[6]) or cmp(x[2],y[2])
-    results.sort(sortBySubjectAndTestCase)    
-    return results
+    query = """
+        SELECT ?assertion ?test ?testTitle ?outcome ?outcomeLabel ?subject ?subjectTitle
+        WHERE {      
+            ?assertion rdf:type earl:Assertion .
+            <%s> dct:hasPart ?assertion .
+            ?assertion earl:test ?test .
+            ?test dc:title ?testTitle .
+            ?assertion earl:result ?result .
+            ?result  earl:outcome ?outcome .
+            ?outcome dc:title ?outcomeLabel .
+            ?assertion earl:subject ?subject .
+            ?subject dc:title ?subjectTitle" .
+        }
+        ORDER BY ?subjectTitle ?testTitle
+    """ % testRequirementUri
+    return model.query(query, initNs=bindings)
 
 def getHttpTracesFromModel(model, testRequirementUri):
-    sparqlGr = SPARQLGraph(model)
-    select = (
-              "?response", # 0
-              "?responseTitle", # 1VAPOUR
-              "?absoluteUri", # 2
-
-              "?statusCodeNumber", # 3
-              "?responseContentType", # 4
-              "?responseLocation",  # 5
-
-              "?statusCodeTest", # 6
-              "?statusCodeValidity", # 7
-              "?responseContentTypeTest", # 8
-              "?responseContentTypeValidity", # 9
-              
-              "?requestAccept", # 10
-              "?previousRequestCount", # 11
-              "?requestType", # 12 <-- unused
-              "?requestMethodName", #13
-              "?requestAbsPath", #14
-              "?requestHost", #15
-              "?responseVary", #16
-              "?userAgent" #17
-              )
-    where = GraphPattern([
-        (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?response"),  # testSubject = response
-        ("?response", RDF["type"], EARL["TestSubject"]),
-        ("?response", DC["title"], "?responseTitle"),
-        ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
-        ("?request", HTTP["response"], "?response"),
-        ("?request", HTTP["absoluteURI"], "?absoluteUri"),
-        ("?request", RDF["type"], "?requestType"),
-        ("?request", HTTP["methodName"], "?requestMethodName"),
-        ("?request", HTTP["abs_path"], "?requestAbsPath"),
-        ("?request", HTTP["host"], "?requestHost"),
-        ("?response", VAPOUR["previousRequestCount"], "?previousRequestCount")
-    ])
-    optional = [
-        GraphPattern([("?request", HTTP["accept"], "?requestAccept")]),
-        GraphPattern([("?request", HTTP["user-agent"], "?userAgent")]),
-        GraphPattern([("?response", HTTP["content-type"], "?responseContentType")]),
-        GraphPattern([("?response", HTTP["location"], "?responseLocation")]),
-        GraphPattern([("?response", HTTP["vary"], "?responseVary")]),
-        GraphPattern([
-                      ("?statusCodeAssertion", EARL["subject"], "?response"),
-                      ("?statusCodeAssertion", EARL["test"], "?statusCodeTest"),
-                      ("?statusCodeTest", VAPOUR["propertyUnderTest"], HTTP["statusCodeNumber"]),
-                      ("?statusCodeAssertion", EARL["result"], "?statusCodeResult"),
-                      ("?statusCodeResult", EARL["outcome"], "?statusCodeValidity")
-        ]),
-        GraphPattern([
-                      ("?responseContentTypeAssertion", EARL["subject"], "?response"),
-                      ("?responseContentTypeAssertion", EARL["test"], "?responseContentTypeTest"),
-                      ("?responseContentTypeTest", VAPOUR["propertyUnderTest"], HTTP["content-type"]),
-                      ("?responseContentTypeAssertion", EARL["result"], "?responseContentTypeResult"),
-                      ("?responseContentTypeResult", EARL["outcome"], "?responseContentTypeValidity")
-        ])
-    ]
-    results = [x for x in Query.query(sparqlGr, select, where, optional)]
-    # manually sorting the results
-    sortByPreviousRequestCount = lambda x, y : cmp(x[11],y[11]) 
-    results.sort(sortByPreviousRequestCount)    
-    return results
+    query = """
+        SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
+               ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity
+               ?requestAccept "?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
+               ?requestHost ?responseVary ?userAgent
+        WHERE {
+            <%s> dct:hasPart ?assertion .
+            ?assertion earl:subject ?response .
+            ?response rdf:type earl:TestSubject ;
+              dc:title ?responseTitle ;
+              http:statusCodeNumber ?statusCodeNumber ;
+              vapour:previousRequestCount"], "?previousRequestCount .
+            ?request http:response ?response ;
+              http:absoluteURI ?absoluteUri ;
+              http:type ?requestType ;
+              http:methodName ?requestMethodName ;
+              http:abs_path ?requestAbsPath ;
+              http:host ?requestHost .
+            OPTIONAL { ?request http:accept ?requestAccept . }
+            OPTIONAL { ?request http:user-agent ?userAgent . }
+            OPTIONAL { ?response http:content-type ?responseContentType . }
+            OPTIONAL { ?response http:location ?responseLocation . }
+            OPTIONAL { ?response http:vary ?responseVary . }
+            OPTIONAL {
+                        ?statusCodeAssertion earl:subject ?response .
+                        ?statusCodeAssertion earl:test ?statusCodeTest .
+                        ?statusCodeTest earl:propertyUnderTest http:statusCodeNumber .
+                        ?statusCodeAssertion earl:result ?statusCodeResult .
+                        ?statusCodeResult earl:outcome ?statusCodeValidity .
+            }
+            OPTIONAL {
+                        ?responseContentTypeAssertion earl:"subject ?response" .
+                        ?responseContentTypeAssertion earl:test ?responseContentTypeTest .
+                        ?responseContentTypeTest vapour:propertyUnderTest http:content-type .
+                        ?responseContentTypeAssertion earl:result ?responseContentTypeResult .
+                        ?responseContentTypeResult earl:outcome ?responseContentTypeValidity .
+            }
+        }
+        ORDER BY ?previousRequestCount
+    """ % testRequirementUri
+    return model.query(query, initNs=bindings)
 
 def getFinalUriFromModel(model, testRequirementUri):
-    sparqlGr = SPARQLGraph(model)
-    select = ("?finalUri", "?contentType", "?statusCodeNumber")
-    # FIXME: a FILTER clause should be added to check the statusCodeNumber == 200
-    where = GraphPattern([
-        (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?response"), # testSubject = response
-        ("?getRequest", HTTP["response"], "?response"),
-        ("?response", HTTP["content-type"], "?contentType"),
-        ("?response", HTTP["statusCodeNumber"], "?statusCodeNumber"),
-        ("?getRequest", HTTP["absoluteURI"], "?finalUri")
-    ])
-    return [x for x in Query.query(sparqlGr, select, where) if int(x[2]) == httplib.OK]
+    query = """
+        SELECT ?finalUri ?contentType ?statusCodeNumber 
+        WHERE {
+          <%s> dct:hasPart ?assertion .
+          ?assertion earl:subject ?response .
+          ?getRequest http:response ?response 
+          ?response http:content-type ?contentType .
+          ?response http:statusCodeNumber ?statusCodeNumber .
+          ?getRequest http:absoluteURI ?finalUri .
+          FILTER (?statusCodeNumber = 200)
+    }
+    """ % testRequirementUri
+    return model.query(query, initNs=bindings)
 
 def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
-    sparqlGr = SPARQLGraph(model)
-    select = ("?resource", # 0
-              "?resourceType", #1
-              "?resourceTypeLabel" # 2
-    )
-    where = GraphPattern([
-        (testRequirementUri, DCT["hasPart"], "?assertion"),
-        ("?assertion", EARL["subject"], "?response"),
-        ("?response", VAPOUR["httpRange14ConclusionOn"], "?resource"),
-        ("?resource", RDF["type"], "?resourceType"),
-        ("?resourceType", RDFS["label"], "?resourceTypeLabel")
-    ])
-    results = [x for x in Query.query(sparqlGr, select, where)]
-    # manually sorting the results
-    sortByUri = lambda x, y : cmp(x[0],y[0]) 
-    results.sort(sortByUri)    
-    return results
+    query = """
+        SELECT ?resource ?resourceType ?resourceTypeLabel
+        WHERE {
+          <%s> dct:hasPart ?assertion .
+          ?assertion earl:subject"], "?response .
+          ?response vapour:httpRange14ConclusionOn ?resource .
+          ?resource rdf:type ?resourceType .
+          ?resourceType rdfs:label ?resourceTypeLabel .
+        }
+        ORDER BY ?resource
+    """ % testRequirementUri
+    return model.query(query, initNs=bindings)
 
 def getTestAgent(model):
     """
     Determine the software agent that was used to execute the tests
     """
-    sparqlGr = SPARQLGraph(model)
-    select = ("?agent", # 0
-              "?agentTitle", # 1
-              "?agentVersion", # 2
-              "?agentHomepage" # 3
-              )
-    where = GraphPattern([
-       ("?x", EARL["assertedBy"], "?agent"),
-       ("?agent", DC["title"], "?agentTitle"),
-       ("?agent", DCT["hasVersion"], "?agentVersion"),
-       ("?agent", FOAF["homepage"], "?agentHomepage")
-    ])
-    results = Query.query(sparqlGr, select, where)
-    return [x for x in results][0]
+    query = """ 
+        SELECT ?agent ?agentTitle ?agentVersion ?agentHomepage
+        WHERE {
+          ?x earl:assertedBy ?agent .
+          ?agent dc:title ?agentTitle ;
+            dct:hasVersion ?agentVersion ;
+            foaf:homepage ?agentHomepage .
+        }
+    """
+    return model.query(query, initNs=bindings)[0]
 
 def sortTrace(trace):    
     # FIXME
