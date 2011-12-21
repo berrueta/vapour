@@ -13,6 +13,7 @@ def performSparqlQuery(graph, query):
     return results
 
 def normalizeQuery(query):
-    for string in ["\n","\t","  ","   ","    ","     ","      ","       ","        ","         ","         ","          ","           "]: #FIXME: regex
+    for string in ["\n","\t","           ","          ","         ","         ","        ","       ","      ","     ","    ","   ","  "]: #FIXME: regex
         query = query.replace(string, " ")
     return query
+
