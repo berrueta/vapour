@@ -10,8 +10,7 @@ URI = Namespace("http://www.w3.org/2006/uri#")
 HTTP = Namespace("http://www.w3.org/2006/http#")
 HTTP_METHODS = Namespace("http://www.w3.org/2006/http-methods#")
 HTTP_STATUS_CODES = Namespace("http://www.w3.org/2006/http-statusCodes#")
-VAPOUR_VOCAB = Namespace("http://vapour.sourceforge.net/vocab.rdf#")
-VAPOUR_SOFT = Namespace("http://vapour.sourceforge.net/vapour.rdf#")
+VAPOUR = Namespace("http://vapour.sourceforge.net/vocab.rdf#")
 RECIPES = Namespace("http://vapour.sourceforge.net/recipes.rdf#")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
@@ -24,9 +23,9 @@ bindings = {
                 u"dct":DCT,
                 u"uri":URI,
                 u"http":HTTP,
-                u"vapourv":VAPOUR_VOCAB,
-                u"vapours":VAPOUR_SOFT,
+                u"vapour":VAPOUR,
                 u"recipes":RECIPES,
                 u"foaf":FOAF,
             }
+
 
