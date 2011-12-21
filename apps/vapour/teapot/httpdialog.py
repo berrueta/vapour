@@ -110,7 +110,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     
     # properties of the requestResource
     graph.add((requestResource, RDF["type"], HTTP["Request"]))
-    graph.add((requestResource, HTTP["methodName"], method))
+    graph.add((requestResource, HTTP["methodName"], Literal(method)))
     graph.add((requestResource, HTTP["method"], HTTP_METHODS[method]))
     # FIXME: the next property may be deprecated
     graph.add((requestResource, URI["uri"], Literal(url))) # FIXME: beware of 2nd requests
