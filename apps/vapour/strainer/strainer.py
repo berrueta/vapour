@@ -140,7 +140,7 @@ def getTestAgent(model):
             foaf:homepage ?agentHomepage .
         }
     """
-    return model.query(query, initNs=bindings)[0]
+    return model.query(query, initNs=bindings)
 
 def sortTrace(trace):    
     # FIXME
