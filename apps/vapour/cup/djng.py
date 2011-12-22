@@ -5,9 +5,14 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
-from vapour.settings import PATH_TEMPLATES, PATH_RDF_FILES
+from vapour.settings import DEBUG, STATIC_URL, PATH_TEMPLATES, PATH_RDF_FILES, PATH_RESOURCES_FILES
+from vapour.common.lang import if_else
 
-resourceBaseUri = "http://idi.fundacionctic.org/vapourres"
+resourceBaseUri = None
+if DEBUG:
+    resourceBaseUri = if_else(STATIC_URL[-1] == "/", STATIC_URL[:-1], STATIC_URL)
+else:
+    resourceBaseUri = PATH_RESOURCES_FILES
 
 class cup:
 
