@@ -12,7 +12,7 @@ from settings import DEBUG, STATIC_URL, STATIC_ROOT
 urlpatterns = patterns('',
     (r"^$",             lambda request: HttpResponsePermanentRedirect("/vapour")),
     (r"^vapour$",       cup.GET),
-    (r"^favicon.ico",   lambda request: HttpResponseRedirect(+"images/favicon.ico"))
+    (r"^favicon.ico",   lambda request: HttpResponseRedirect(STATIC_URL+"images/favicon.png"))
 )
 
 if DEBUG:
