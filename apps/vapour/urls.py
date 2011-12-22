@@ -1,16 +1,22 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.views.static import serve
 from vapour.cup.djng import cup
-import settings
+from settings import DEBUG, STATIC_URL, STATIC_ROOT
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r"^favicon.ico",   lambda request: HttpResponseRedirect(settings.MEDIA_URL+"images/favicon.ico")),
     (r"^$",             lambda request: HttpResponsePermanentRedirect("/vapour")),
-    (r"^vapour$",       cup.GET)
+    (r"^vapour$",       cup.GET),
+    (r"^favicon.ico",   lambda request: HttpResponseRedirect(+"images/favicon.ico"))
 )
+
+if DEBUG:
+    urlpatterns += patterns('',
+            (r"^%s(?P<path>.*)$" % STATIC_URL[1:], serve, {"document_root": STATIC_ROOT}),
+    )
 
