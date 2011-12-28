@@ -57,73 +57,14 @@
 	    <form action="" method="get" id="form">
 
           <p>
-            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri" id="labelVocabUri">URI:</label>
-            #if $vocabUri:
-            <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
+            <label title="Address of the page containing the vocabulary" for="uri" class="uri" id="labelUri">URI:</label>
+            #if $uri:
+            <input class="uri" type="text" size="50" name="uri" id="uri" value="$uri" /><br/>
             #else:
-	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="http://" /><br/>
+	        <input class="uri" type="text" size="50" name="uri" id="uri" value="http://" /><br/>
             #end if
             <span id="uriHint">(example: <tt id="example">http://dbpedia.org/resource/Asturias</tt>)</span>
           </p>
-
-          <fieldset id="vocabularyValidationFieldset">
-	      <legend class="showHideTitle" id="vocabularyValidationLegend">Specific options for vocabularies / ontologies</legend>
-
-          <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
-      
-          <p>
-            <!-- FIXME: we may want to add some links to this paragraph -->
-            If you want to validate an RDF or OWL vocabulary or ontology, you can enter
-            here the URIs of a class, a property and an instance, to have them checked
-            as well as the namespace (vocabulary) URI above.
-          </p>
-                  
-          <p>
-            <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
-            #if $classUri:
-	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
-            #else:
-            <input class="uri" type="text" size="50" name="classUri" id="classUri" value="http://" />
-            #end if
-          </p>
-
-          <p>
-            <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
-            #if $propertyUri:
-	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri" />
-            #else:
-	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="http://" />
-            #end if
-          </p>
-
-          <p>
-            <label title="URI of an instance in the vocabulary" for="instanceUri" class="uri">Instance URI:</label>
-            #if $instanceUri:
-	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="$instanceUri" />
-            #else:
-	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="http://" />
-            #end if
-          </p>
-
-          <p>
-	        #if $autodetectUris:
-	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" checked="checked" />
-	        #else:
-	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" />
-	        #end if
-            <label for="autodetectUris">Autodetect if empty</label>        
-          </p>
-
-          </div>
-
-          </fieldset>
-
-          #if not ($classUri or $propertyUri or $instanceUri or $autodetectUris):
-          <script type="text/javascript">
-            document.getElementById("vocabularyValidationSubform").setAttribute("style", document.getElementById("vocabularyValidationSubform").getAttribute("style") + "; display:none;");
-            document.getElementById("vocabularyValidationLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
-          </script>
-	      #end if
 
           <fieldset id="advancedOptionsFieldset">
           <legend class="showHideTitle" id="advancedOptionsLegend">More options</legend>   
