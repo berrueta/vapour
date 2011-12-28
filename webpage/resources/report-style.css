@@ -1,24 +1,38 @@
-
 /* CSS style for reports of Vapour */
+
+html{
+	background-color: #CCC;
+}
+
+body{
+	margin:0px;
+	background-image: url('images/bgDg.png');
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-color: #ffffff;
+}
+
 
 div#header {
   background-color: #5674bc;
   text-align: left;
   vertical-align: top;
   display: block;
-  padding: 0.3em 2em 1em 0.5em;
-  margin-bottom: 0.5em;
-  margin-top: 0.3em;
-  background-image: url(images/ctic-white.png);
-  background-repeat: no-repeat;
-  background-position: bottom right;
+  background-image: url('images/header-bg.png');
+  background-repeat: repeat-x;
+  background-position: top left;
+  height:100px;
 }
 
 h1 {
-  font-size: 2.4em;
+  line-height: 100px;
+  margin-left:20px;
+  font-size: 3em;
   font-weight: bold;
-  color: #ffffff;
   display: inline;
+  color: #344251;
+  text-shadow: 1px 1px 0px #bad3ed;
+  font-weight: bold;
 }
 
 h1 a, h1 a:active, h1 a:hover, h1 a:visited {
@@ -33,6 +47,7 @@ h1 a abbr {
 
 h2, h3, h4, h5, h6 {
   color: #5674bc;
+  text-shadow: 1px 1px 1px #000;
 }
 
 div#header h2 {
@@ -44,11 +59,6 @@ div#header h2 {
 
 img {
   border: 0;
-}
-
-.all{
-	width:90%;
-	margin-left:5%;
 }
 
 .fileIcon {
@@ -138,6 +148,9 @@ img {
   margin-bottom: 1em;
   padding: .6em;
   background-color:#fffff9;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; 
 }
 
 .httpDialog
@@ -184,9 +197,9 @@ p#linkToResults {
 }
 
 fieldset {
-  border: 1px outset;
+  border: 1px groove;
   margin-top: 1.4em;
-  background-color:#eeeedd;
+  background-color:#DDD;
   margin-left:1em;
   margin-right:1em;
 }
@@ -194,10 +207,9 @@ fieldset {
 legend {
   font-size:larger;
   color:#5674bc;
-  border:1px #b0b0c0 solid;
   padding:0.1em;
   padding-right:0.5em;
-  background-color:#fefeed;
+  text-shadow: 1px 1px 1px #000;
 }
 .moreOptions {
   margin-bottom: 0px;
@@ -211,10 +223,19 @@ form > p {
 }
 
 .inputData {
-  border: 1px #b0b0c0 solid;
-  padding: .6em;
-  background-color: #e0e0d0;
-  margin-bottom: 2em;
+	text-align: left;
+	border-left: 5px solid #F3A01E;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #DDD;
+	background-color: #EEE;
+	padding: 10px;
+	width:90%;
+	margin:20px auto;
+	-moz-box-shadow: -2px 2px 2px rgba(0,0,0,0.3);
+	-webkit-box-shadow: -2px 2px 2px rgba(0,0,0,0.3);
+	box-shadow: -2px 2px 2px rgba(0,0,0,0.3)
 }
 
 input { 
@@ -235,14 +256,38 @@ input.uri {
   font-family: Monaco, "Courier New", Monospace;
   font-size: 0.9em;
   width: 75%;
+  background-image:url(images/form_bg.jpg);
+  background-repeat:repeat-x;
+  border:1px solid #d1c7ac;
+  color:#333333;
+  padding:3px 3px 3px 10px;
+  margin-right:4px;	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+  margin-bottom:8px;
+  font-family:tahoma, arial, sans-serif;
+}
+
+input#userAgent{
+  font-family: Monaco, "Courier New", Monospace;
+  font-size: 0.9em;
+  background-image:url(images/form_bg.jpg);
+  background-repeat:repeat-x;
+  border:1px solid #d1c7ac;
+  color:#333333;
+  padding:3px 3px 3px 10px;
+  margin-right:4px;
+  margin-bottom:8px;
 }
 
 label.uri {
   display: block;
   width: 7em;
+  height:2em;
   float:left;
   text-align: left;
-  margin-right: 0.3em;
+  margin-right: 0.3em;overallResultPass
+  line-height:2em;
 }
 
 label#labelVocabUri {
@@ -268,33 +313,24 @@ p.submit_button {
   text-align:center;
 }
 
-p.submit_button input {
-	overflow: visible;
-	width: auto;
-	background: #fff;
-  color: #365D95;
-  padding: 0.3em 0.4em 0.1em 0.3em;
-	font-size: 1.2em;
-	width: 12em;
-	text-align: center;
-	border-bottom: 2px solid #444;
-	border-right: 2px solid #444;
-	border-top: 1px solid #aaa;
-	border-left: 1px solid #aaa;
-	background: #eee url("grad.png") repeat-x top left;
-	cursor: pointer;
-}
-
 p.submit_button input:active {
   color: #1f2126;
-	border-bottom: 1px solid #aaa;
-	border-right: 1px solid #aaa;
-	border-top: 2px solid #444;
-	border-left: 2px solid #444;
 }
 
 
 /* summary ====================================================== */
+
+div#report {
+  width: 90%;
+  display: block;
+  margin: 2em auto 3em auto;
+}
+
+p.overallResultFail, p.overallResultPass {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; 
+}
 
 ul.testResultChecklist {
   list-style-type:none;
@@ -365,6 +401,9 @@ h3
   margin-bottom: 1em;
   padding: .6em;
   background-color: #f0f0ff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; 
 }
 
 .summaryTable
@@ -424,24 +463,23 @@ h3
 }
 
 div#footer {
-  width: 90%;
-  margin-left: 5%;
   margin-top: 3em;
-  padding-bottom: 3em;
-  border-top: 1px #5674bc solid;
+  padding: 1em 3em 3em 5em;
+  border-top: 1px #5674bc groove;
+  background-color: #CCC;
 }
 
 div#footer p {
   font-size: 0.7em;
-  color: #888888;
+  color: #222;
   text-align: left;
-  padding-top: 1em;
 }
 
 div#footer p#logo {
-  float: left;
+  float: right;
   margin-right: 2em;
   padding-top: 0;
+  margin-top:0px;
 }
 
 /* from Miguel */
@@ -459,5 +497,88 @@ div#footer p#logo {
 .shoHideTitle:hover
 {
 	color: #000000;
+}
+
+/* by Ivan */
+
+body:before {
+	content: "";
+	position: fixed;
+	top: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	-moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	z-index: 100;
+}
+
+.submit_button input {
+  background-color: #a5b8da;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a5b8da), to(#7089b3));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #a5b8da, #7089b3);
+  background-image: -moz-linear-gradient(top, #a5b8da, #7089b3);
+  border-top: 1px solid #758fba;
+  border-right: 1px solid #6c84ab;
+  border-bottom: 1px solid #5c6f91;
+  border-left: 1px solid #6c84ab;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+  border-radius: 18px;
+  -webkit-box-shadow: inset 0 1px 0 0 #aec3e5;
+  -moz-box-shadow: inset 0 1px 0 0 #aec3e5;
+  -ms-box-shadow: inset 0 1px 0 0 #aec3e5;
+  -o-box-shadow: inset 0 1px 0 0 #aec3e5;
+  box-shadow: inset 0 1px 0 0 #aec3e5;
+  color: #fff;
+  font: bold 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  line-height: 1;
+  padding: 8px 0;
+  text-align: center;
+  text-shadow: 0 -1px 1px #64799e;
+  text-transform: uppercase;
+  width: 150px; }
+  .submit_button input:hover {
+    background-color: #9badcc;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#9badcc), to(#687fa6));
+    background-image: -webkit-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -moz-linear-gradient(top, #9badcc, #687fa6);
+    border-top: 1px solid #6d86ad;
+    border-right: 1px solid #647a9e;
+    border-bottom: 1px solid #546685;
+    border-left: 1px solid #647a9e;
+    -webkit-box-shadow: inset 0 1px 0 0 #a5b9d9;
+    -moz-box-shadow: inset 0 1px 0 0 #a5b9d9;
+    -ms-box-shadow: inset 0 1px 0 0 #a5b9d9;
+    -o-box-shadow: inset 0 1px 0 0 #a5b9d9;
+    box-shadow: inset 0 1px 0 0 #a5b9d9;
+    cursor: pointer; }
+  .submit_button input:active {
+    border: 1px solid #546685;
+    -webkit-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
+    -ms-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
+    -o-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee; }
+
+.error{
+    color: red;
+}
+
+div#checking-dialog {
+    display: none;
+    background-color: #3f6171;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.7em;
+} 
+
+.ui-dialog-titlebar { 
+    display: none; 
 }
 
