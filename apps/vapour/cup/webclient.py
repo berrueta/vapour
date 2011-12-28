@@ -22,31 +22,22 @@ class cup:
         logger = common.createLogger()
 
         try:
-            vocabUri = request.GET.get("vocabUri")
-            if (vocabUri == "" or vocabUri == "http://"): vocabUri = None
+            uri = request.GET.get("uri")
         except KeyError:
-            vocabUri = None
-        try:
-            classUri = request.GET.get("classUri")
-            if (classUri == "" or classUri == "http://"): classUri = None
-        except KeyError:
-            classUri = None                
-        try:
-            propertyUri = request.GET.get("propertyUri")
-            if (propertyUri == "" or propertyUri == "http://"): propertyUri = None
-        except KeyError:
-            propertyUri = None
-        try:
-            instanceUri = request.GET.get("instanceUri")
-            if (instanceUri == "" or instanceUri == "http://"): instanceUri = None
-        except KeyError:
-            instanceUri = None
+            try:
+                uri = request.GET.get("vocabUri") # legacy http interface
+            except KeyError:
+                uri = None
+        finally:
+            if (uri == "" or uri == "http://"): uri = None
+
         try:
             defaultResponse = request.GET.get("defaultResponse")
             if defaultResponse != "rdfxml" and defaultResponse != "html" and defaultResponse != "dontmind":
                 defaultResponse = "dontmind" # default value
         except KeyError:
             defaultResponse = "dontmind"
+
         try:
             userAgent = request.META["HTTP_USER_AGENT"]
             if not userAgent:
@@ -59,7 +50,7 @@ class cup:
         try:
             format = request.GET.get("format")
         except KeyError:
-            if ((vocabUri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
+            if ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
                 format = common.getBestFormat(request.META["HTTP_ACCEPT"])
                 logger.info("Using content negotiation to return report in %s" % format.upper())
         if format == None:
@@ -81,51 +72,22 @@ class cup:
             htmlVersions = False
 
         try:
-            autodetectUrisIfEmpty = request.GET.get("autodetectUris") is "1"
-        except KeyError:
-            autodetectUrisIfEmpty = False
-
-        try:
             store = common.createStore()
                 
-            if vocabUri is not None:
+            if uri is not None:
                 if (client):
-                    logger.info("Request from %s over URI: %s" % (client, vocabUri))
+                    logger.info("Request from %s over URI: %s" % (client, uri))
                 else:
-                    logger.info("Request over URI: " + vocabUri)
-                if (classUri is None and autodetectUrisIfEmpty) or (propertyUri is None and autodetectUrisIfEmpty):
-                    (classUris, propertyUris, instanceUris) = autodetect.autodetectUris(store, vocabUri, userAgent)    
-                    random.seed()
-                    if autodetectUrisIfEmpty and not classUri and classUris:
-                        classUri = random.choice(classUris)
-                    if autodetectUrisIfEmpty and not propertyUri and propertyUris:
-                        propertyUri = random.choice(propertyUris)
-                    if autodetectUrisIfEmpty and not instanceUri and instanceUris:
-                        instanceUri = random.choice(instanceUris)
+                    logger.info("Request over URI: " + uri)
 
-                # defines the resources to be checked  
-                resourcesToCheck = []
-                if classUri is None and propertyUri is None and instanceUri is None:
-                    resourcesToCheck.append({'uri': vocabUri, 'description': "resource URI", 'order': 1})
-                else:
-                    resourcesToCheck.append({'uri': vocabUri, 'description': "vocabulary URI", 'order': 1})
-                    if classUri is not None:
-                        resourcesToCheck.append({'uri': classUri, 'description': "class URI", 'order': 2})
-                    if propertyUri is not None:
-                        resourcesToCheck.append({'uri': propertyUri, 'description': "property URI", 'order': 3})
-                    if instanceUri is not None:
-                        resourcesToCheck.append({'uri': instanceUri, 'description': "instance URI", 'order': 4})
-                
+                resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
+
                 # defines the options of the validator
                 validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent, client)
                 
-                recipes.checkRecipes(store, resourcesToCheck, validatorOptions)
-                if classUri is not None:
-                    namespaceFlavour = autodetect.autodetectNamespaceFlavour(vocabUri, classUri)
-                    validRecipes = autodetect.autodetectValidRecipes(vocabUri, classUri, namespaceFlavour, htmlVersions)
-                else:
-                    namespaceFlavour = None
-                    validRecipes = []
+                recipes.checkRecipes(store, resourceToCheck, validatorOptions)
+                namespaceFlavour = None
+                validRecipes = []
                 
                 if format == "html":        
                     store.parse(PATH_RDF_FILES + "/vapour.rdf")
@@ -134,8 +96,7 @@ class cup:
                     store.parse(PATH_RDF_FILES + "/http.rdf")        
                     store.parse(PATH_RDF_FILES + "/vocab.rdf")        
                     model = common.createModel(store)
-                    response = HttpResponse(strainer.resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, True,
-                                                                    autodetectUrisIfEmpty, 
+                    response = HttpResponse(strainer.resultsModelToHTML(model, uri, True,
                                                                     validatorOptions, namespaceFlavour, 
                                                                     validRecipes, resourceBaseUri, PATH_TEMPLATES),
                                             mimetype="text/html") #IE sucks

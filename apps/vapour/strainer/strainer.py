@@ -145,17 +145,13 @@ def sortTrace(trace):
     # FIXME
     return trace
 
-def prepareData(resourceBaseUri, validatorOptions, vocabUri="", classUri="", propertyUri="", instanceUri = "", printForm=False, autodetectUris=False, namespaceFlavour=None, validRecipes=[]):
+def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, namespaceFlavour=None, validRecipes=[]):
     data = {}
     
     data['resourceBaseUri'] = resourceBaseUri
     
     data['printForm'] = printForm
-    data['vocabUri'] = vocabUri
-    data['classUri'] = classUri
-    data['propertyUri'] = propertyUri
-    data['instanceUri'] = instanceUri
-    data['autodetectUris'] = autodetectUris
+    data['uri'] = uri
     data['validateRDF'] = validatorOptions.validateRdf
     data['htmlVersions'] = validatorOptions.htmlVersions
     data['defaultResponse'] = validatorOptions.defaultResponse
@@ -170,18 +166,16 @@ def prepareData(resourceBaseUri, validatorOptions, vocabUri="", classUri="", pro
     data['httpTraces'] = {}
     data['finalUris'] = {}
     data['httpRange14Conclusions'] = {}
-    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'vocabUri':vocabUri or '','classUri':classUri or '','autodetectUris':str(int(autodetectUris)),'propertyUri':propertyUri or '','validateRDF':str(int(validatorOptions.validateRdf)),'htmlVersions':str(int(validatorOptions.htmlVersions)),'format':'rdf', 'defaultResponse':validatorOptions.defaultResponse})).replace("&","&amp;")
+    data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'uri':uri or '','validateRDF':str(int(validatorOptions.validateRdf)),'htmlVersions':str(int(validatorOptions.htmlVersions)),'format':'rdf', 'defaultResponse':validatorOptions.defaultResponse})).replace("&","&amp;")
     return data
 
-def resultsModelToHTML(model, vocabUri, classUri, propertyUri, instanceUri, printForm,
-                       autodetectUris, 
-                       validatorOptions, namespaceFlavour, validRecipes,
+def resultsModelToHTML(model, uri, printForm, validatorOptions, namespaceFlavour, validRecipes,
                        resourceBaseUri = "resources", templateDir = templateDir):
     """
     Entry point: use a RDFmodel with results as input to populate a
     cheetah template
     """
-    data = prepareData(resourceBaseUri, validatorOptions, vocabUri, classUri, propertyUri, instanceUri, printForm, autodetectUris, namespaceFlavour, validRecipes)
+    data = prepareData(resourceBaseUri, validatorOptions, uri, printForm, namespaceFlavour, validRecipes)
     data['testRequirements'] = getTestRequirements(model)
     for testRequirementUri in [x[0] for x in data['testRequirements']]:        
         data['testResults'][testRequirementUri] = getResultsFromModel(model, testRequirementUri)
