@@ -26,13 +26,11 @@
     <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
+    <link type="text/css" rel="stylesheet" href="$resourceBaseUri/jquery-ui-1.8.16.custom.css" media="screen,projection,print" />
     #if len($testRequirements) > 0:
     <link rel="alternate" type="application/rdf+xml" title="RDF version of this report" href="$rdfReportUrl" />
     #end if
     <link rel="meta" type="application/rdf+xml" title="DOAP" href="http://vapour.sourceforge.net/resources/doap.rdf" />    
-    <script type="text/javascript"src="$resourceBaseUri/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript"src="$resourceBaseUri/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
   </head>
   <body>    
     <div class="all">
@@ -417,6 +415,15 @@
       #end if
     </div>
 
+	<div id="checking-dialog" title="Checking with Vapour">
+		<p><img src="$resourceBaseUri/images/spinner.gif" alt="checking..."/></p>
+		<p>Vapour is checking...</p> 
+	</div> 
+
+    <script type="text/javascript"src="$resourceBaseUri/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"src="$resourceBaseUri/jquery.validate.min.js"></script>
+    <script type="text/javascript"src="$resourceBaseUri/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
     
   </body>
 

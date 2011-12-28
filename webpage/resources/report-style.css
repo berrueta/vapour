@@ -569,3 +569,16 @@ body:before {
     color: red;
 }
 
+div#checking-dialog {
+    display: none;
+    background-color: #3f6171;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.7em;
+} 
+
+.ui-dialog-titlebar { 
+    display: none; 
+}
+

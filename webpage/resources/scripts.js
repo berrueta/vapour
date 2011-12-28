@@ -60,11 +60,19 @@ function submit() {
             }
         }
     });
+    $("#checking-dialog").dialog({
+        dialogClass: "alert",
+        autoOpen: false,
+		modal: true,
+		resizable: false,
+        width:'auto',
+		draggable: false
+	}).siblings(".ui-dialog-titlebar").remove();
     form.submit(function() {
         if ($(this).valid()) {
-                
             var button = $("#submitButton");
             button.attr("disabled", "disabled");
+            $('#checking-dialog').dialog('open');
             button.val("Checking...");
         } else {
             return false;
