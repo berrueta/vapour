@@ -140,6 +140,7 @@ class cup:
                                                                     validRecipes, resourceBaseUri, PATH_TEMPLATES),
                                             mimetype="text/html") #IE sucks
                     response["Vary"] = "Accept"
+                    response["Access-Control-Allow-Origin"] = "*"
                     return response
                 elif format == "rdf":
                     response = HttpResponse(store.serialize(format="pretty-xml"), mimetype="application/rdf+xml")
@@ -148,6 +149,7 @@ class cup:
                     response["Expires"] = "0"
                     response["Cache-Control"] = "must-revalidate, post-check=0, pre-check=0"
                     response["Pragma"] = "public"
+                    response["Access-Control-Allow-Origin"] = "*"
                     return response
                 else:
                     return HttpResponseBadRequest("<h1>Unknown format</h1> <p>Requested format '+ " + format + "'</p>")
