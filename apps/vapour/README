@@ -9,23 +9,35 @@ Dependencies
 ------------
 
     - python (>=2.4)
-    - python-django (>=1.0)
-    - google-app-engine-django (>=r109)
-    - python-rdflib
-    - python-httplib
-    - python-dnspython
+    - django (>=1.0)
+    - rdflib (>=3.0)
+    - rdfextras (>=0.1)
+    - httplib
+    - dnspython
 
 
 Running
 -------
 
-if you want to install this application by yourself, once your've installed 
-all dependencies, you must link the Google App Engine SDK for Python by
-running: 
-
-    ln -s /path/to/google_appengine .google_appengine
-
-And then you'd be able launch Vapour:
+If you want to install this application by yourself, once your've installed 
+all dependencies, you would need to execute:
 
     python manage.py runserver
 
+For running Vapour as CGI on Apache, you should use a configuration like:
+
+    Alias /resources/ /path/to/vapour/webpage/resources/
+
+    <Directory /path/to/vapour/webpage/resources>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    WSGIScriptAlias / /path/to/vapour/apps/vapour/wsgi.py
+
+    <Directory /path/to/vapour/apps/vapour>
+        Order deny,allow
+        Allow from all
+    </Directory> 
+
+Remember to disable the debug mode on Django settings.
