@@ -44,9 +44,19 @@ function showHide(element, name) {
     }
 }
 
+function submit() {
+    $("form#form").submit(function() {
+        var button = $("#submitButton");
+        button.attr("disabled", "disabled");
+        button.val("Checking...");
+        return false;
+    });
+}
+
 $(document).ready(function() {
     example();
     cleanInputs();
     showHideForms();
+    submit();
 });
 
