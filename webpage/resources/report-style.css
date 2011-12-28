@@ -484,7 +484,7 @@ div#footer p#logo {
 
 /* from Miguel */
 
-.shoHideTitle
+.showHideTitle
 {
 	clear: both;
 	background-image: url("arrow-open.png");
@@ -494,7 +494,7 @@ div#footer p#logo {
 	cursor: pointer;	
 }
 
-.shoHideTitle:hover
+.showHideTitle:hover
 {
 	color: #000000;
 }
