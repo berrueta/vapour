@@ -2,7 +2,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.views.static import serve
-from vapour.cup.djng import cup
+from vapour.cup.webclient import cup
 from settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 # Uncomment the next two lines to enable the admin:
