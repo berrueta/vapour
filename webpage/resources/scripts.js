@@ -3,7 +3,7 @@
 
 function example() {
     $("tt#example").click(function() {
-        $("input#vocabUri").val($("tt#example").html());
+        $("input#uri").val($("tt#example").html());
     });
 }
 
