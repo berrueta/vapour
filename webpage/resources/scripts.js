@@ -45,11 +45,30 @@ function showHide(element, name) {
 }
 
 function submit() {
-    $("form#form").submit(function() {
-        var button = $("#submitButton");
-        button.attr("disabled", "disabled");
-        button.val("Checking...");
-        return false;
+    $.validator.addMethod("notonlyhttp", 
+        function(value, element) {
+            return (value != "http://");
+        }, 
+        "URI required!"
+    );
+    var form = $("form#form");
+    form.validate({
+        rules: {
+            vocabUri: {
+                required: true,
+                notonlyhttp: true
+            }
+        }
+    });
+    form.submit(function() {
+        if ($(this).valid()) {
+                
+            var button = $("#submitButton");
+            button.attr("disabled", "disabled");
+            button.val("Checking...");
+        } else {
+            return false;
+        }
     });
 }
 
