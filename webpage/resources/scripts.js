@@ -1,48 +1,89 @@
 
-/*
-  vapour.sf.net scripts
-*/
+/* vapour js scripts */
 
 function example() {
-	var node = document.getElementById("example");
-	node.onclick = function() { document.getElementById("vocabUri").value=this.innerHTML };
+    $("tt#example").click(function() {
+        $("input#vocabUri").val($("tt#example").html());
+    });
 }
 
 function cleanInputs() {
-    var inputs = new Array("vocabUri", "classUri", "propertyUri", "instanceUri");
+    var inputs = new Array("vocab", "class", "property", "instance");
     for (var i=0; i<inputs.length; i++) {
-        var input = document.getElementById(inputs[i]);
-        input.onfocus = function() { if(this.value=='http://') this.value=''; };
-        input.onblur = function() { if(this.value=='') this.value='http://'; };
+        var input = $("#"+inputs[i]+"Uri");
+        input.focus(function() { 
+            if($(this).val()=="http://") {
+                $(this).val();
+            }
+        });
+        input.blur(function() { 
+            if(!$(this).val()) {
+                $(this).val("http://"); 
+            }
+        });
     }
 }
 
-function showHideForm() {
-    //vocabulary validation legend
-    var vocabularyValidationLegend = document.getElementById("vocabularyValidationLegend");
-    vocabularyValidationLegend.onclick = function() { showHide(vocabularyValidationLegend, document.getElementById('vocabularyValidationSubform')); };
-
-    //vocabulary validation legend
-    var advancedOptionsLegend = document.getElementById("advancedOptionsLegend");
-    advancedOptionsLegend.onclick = function() { showHide(advancedOptionsLegend, document.getElementById('advancedOptionsSubform')); };
+function showHideForms() {
+    $("#vocabularyValidationLegend").click(function() { 
+        showHide($(this), "vocabularyValidationSubform"); 
+    });
+    $("#advancedOptionsLegend").click(function() { 
+        showHide($(this), "advancedOptionsSubform"); 
+    });
 }
 
-function addLoadEvent(func) {
-	//by Simon Willison:
-	//   http://simon.incutio.com/archive/2004/05/26/addLoadEvent
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
-	}
-	else {
-		window.onload = function() {
-			oldonload();
-			func();
-		}
-	}
+function showHide(element, name) {
+    var div = $("#"+name);
+    if (div.is(":hidden")) {  
+        element.css("background-image", "url('http://vapour.sourceforge.net/resources/arrow-open.png')");
+        div.slideDown("slow");
+    } else {
+        element.css("background-image", "url('http://vapour.sourceforge.net/resources/arrow-closed.png')");
+        div.slideUp("slow");
+    }
 }
 
-addLoadEvent(example);
-addLoadEvent(cleanInputs);
-addLoadEvent(showHideForm);
+function submit() {
+    $.validator.addMethod("notonlyhttp", 
+        function(value, element) {
+            return (value != "http://");
+        }, 
+        "URI required!"
+    );
+    var form = $("form#form");
+    form.validate({
+        rules: {
+            vocabUri: {
+                required: true,
+                notonlyhttp: true
+            }
+        }
+    });
+    $("#checking-dialog").dialog({
+        dialogClass: "alert",
+        autoOpen: false,
+		modal: true,
+		resizable: false,
+        width:'auto',
+		draggable: false
+	}).siblings(".ui-dialog-titlebar").remove();
+    form.submit(function() {
+        if ($(this).valid()) {
+            var button = $("#submitButton");
+            button.attr("disabled", "disabled");
+            $('#checking-dialog').dialog('open');
+            button.val("Checking...");
+        } else {
+            return false;
+        }
+    });
+}
+
+$(document).ready(function() {
+    example();
+    cleanInputs();
+    showHideForms();
+    submit();
+});
 

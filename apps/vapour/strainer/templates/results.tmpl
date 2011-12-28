@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+#from vapour.namespaces import EARL
+#from vapour.teapot import mimetypes
+  <head>
+    #if len($testRequirements) > 0:
+    <title>Vapour Report</title>
+    #else:
+    <title>Vapour, a Linked Data validator</title>
+    #end if
+    <meta http-equiv="content-type" content="text/xhtml+xml; charset=utf-8" />
+    #if len($testAgent) > 0:
+    <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
+	#end if
+    #if len($testRequirements) > 0:
+	    #if $isThereAnyFailingTest:
+    <link rel="shortcut icon" href="$resourceBaseUri/redFavicon.png" type="image/png" />
+	    #else:
+    <link rel="shortcut icon" href="$resourceBaseUri/greenFavicon.png" type="image/png" />
+	    #end if
+    #else:
+    <link rel="shortcut icon" href="$resourceBaseUri/images/favicon.png" type="image/png" />
+    #end if
+    <meta name="description" content="An automatically-generated report of compliance with respect to the 'Best Practice Recipes for Publishing RDF vocabularies'" />
+    <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
+    <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
+    <link type="text/css" rel="stylesheet" href="$resourceBaseUri/jquery-ui-1.8.16.custom.css" media="screen,projection,print" />
+    #if len($testRequirements) > 0:
+    <link rel="alternate" type="application/rdf+xml" title="RDF version of this report" href="$rdfReportUrl" />
+    #end if
+    <link rel="meta" type="application/rdf+xml" title="DOAP" href="http://vapour.sourceforge.net/resources/doap.rdf" />    
+  </head>
+  <body>    
+    <div class="all">
+    
+    #if $printForm:
+    <div id="header">
+      <h1>
+        <a href="http://vapour.sourceforge.net/" title="go to vapour project home page">
+          <abbr title="VAlidation Process Of Uri Response">vapour</abbr>
+        </a>
+      </h1>
+      <h2>a Linked Data validator</h2>
+    </div>
+
+    #if len($testRequirements) > 0:
+    <p id="linkToResults">
+      <a href="#report">Jump to the results</a> -
+      <a href="?">Clear report</a>
+    </p>
+    #end if
+
+    <div class="inputData">
+	    <h2>Validate by URI</h2>
+	    <form action="" method="get" id="form">
+
+          <p>
+            <label title="Address of the page containing the vocabulary" for="vocabUri" class="uri" id="labelVocabUri">URI:</label>
+            #if $vocabUri:
+            <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="$vocabUri" /><br/>
+            #else:
+	        <input class="uri" type="text" size="50" name="vocabUri" id="vocabUri" value="http://" /><br/>
+            #end if
+            <span id="uriHint">(example: <tt id="example">http://dbpedia.org/resource/Asturias</tt>)</span>
+          </p>
+
+          <fieldset id="vocabularyValidationFieldset">
+	      <legend class="shoHideTitle" id="vocabularyValidationLegend">Specific options for vocabularies / ontologies</legend>
+
+          <div id="vocabularyValidationSubform" class="vocabularyValidationSubform">
+      
+          <p>
+            <!-- FIXME: we may want to add some links to this paragraph -->
+            If you want to validate an RDF or OWL vocabulary or ontology, you can enter
+            here the URIs of a class, a property and an instance, to have them checked
+            as well as the namespace (vocabulary) URI above.
+          </p>
+                  
+          <p>
+            <label title="URI of a class in the vocabulary" for="classUri" class="uri">Class URI:</label>
+            #if $classUri:
+	        <input class="uri" type="text" size="50" name="classUri" id="classUri" value="$classUri" />
+            #else:
+            <input class="uri" type="text" size="50" name="classUri" id="classUri" value="http://" />
+            #end if
+          </p>
+
+          <p>
+            <label title="URI of a property in the vocabulary" for="propertyUri" class="uri">Property URI:</label>
+            #if $propertyUri:
+	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="$propertyUri" />
+            #else:
+	        <input class="uri" type="text" size="50" name="propertyUri" id="propertyUri" value="http://" />
+            #end if
+          </p>
+
+          <p>
+            <label title="URI of an instance in the vocabulary" for="instanceUri" class="uri">Instance URI:</label>
+            #if $instanceUri:
+	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="$instanceUri" />
+            #else:
+	        <input class="uri" type="text" size="50" name="instanceUri" id="instanceUri" value="http://" />
+            #end if
+          </p>
+
+          <p>
+	        #if $autodetectUris:
+	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="autodetectUris" id="autodetectUris" value="1" />
+	        #end if
+            <label for="autodetectUris">Autodetect if empty</label>        
+          </p>
+
+          </div>
+
+          </fieldset>
+
+          #if not ($classUri or $propertyUri or $instanceUri or $autodetectUris):
+          <script type="text/javascript">
+            document.getElementById("vocabularyValidationSubform").setAttribute("style", document.getElementById("vocabularyValidationSubform").getAttribute("style") + "; display:none;");
+            document.getElementById("vocabularyValidationLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
+          </script>
+	      #end if
+
+          <fieldset id="advancedOptionsFieldset">
+          <legend class="shoHideTitle" id="advancedOptionsLegend">More options</legend>   
+
+          <div id="advancedOptionsSubform" class="advancedOptionsSubform">
+          <p>
+	        #if $validateRDF:
+	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" />
+	        #end if
+	        <label for="validateRDF" class="check">Check the RDF responses for meaningful data (takes some time)</label>
+          </p>
+
+          <p>
+	        #if $htmlVersions:
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" />
+	        #end if
+	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
+          </p>
+          
+          <p>
+            <!-- FIXME: this field depends on the previous checkbox (i.e.: it only makes
+            sense when there are HTML descriptions of the symbols). It would be nice
+            if it could be "disabled" if the checkbox above is not checked -->
+            <label for="defaultResponse">Expected default response (without content negotiation)</label>
+            <select name="defaultResponse" id="defaultResponse">
+              #if $defaultResponse == "dontmind":
+                <option value="dontmind" selected="selected">I don't mind</option>
+              #else:
+                <option value="dontmind">I don't mind</option>
+              #end if
+              #if $defaultResponse == "rdfxml":
+                <option value="rdfxml" selected="selected">RDF/XML</option>
+              #else:
+                <option value="rdfxml">RDF/XML</option> 
+              #end if
+              #if $defaultResponse == "html":
+                <option value="html" selected="selected">(X)HTML</option>
+              #else:
+                <option value="html">(X)HTML</option>
+              #end if
+            </select>
+          </p>
+
+          <p>
+	        <label for="userAgent">User Agent: </label>
+	        <input type="text" size="30" name="userAgent" id="userAgent" value="$userAgent" />
+	      </p>
+	
+          </div>
+          </fieldset>
+
+          #if not ($validateRDF or $htmlVersions or $defaultResponse!="dontmind"):
+          <script type="text/javascript">
+            document.getElementById("advancedOptionsSubform").setAttribute("style", document.getElementById("advancedOptionsSubform").getAttribute("style") + "; display:none;");
+            document.getElementById("advancedOptionsLegend").setAttribute("style", "background-image: url(http://vapour.sourceforge.net/resources/arrow-closed.png);");
+          </script>
+	      #end if
+
+          <p class="submit_button"><input type="submit" value="Check" id="submitButton" /></p>      
+        </form>
+    </div>
+    #end if
+    
+    <div id="report">
+
+    #if len($testRequirements) > 0:
+    <h2><a name="report">Vapour Report</a></h2>
+
+    #if $isThereAnyFailingTest:
+    <p class="overallResultFail">Some tests failed!</p>
+    #else:
+    <p class="overallResultPass">All tests passed!</p>
+    #end if
+
+    <div class="summary">
+      <h3>Summary:</h3>
+      <table class="summaryTable" summary="sumary of Vapour's report">
+        <thead>
+          <tr>
+            <td>Test requirement</td>
+            <td>Passed tests</td>
+          </tr>
+        </thead>
+        <tbody>
+          #for $testRequirement in $testRequirements:
+          <tr>
+            <td>
+              <a href="#$testRequirement[0]">
+              $testRequirement[1]
+              </a>
+             </td>
+             #set $totalTests = len($testResults[$testRequirement[0]])
+             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["failed"]])
+             #if $failedTests == 0:
+               #set $cssClass = "allTestsOk"
+             #else:
+               #set $cssClass = "someTestsFail"
+             #end if
+            <td class="$cssClass">
+            #echo ($totalTests - $failedTests)#/$totalTests
+            </td>            
+          </tr>
+          #end for
+        </tbody>
+      </table>
+      <p>
+      #if $namespaceFlavour:
+        It is a $namespaceFlavour['name'].
+      #end if
+      #if len($validRecipes) > 0:
+         To learn more about how to set up Apache to serve RDF using this configuration, please check:
+         #if len($validRecipes)>1:
+           </p>
+           <ul>
+             #for $validRecipe in $validRecipes:
+               <li><a href="$validRecipe['link']">$validRecipe['name']</a></li>
+             #end for
+           </ul>
+         #else:
+           <a href="$validRecipes[0]['link']">$validRecipes[0]['name']</a></p>
+         #end if
+      #else:
+         </p>
+      #end if
+    </div> <!-- /summary -->
+
+    #for $testRequirement in $testRequirements:
+    <div class="testRequirement">
+      <div class="httpDialog">
+        <h3 id="$testRequirement[0]">$testRequirement[1]</h3>
+         <div class="clientIcon">
+           <img src="$resourceBaseUri/computer.png" alt="A computer on the client-side"/>
+           <p class="httpDialogIconLegend">Client</p>
+         </div> <!-- /clientIcon -->
+         <div class="dialogArea">
+	       #for $trace in $httpTraces[$testRequirement[0]]:
+ 	       <!-- $trace[1] -->
+	       <div class="request">
+	  	      <div class="requestInner">
+	  	         <span class="httpHeader">#echo $trace[13].upper() # #echo $trace[14]#</span>
+	  	         #if $trace[10] != None:
+		  	     <span class="httpHeader">Accept: $trace[10]</span>
+		         #end if
+	  	         #if $trace[17] != None:
+		  	     <span class="httpHeader">User-Agent: $trace[17]</span>
+		         #end if
+	  	      </div> <!-- /requestInner -->
+           </div> <!-- /request -->
+	       <div class="response">
+	         <div class="responseInner">
+	            #if $trace[3] == 200:
+                <div class="fileIcon">
+		          <a href="$trace[2]">
+		          #if ($trace[4].startswith(mimetypes.rdfXml)):
+			        <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
+			      #else if ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml)):
+			        <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
+			      #else:
+			        <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
+			      #end if
+			      </a>
+			    </div> <!-- /fileIcon -->
+	            #end if
+	      
+                #if $trace[7] == EARL["passed"]:
+                  #set $additionalCssClass = "goodHttpHeader"
+			    #else if $trace[7] == EARL["failed"]:
+			      #set $additionalCssClass = "badHttpHeader"
+			    #else:
+			      #set $additionalCssClass = ""
+			    #end if
+			    
+                <span class="httpHeader $additionalCssClass">$trace[3]</span>
+			      
+			    #if $trace[3] == 200:
+			      #if $trace[9] == EARL["passed"]:
+			        #set $additionalCssClass = "goodHttpHeader"
+			      #else if $trace[9] == EARL["failed"]:
+			        #set $additionalCssClass = "badHttpHeader"
+			      #else:
+			        #set $additionalCssClass = ""
+			      #end if	        
+			      <span class="httpHeader $additionalCssClass">Content-type: $trace[4]</span>
+			    #end if
+			      
+			    #if $trace[3] == 303 or $trace[3] == 302:
+			    <span class="httpHeader">Location: $trace[5]</span>
+			    #end if
+                            #if $trace[3] == 200 and $trace[16] is not None:
+                            <span class="httpHeader">Vary: $trace[16]</span>
+                            #end if
+	         </div> <!-- /responseInner -->
+	       </div> <!-- /response -->
+	       #end for
+         </div> <!-- /dialogArea -->
+         
+         <div class="serverIcon">
+		   <img src="$resourceBaseUri/apacheconf.png" alt="A web server" />
+		   <p class="httpDialogIconLegend">Web server</p>
+         </div>
+         <div class="dummyR"></div>
+      </div> <!-- /httpDialog -->
+
+      <h4>Test results</h4>
+      <ul class="testResultChecklist">
+	  #for $test in $testResults[$testRequirement[0]]:
+        #if $test[3] == EARL["passed"]:
+          #set $testResultCssClass = "correctValue"
+        #else
+          #set $testResultCssClass = "badValue"
+        #end if
+	  <li class="$testResultCssClass">
+	    $test[6] ($test[2]): <span>$test[4]</span>
+	  </li>
+	  #end for
+      </ul>
+    
+      <h4>Conclusions on the type of the resources</h4>
+      <ul class="httpRange14Conc">
+      #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
+        <li>
+          <a href="$resource[0]">$resource[0]</a> is $resource[2]
+        </li>
+      #end for
+      </ul>
+    
+      #if len($finalUris[$testRequirement[0]]) > 0:
+      <h4>Further options</h4>
+      <ul class="futherOptions">
+      #from urllib import quote
+      #for $finalUri in $finalUris[$testRequirement[0]]:
+        #if 'text/html' in $finalUri[1] or 'application/xhtml+xml' in $finalUri[1]:
+        <li>
+          <a href="http://validator.w3.org/check?uri=#echo quote($finalUri[0], '') #">Check the response with the W3C markup validator</a>
+        </li>
+        <li>
+          <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=#echo quote($finalUri[0], '') #">Run the RDFa Distiller service</a>
+        </li>
+        #else if  'application/rdf+xml' in $finalUri[1]:
+        <li>
+          <a href="http://www.w3.org/RDF/Validator/ARPServlet?URI=#echo quote($finalUri[0], '') #">Check the response with the W3C RDF validator</a>
+        </li>
+        <li>
+          Browse the data using a RDF browser:
+          <a href="http://beckr.org/marbles?uri=#echo quote($finalUri[0], '') #">Marbles</a>,
+          <a href="http://linkeddata.uriburner.com/ode/?uri=#echo quote($finalUri[0], '') #"><abbr title="OpenLink Data Explorer">ODE</abbr></a>,
+          <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Zitgist</a>, 
+          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=#echo quote($finalUri[0], '') #">Disco</a>
+        </li>
+        <li>
+          <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
+        </li>
+        #end if
+      #end for
+      </ul>
+      #end if
+      
+      <p class="backtotop"><a href="#report">back to top</a></p>
+
+    </div> <!-- /testRequirement -->
+    #end for
+
+  </div>
+  #end if
+
+  </div> <!-- /all -->
+
+    <div id="footer">
+      <p id="logo">
+        <a href="http://www.fundacionctic.org/"><img src="$resourceBaseUri/images/ctic.png" width="215" height="62" alt="Fundacion CTIC" /></a>
+      </p>
+      #if len($testAgent) > 0:
+      <p>
+        Report generated by <a href="$testAgent[3]/">$testAgent[1]</a>, version $testAgent[2] on ${reportDate}. 
+        You can also <a href="$rdfReportUrl">get an RDF version</a> of this report.
+      </p>
+      #else:
+      <p>
+        <a href="http://vapour.sourceforge.net/">Vapour</a> is a validation service to check whether semantic web 
+        data is correctly published according to the current best practices, as defined by the 
+        <a href="http://www.w3.org/DesignIssues/LinkedData.html">Linked Data</a> principles, the 
+        <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a> and the 
+        <a href="http://www.w3.org/TR/cooluris/">Cool <abbr title="Uniform Resource Identifier">URIs</abbr></a>.
+      </p>
+      #end if
+    </div>
+
+	<div id="checking-dialog" title="Checking with Vapour">
+		<p><img src="$resourceBaseUri/images/spinner.gif" alt="checking..."/></p>
+		<p>Vapour is checking...</p> 
+	</div> 
+
+    <script type="text/javascript"src="$resourceBaseUri/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"src="$resourceBaseUri/jquery.validate.min.js"></script>
+    <script type="text/javascript"src="$resourceBaseUri/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
+    
+  </body>
+
+</html>
+
