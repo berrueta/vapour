@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.sf.vapour</groupId>
+	<artifactId>vapour-api</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Vapour API</name>
+	<description>Vapour Java API</description>
+	<url>http://vapour.sourceforge.net</url>
+
+	<licenses>
+		<license>
+			<name>W3C License</name>
+			<url>http://www.w3.org/Consortium/Legal/copyright-software</url>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Fundación CTIC</name>
+		<url>http://fundacionctic.org/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>sergio</id>
+			<name>Sergio Fernández</name>
+			<email>sergio.fernandez@fundacionctic.org</email>
+			<url>http://www.wikier.org/</url>
+		</developer>
+	</developers>
+
+	<build>
+		<directory>target</directory>
+		<outputDirectory>target/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${project.build.java.version}</source>
+					<target>${project.build.java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-core</artifactId>
+			<version>2.7.0-incubating</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-arq</artifactId>
+			<version>2.9.0-incubating</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+        <project.build.java.version>1.6</project.build.java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+</project>
