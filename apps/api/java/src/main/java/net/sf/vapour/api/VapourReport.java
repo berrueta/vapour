@@ -8,6 +8,8 @@ public interface VapourReport {
 	
 	int getTestPassed();
 	
+	int getTestFailed();
+	
 	List<VapourTest> getTests();
 
 }
