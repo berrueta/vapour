@@ -3,4 +3,7 @@ syntax: glob
 *~
 *.pyc
 .google_appengine
-
+target
+.project
+.classpath
+.settings
