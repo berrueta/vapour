@@ -20,18 +20,15 @@ public class VapourReportImpl implements VapourReport {
 	}
 
 	public int getTestPerformed() {
-		String query = "PREFIX earl: <http://www.w3.org/ns/earl#> SELECT (count(*) as ?count) WHERE { ?testRequirement a earl:TestRequirement }";
-		return SparqlHelper.execCountQuery(this.model, query);
+		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildTestsCount());
 	}
 
 	public int getTestPassed() {
-		String query = "PREFIX earl: <http://www.w3.org/ns/earl#> SELECT (count(*) as ?count) WHERE { ?assertion a earl:Assertion . ?assertion earl:result ?result . ?result earl:outcome earl:passed }";
-		return SparqlHelper.execCountQuery(this.model, query);
+		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildPassedTestsCount());
 	}
 	
 	public int getTestFailed() {
-		String query = "PREFIX earl: <http://www.w3.org/ns/earl#> SELECT (count(*) as ?count) WHERE { ?assertion a earl:Assertion . ?assertion earl:result ?result . ?result earl:outcome earl:failed }";
-		return SparqlHelper.execCountQuery(this.model, query);
+		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildFailedTestsCount());
 	}
 
 	public List<VapourTest> getTests() {
