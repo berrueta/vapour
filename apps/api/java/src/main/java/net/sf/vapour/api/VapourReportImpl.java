@@ -2,13 +2,12 @@ package net.sf.vapour.api;
 
 import java.util.List;
 
-import net.sf.vapour.api.helpers.SparqlHelper;
 
 import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
-public class VapourReportImpl implements VapourReport {
+class VapourReportImpl implements VapourReport {
 	
 	private static final Logger log = Logger.getLogger(VapourReportImpl.class);
 	private final Model model;

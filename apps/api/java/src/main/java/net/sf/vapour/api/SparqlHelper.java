@@ -1,4 +1,4 @@
-package net.sf.vapour.api.helpers;
+package net.sf.vapour.api;
 
 import org.apache.log4j.Logger;
 
@@ -8,7 +8,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
-public class SparqlHelper {
+class SparqlHelper {
 	
 	private static final Logger log = Logger.getLogger(SparqlHelper.class);
 	
