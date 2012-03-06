@@ -16,9 +16,10 @@ class QueryBuilder {
 	public static String buildCountTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (count(?assertion) as ?count) \n");
+		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
 		sb.append("WHERE { \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
+        sb.append("  ?assertion earl:result ?result . \n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -26,7 +27,7 @@ class QueryBuilder {
 	public static String buildCountPassedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (count(?assertion) as ?count) \n");
+		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
 		sb.append("WHERE { \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
@@ -38,7 +39,7 @@ class QueryBuilder {
 	public static String buildCountFailedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (count(?assertion) as ?count) \n");
+		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
 		sb.append("WHERE { \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
