@@ -5,6 +5,7 @@ public class VapourApiMain {
 	public static void main(String[] args) {
 		String uri = "http://dbpedia.org/resource/Asturias";
 		VapourApi api = VapourApiFactory.createVapourApi();
+		//VapourApi api = VapourApiFactory.createVapourApi("http://localhost:8000/vapour");
 		api.enableCacheDump();
 		VapourReport report = api.check(uri);
 		System.out.println();
