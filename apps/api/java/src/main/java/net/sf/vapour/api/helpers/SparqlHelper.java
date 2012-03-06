@@ -23,4 +23,10 @@ public class SparqlHelper {
 		return results.nextSolution().getLiteral(var).getInt();
 	}
 
+	public static boolean execAskQuery(Model model, String query) {
+		log.trace("Query: " + query);
+		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
+		return qe.execAsk();
+	}
+
 }

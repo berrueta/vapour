@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface VapourReport {
 	
+	boolean isValid();
+	
 	int getTestPerformed();
 	
 	int getTestPassed();

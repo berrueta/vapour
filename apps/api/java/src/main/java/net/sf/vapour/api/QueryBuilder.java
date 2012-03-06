@@ -2,7 +2,18 @@ package net.sf.vapour.api;
 
 class QueryBuilder {
 	
-	public static String buildTestsCount() {
+	public static String buildAskFailedTests() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
+		sb.append("ASK { \n");
+		sb.append("  ?assertion a earl:Assertion . \n");
+        sb.append("  ?assertion earl:result ?result . \n");
+        sb.append("  ?result earl:outcome earl:failed . \n");
+		sb.append("}");
+		return sb.toString();
+	}
+	
+	public static String buildCountTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
 		sb.append("SELECT (count(?assertion) as ?count) \n");
@@ -12,7 +23,7 @@ class QueryBuilder {
 		return sb.toString();
 	}
 	
-	public static String buildPassedTestsCount() {
+	public static String buildCountPassedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
 		sb.append("SELECT (count(?assertion) as ?count) \n");
@@ -24,7 +35,7 @@ class QueryBuilder {
 		return sb.toString();
 	}
 	
-	public static String buildFailedTestsCount() {
+	public static String buildCountFailedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
 		sb.append("SELECT (count(?assertion) as ?count) \n");
