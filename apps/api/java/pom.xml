@@ -6,8 +6,8 @@
 	<artifactId>vapour-api</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>Vapour API</name>
-	<description>Vapour Java API</description>
+	<name>Vapour Java API</name>
+	<description>Vapour API bindings for Java</description>
 	<url>http://vapour.sourceforge.net</url>
 
 	<licenses>
