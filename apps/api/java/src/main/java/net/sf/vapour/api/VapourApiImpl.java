@@ -1,7 +1,5 @@
 package net.sf.vapour.api;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -34,16 +32,22 @@ public class VapourApiImpl implements VapourApi {
 	public static final String DEFAULT_RESPONSE_PARAM = "defaultResponse";
 	public static final String USER_AGENT_PARAM = "userAgent";
 	public static final String FORMAT_PARAM = "format";
+	private boolean cache;
 	private String service;
 
 	public VapourApiImpl(String service) {
 		super();
+		this.cache = false;
 		this.service = service;
 		log.info("Create API against " + this.service);
 	}
 
 	public VapourReport check(String uri) {
 		return this.check(uri, false, false, Format.RDFXML, "vapour.sourceforge.net");
+	}
+	
+	public void enableCacheDump() {
+		this.cache = true;
 	}
 
 	public VapourReport check(String uri, boolean meaningful, boolean html, Format format) {
@@ -74,7 +78,9 @@ public class VapourApiImpl implements VapourApi {
 	    	Model model = ModelFactory.createDefaultModel();
 	    	model.read(reader, this.service);
 	    	VapourReportImpl report = new VapourReportImpl(model);
-	    	FileHelper.writeModel(model, VAPOUR_CACHE_PATH);
+	    	if (this.cache) { 
+	    		FileHelper.writeModel(model, VAPOUR_CACHE_PATH);
+	    	}
 			return report;
 		} catch (ClientProtocolException e) {
 			log.error(e);

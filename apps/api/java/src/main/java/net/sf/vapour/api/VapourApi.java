@@ -6,4 +6,6 @@ public interface VapourApi {
 	
 	VapourReport check(String uri, boolean meaningful, boolean html, Format format);
 
+	void enableCacheDump();
+
 }
