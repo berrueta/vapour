@@ -1,10 +1,12 @@
 package net.sf.vapour.api;
 
+import java.util.LinkedList;
 import java.util.List;
-
 
 import org.apache.log4j.Logger;
 
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
 class VapourReportImpl implements VapourReport {
@@ -29,13 +31,20 @@ class VapourReportImpl implements VapourReport {
 	public int getTestPassed() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountPassedTests());
 	}
-	
+	 
 	public int getTestFailed() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountFailedTests());
 	}
 
 	public List<VapourTest> getTests() {
-		throw new RuntimeException("Unimplemented");
+		List<VapourTest> tests = new LinkedList<VapourTest>();
+		ResultSet results = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTests());
+		while(results.hasNext()) {
+			QuerySolution result = results.nextSolution();
+			VapourTest test = new VapourTestImpl(result, this.model);
+			tests.add(test);
+		}
+		return tests;
 	}
 
 	@Override
