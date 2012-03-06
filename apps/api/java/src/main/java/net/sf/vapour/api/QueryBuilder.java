@@ -76,7 +76,7 @@ class QueryBuilder {
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
 		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
 		sb.append("ASK { \n");
-		sb.append("  <" + test + "> ?assertion a earl:TestRequirement ; \n");
+		sb.append("  <" + test + "> a earl:TestRequirement ; \n");
         sb.append("    dc:hasPart ?assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
         sb.append("  ?result earl:outcome earl:failed . \n");
@@ -98,6 +98,7 @@ class QueryBuilder {
 		sb.append("  ?response http:statusCodeNumber ?statusCodeNumber . \n");
 		sb.append("  ?getRequest http:absoluteURI ?finalUri . \n");
 		sb.append("  FILTER (?statusCodeNumber = 200) \n");
+		sb.append("}");
 		return sb.toString();
 	}
 	
