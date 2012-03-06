@@ -1,10 +1,14 @@
 package net.sf.vapour.api;
 
+import org.apache.log4j.Logger;
+
 import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
 class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 	
+	private static final Logger log = Logger.getLogger(VapourTestImpl.class);
 	private String id;
 	private String title;
 	private int order;
@@ -24,11 +28,17 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 		this.id = result.getResource("testRequirement").getURI();
 		this.title = result.getLiteral("testRequirementTitle").getString();
 		this.order = result.getLiteral("testRequirementOrder").getInt();
-		this.model = SparqlHelper.execDescribeQuery(model, QueryBuilder.buildDescribe(this.id));
+		//this.model = SparqlHelper.execDescribeQuery(model, QueryBuilder.buildDescribe(this.id));
+		this.model = model;
 		this.success = SparqlHelper.execAskQuery(this.model, QueryBuilder.buildAskFailedTest(this.id));
-		QuerySolution finalUri = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestFinalUri(this.id)).nextSolution();
-		this.url = finalUri.getResource("finalUri").getURI();
-		this.ct = finalUri.getLiteral("contentType").getString();
+		ResultSet finalUriResult = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestFinalUri(this.id));
+		if (finalUriResult.hasNext()) {
+			QuerySolution finalUri = finalUriResult.nextSolution();
+			this.url = finalUri.getLiteral("finalUri").getString(); //FIXME: bug in vapour? it should be a resource?
+			this.ct = finalUri.getLiteral("contentType").getString();
+		} else {
+			log.error("Can't retrieve details of the final URI for the test <" + this.id + ">");
+		}
 	}
 	
 	public String getId() {
@@ -98,6 +108,15 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("  - " + title + " <" + this.id + "> (order=" + this.order + ") \n");
+		sb.append("        success = " + this.success + "\n");
+		sb.append("        final uri=" + this.url + " (context-type=" + this.ct + ")\n");
+		return sb.toString();
 	}
 	
 }
