@@ -1,5 +1,7 @@
 package net.sf.vapour.api;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -23,12 +25,14 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 public class VapourApiImpl implements VapourApi {
 
 	private static final Logger log = Logger.getLogger(VapourApiImpl.class);
-	private static final String URI_PARAM = "vocabUri"; //FIXME: change to 'uri' on the new versions
-	private static final String VALIDATE_RDF_PARAM = "validateRDF";
-	private static final String HTML_VERSION_PARAM = "htmlVersions";
-	private static final String DEFAULT_RESPONSE_PARAM = "defaultResponse";
-	private static final String USER_AGENT_PARAM = "userAgent";
-	private static final String FORMAT_PARAM = "format";
+	private static final String VAPOUR_CACHE_PATH = "vapour.cache";
+	private static final String RDF_SERALIZATION = "RDF/XML-ABBREV";
+	public static final String URI_PARAM = "vocabUri"; //FIXME: change to 'uri' on the new versions
+	public static final String VALIDATE_RDF_PARAM = "validateRDF";
+	public static final String HTML_VERSION_PARAM = "htmlVersions";
+	public static final String DEFAULT_RESPONSE_PARAM = "defaultResponse";
+	public static final String USER_AGENT_PARAM = "userAgent";
+	public static final String FORMAT_PARAM = "format";
 	private String service;
 
 	public VapourApiImpl(String service) {
@@ -69,6 +73,7 @@ public class VapourApiImpl implements VapourApi {
 	    	Model model = ModelFactory.createDefaultModel();
 	    	model.read(reader, this.service);
 	    	VapourReportImpl report = new VapourReportImpl(model);
+	    	this.saveCache(model);
 			return report;
 		} catch (ClientProtocolException e) {
 			log.error(e);
@@ -76,6 +81,17 @@ public class VapourApiImpl implements VapourApi {
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);
+		}
+	}
+
+	private void saveCache(Model model) {
+		try {		
+			log.debug("Writing " + model.size() + "  statements as cache...");
+			FileWriter fw = new FileWriter(VAPOUR_CACHE_PATH);
+			BufferedWriter out = new BufferedWriter(fw);
+			model.write(out, RDF_SERALIZATION);
+		} catch (IOException e) {
+			log.error("Error writing '" + VAPOUR_CACHE_PATH + "': " + e.getMessage());
 		}
 	}
 
