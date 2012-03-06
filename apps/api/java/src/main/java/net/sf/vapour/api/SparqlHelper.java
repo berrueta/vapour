@@ -28,5 +28,17 @@ class SparqlHelper {
 		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
 		return qe.execAsk();
 	}
+	
+	public static ResultSet execSelectQuery(Model model, String query) {
+		log.trace("Query: " + query);
+		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
+		return qe.execSelect();
+	}
+
+	public static Model execDescribeQuery(Model model, String query) {
+		log.trace("Query: " + query);
+		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
+		return qe.execDescribe();
+	}
 
 }
