@@ -15,7 +15,6 @@ class FileHelper {
 	
 	public static void writeModel(Model model, String path) {
 		try {		
-			log.debug("Writing " + model.size() + "  statements as cache...");
 			FileWriter fw = new FileWriter(path);
 			BufferedWriter out = new BufferedWriter(fw);
 			model.write(out, RDF_SERALIZATION);

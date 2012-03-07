@@ -1,6 +1,6 @@
 package net.sf.vapour.api;
 
-public interface VapourIteraction {
+public interface VapourAssertion {
 	
 	VapourRequest getRequest();
 	

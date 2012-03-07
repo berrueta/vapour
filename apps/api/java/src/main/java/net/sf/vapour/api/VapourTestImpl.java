@@ -1,5 +1,9 @@
 package net.sf.vapour.api;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.query.QuerySolution;
@@ -15,12 +19,12 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 	private boolean success;
 	private String url;
 	private String ct;
-	private VapourTrace trace;
+	private List<VapourAssertion> assertions;
 	private Model model;
 	
 	public VapourTestImpl() {
 		super();
-		this.trace = null;
+		this.assertions = new LinkedList<VapourAssertion>();
 	}
 
 	public VapourTestImpl(QuerySolution result, Model model) {
@@ -65,11 +69,22 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 		return this.ct;
 	}
 
-	public VapourTrace getTrace() {
-		if (this.trace == null) {
-			throw new RuntimeException("unimplemented");
+	public List<VapourAssertion> getAssertions() {
+		if (this.assertions == null) { //lazy initialization
+			this.assertions = this.buildAssertions();
 		}
-		return this.trace;
+		return Collections.unmodifiableList(this.assertions);
+	}
+
+	private List<VapourAssertion> buildAssertions() {
+		List<VapourAssertion> assertions = new LinkedList<VapourAssertion>();
+		ResultSet traces = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestHttpTraces(this.id));
+		while (traces.hasNext()) {
+			QuerySolution qs = traces.nextSolution();
+			VapourAssertion assertion = new VapourAssertionImpl(qs);
+			assertions.add(assertion);
+		}
+		return assertions;
 	}
 
 	public int compareTo(VapourTest o) {
@@ -115,7 +130,10 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("  - " + title + " <" + this.id + "> (order=" + this.order + ") \n");
 		sb.append("        success = " + this.success + "\n");
-		sb.append("        final uri=" + this.url + " (context-type=" + this.ct + ")\n");
+		sb.append("        final uri=" + this.url + " (context-type=" + this.ct + ")\n\n");
+		for(VapourAssertion assertion : this.assertions) {
+			sb.append(assertion);
+		}
 		return sb.toString();
 	}
 	

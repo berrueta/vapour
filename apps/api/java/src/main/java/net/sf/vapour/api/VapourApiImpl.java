@@ -79,6 +79,7 @@ class VapourApiImpl implements VapourApi {
 	    	VapourReportImpl report = new VapourReportImpl(model);
 	    	if (this.cache) { 
 	    		FileHelper.writeModel(model, VAPOUR_CACHE_PATH);
+	    		log.info("Written " + model.size() + " statements as cache");
 	    	}
 			return report;
 		} catch (ClientProtocolException e) {

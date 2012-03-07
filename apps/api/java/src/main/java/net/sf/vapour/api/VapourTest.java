@@ -1,5 +1,7 @@
 package net.sf.vapour.api;
 
+import java.util.List;
+
 public interface VapourTest {
 	
 	String getId();
@@ -14,6 +16,6 @@ public interface VapourTest {
 	
 	String getFinalContentType();
 	
-	VapourTrace getTrace();
+	List<VapourAssertion> getAssertions();
 
 }
