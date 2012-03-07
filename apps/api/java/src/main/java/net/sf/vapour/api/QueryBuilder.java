@@ -16,22 +16,11 @@ class QueryBuilder {
 	public static String buildCountTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
+		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("SELECT (COUNT(DISTINCT ?testRequirement) AS ?count) \n");
 		sb.append("WHERE { \n");
-		sb.append("  ?assertion a earl:Assertion . \n");
-        sb.append("  ?assertion earl:result ?result . \n");
-		sb.append("}");
-		return sb.toString();
-	}
-	
-	public static String buildCountPassedTests() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
-		sb.append("WHERE { \n");
-		sb.append("  ?assertion a earl:Assertion . \n");
-        sb.append("  ?assertion earl:result ?result . \n");
-        sb.append("  ?result earl:outcome earl:passed . \n");
+		sb.append("  ?testRequirement a earl:TestRequirement . \n");
+		sb.append("  ?testRequirement dc:title ?testRequirementTitle . \n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -39,8 +28,11 @@ class QueryBuilder {
 	public static String buildCountFailedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("SELECT (COUNT(DISTINCT ?result) AS ?count) \n");
+		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("SELECT (COUNT(DISTINCT ?testRequirement) AS ?count) \n");
 		sb.append("WHERE { \n");
+		sb.append("  ?testRequirement a earl:TestRequirement ; \n");
+		sb.append("    dc:hasPart ?assertion . \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
         sb.append("  ?result earl:outcome earl:failed . \n");
