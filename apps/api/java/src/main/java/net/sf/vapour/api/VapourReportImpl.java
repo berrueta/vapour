@@ -1,5 +1,6 @@
 package net.sf.vapour.api;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ class VapourReportImpl implements VapourReport {
 		if (this.tests == null) {
 			this.tests = buildTests();
 		}
-		return this.tests;
+		return Collections.unmodifiableList(this.tests);
 	}
 
 	private List<VapourTest> buildTests() {
@@ -52,6 +53,7 @@ class VapourReportImpl implements VapourReport {
 			VapourTest test = new VapourTestImpl(result, this.model);
 			tests.add(test);
 		}
+		Collections.sort(tests);
 		return tests;
 	}
 

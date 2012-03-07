@@ -2,7 +2,7 @@ package net.sf.vapour.api;
 
 import com.hp.hpl.jena.query.QuerySolution;
 
-class VapourAssertionImpl implements VapourAssertion, Comparable<VapourAssertion> {
+class VapourAssertionImpl implements VapourAssertion {
 	
 	String id;
 	VapourRequest request;

@@ -10,7 +10,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
-class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
+class VapourTestImpl implements VapourTest {
 	
 	private static final Logger log = Logger.getLogger(VapourTestImpl.class);
 	private String id;
@@ -84,11 +84,17 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 			VapourAssertion assertion = new VapourAssertionImpl(qs);
 			assertions.add(assertion);
 		}
+		Collections.sort(assertions);
 		return assertions;
 	}
 
 	public int compareTo(VapourTest o) {
-		return this.order - o.getOrder();
+		int order = this.order - o.getOrder();
+		if (order == 0) {
+			return this.id.compareTo(o.getId());
+		} else {
+			return order;
+		}
 	}
 
 	@Override
