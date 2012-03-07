@@ -42,11 +42,7 @@ class VapourApiImpl implements VapourApi {
 	}
 
 	public VapourReport check(String uri) {
-		return this.check(uri, false, false, Format.RDFXML, "vapour.sourceforge.net");
-	}
-	
-	public void enableCacheDump() {
-		this.cache = true;
+		return this.check(uri, new ArrayList<NameValuePair>());
 	}
 
 	public VapourReport check(String uri, boolean meaningful, boolean html, Format format) {
@@ -54,14 +50,18 @@ class VapourApiImpl implements VapourApi {
 	}
 	
 	private VapourReport check(String uri, boolean meaningful, boolean html, Format format, String useragent) {
-		log.debug("Checking '" + uri + "'...");
-		HttpClient client = new DefaultHttpClient();
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair(URI_PARAM, uri));
 		params.add(new BasicNameValuePair(VALIDATE_RDF_PARAM, (meaningful ? "1" : "0")));
 		params.add(new BasicNameValuePair(HTML_VERSION_PARAM, (html ? "1" : "0")));
 		params.add(new BasicNameValuePair(DEFAULT_RESPONSE_PARAM, format.name().toLowerCase()));
 		params.add(new BasicNameValuePair(USER_AGENT_PARAM, useragent));
+		return this.check(uri, params);
+	}
+
+	private VapourReport check(String uri, List<NameValuePair> params) {
+		log.debug("Checking '" + uri + "'...");
+		HttpClient client = new DefaultHttpClient();
+		params.add(new BasicNameValuePair(URI_PARAM, uri));
 		params.add(new BasicNameValuePair(FORMAT_PARAM, "rdf"));
 		HttpGet method = new HttpGet(this.service + "?" + URLEncodedUtils.format(params, "utf-8"));
 		method.setHeader("Accept", "application/rdf+xml"); 
@@ -89,6 +89,10 @@ class VapourApiImpl implements VapourApi {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public void enableCacheDump() {
+		this.cache = true;
 	}
 
 }
