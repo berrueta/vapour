@@ -78,10 +78,9 @@ class VapourTestImpl implements VapourTest {
 
 	private List<VapourAssertion> buildAssertions() {
 		List<VapourAssertion> assertions = new LinkedList<VapourAssertion>();
-		ResultSet traces = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestHttpTraces(this.id));
-		while (traces.hasNext()) {
-			QuerySolution qs = traces.nextSolution();
-			VapourAssertion assertion = new VapourAssertionImpl(qs);
+		ResultSet results = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestHttpTraces(this.id));
+		while (results.hasNext()) {
+			VapourAssertion assertion = new VapourAssertionImpl(results.nextSolution());
 			assertions.add(assertion);
 		}
 		Collections.sort(assertions);
