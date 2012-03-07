@@ -30,7 +30,7 @@ class VapourTestImpl implements VapourTest, Comparable<VapourTest> {
 		this.order = result.getLiteral("testRequirementOrder").getInt();
 		//this.model = SparqlHelper.execDescribeQuery(model, QueryBuilder.buildDescribe(this.id));
 		this.model = model;
-		this.success = SparqlHelper.execAskQuery(this.model, QueryBuilder.buildAskFailedTest(this.id));
+		this.success = !SparqlHelper.execAskQuery(this.model, QueryBuilder.buildAskFailedTest(this.id));
 		ResultSet finalUriResult = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTestFinalUri(this.id));
 		if (finalUriResult.hasNext()) {
 			QuerySolution finalUri = finalUriResult.nextSolution();
