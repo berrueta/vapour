@@ -29,7 +29,7 @@ class VapourReportImpl implements VapourReport {
 	}
 
 	public int getTestPassed() {
-		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountPassedTests());
+		return (this.getTestPerformed() - this.getTestFailed()); //FIXME: find a query for query for getting such result directly
 	}
 	 
 	public int getTestFailed() {
