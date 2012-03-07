@@ -2,7 +2,7 @@ package net.sf.vapour.api;
 
 import java.util.List;
 
-public interface VapourTest {
+public interface VapourTest extends Comparable<VapourTest> {
 	
 	String getId();
 	

@@ -1,6 +1,6 @@
 package net.sf.vapour.api;
 
-public interface VapourAssertion {
+public interface VapourAssertion extends Comparable<VapourAssertion> {
 	
 	VapourRequest getRequest();
 	
