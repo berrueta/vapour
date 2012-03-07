@@ -1,6 +1,8 @@
 Vapour API bindings for Java
 ----------------------------
 
-For running the test main:
+For running a example validation, execute:
 
-    mvn exec:java -Dexec.mainClass="net.sf.vapour.api.VapourApiMain"
+    mvn compile exec:java -Dexec.mainClass="net.sf.vapour.api.VapourApiExample"
+
+    

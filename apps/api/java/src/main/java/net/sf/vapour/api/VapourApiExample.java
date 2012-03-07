@@ -1,6 +1,6 @@
 package net.sf.vapour.api;
 
-public class VapourApiMain {
+public class VapourApiExample {
 
 	public static void main(String[] args) {
 		String uri = "http://dbpedia.org/resource/Asturias";
