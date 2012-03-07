@@ -13,9 +13,6 @@ public class VapourApiMain {
 		System.out.println("-------------");
 		System.out.println("URI: " + uri + "");
 		System.out.println("Result: " + report + "");
-		System.out.println("Tests performed: " + report.getTestPerformed());
-		System.out.println("Tests passed: " + report.getTestPassed());
-		System.out.println("Tests failed: " + report.getTestFailed());
 		System.out.println();
 		System.out.println("Tests:");
 		for (VapourTest test : report.getTests()) {

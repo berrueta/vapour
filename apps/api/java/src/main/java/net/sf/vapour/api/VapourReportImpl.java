@@ -12,6 +12,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 class VapourReportImpl implements VapourReport {
 	
 	private static final Logger log = Logger.getLogger(VapourReportImpl.class);
+	private List<VapourTest> tests;
 	private final Model model;
 
 	public VapourReportImpl(Model model) {
@@ -37,6 +38,13 @@ class VapourReportImpl implements VapourReport {
 	}
 
 	public List<VapourTest> getTests() {
+		if (this.tests == null) {
+			this.tests = buildTests();
+		}
+		return this.tests;
+	}
+
+	private List<VapourTest> buildTests() {
 		List<VapourTest> tests = new LinkedList<VapourTest>();
 		ResultSet results = SparqlHelper.execSelectQuery(this.model, QueryBuilder.buildGetTests());
 		while(results.hasNext()) {

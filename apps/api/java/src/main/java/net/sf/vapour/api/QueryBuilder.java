@@ -96,20 +96,43 @@ class QueryBuilder {
 		sb.append("}");
 		return sb.toString();
 	}
+
+	public static String buildGetTestAssertions(String test) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
+		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
+		sb.append("PREFIX http: <http://www.w3.org/2006/http#> \n");
+		sb.append("SELECT ?assertion ?test ?testTitle ?outcome ?outcomeLabel ?subject ?subjectTitle \n");
+		sb.append("WHERE { \n");
+		sb.append("  ?assertion a earl:Assertion . \n");
+		sb.append("  <" + test + "> dct:hasPart ?assertion . \n");
+		sb.append("  ?assertion earl:test ?test . \n");
+		sb.append("  ?test dc:title ?testTitle . \n");
+		sb.append("  ?assertion earl:result ?result . \n");
+		sb.append("  ?result  earl:outcome ?outcome . \n");
+		sb.append("  ?outcome dc:title ?outcomeLabel . \n");
+		sb.append("  ?assertion earl:subject ?subject . \n");
+		sb.append("  ?subject dc:title ?subjectTitle . \n");
+		sb.append("} \n");
+		sb.append("ORDER BY ?subjectTitle ?testTitle \n");
+    	return sb.toString();
+    }
 	
 	public static String buildGetTestHttpTraces(String test) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
 		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("PREFIX http: <http://www.w3.org/2006/http#> \n");
+		sb.append("PREFIX vapour: <http://vapour.sourceforge.net/vocab.rdf#> \n");
 		sb.append("SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation \n");
 		sb.append("       ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity \n");
 		sb.append("       ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath \n");
-		sb.append("       ?requestHost ?responseVary ?userAgent \n");
+		sb.append("       ?requestHost ?responseVary ?userAgent ?assertion \n");
 		sb.append("WHERE { \n");
 		sb.append("     <" + test + "> dct:hasPart ?assertion . \n");
 		sb.append("     ?assertion earl:subject ?response . \n");
-		sb.append("     ?response rdf:type earl:TestSubject ; \n");
+		sb.append("     ?response a earl:TestSubject ; \n");
 		sb.append("       dc:title ?responseTitle ; \n");
 		sb.append("       http:statusCodeNumber ?statusCodeNumber ; \n");
 		sb.append("       vapour:previousRequestCount ?previousRequestCount . \n");
@@ -141,6 +164,5 @@ class QueryBuilder {
 		sb.append("ORDER BY ?previousRequestCount \n");
 		return sb.toString();
 	}
-		
 	
 }
