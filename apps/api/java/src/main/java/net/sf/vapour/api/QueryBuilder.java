@@ -122,6 +122,7 @@ class QueryBuilder {
 	public static String buildGetTestHttpTraces(String test) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
+		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
 		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("PREFIX http: <http://www.w3.org/2006/http#> \n");
 		sb.append("PREFIX vapour: <http://vapour.sourceforge.net/vocab.rdf#> \n");
