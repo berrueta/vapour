@@ -64,6 +64,22 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>src/etc/header.txt</header>
+                    <includes>
+                        <include>src/main/java/**</include>
+                        <include>src/test/**</include>
+                        <include>src/main/resources/**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>target/**</exclude>
+                        <exclude>*.txt</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>			
 		</plugins>
         <extensions>
             <extension>
