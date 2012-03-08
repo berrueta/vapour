@@ -19,6 +19,8 @@ package net.sf.vapour.api;
  */
 public class VapourApiFactory {
 	
+	private static final String PUBLIC_SERVICE = "http://validator.linkeddata.org/vapour";
+
 	/**
 	 * Create a Vapour API instance against the public service 
 	 * (http://validator.linkeddata.org/vapour)
@@ -26,7 +28,7 @@ public class VapourApiFactory {
 	 * @return Vapour API instance
 	 */
 	public static VapourApi createVapourApi() {
-		return new VapourApiImpl("http://validator.linkeddata.org/vapour");
+		return new VapourApiImpl(PUBLIC_SERVICE);
 	}
 	
 	/**
