@@ -65,6 +65,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
 	</build>
 
 	<dependencies>
@@ -110,5 +117,18 @@
 		<project.build.java.version>1.6</project.build.java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+    <distributionManagement>
+        <repository>
+            <id>ctic-nexus</id>
+            <name>CTIC nexus</name>
+            <url>dav:http://wopr.fundacionctic.org:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>ctic-nexus</id>
+            <name>CTIC nexus</name>
+            <url>dav:http://wopr.fundacionctic.org:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>	
 
 </project>
