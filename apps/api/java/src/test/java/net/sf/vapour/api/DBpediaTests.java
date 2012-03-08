@@ -37,5 +37,29 @@ public class DBpediaTests {
 		Assert.assertEquals(2, passed);
 		Assert.assertEquals(0, failed);
 	}
-
+	
+	@Test
+	public void testCustomOptions() {
+		VapourReport report = this.api.check(URI, true, true, Format.HTML);
+		int tests = report.getTestPerformed();
+		int passed = report.getTestPassed();
+		int failed = report.getTestFailed();
+		Assert.assertEquals(tests, passed + failed);
+		Assert.assertEquals(3, tests);
+		Assert.assertEquals(3, passed);
+		Assert.assertEquals(0, failed);
+	}
+	
+	@Test
+	public void testCustomOptionsDifferentDefaultFormat() {
+		VapourReport report = this.api.check(URI, true, true, Format.RDFXML);
+		int tests = report.getTestPerformed();
+		int passed = report.getTestPassed();
+		int failed = report.getTestFailed();
+		Assert.assertEquals(tests, passed + failed);
+		Assert.assertEquals(3, tests);
+		Assert.assertEquals(3, passed); //FIXME
+		Assert.assertEquals(0, failed);
+	}
+	
 }
