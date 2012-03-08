@@ -24,7 +24,6 @@ class VapourTestImpl implements VapourTest {
 	
 	public VapourTestImpl() {
 		super();
-		this.assertions = new LinkedList<VapourAssertion>();
 	}
 
 	public VapourTestImpl(QuerySolution result, Model model) {
@@ -136,7 +135,7 @@ class VapourTestImpl implements VapourTest {
 		sb.append("  - " + title + " <" + this.id + "> (order=" + this.order + ") \n");
 		sb.append("        success = " + this.success + "\n");
 		sb.append("        final uri=" + this.url + " (context-type=" + this.ct + ")\n\n");
-		for(VapourAssertion assertion : this.assertions) {
+		for(VapourAssertion assertion : this.getAssertions()) {
 			sb.append(assertion);
 		}
 		return sb.toString();
