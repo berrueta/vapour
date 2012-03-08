@@ -69,6 +69,7 @@
                 <artifactId>maven-license-plugin</artifactId>
                 <configuration>
                     <header>src/etc/header.txt</header>
+                    <strictCheck>true</strictCheck>
                     <includes>
                         <include>src/main/java/**</include>
                         <include>src/test/**</include>
