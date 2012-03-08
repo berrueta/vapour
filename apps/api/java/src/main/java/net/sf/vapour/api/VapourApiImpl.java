@@ -5,7 +5,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -13,6 +12,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -82,6 +82,9 @@ class VapourApiImpl implements VapourApi {
 	    		log.info("Written " + model.size() + " statements as cache");
 	    	}
 			return report;
+		} catch (HttpHostConnectException e) {
+			log.error(e.getMessage());
+			throw new RuntimeException(e);
 		} catch (ClientProtocolException e) {
 			log.error(e);
 			throw new RuntimeException(e);
