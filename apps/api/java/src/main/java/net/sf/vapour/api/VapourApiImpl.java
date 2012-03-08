@@ -55,7 +55,7 @@ class VapourApiImpl implements VapourApi {
 		super();
 		this.cache = false;
 		this.service = service;
-		log.info("Create API against " + this.service);
+		log.info("Created API against " + this.service);
 	}
 
 	public VapourReport check(String uri) {
