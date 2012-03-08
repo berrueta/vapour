@@ -40,7 +40,7 @@ class VapourAssertionImpl implements VapourAssertion {
 	}
 
 	public int compareTo(VapourAssertion o) {
-		return (o.getResponse().getPreviousRequestCount() - this.getResponse().getPreviousRequestCount());
+		return (this.getResponse().getPreviousRequestCount() - o.getResponse().getPreviousRequestCount());
 	}
 
 	@Override
