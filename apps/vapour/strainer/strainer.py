@@ -60,7 +60,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
         SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
                ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity
                ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
-               ?requestHost ?responseVary ?userAgent
+               ?requestHost ?responseVary ?userAgent ?assertion
         WHERE {
             <%s> dct:hasPart ?assertion .
             ?assertion earl:subject ?response .
