@@ -1,5 +1,13 @@
 package net.sf.vapour.api;
 
+/**
+ * Helper for building all the necessary queries
+ * (actually the same used on the public web service for 
+ * generating the HTML report)
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class QueryBuilder {
 	
 	public static String buildAskFailedTests() {

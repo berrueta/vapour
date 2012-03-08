@@ -1,5 +1,11 @@
 package net.sf.vapour.api;
 
+/**
+ * Implementation of a response in Vapour
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourResponseImpl implements VapourResponse {
 	
 	private String title;

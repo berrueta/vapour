@@ -1,5 +1,11 @@
 package net.sf.vapour.api;
 
+/**
+ * Factory methods for creation of APIs against Vapour
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 public class VapourApiFactory {
 	
 	/**

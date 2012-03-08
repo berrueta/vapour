@@ -21,6 +21,12 @@ import org.apache.log4j.Logger;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+/**
+ * Default implementation of the Vapour API bindings for Java
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourApiImpl implements VapourApi {
 
 	private static final Logger log = Logger.getLogger(VapourApiImpl.class);

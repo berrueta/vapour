@@ -1,5 +1,11 @@
 package net.sf.vapour.api;
 
+/**
+ * Dummy example of the API usage
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 public class VapourApiExample {
 
 	public static void main(String[] args) {
