@@ -21,55 +21,40 @@ class cup:
         
         logger = common.createLogger()
 
-        try:
-            uri = request.GET.get("uri")
-        except KeyError:
-            try:
-                uri = request.GET.get("vocabUri") # legacy http interface
-            except KeyError:
-                uri = None
-        finally:
-            if (uri == "" or uri == "http://"): uri = None
+        uri = None
+        uri = request.GET.get("uri")
+        if (not uri):
+            uri = request.GET.get("vocabUri") # legacy http api
+        if (uri is "" or uri is "http://"): 
+            uri = None
 
-        try:
-            defaultResponse = request.GET.get("defaultResponse")
-            if defaultResponse != "rdfxml" and defaultResponse != "html" and defaultResponse != "dontmind":
-                defaultResponse = "dontmind" # default value
-        except KeyError:
-            defaultResponse = "dontmind"
+        defaultResponse = "dontmind"
+        defaultResponse = request.GET.get("defaultResponse")
+        if ((defaultResponse is not "rdfxml") and (defaultResponse is not "html") and (defaultResponse is not "dontmind")):
+            defaultResponse = "dontmind" # default value            
 
-        try:
-            userAgent = request.META["HTTP_USER_AGENT"]
-            if not userAgent:
-                userAgent = options.defaultUserAgent
-            elif "\n" in userAgent:
-                userAgent = options.defaultUserAgent # prevent HTTP header injection
-        except KeyError:
+        userAgent = options.defaultUserAgent
+        userAgent = request.META["HTTP_USER_AGENT"]
+        if (not userAgent):
             userAgent = options.defaultUserAgent
+        elif ("\n" in userAgent):
+            userAgent = options.defaultUserAgent # prevent HTTP header injection
 
-        try:
+        format = "html"
+        if ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
+            format = common.getBestFormat(request.META["HTTP_ACCEPT"])
+            logger.info("Using content negotiation to return report in %s" % format.upper())
+        else:
             format = request.GET.get("format")
-        except KeyError:
-            if ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
-                format = common.getBestFormat(request.META["HTTP_ACCEPT"])
-                logger.info("Using content negotiation to return report in %s" % format.upper())
-        if format == None:
-            format = "html"
 
-        try:
-            client = request.META.get('REMOTE_ADDR')
-        except KeyError:
-            client = None
+        client = None
+        client = request.META.get('REMOTE_ADDR')
 
-        try:
-            validateRDF = request.GET.get("validateRDF") is "1"
-        except KeyError:
-            validateRDF = False
+        validateRDF = False
+        validateRDF = request.GET.get("validateRDF") is "1"            
 
-        try:
-            htmlVersions = request.GET.get("htmlVersions") is "1"
-        except KeyError:
-            htmlVersions = False
+        htmlVersions = False
+        htmlVersions = request.GET.get("htmlVersions") is "1"
 
         try:
             store = common.createStore()
