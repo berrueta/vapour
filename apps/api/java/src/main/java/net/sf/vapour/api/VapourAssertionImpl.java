@@ -17,7 +17,7 @@ class VapourAssertionImpl implements VapourAssertion {
 	private void buildRequest(QuerySolution qs) {
 		String method = qs.getLiteral("requestMethodName").getString();
 		String uri = qs.getLiteral("absoluteUri").getString();
-		String acceptHeader = qs.getLiteral("requestAccept").getString();
+		String acceptHeader = (qs.getLiteral("requestAccept") != null ? qs.getLiteral("requestAccept").getString() : null);
 		String userAgent = qs.getLiteral("userAgent").getString();
 		this.request = new VapourRequestImpl(method, uri, acceptHeader, userAgent);
 	}
@@ -25,7 +25,7 @@ class VapourAssertionImpl implements VapourAssertion {
 	private void buildResponse(QuerySolution qs) {
 		String title = qs.getLiteral("responseTitle").getString();
 		int statusCode = qs.getLiteral("statusCodeNumber").getInt();
-		String location = qs.getLiteral("responseLocation").getString();
+		String location = (qs.getLiteral("responseLocation") != null ? qs.getLiteral("responseLocation").getString() : null);
 		String contentType = qs.getLiteral("responseContentType").getString();
 		int previousRequestCount = qs.getLiteral("previousRequestCount").getInt();
 		this.response = new VapourResponseImpl(title, statusCode, location, contentType, previousRequestCount);
