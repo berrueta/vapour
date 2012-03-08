@@ -106,7 +106,7 @@ def addToGraph(graph, url, accept, response, previousRequestCount, method, userA
     # Not sure about adding this triple, the response is a different
     # resource...
     graph.add((testSubjectResource, RDF["type"], EARL["TestSubject"]))
-    graph.add((testSubjectResource, VAPOUR["previousRequestCount"], Literal(previousRequestCount)))
+    graph.add((testSubjectResource, VAPOUR["previousRequestCount"], Literal(previousRequestCount, XSD["nonNegativeInteger"])))
     
     # properties of the requestResource
     graph.add((requestResource, RDF["type"], HTTP["Request"]))
