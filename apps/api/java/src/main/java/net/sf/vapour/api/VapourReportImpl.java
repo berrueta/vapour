@@ -10,6 +10,12 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
+/**
+ * Implementation of a Vapour report
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourReportImpl implements VapourReport {
 	
 	private static final Logger log = Logger.getLogger(VapourReportImpl.class);

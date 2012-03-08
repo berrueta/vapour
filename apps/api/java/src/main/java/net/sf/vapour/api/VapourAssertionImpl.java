@@ -2,6 +2,12 @@ package net.sf.vapour.api;
 
 import com.hp.hpl.jena.query.QuerySolution;
 
+/**
+ * Implementation of an asserton in Vapour
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourAssertionImpl implements VapourAssertion {
 	
 	String id;

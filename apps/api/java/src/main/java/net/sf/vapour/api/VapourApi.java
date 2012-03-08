@@ -1,5 +1,11 @@
 package net.sf.vapour.api;
 
+/**
+ * Definition of the Vapour API bindings for Java
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 public interface VapourApi {
 	
 	VapourReport check(String uri);

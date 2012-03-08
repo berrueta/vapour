@@ -1,5 +1,11 @@
 package net.sf.vapour.api;
 
+/**
+ * Implementation of a request in Vapour
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourRequestImpl implements VapourRequest {
 	
 	private String method;

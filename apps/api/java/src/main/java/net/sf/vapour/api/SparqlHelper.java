@@ -8,6 +8,12 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
+/**
+ * Helper for working with SPARQL using Apache Jena
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class SparqlHelper {
 	
 	private static final Logger log = Logger.getLogger(SparqlHelper.class);
