@@ -47,7 +47,6 @@ class cup:
         else:
             format = request.GET.get("format")
 
-        client = None
         client = request.META.get('REMOTE_ADDR')
 
         validateRDF = False
