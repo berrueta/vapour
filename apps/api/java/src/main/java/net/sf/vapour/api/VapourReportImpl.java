@@ -43,15 +43,15 @@ class VapourReportImpl implements VapourReport {
 		return !SparqlHelper.execAskQuery(this.model, QueryBuilder.buildAskFailedTests());
 	}	
 
-	public int getTestPerformed() {
+	public int getPerformedTests() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountTests());
 	}
 
-	public int getTestPassed() {
-		return (this.getTestPerformed() - this.getTestFailed()); //FIXME: find a query for query for getting such result directly
+	public int getPassedTests() {
+		return (this.getPerformedTests() - this.getFailedTests()); //FIXME: find a query for query for getting such result directly
 	}
 	 
-	public int getTestFailed() {
+	public int getFailedTests() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountFailedTests());
 	}
 
@@ -76,7 +76,7 @@ class VapourReportImpl implements VapourReport {
 
 	@Override
 	public String toString() {
-		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getTestPassed() + "/" + this.getTestPerformed() + ")";
+		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getPassedTests() + "/" + this.getPerformedTests() + ")";
 	}
 	
 }
