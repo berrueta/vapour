@@ -73,7 +73,7 @@ class VapourTestImpl implements VapourTest {
 		return this.order;
 	}
 
-	public boolean getSucess() {
+	public boolean isSucess() {
 		return this.success;
 	}
 	

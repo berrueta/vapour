@@ -27,7 +27,7 @@ public interface VapourTest extends Comparable<VapourTest> {
 	
 	int getOrder();
 	
-	boolean getSucess();
+	boolean isSucess();
 	
 	String getFinalUri();
 	
