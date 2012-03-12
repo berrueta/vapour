@@ -23,11 +23,11 @@ public interface VapourReport {
 	
 	boolean isValid();
 	
-	int getTestPerformed();
+	int getPerformedTests();
 	
-	int getTestPassed();
+	int getPassedTests();
 	
-	int getTestFailed();
+	int getFailedTests();
 	
 	List<VapourTest> getTests();
 
