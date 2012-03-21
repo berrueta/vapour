@@ -19,15 +19,16 @@ public class VapourApiMain {
 		final Option helpOption = new Option("h", "help", false, "Option for printing");
 		final Option uriOption = new Option("u", "uri", true, "URI to check");
 		uriOption.setRequired(true);
+		final Option testOption = new Option("t", "tests", false, "Show tests details");
 		final Options options = new Options();
-		options.addOption(helpOption).addOption(uriOption);
+		options.addOption(helpOption).addOption(uriOption).addOption(testOption);
 		try {
 			final CommandLineParser cmdLinePosixParser = new PosixParser();
-			CommandLine commandLine = cmdLinePosixParser.parse(options, args);
-			if (commandLine.hasOption("help")) {
+			CommandLine cmd = cmdLinePosixParser.parse(options, args);
+			if (cmd.hasOption("help")) {
 				printHelp(options, System.out);
 			}
-			String uri = commandLine.getOptionValue("uri");
+			String uri = cmd.getOptionValue("uri");
 			VapourApi api = VapourApiFactory.createVapourApi();
 			api.enableCacheDump();
 			VapourReport report = api.check(uri);
@@ -37,9 +38,12 @@ public class VapourApiMain {
 			System.out.println("URI: " + uri + "");
 			System.out.println("Result: " + report + "");
 			System.out.println();
-			System.out.println("Tests:");
-			for (VapourTest test : report.getTests()) {
-				System.out.println(test);
+			if (cmd.hasOption("t")) {
+				System.out.println("Tests:");
+				for (VapourTest test : report.getTests()) {
+					System.out.println(test);
+				}
+				System.out.println();
 			}
 		} catch (ParseException e) {
 			System.err.println("Encountered exception while parsing options: " + e.getMessage());
