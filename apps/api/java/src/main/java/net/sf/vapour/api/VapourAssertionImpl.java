@@ -32,7 +32,7 @@ class VapourAssertionImpl implements VapourAssertion {
 	}
 
 	private void buildRequest(QuerySolution qs) {
-		String method = qs.getLiteral("requestMethodName").getString();
+		String method = qs.get("requestMethodName").toString(); //FIXME: it should be a literal, but comes as a resource
 		String uri = qs.getLiteral("absoluteUri").getString();
 		String acceptHeader = (qs.getLiteral("requestAccept") != null ? qs.getLiteral("requestAccept").getString() : null);
 		String userAgent = qs.getLiteral("userAgent").getString();
