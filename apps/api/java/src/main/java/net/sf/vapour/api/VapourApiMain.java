@@ -20,8 +20,9 @@ public class VapourApiMain {
 		final Option uriOption = new Option("u", "uri", true, "URI to check");
 		uriOption.setRequired(true);
 		final Option testOption = new Option("t", "tests", false, "Show tests details");
+		final Option cacheOption = new Option("c", "cache", false, "Dumps on disk the test suite cache");
 		final Options options = new Options();
-		options.addOption(helpOption).addOption(uriOption).addOption(testOption);
+		options.addOption(helpOption).addOption(uriOption).addOption(testOption).addOption(cacheOption);
 		try {
 			final CommandLineParser cmdLinePosixParser = new PosixParser();
 			CommandLine cmd = cmdLinePosixParser.parse(options, args);
@@ -30,7 +31,9 @@ public class VapourApiMain {
 			}
 			String uri = cmd.getOptionValue("uri");
 			VapourApi api = VapourApiFactory.createVapourApi();
-			api.enableCacheDump();
+			if (cmd.hasOption("c")) {
+				api.enableCacheDump();
+			}
 			VapourReport report = api.check(uri);
 			System.out.println();
 			System.out.println("Vapour Report:");
