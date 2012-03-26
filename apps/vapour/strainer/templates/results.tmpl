@@ -223,9 +223,9 @@
 	            #if $trace[3] == 200:
                 <div class="fileIcon">
 		          <a href="$trace[2]">
-		          #if ($trace[4].startswith(mimetypes.rdfXml)):
+		          #if ($trace[4] and $trace[4].startswith(mimetypes.rdfXml)):
 			        <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
-			      #else if ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml)):
+			      #else if ($trace[4] and ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml))):
 			        <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
 			      #else:
 			        <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
