@@ -43,7 +43,7 @@ class VapourAssertionImpl implements VapourAssertion {
 		String title = qs.getLiteral("responseTitle").getString();
 		int statusCode = qs.getLiteral("statusCodeNumber").getInt();
 		String location = (qs.getLiteral("responseLocation") != null ? qs.getLiteral("responseLocation").getString() : null);
-		String contentType = qs.getLiteral("responseContentType").getString();
+		String contentType = (qs.getLiteral("responseContentType") != null ? qs.getLiteral("responseContentType").getString() : null);
 		int previousRequestCount = qs.getLiteral("previousRequestCount").getInt();
 		this.response = new VapourResponseImpl(title, statusCode, location, contentType, previousRequestCount);
 	}
