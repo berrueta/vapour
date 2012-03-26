@@ -19,10 +19,31 @@ package net.sf.vapour.api;
  */
 public interface VapourApi {
 	
+	/**
+	 * Checks against Vapour is this URI is correctly published according the
+	 * Linked Data principles and best practices
+	 * 
+	 * @param uri uri to test
+	 * @return report for the given uri
+	 */
 	VapourReport check(String uri);
 	
+	/**
+	 * Checks against Vapour is this URI is correctly published according the
+	 * Linked Data principles and best practices
+	 * 
+	 * @param uri uri to tes
+	 * @param meaningful check the RDF responses for meaningful data 
+	 * @param html check there are HTML descriptions of the symbols
+	 * @param format Expected default format for the response
+	 * @return report for the given uri
+	 */
 	VapourReport check(String uri, boolean meaningful, boolean html, Format format);
 
+	/**
+	 * Enables to save on disk a RDF cache of the last report
+	 * (disabled by default)
+	 */
 	void enableCacheDump();
 
 }
