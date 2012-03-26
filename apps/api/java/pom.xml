@@ -75,7 +75,7 @@
 						</manifestEntries>
 					</archive>
 					<excludes>
-						<exclude>src/main/resources/log4j.properties</exclude>
+						<exclude>log4j.properties</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
