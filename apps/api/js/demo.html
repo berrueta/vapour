@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset=utf-8 />
+	<title>Vapour JS Demo</title>
+	<!--<link rel="stylesheet" type="text/css" media="screen" href="style.css" />-->
+  </head>
+
+  <body>
+
+    <form id="vapour">
+      <label for="uri">
+        URI:
+        <input type="text" name="uri" id="uri" size="50" value="http://dbpedia.org/resource/Asturias" />
+      </label>
+      <input type="submit" value="check" />
+    </form>
+	
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript"src="vapour.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("form#vapour").vapour();
+      });
+    </script>
+
+  </body>
+
+</html>
+
