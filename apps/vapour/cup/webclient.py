@@ -41,11 +41,13 @@ class cup:
             userAgent = options.defaultUserAgent # prevent HTTP header injection
 
         format = "html"
-        if ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
+        paramFormat = request.GET.get("format")
+        if (paramFormat and (paramFormat in ["rdf", "html"])):
+            format = paramFormat
+            logger.info("Using forced format to return the report as %s" % format.upper())
+        elif ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
             format = common.getBestFormat(request.META["HTTP_ACCEPT"])
-            logger.info("Using content negotiation to return report in %s" % format.upper())
-        else:
-            format = request.GET.get("format")
+            logger.info("Using content negotiation to return the report as %s" % format.upper())
 
         client = request.META.get('REMOTE_ADDR')
 
