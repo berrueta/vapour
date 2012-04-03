@@ -15,7 +15,7 @@ jQuery.fn.vapour = function() {
     form.submit(function() {
         if ($(this).valid()) {
             var uri = form.find("input#uri");
-            var report = get_vapour_report(uri.val());
+            getVapourReport($(this), uri.val());
             return false;
         } else {
             return false;
@@ -24,7 +24,7 @@ jQuery.fn.vapour = function() {
 
 }
 
-function get_vapour_report(uri) {
+function getVapourReport(form, uri) {
 
     var req = $.ajax({
                         type: "GET",
@@ -50,19 +50,24 @@ function get_vapour_report(uri) {
                                                          .where("?assertion earl:result ?result")
                                                          .where("?result earl:outcome earl:failed")
                                                          .length;
-                                    var testPassed = tests - testsFailed;
+                                    var testsPassed = tests - testsFailed;
                                     var report = new Object();
                                     report.uri = uri;
                                     report.tests = tests;
                                     report.testsPassed = testsPassed;
                                     report.testsFailed = testsFailed;
-                                    return report;
+                                    printVapourReport(form, report);
                                 });
 
     req.fail(function(response) { 
                                     alert("Vapour JS Error: " + response.responseText); 
-                                    return new Object();
                                 });
 
+}
+
+function printVapourReport(form, report) {
+    var color = (report.testsFailed == 0) ? "green" : "red";
+    var style = "background-color: " + color + "; color: #ffffff; padding: 0.5em 1em 0.5em 1em; width: auto; text-align: center; border-radius: 6px;";
+    form.after("<p style=\"" + style + "\"> " + report.testsPassed + " / " + report.tests + " </p>");
 }
 
