@@ -33,14 +33,24 @@ function get_vapour_report(uri) {
                         contentType: "application/x-www-form-urlencoded",
                         data: { vocabUri: uri, format: "rdf" },
                         accepts: "application/rdf+xml",
-                        dataType: "text"
+                        dataType: "xml"
                      });
     req.done(function(response) {
-                                    alert(response);
                                     var rdf = $.rdf().load(response, {});
+                                    var triples = rdf.databank.size();
                                     var tests = rdf.prefix("earl", "http://www.w3.org/ns/earl#")
-                                                   .where("?testRequirement a earl:TestRequirement");
-                                    alert(tests.length);
+                                                   .where("?testRequirement a earl:TestRequirement")
+                                                   .length;
+                                    alert(tests);
+                                    var testsFailed = rdf.prefix("earl", "http://www.w3.org/ns/earl#")
+                                                         .prefix("dc", "http://purl.org/dc/elements/1.1/")
+                                                         .where("?testRequirement a earl:TestRequirement")
+                                                         .where("?testRequirement dc:hasPart ?assertion")
+                                                         .where("?assertion a earl:Assertion")
+                                                         .where("?assertion earl:result ?result")
+                                                         .where("?result earl:outcome earl:failed")
+                                                         .length;
+                                    alert(testsFailed);
                                 });
     req.fail(function(response) { alert("Error: " + response.responseText); });
     } catch(e) { alert("Exception: " + e); }
