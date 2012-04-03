@@ -76,7 +76,7 @@ function getVapourReport(form, uri) {
 
 function printVapourReport(form, report) {
     var color = (report.testsFailed == 0) ? "green" : "red";
-    var style = "background-color: " + color + "; color: #ffffff; font-weight: bold; padding: 1em 2em 1em 2em; margin: 1em; display: inline-block; text-align: center; border-radius: 8px;";
+    var style = "background-color: " + color + "; color: #ffffff; font-weight: bold; padding: 1em 2em 1em 2em; margin: 3em; display: inline-block; text-align: center; border-radius: 8px;";
     form.after("<span id=\"vapourReport\" style=\"" + style + "\"> " + report.testsPassed + " / " + report.tests + " </span>");
 }
 
