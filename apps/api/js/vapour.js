@@ -25,7 +25,7 @@ jQuery.fn.vapour = function() {
 }
 
 function get_vapour_report(uri) {
-    try {
+
     var req = $.ajax({
                         type: "GET",
                         //url: "http://validator.linkeddata.org/vapour", 
@@ -35,13 +35,13 @@ function get_vapour_report(uri) {
                         accepts: "application/rdf+xml",
                         dataType: "xml"
                      });
+
     req.done(function(response) {
                                     var rdf = $.rdf().load(response, {});
                                     var triples = rdf.databank.size();
                                     var tests = rdf.prefix("earl", "http://www.w3.org/ns/earl#")
                                                    .where("?testRequirement a earl:TestRequirement")
                                                    .length;
-                                    alert(tests);
                                     var testsFailed = rdf.prefix("earl", "http://www.w3.org/ns/earl#")
                                                          .prefix("dc", "http://purl.org/dc/elements/1.1/")
                                                          .where("?testRequirement a earl:TestRequirement")
@@ -50,10 +50,19 @@ function get_vapour_report(uri) {
                                                          .where("?assertion earl:result ?result")
                                                          .where("?result earl:outcome earl:failed")
                                                          .length;
-                                    alert(testsFailed);
+                                    var testPassed = tests - testsFailed;
+                                    var report = new Object();
+                                    report.uri = uri;
+                                    report.tests = tests;
+                                    report.testsPassed = testsPassed;
+                                    report.testsFailed = testsFailed;
+                                    return report;
                                 });
-    req.fail(function(response) { alert("Error: " + response.responseText); });
-    } catch(e) { alert("Exception: " + e); }
+
+    req.fail(function(response) { 
+                                    alert("Vapour JS Error: " + response.responseText); 
+                                    return new Object();
+                                });
 
 }
 
