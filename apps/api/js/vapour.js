@@ -28,7 +28,6 @@ jQuery.fn.vapour = function() {
 function cleanVapourReport() {
     var p = $("span#vapourReport");
     if (p) {
-        
         p.remove();
     }
 }
