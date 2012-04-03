@@ -14,6 +14,7 @@ jQuery.fn.vapour = function() {
 
     form.submit(function() {
         if ($(this).valid()) {
+            cleanVapourReport();
             var uri = form.find("input#uri");
             getVapourReport($(this), uri.val());
             return false;
@@ -24,12 +25,20 @@ jQuery.fn.vapour = function() {
 
 }
 
+function cleanVapourReport() {
+    var p = $("span#vapourReport");
+    if (p) {
+        
+        p.remove();
+    }
+}
+
 function getVapourReport(form, uri) {
 
     var req = $.ajax({
                         type: "GET",
                         //url: "http://validator.linkeddata.org/vapour", 
-                        url: "http://localhost:8000/vapour",
+                        url: "http://192.168.2.19:8000/vapour",
                         contentType: "application/x-www-form-urlencoded",
                         data: { vocabUri: uri, format: "rdf" },
                         accepts: "application/rdf+xml",
@@ -67,7 +76,7 @@ function getVapourReport(form, uri) {
 
 function printVapourReport(form, report) {
     var color = (report.testsFailed == 0) ? "green" : "red";
-    var style = "background-color: " + color + "; color: #ffffff; padding: 0.5em 1em 0.5em 1em; width: auto; text-align: center; border-radius: 6px;";
-    form.after("<p style=\"" + style + "\"> " + report.testsPassed + " / " + report.tests + " </p>");
+    var style = "background-color: " + color + "; color: #ffffff; font-weight: bold; padding: 1em 2em 1em 2em; margin: 1em; display: inline-block; text-align: center; border-radius: 8px;";
+    form.after("<span id=\"vapourReport\" style=\"" + style + "\"> " + report.testsPassed + " / " + report.tests + " </span>");
 }
 

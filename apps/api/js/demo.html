@@ -3,17 +3,31 @@
   <head>
 	<meta charset=utf-8 />
 	<title>Vapour JS Demo</title>
-	<!--<link rel="stylesheet" type="text/css" media="screen" href="style.css" />-->
+	<link rel="stylesheet" type="text/css" href="http://vapour.sourceforge.net/resources/style.css" />
+    <style type="text/css">
+        body {
+            font-size: 1.1em;
+        }
+        form {
+            margin: 3em;
+        }
+        form label {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
   </head>
 
   <body>
 
+    <h1>Vapour JS Demo</h1>
+
     <form id="vapour">
-      <label for="uri">
-        URI:
-        <input type="text" name="uri" id="uri" size="50" value="http://dbpedia.org/resource/Asturias" />
-      </label>
-      <input type="submit" value="check" />
+          <label for="uri">
+            URI:
+            <input type="text" name="uri" id="uri" size="50" value="http://dbpedia.org/resource/Asturias" />
+          </label>
+          <input type="submit" value="check" />
     </form>
 	
 	<!--[if IE]>
