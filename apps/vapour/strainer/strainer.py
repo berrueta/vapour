@@ -57,10 +57,10 @@ def getResultsFromModel(model, testRequirementUri):
 
 def getHttpTracesFromModel(model, testRequirementUri):
     query = """
-        SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
+        SELECT DISTINCT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
                ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity
                ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
-               ?requestHost ?responseVary ?userAgent ?assertion
+               ?requestHost ?responseVary ?userAgent
         WHERE {
             <%s> dct:hasPart ?assertion .
             ?assertion earl:subject ?response .
@@ -142,7 +142,7 @@ def getTestAgent(model):
     return performSparqlQuery(model, query)
 
 def sortTrace(trace):    
-    # FIXME
+    # FIXME: deprecate this function, already ordered directly in the query
     return trace
 
 def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, namespaceFlavour=None, validRecipes=[]):
