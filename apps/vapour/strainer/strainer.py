@@ -93,7 +93,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
                         ?responseContentTypeResult earl:outcome ?responseContentTypeValidity .
             }
         }
-        ORDER BY ?previousRequestCount
+        ORDER BY ASC(?previousRequestCount)
     """ % testRequirementUri
     return performSparqlQuery(model, query)
 
