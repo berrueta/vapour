@@ -181,7 +181,7 @@ class QueryBuilder {
 		sb.append("                 ?responseContentTypeResult earl:outcome ?responseContentTypeValidity . \n");
 		sb.append("     } \n");
 		sb.append("} \n");
-		sb.append("ORDER BY ?previousRequestCount \n");
+		sb.append("ORDER BY ASC(?previousRequestCount) \n");
 		return sb.toString();
 	}
 	
