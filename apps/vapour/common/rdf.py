@@ -25,9 +25,9 @@ def performSparqlQueryLibRdf(graph, query):
         result = []
         for var in vars:
             if (row[var]):
-                result.append(str(row[var]))
+                result.append(getLibRdfNodeValue(row[var]))
             else:
-                result.append(None)
+                result.append("")
         results.append(result)
     logging.debug("Returned %d results" % len(results))
     return results
@@ -51,4 +51,17 @@ def getQueryVars(query):
         for var in m.groups()[1].strip().split(" "):
             vars.append(var[1:])
     return vars
+
+def getLibRdfNodeValue(node):
+    if node.is_resource():
+        return str(node.uri)
+    elif node.is_blank():
+        return node.blank_identifier
+    elif node.is_literal():
+        if (str(node.literal_value["datatype"]) == "http://www.w3.org/2001/XMLSchema#integer"):
+            return int(node.literal_value["string"])
+        else:
+            return node.literal_value["string"]
+    else:
+        return str(node)
 
