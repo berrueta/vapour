@@ -99,7 +99,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
 
 def getFinalUriFromModel(model, testRequirementUri):
     query = """
-        SELECT ?finalUri ?contentType ?statusCodeNumber 
+        SELECT DISTINCT ?finalUri ?contentType ?statusCodeNumber 
         WHERE {
           <%s> dct:hasPart ?assertion .
           ?assertion earl:subject ?response .
@@ -114,7 +114,7 @@ def getFinalUriFromModel(model, testRequirementUri):
 
 def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     query = """
-        SELECT ?resource ?resourceType ?resourceTypeLabel
+        SELECT DISTINCT ?resource ?resourceType ?resourceTypeLabel
         WHERE {
           <%s> dct:hasPart ?assertion .
           ?assertion earl:subject ?response .
