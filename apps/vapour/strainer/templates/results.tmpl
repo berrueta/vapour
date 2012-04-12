@@ -72,15 +72,6 @@
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
 
           <p>
-	        #if $mixedAccept:
-	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" checked="checked" />
-	        #else:
-	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" />
-	        #end if
-	        <label for="mixedAccept" class="check">Test for mixed accept headers and q values (takes long time)</label>
-          </p>
-
-          <p>
 	        #if $validateRDF:
 	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
 	        #else:
@@ -96,6 +87,18 @@
 	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" />
 	        #end if
 	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
+          </p>
+
+          <p>
+	        #if $mixedAccept:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" />
+	        #end if
+	        <label for="mixedAccept" class="check">
+                Test for mixed accept headers and q values (large test suite, takes quite long time)
+                <a href="http://pedantic-web.org/fops.html#accept-interpretation" title="get more info (in a new window)" target="_blank"><img src="$resourceBaseUri/info.png" alt="info" /></a>
+            </label>
           </p>
           
           <p>
@@ -177,7 +180,7 @@
              #else:
                #set $cssClass = "someTestsFail"
              #end if
-            <td class="$cssClass">
+            <td class="$cssClass" style="text-align: center;">
             #echo ($totalTests - $failedTests)#/$totalTests
             </td>            
           </tr>

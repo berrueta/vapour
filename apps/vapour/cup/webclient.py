@@ -52,11 +52,6 @@ class cup:
 
         client = request.META.get('REMOTE_ADDR')
 
-        if (request.GET.get("mixedAccept")):
-            mixedAccept = bool(int(request.GET.get("mixedAccept"))) 
-        else:
-            mixedAccept = False
-
         if (request.GET.get("validateRDF")):
             validateRDF = bool(int(request.GET.get("validateRDF"))) 
         else:
@@ -65,7 +60,12 @@ class cup:
         if (request.GET.get("htmlVersions")):
             htmlVersions = bool(int(request.GET.get("htmlVersions"))) 
         else:
-            htmlVersions = False         
+            htmlVersions = False   
+
+        if (request.GET.get("mixedAccept")):
+            mixedAccept = bool(int(request.GET.get("mixedAccept"))) 
+        else:
+            mixedAccept = False      
 
         try:
             store = common.createStore()
