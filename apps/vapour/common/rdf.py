@@ -1,21 +1,54 @@
 
+import logging
 import rdflib
 rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
 rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
-from vapour.namespaces import bindings
-from vapour.cup.common import createLogger
+import RDF
+from vapour.namespaces import bindings, buildPrefixesSparqlDeclaration
+import re
 
-def performSparqlQuery(graph, query, log=False):
-    if (log):
-        logger = createLogger()
-        logger.debug("Performing SPARQL query: %s" % normalizeQuery(query))
+def performSparqlQuery(graph, query):
+    #return performSparqlQueryRdfLib(graph, query)
+    return performSparqlQueryLibRdf(graph, query)
+
+def performSparqlQueryLibRdf(graph, query):
+    query = normalizeQuery(buildPrefixesSparqlDeclaration() + query)
+    #logging.debug("Performing SPARQL query: %s" % query)
+    parser = RDF.Parser(mime_type="application/rdf+xml")
+    model = RDF.Model()
+    parser.parse_string_into_model(model, graph.serialize(format="xml"), "http://validator.linkeddata.org/vapour")
+    q = RDF.Query(query, query_language="sparql")
+    vars = getQueryVars(query)
+    #logging.debug("Vars: %s (%d)" % (vars, len(vars)))
+    results = []
+    for row in q.execute(model):
+        result = []
+        for var in vars:
+            if (row[var]):
+                result.append(str(row[var]))
+            else:
+                result.append(None)
+        results.append(result)
+    logging.debug("Returned %d results" % len(results))
+    return results
+
+def performSparqlQueryRdfLib(graph, query):
+    #logging.debug("Performing SPARQL query: %s" % normalizeQuery(query))
     results = graph.query(query, initNs=bindings)
-    if (log):
-        logger.debug("Returned %d results" % len(results))
+    logging.debug("Returned %d results" % len(results))
     return results
 
 def normalizeQuery(query):
     for string in ["\n","\t","           ","          ","         ","         ","        ","       ","      ","     ","    ","   ","  "]: #FIXME: regex
         query = query.replace(string, " ")
     return query
+
+def getQueryVars(query):
+    p = re.compile("select (distinct )?((\?[a-zA-Z]+ )+)where*", re.IGNORECASE)
+    m = p.search(query)
+    vars = []
+    if (m):
+        for var in m.groups()[1].strip().split(" "):
+            vars.append(var[1:])
+    return vars
 

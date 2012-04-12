@@ -27,7 +27,7 @@ def getTestRequirements(model):
 def isThereAnyFailingTest(model):
     #FIXME: ASK query
     query = """
-        SELECT *
+        SELECT ?assertion ?result
         WHERE {
             ?assertion rdf:type earl:Assertion .
             ?assertion earl:result ?result .
