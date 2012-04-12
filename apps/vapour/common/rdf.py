@@ -27,7 +27,7 @@ def performSparqlQueryLibRdf(graph, query):
             if (row[var]):
                 result.append(getLibRdfNodeValue(row[var]))
             else:
-                result.append("")
+                result.append(None)
         results.append(result)
     logging.debug("Returned %d results" % len(results))
     return results
