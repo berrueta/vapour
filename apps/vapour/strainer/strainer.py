@@ -152,6 +152,7 @@ def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, name
     
     data['printForm'] = printForm
     data['uri'] = uri
+    data['mixedAccept'] = validatorOptions.mixedAccept
     data['validateRDF'] = validatorOptions.validateRdf
     data['htmlVersions'] = validatorOptions.htmlVersions
     data['defaultResponse'] = validatorOptions.defaultResponse

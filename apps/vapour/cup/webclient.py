@@ -1,4 +1,5 @@
 
+import logging
 import random
 import traceback
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -51,11 +52,20 @@ class cup:
 
         client = request.META.get('REMOTE_ADDR')
 
-        validateRDF = False
-        validateRDF = request.GET.get("validateRDF") is "1"            
+        if (request.GET.get("mixedAccept")):
+            mixedAccept = bool(int(request.GET.get("mixedAccept"))) 
+        else:
+            mixedAccept = False
 
-        htmlVersions = False
-        htmlVersions = request.GET.get("htmlVersions") is "1"
+        if (request.GET.get("validateRDF")):
+            validateRDF = bool(int(request.GET.get("validateRDF"))) 
+        else:
+            validateRDF = False
+
+        if (request.GET.get("htmlVersions")):
+            htmlVersions = bool(int(request.GET.get("htmlVersions"))) 
+        else:
+            htmlVersions = False         
 
         try:
             store = common.createStore()
@@ -69,7 +79,7 @@ class cup:
                 resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
 
                 # defines the options of the validator
-                validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent, client)
+                validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, mixedAccept, validateRDF, userAgent, client)
                 
                 recipes.checkRecipes(store, resourceToCheck, validatorOptions)
                 namespaceFlavour = None
