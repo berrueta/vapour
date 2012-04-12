@@ -174,7 +174,7 @@
               </a>
              </td>
              #set $totalTests = len($testResults[$testRequirement[0]])
-             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["failed"]])
+             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == str(EARL["failed"])])
              #if $failedTests == 0:
                #set $cssClass = "allTestsOk"
              #else:
