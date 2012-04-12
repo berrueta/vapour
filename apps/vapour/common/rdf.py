@@ -29,13 +29,13 @@ def performSparqlQueryLibRdf(graph, query):
             else:
                 result.append(None)
         results.append(result)
-    logging.debug("Returned %d results" % len(results))
+    #logging.debug("Returned %d results" % len(results))
     return results
 
 def performSparqlQueryRdfLib(graph, query):
     #logging.debug("Performing SPARQL query: %s" % normalizeQuery(query))
     results = graph.query(query, initNs=bindings)
-    logging.debug("Returned %d results" % len(results))
+    #logging.debug("Returned %d results" % len(results))
     return results
 
 def normalizeQuery(query):
