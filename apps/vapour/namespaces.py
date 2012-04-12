@@ -29,4 +29,9 @@ bindings = {
                 u"foaf":FOAF,
             }
 
+def buildPrefixesSparqlDeclaration():
+    prefixes = ""
+    for prefix, ns in bindings.items():
+        prefixes += "PREFIX %s: <%s> \n" % (prefix, ns) 
+    return prefixes
 
