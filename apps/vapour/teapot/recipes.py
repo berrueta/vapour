@@ -70,7 +70,7 @@ def checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions):
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, "GET")
     
 def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
-    scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
+    scenarioDescription = " (requesting with mixed accept header: '" + mimetypes.mixed[mixNum] + "')"
     requestedContentType = mimetypes.mixed[mixNum]
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, "GET")    
 
