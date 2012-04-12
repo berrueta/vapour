@@ -1,3 +1,4 @@
+
 rdfXml = "application/rdf+xml"
 html = "text/html"
 xhtml = "application/xhtml+xml"
@@ -19,3 +20,4 @@ requestDescription = {
                xhtml : "requesting XHTML data",
                xhtmlOrHtml : "requesting (X)HTML data"
                }
+

@@ -70,6 +70,16 @@
           <legend class="showHideTitle" id="advancedOptionsLegend">More options</legend>   
 
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
+
+          <p>
+	        #if $mixedAccept:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" />
+	        #end if
+	        <label for="mixedAccept" class="check">Test for mixed accept headers and q values (takes long time)</label>
+          </p>
+
           <p>
 	        #if $validateRDF:
 	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />

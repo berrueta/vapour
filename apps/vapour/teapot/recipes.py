@@ -34,8 +34,9 @@ def checkRecipes(graph, resource, validatorOptions):
         #checkWithAcceptHtml(graph, resource, classUri, propertyUri)
         #checkWithAcceptXhtml(graph, resource, classUri, propertyUri)
         checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions)
-    #for i in range(0,8):
-    #    checkWithMixedAccept(graph, resource, i, validatorOptions)
+    if validatorOptions.mixedAccept:
+        for i in range(0, len(mimetypes.mixed)):
+            checkWithMixedAccept(graph, resource, i, validatorOptions)
     if validatorOptions.htmlVersions:
         checkVary(graph, validatorOptions)
 
