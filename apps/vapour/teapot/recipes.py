@@ -122,7 +122,7 @@ def checkVary(graph, validatorOptions):
           FILTER (?statusCodeNumber2 = 200) 
         }
     """
-    tuples = graph.query(Parse(query), initNs=bindings).serialize('python')
+    tuples = graph.query(query, initNs=bindings).serialize('python')
     for t in tuples:
         testResult = t[2] is not None and t[3] is not None and ("accept" in lower(t[2])) and ("accept" in lower(t[3]))
         assertVaryHeader(graph, t[0], testResult, t[4])
