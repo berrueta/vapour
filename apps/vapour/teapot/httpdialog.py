@@ -1,7 +1,9 @@
+
 from vapour.namespaces import *
 from vapour.common.vapourexceptions import *
 from vapour.teapot import options
 from vapour.common.security import isLocatedAtIntranet, isValidUrl
+from vapour.common import getLogger
 from labeler import labelTestSubjects
 from rdflib import Graph, BNode, Literal
 import httplib
@@ -58,6 +60,8 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     path = parsedUrl[2]
 
     locatedAtIntranet, ip = isLocatedAtIntranet(host, options)
+    isLocatedAtIntranetStr = "is" if locatedAtIntranet else "is not"
+    getLogger().debug("Host %s %s located at intranet" % (host, isLocatedAtIntranetStr))
     if locatedAtIntranet:
         raise ForbiddenAddress(str(ip), url, options.client)
     
