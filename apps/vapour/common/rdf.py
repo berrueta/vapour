@@ -1,5 +1,4 @@
 
-import logging
 import rdflib
 rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
 rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
@@ -13,13 +12,13 @@ def performSparqlQuery(graph, query):
 
 def performSparqlQueryLibRdf(graph, query):
     query = normalizeQuery(buildPrefixesSparqlDeclaration() + query)
-    #logging.debug("Performing SPARQL query: %s" % query)
+    #loggger.debug("Performing SPARQL query: %s" % query)
     parser = RDF.Parser(mime_type="application/rdf+xml")
     model = RDF.Model()
     parser.parse_string_into_model(model, graph.serialize(format="xml"), "http://validator.linkeddata.org/vapour")
     q = RDF.Query(query, query_language="sparql")
     vars = getQueryVars(query)
-    #logging.debug("Vars: %s (%d)" % (vars, len(vars)))
+    #loggger.debug("Vars: %s (%d)" % (vars, len(vars)))
     results = []
     for row in q.execute(model):
         result = []
@@ -29,13 +28,13 @@ def performSparqlQueryLibRdf(graph, query):
             else:
                 result.append(None)
         results.append(result)
-    #logging.debug("Returned %d results" % len(results))
+    #loggger.debug("Returned %d results" % len(results))
     return results
 
 def performSparqlQueryRdfLib(graph, query):
-    #logging.debug("Performing SPARQL query: %s" % normalizeQuery(query))
+    #loggger.debug("Performing SPARQL query: %s" % normalizeQuery(query))
     results = graph.query(query, initNs=bindings)
-    #logging.debug("Returned %d results" % len(results))
+    #loggger.debug("Returned %d results" % len(results))
     return results
 
 def normalizeQuery(query):

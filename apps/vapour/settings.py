@@ -120,6 +120,43 @@ INSTALLED_APPS = (
      "vapour.teapot",
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s'
+        },
+        'verbose': {
+            'format': '%(asctime)s %(filename)s:%(lineno)d %(process)d %(thread)d %(levelname)s: %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level' : 'DEBUG',
+            'class' : 'logging.StreamHandler',
+            'formatter': 'simple'
+            
+        },
+	    'file': {
+	        'level': 'INFO',
+	        'class': 'logging.FileHandler',
+            'filename': 'vapour.log',
+            'formatter': 'simple'
+	    }
+    },
+    'loggers': {
+        'vapour': {
+            'handlers': ['file'],
+            'level': 'INFO'
+        },
+        'vapour.dev': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
+    }
+}
+
 #Custom stuff for vapour
 REQ_BASE_URL = "http://validator.linkeddata.org/vapour#req"
 PATH_RDF_FILES = "http://vapour.sourceforge.net"

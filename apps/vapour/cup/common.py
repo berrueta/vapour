@@ -3,11 +3,10 @@ import os
 import sys
 from rdflib import ConjunctiveGraph, Graph
 from vapour.namespaces import *
-import logging
 from vapour.common.odict import OrderedDict
 from vapour.settings import PATH_LOG
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
+#logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
 
 def createStore():
     store = Graph()

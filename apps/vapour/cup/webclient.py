@@ -1,5 +1,4 @@
 
-import logging
 import random
 import traceback
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -8,6 +7,7 @@ from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 from vapour.settings import DEBUG, MEDIA_URL, PATH_TEMPLATES, PATH_RDF_FILES, PATH_RESOURCES_FILES
 from vapour.common.lang import if_else
+from vapour.common import getLogger
 
 resourceBaseUri = None
 if DEBUG:
@@ -19,6 +19,8 @@ class cup:
 
     @staticmethod
     def GET(request):
+
+        logger = getLogger()
 
         uri = None
         uri = request.GET.get("uri")
@@ -43,10 +45,10 @@ class cup:
         paramFormat = request.GET.get("format")
         if (paramFormat and (paramFormat in ["rdf", "html"])):
             format = paramFormat
-            logging.info("Using forced format to return the report as %s" % format.upper())
+            logger.info("Using forced format to return the report as %s" % format.upper())
         elif ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
             format = common.getBestFormat(request.META["HTTP_ACCEPT"])
-            logging.info("Using content negotiation to return the report as %s" % format.upper())
+            logger.info("Using content negotiation to return the report as %s" % format.upper())
 
         client = request.META.get('REMOTE_ADDR')
 
@@ -70,9 +72,9 @@ class cup:
                 
             if uri is not None:
                 if (client):
-                    logging.info("Request from %s over URI: %s" % (client, uri))
+                    logger.info("Request from %s over URI: %s" % (client, uri))
                 else:
-                    logging.info("Request over URI: " + uri)
+                    logger.info("Request over URI: " + uri)
 
                 resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
 
@@ -111,6 +113,6 @@ class cup:
             else:  # vocabUri is None
                 return HttpResponse(strainer.justTheFormInHTML(resourceBaseUri, PATH_TEMPLATES))
         except Exception, e:
-            logging.error(str(e))
+            logger.error(str(e))
             return HttpResponse(strainer.exceptionInHTML(e, resourceBaseUri, PATH_TEMPLATES), status=500)
 
