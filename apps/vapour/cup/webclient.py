@@ -19,8 +19,6 @@ class cup:
 
     @staticmethod
     def GET(request):
-        
-        logger = common.createLogger()
 
         uri = None
         uri = request.GET.get("uri")
@@ -45,10 +43,10 @@ class cup:
         paramFormat = request.GET.get("format")
         if (paramFormat and (paramFormat in ["rdf", "html"])):
             format = paramFormat
-            logger.info("Using forced format to return the report as %s" % format.upper())
+            logging.info("Using forced format to return the report as %s" % format.upper())
         elif ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
             format = common.getBestFormat(request.META["HTTP_ACCEPT"])
-            logger.info("Using content negotiation to return the report as %s" % format.upper())
+            logging.info("Using content negotiation to return the report as %s" % format.upper())
 
         client = request.META.get('REMOTE_ADDR')
 
@@ -72,9 +70,9 @@ class cup:
                 
             if uri is not None:
                 if (client):
-                    logger.info("Request from %s over URI: %s" % (client, uri))
+                    logging.info("Request from %s over URI: %s" % (client, uri))
                 else:
-                    logger.info("Request over URI: " + uri)
+                    logging.info("Request over URI: " + uri)
 
                 resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
 
@@ -113,6 +111,6 @@ class cup:
             else:  # vocabUri is None
                 return HttpResponse(strainer.justTheFormInHTML(resourceBaseUri, PATH_TEMPLATES))
         except Exception, e:
-            logger.error(str(e))
+            logging.error(str(e))
             return HttpResponse(strainer.exceptionInHTML(e, resourceBaseUri, PATH_TEMPLATES), status=500)
 

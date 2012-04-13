@@ -1,4 +1,5 @@
 
+import logging
 import urlparse
 from dns.resolver import Resolver, NXDOMAIN
 from vapour.settings import ALLOW_INTRANET
@@ -6,9 +7,7 @@ from vapour.cup import common
 
 def isLocatedAtIntranet(host, options=None):
 
-    logger = common.createLogger()
-
-    logger.debug("security check for host: %s" % host)
+    logging.debug("security check for host: %s" % host)
 
     requestFromIntranet = False
     if (options and options.client):
