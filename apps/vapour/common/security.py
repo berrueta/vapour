@@ -8,7 +8,6 @@ from vapour.common import getLogger
 def isLocatedAtIntranet(host, options=None):
 
     logger = getLogger()
-    logger.debug("security check for host: %s" % host)
 
     requestFromIntranet = False
     if (options and options.client):
