@@ -70,6 +70,7 @@ h4 {
 
 a, a:active, a:visited {
   color: #344251;
+  text-decoration: none;
 }
 
 a:hover {
