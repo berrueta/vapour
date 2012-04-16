@@ -111,6 +111,11 @@ div#content ul {
   list-style-type: none;
 }
 
+div#content ul li:before {
+    content: "•  ";
+    color:  #344251;
+}
+
 div#content dl#arch {
   margin-left: 50px;
 }
@@ -146,6 +151,10 @@ ul#funding {
   margin: 0;
 }
 
+div#content ul#funding li:before {
+    content: "";
+}
+
 ul#funding a:hover {
     background-color: #cccccc;
 }
@@ -174,6 +183,10 @@ div#footer ul {
 div#footer ul li {
   margin-left: 2em;
   display: inline;
+}
+
+div#footer ul li a:hover {
+  text-decoration: none;
 }
 
 body:before {
