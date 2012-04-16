@@ -57,6 +57,15 @@ div#header h2 {
   padding-left: 0.4em;
 }
 
+a, a:active, a:visited {
+  color: #344251;
+}
+
+a:hover {
+  background-color: #344251;
+  color: #ffffff;
+}
+
 img {
   border: 0;
 }

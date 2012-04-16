@@ -68,6 +68,15 @@ h4 {
   font-size: 1.1em;
 }
 
+a, a:active, a:visited {
+  color: #344251;
+}
+
+a:hover {
+  background-color: #344251;
+  color: #ffffff;
+}
+
 p {
   text-align: justify;
 }
