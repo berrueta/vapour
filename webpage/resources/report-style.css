@@ -575,7 +575,8 @@ div#checking-dialog {
     text-align: center;
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.7em;  
+    border-radius: 20px;
 } 
 
 .ui-dialog-titlebar { 
