@@ -85,13 +85,15 @@ class cup:
                 namespaceFlavour = None
                 validRecipes = []
                 
-                if format == "html":        
-                    store.parse(PATH_RDF_FILES + "/vapour.rdf")
-                    store.parse(PATH_RDF_FILES + "/recipes.rdf")
-                    store.parse(PATH_RDF_FILES + "/earl.rdf")        
-                    store.parse(PATH_RDF_FILES + "/http.rdf")        
-                    store.parse(PATH_RDF_FILES + "/vocab.rdf")        
-                    model = common.createModel(store)
+                logger.debug("Reading common files from %s" % PATH_RDF_FILES)
+                store.parse(PATH_RDF_FILES + "/vapour.rdf")
+                store.parse(PATH_RDF_FILES + "/recipes.rdf")
+                store.parse(PATH_RDF_FILES + "/earl.rdf")        
+                store.parse(PATH_RDF_FILES + "/http.rdf")        
+                store.parse(PATH_RDF_FILES + "/vocab.rdf")       
+                model = common.createModel(store)
+
+                if format == "html":    
                     response = HttpResponse(strainer.resultsModelToHTML(model, uri, True,
                                                                     validatorOptions, namespaceFlavour, 
                                                                     validRecipes, resourceBaseUri, PATH_TEMPLATES),

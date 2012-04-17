@@ -159,9 +159,11 @@ LOGGING = {
 
 #Custom stuff for vapour
 REQ_BASE_URL = "http://validator.linkeddata.org/vapour#req"
-PATH_RDF_FILES = "http://vapour.sourceforge.net"
+if DEBUG:
+    PATH_RDF_FILES = os.path.join(ROOT_PATH, "..", "..", "webpage")
+else:
+    PATH_RDF_FILES = "http://vapour.sourceforge.net"
 PATH_RESOURCES_FILES = "http://idi.fundacionctic.org/vapourres"
 PATH_TEMPLATES = os.path.join(ROOT_PATH, "strainer/templates/")
-PATH_LOG = os.path.join(ROOT_PATH, "log/vapour.log")
 ALLOW_INTRANET = True
 
