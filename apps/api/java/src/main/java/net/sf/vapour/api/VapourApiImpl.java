@@ -42,7 +42,7 @@ class VapourApiImpl implements VapourApi {
 
 	private static final Logger log = Logger.getLogger(VapourApiImpl.class);
 	private static final String VAPOUR_CACHE_PATH = "vapour.cache";
-	public static final String URI_PARAM = "vocabUri"; //FIXME: change to 'uri' on the new versions
+	public static final String URI_PARAM = "uri";
 	public static final String VALIDATE_RDF_PARAM = "validateRDF";
 	public static final String HTML_VERSION_PARAM = "htmlVersions";
 	public static final String DEFAULT_RESPONSE_PARAM = "defaultResponse";
