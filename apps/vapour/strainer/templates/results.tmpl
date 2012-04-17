@@ -328,13 +328,14 @@
         </li>
         <li>
           Browse the data using a RDF browser:
-          <a href="http://beckr.org/marbles?uri=#echo quote($finalUri[0], '') #">Marbles</a>,
-          <a href="http://linkeddata.uriburner.com/ode/?uri=#echo quote($finalUri[0], '') #"><abbr title="OpenLink Data Explorer">ODE</abbr></a>,
-          <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Zitgist</a>, 
-          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=#echo quote($finalUri[0], '') #">Disco</a>
+          <a href="http://beckr.org/marbles?uri=$uri">Marbles</a>,
+          <a href="http://linkeddata.uriburner.com/ode/?uri=$uri"><abbr title="OpenLink Data Explorer">ODE</abbr></a>,
+          <a href="http://dataviewer.zitgist.com/?uri=$uri">Zitgist</a>, 
+          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=$uri">Disco</a>,
+          <a href="http://ontorule-project.eu/parrot/parrot?documentUri=$uri">Parrot</a>
         </li>
         <li>
-          <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
+          <a href="http://pingthesemanticweb.com/ping.php?url=$uri">PingTheSemanticWeb</a>
         </li>
         #end if
       #end for
