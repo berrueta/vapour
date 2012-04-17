@@ -10,6 +10,8 @@ body{
     background-position: top left;
     background-repeat: repeat-x;
     background-color: #ffffff;
+    font-family: sans-serif; 
+    line-height: 1.4em;
 }
 
 
@@ -470,6 +472,10 @@ h3
 .httpDialogIconLegend {
   font-size: 0.8em;
   color: #888888;
+}
+
+div.assertion {
+    line-height: 1em;
 }
 
 div#footer {
