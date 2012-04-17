@@ -11,14 +11,14 @@
     one HTTP request/response dialogue, because the first response
     contains an HTTP 303 REDIRECT code. This property connects a
     dialogue fragment with the inmediate previous one.</rdfs:comment>
-    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
-    <rdfs:range rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/earl#TestSubject"/>
+    <rdfs:range rdf:resource="http://www.w3.org/ns/earl#TestSubject"/>
   </rdf:Property>
 
   <rdf:Property rdf:about="#previousRequestCount">
     <rdfs:label xml:lang="en">Number of previous request</rdfs:label>
     <rdfs:comment xml:lang="en">The number of HTTP requests previous to this one (i.e.: hop-count)</rdfs:comment>
-    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/earl#TestSubject"/>
     <!--rdfs:range rdf:resource=""/-->  <!-- FIXME: xs:integer -->
   </rdf:Property>
 
@@ -29,7 +29,7 @@
     <rdfs:comment xml:lang="en">
       The property of the HTTP which value is checked in this test.
     </rdfs:comment>
-    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestCase"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/earl#TestCase"/>
   </rdf:Property>
 
   <rdf:Property rdf:about="#order">
@@ -40,7 +40,7 @@
       This property is used for presentational purposes, just to define an
       convenient order for the test requirements
     </rdfs:comment>
-    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestRequirement"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/earl#TestRequirement"/>
   </rdf:Property>
 
   <rdf:Property rdf:about="#httpRange14ConclusionOn">
@@ -51,7 +51,7 @@
       This property relates a TestSubject with a web resource which type
       can be inferred as per httpRange-14 TAG finding
     </rdfs:comment>
-    <rdfs:domain rdf:resource="http://www.w3.org/WAI/ER/EARL/nmg-strawman#TestSubject"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/earl#TestSubject"/>
   </rdf:Property>
 
   <rdfs:Class rdf:about="#AnyResource">
