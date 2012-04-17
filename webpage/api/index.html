@@ -54,13 +54,13 @@
         It can be accessed using content negotiation, for instance using <a href="http://curl.haxx.se/">curl</a>:  
       </p>
 
-      <pre>$ curl -H "Accept: application/rdf+xml" "http://validator.linkeddata.org/vapour?vocabUri=http://dbpedia.org/resource/Asturias"</pre>
+      <pre>$ curl -H "Accept: application/rdf+xml" "http://validator.linkeddata.org/vapour?uri=http://dbpedia.org/resource/Asturias"</pre>
 
       <p>
         Or forcing the returned format with a query parameter, for instance:  
       </p>
 
-      <pre>$ curl "http://validator.linkeddata.org/vapour?vocabUri=http://dbpedia.org/resource/Asturias&format=rdf"</pre>
+      <pre>$ curl "http://validator.linkeddata.org/vapour?uri=http://dbpedia.org/resource/Asturias&format=rdf"</pre>
 
       <h3>Bindings</h3>
 
@@ -100,7 +100,14 @@
 &lt;/repositories&gt;</pre>
 
       <p>
-        And then use a code like:
+        For those who are not using maven in their projects, a JAR package with dependencies is also provided
+        (<a href="../resources/bin/vapour-api-1.0-with-dependencies.jar">vapour-api-1.0-with-dependencies.jar</a>).
+        Please, be careful using this package in your projects, because the dependecies included could conflict 
+        with yours.
+      </p>
+
+      <p>
+        Finally, the code you would need to used coould be something like:
       </p>
 
       <pre>VapourApi api = VapourApiFactory.createVapourApi();
