@@ -141,7 +141,7 @@ LOGGING = {
 	    'file': {
 	        'level': 'INFO',
 	        'class': 'logging.FileHandler',
-            'filename': 'vapour.log',
+            'filename': '/home/sergio/projects/vapour/apps/vapour/vapour.log',
             'formatter': 'simple'
 	    }
     },
