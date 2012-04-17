@@ -22,6 +22,16 @@
     <dc:description xml:lang="en">Vapour is a tool to validate the possible responses of an URI</dc:description>
     <foaf:homepage rdf:resource="http://vapour.sourceforge.net"/>
     <dct:hasVersion>2.0</dct:hasVersion>
+    <dct:date>2008-07-17</dct:date>
+    <rdfs:seeAlso rdf:resource="http://vapour.sourceforge.net/resources/doap.rdf"/>
+  </earl:Software>
+
+  <earl:Software rdf:about="#vapour3-0">
+    <dc:title xml:lang="en">Vapour</dc:title>
+    <dc:description xml:lang="en">Vapour is a tool to validate the possible responses of an URI</dc:description>
+    <foaf:homepage rdf:resource="http://vapour.sourceforge.net"/>
+    <dct:hasVersion>3.0</dct:hasVersion>
+    <dct:date>2012-04-18</dct:date>
     <rdfs:seeAlso rdf:resource="http://vapour.sourceforge.net/resources/doap.rdf"/>
   </earl:Software>
 
