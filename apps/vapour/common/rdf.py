@@ -18,6 +18,8 @@ def performSparqlQueryLibRdf(graph, query):
     parser = RDF.Parser(mime_type="application/rdf+xml")
     model = RDF.Model()
     parser.parse_string_into_model(model, graph.serialize(format="xml"), "http://validator.linkeddata.org/vapour")
+    if type(query) is unicode: 
+        query = query.encode("utf-8") # http://bugs.librdf.org/mantis/view.php?id=464
     q = RDF.Query(query, query_language="sparql")
     vars = getQueryVars(query)
     #loggger.debug("Vars: %s (%d)" % (vars, len(vars)))
