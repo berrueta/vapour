@@ -1,5 +1,5 @@
 
-from rdflib.graph import ConjunctiveGraph
+from rdflib import ConjunctiveGraph
 from vapour.common.rdf import performSparqlQuery
 from vapour.namespaces import *
 from vapour.teapot import options
