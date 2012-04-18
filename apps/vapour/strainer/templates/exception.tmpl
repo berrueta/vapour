@@ -9,7 +9,6 @@
     <meta name="keywords" content="rdf, best practice, recipes, semantic web" />
     <link type="text/css" rel="stylesheet" href="$resourceBaseUri/report-style.css" media="screen,projection,print" />
     <link rel="meta" type="application/rdf+xml" title="DOAP" href="http://vapour.sourceforge.net/resources/doap.rdf" />
-    <script type="text/javascript" src="$resourceBaseUri/scripts.js"></script>
   </head>
   <body>    
     <div class="all">
@@ -24,10 +23,11 @@
       </div>
 
       <div id="report">
+      <img src="$resourceBaseUri/images/spilled-tea.gif" style="float: right;" alt="spilled-tea" />
       <p>Vapour was unable to complete the request due to the following exception:</p>
       <pre class="exception">${exceptionDescription}</pre>
-      <p>Complete traceback:</p>
-      <pre class="exception">${exceptionDetails}</pre>
+      <p>Complete traceback (<a href="#traceback" id="seehide">see/hide</a>):</p>
+      <pre id="traceback" class="exception">${exceptionDetails}</pre>
       <p>Please, <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865">report this bug</a> 
       or <a href="?">return to Vapour</a>.</p>
       </div>
@@ -46,6 +46,9 @@
         <a href="http://www.w3.org/TR/cooluris/">Cool <abbr title="Uniform Resource Identifier">URIs</abbr></a>.
       </p>
     </div>
+
+    <script type="text/javascript"src="$resourceBaseUri/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="$resourceBaseUri/scripts2.js"></script>
     
   </body>
 
