@@ -7,7 +7,7 @@ ROOT_PATH = os.path.dirname(__file__)
 
 sys.path.append(os.path.abspath("lib"))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -163,7 +163,7 @@ if DEBUG:
     PATH_RDF_FILES = os.path.join(ROOT_PATH, "..", "..", "webpage")
 else:
     PATH_RDF_FILES = "http://vapour.sourceforge.net"
-PATH_RESOURCES_FILES = "http://idi.fundacionctic.org/vapourres"
+PATH_RESOURCES_FILES = "http://vapour.sourceforge.net/resources"
 PATH_TEMPLATES = os.path.join(ROOT_PATH, "strainer/templates/")
 ALLOW_INTRANET = True
 
