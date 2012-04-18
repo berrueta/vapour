@@ -12,7 +12,7 @@ from settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 urlpatterns = patterns('',
     (r"^$",             lambda request: HttpResponsePermanentRedirect("/vapour")),
     (r"^vapour$",       cup.GET),
-    (r"^favicon.ico",   lambda request: HttpResponseRedirect(MEDIA_URL+"images/favicon.png"))
+    #(r"^favicon.ico",   lambda request: HttpResponseRedirect(MEDIA_URL+"images/favicon.png"))
 )
 
 if DEBUG:
