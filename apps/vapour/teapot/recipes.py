@@ -8,6 +8,7 @@ from httprange14 import httpRange14Conclusions
 from util import lastTestSubjectOfSequence
 import mimetypes, options
 from string import lower
+from vapour.common.rdf import performSparqlQuery
 
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
@@ -122,7 +123,7 @@ def checkVary(graph, validatorOptions):
           FILTER (?statusCodeNumber2 = 200) 
         }
     """
-    tuples = graph.query(query, initNs=bindings).serialize('python')
+    tuples = performSparqlQuery(graph, query)
     for t in tuples:
         testResult = t[2] is not None and t[3] is not None and ("accept" in lower(t[2])) and ("accept" in lower(t[3]))
         assertVaryHeader(graph, t[0], testResult, t[4])
