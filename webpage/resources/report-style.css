@@ -595,7 +595,11 @@ div#checking-dialog {
     border-radius: 20px;
 } 
 
+.ui-dialog { 
+    border-radius: 20px !important;
+}
+
 .ui-dialog-titlebar { 
-    display: none; 
+    display: none;
 }
 
