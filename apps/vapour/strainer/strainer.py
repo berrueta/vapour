@@ -209,7 +209,7 @@ if __name__ == "__main__":
     #
     # Test with local files
     #
-    store = Graph()
+    store = ConjunctiveGraph()
     store.parse("../../../../../webpage/vapour.rdf")
     store.parse("../../../../../webpage/recipes.rdf")
     store.parse("../../../../../webpage/earl.rdf")
