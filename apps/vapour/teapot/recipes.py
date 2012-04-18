@@ -34,8 +34,9 @@ def checkRecipes(graph, resource, validatorOptions):
         #checkWithAcceptHtml(graph, resource, classUri, propertyUri)
         #checkWithAcceptXhtml(graph, resource, classUri, propertyUri)
         checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions)
-    #for i in range(0,8):
-    #    checkWithMixedAccept(graph, resource, i, validatorOptions)
+    if validatorOptions.mixedAccept:
+        for i in range(0, len(mimetypes.mixed)):
+            checkWithMixedAccept(graph, resource, i, validatorOptions)
     if validatorOptions.htmlVersions:
         checkVary(graph, validatorOptions)
 
@@ -69,7 +70,7 @@ def checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions):
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, "GET")
     
 def checkWithMixedAccept(graph, resource, mixNum, validatorOptions):
-    scenarioDescription = " (requesting a mix of MIME types: '" + mimetypes.mixed[mixNum] + "')"
+    scenarioDescription = " (requesting with mixed accept header: '" + mimetypes.mixed[mixNum] + "')"
     requestedContentType = mimetypes.mixed[mixNum]
     runScenario(graph, resource, scenarioDescription, requestedContentType, validatorOptions, "GET")    
 
@@ -121,7 +122,7 @@ def checkVary(graph, validatorOptions):
           FILTER (?statusCodeNumber2 = 200) 
         }
     """
-    tuples = graph.query(Parse(query), initNs=bindings).serialize('python')
+    tuples = graph.query(query, initNs=bindings).serialize('python')
     for t in tuples:
         testResult = t[2] is not None and t[3] is not None and ("accept" in lower(t[2])) and ("accept" in lower(t[3]))
         assertVaryHeader(graph, t[0], testResult, t[4])

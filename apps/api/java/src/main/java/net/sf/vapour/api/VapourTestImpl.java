@@ -1,3 +1,14 @@
+/**
+ * Copyright (C) 2012 Fundación CTIC <http://fundacionctic.org>, All Rights Reserved.
+ *
+ * This work is distributed under the W3C® Software License in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You may obtain a copy of the License at
+ *
+ *     http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ */
 package net.sf.vapour.api;
 
 import java.util.Collections;
@@ -10,6 +21,12 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
+/**
+ * Implementation of a test in Vapour
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourTestImpl implements VapourTest {
 	
 	private static final Logger log = Logger.getLogger(VapourTestImpl.class);
@@ -56,7 +73,7 @@ class VapourTestImpl implements VapourTest {
 		return this.order;
 	}
 
-	public boolean getSucess() {
+	public boolean isSucess() {
 		return this.success;
 	}
 	

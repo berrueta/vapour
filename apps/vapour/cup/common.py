@@ -3,14 +3,12 @@ import os
 import sys
 from rdflib import ConjunctiveGraph, Graph
 from vapour.namespaces import *
-import logging
 from vapour.common.odict import OrderedDict
-from vapour.settings import PATH_LOG
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
+#logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s", stream=sys.stderr)
 
 def createStore():
-    store = Graph()
+    store = ConjunctiveGraph()
     store.bind('earl', EARL)
     store.bind('rdf', RDF)
     store.bind('rdfs', RDFS)
@@ -25,27 +23,6 @@ def createStore():
 
 def createModel(store):
     return store
-
-def clearLoggerHandlers(logger):
-	#because logger prints duplicate message, and I don't know how to fix it
-	handlers = logger.handlers
-	for handler in handlers:
-		logger.removeHandler(handler)
-	return logger
-
-def oldCreateLogger(name='vapour'):
-	logger = logging.getLogger(name)
-	logger = clearLoggerHandlers(logger) #FIXME
-	hdlr = logging.FileHandler(PATH_LOG)
-	formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
-	hdlr.setFormatter(formatter)
-	logger.addHandler(hdlr)
-	logger.setLevel(logging.INFO)
-	return logger
-
-#FIXME: check how log on disk (required for the public service)
-def createLogger(name='vapour'): 
-	return logging.getLogger(name)
 
 def getBestFormat(accceptHeader):
     #Example: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5

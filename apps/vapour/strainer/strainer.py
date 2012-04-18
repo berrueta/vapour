@@ -27,7 +27,7 @@ def getTestRequirements(model):
 def isThereAnyFailingTest(model):
     #FIXME: ASK query
     query = """
-        SELECT *
+        SELECT ?assertion ?result
         WHERE {
             ?assertion rdf:type earl:Assertion .
             ?assertion earl:result ?result .
@@ -57,10 +57,10 @@ def getResultsFromModel(model, testRequirementUri):
 
 def getHttpTracesFromModel(model, testRequirementUri):
     query = """
-        SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
+        SELECT DISTINCT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
                ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity
                ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath
-               ?requestHost ?responseVary ?userAgent ?assertion
+               ?requestHost ?responseVary ?userAgent
         WHERE {
             <%s> dct:hasPart ?assertion .
             ?assertion earl:subject ?response .
@@ -93,13 +93,13 @@ def getHttpTracesFromModel(model, testRequirementUri):
                         ?responseContentTypeResult earl:outcome ?responseContentTypeValidity .
             }
         }
-        ORDER BY ?previousRequestCount
+        ORDER BY ASC(?previousRequestCount)
     """ % testRequirementUri
     return performSparqlQuery(model, query)
 
 def getFinalUriFromModel(model, testRequirementUri):
     query = """
-        SELECT ?finalUri ?contentType ?statusCodeNumber 
+        SELECT DISTINCT ?finalUri ?contentType ?statusCodeNumber 
         WHERE {
           <%s> dct:hasPart ?assertion .
           ?assertion earl:subject ?response .
@@ -114,7 +114,7 @@ def getFinalUriFromModel(model, testRequirementUri):
 
 def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     query = """
-        SELECT ?resource ?resourceType ?resourceTypeLabel
+        SELECT DISTINCT ?resource ?resourceType ?resourceTypeLabel
         WHERE {
           <%s> dct:hasPart ?assertion .
           ?assertion earl:subject ?response .
@@ -142,7 +142,7 @@ def getTestAgent(model):
     return performSparqlQuery(model, query)
 
 def sortTrace(trace):    
-    # FIXME
+    # FIXME: deprecate this function, already ordered directly in the query
     return trace
 
 def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, namespaceFlavour=None, validRecipes=[]):
@@ -152,6 +152,7 @@ def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, name
     
     data['printForm'] = printForm
     data['uri'] = uri
+    data['mixedAccept'] = validatorOptions.mixedAccept
     data['validateRDF'] = validatorOptions.validateRdf
     data['htmlVersions'] = validatorOptions.htmlVersions
     data['defaultResponse'] = validatorOptions.defaultResponse

@@ -1,3 +1,14 @@
+/**
+ * Copyright (C) 2012 Fundación CTIC <http://fundacionctic.org>, All Rights Reserved.
+ *
+ * This work is distributed under the W3C® Software License in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You may obtain a copy of the License at
+ *
+ *     http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ */
 package net.sf.vapour.api;
 
 import java.util.Collections;
@@ -10,6 +21,12 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
+/**
+ * Implementation of a Vapour report
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourReportImpl implements VapourReport {
 	
 	private static final Logger log = Logger.getLogger(VapourReportImpl.class);
@@ -26,15 +43,15 @@ class VapourReportImpl implements VapourReport {
 		return !SparqlHelper.execAskQuery(this.model, QueryBuilder.buildAskFailedTests());
 	}	
 
-	public int getTestPerformed() {
+	public int getPerformedTests() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountTests());
 	}
 
-	public int getTestPassed() {
-		return (this.getTestPerformed() - this.getTestFailed()); //FIXME: find a query for query for getting such result directly
+	public int getPassedTests() {
+		return (this.getPerformedTests() - this.getFailedTests()); //FIXME: find a query for query for getting such result directly
 	}
 	 
-	public int getTestFailed() {
+	public int getFailedTests() {
 		return SparqlHelper.execCountQuery(this.model, QueryBuilder.buildCountFailedTests());
 	}
 
@@ -59,7 +76,7 @@ class VapourReportImpl implements VapourReport {
 
 	@Override
 	public String toString() {
-		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getTestPassed() + "/" + this.getTestPerformed() + ")";
+		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getPassedTests() + "/" + this.getPerformedTests() + ")";
 	}
 	
 }

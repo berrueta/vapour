@@ -12,7 +12,7 @@
     #end if
     <meta http-equiv="content-type" content="text/xhtml+xml; charset=utf-8" />
     #if len($testAgent) > 0:
-    <meta name="generator" content="$testAgent[1] $testAgent[2] (${testAgent[3]})" />
+    <meta name="generator" content="$testAgent[0][1] $testAgent[0][2] (${testAgent[0][3]})" />
 	#end if
     #if len($testRequirements) > 0:
 	    #if $isThereAnyFailingTest:
@@ -70,6 +70,7 @@
           <legend class="showHideTitle" id="advancedOptionsLegend">More options</legend>   
 
           <div id="advancedOptionsSubform" class="advancedOptionsSubform">
+
           <p>
 	        #if $validateRDF:
 	          <input type="checkbox" name="validateRDF" id="validateRDF" value="1" checked="checked" />
@@ -86,6 +87,18 @@
 	          <input type="checkbox" name="htmlVersions" id="htmlVersions" value="1" />
 	        #end if
 	        <label for="htmlVersions" class="check">There are HTML descriptions of the symbols</label>
+          </p>
+
+          <p>
+	        #if $mixedAccept:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" checked="checked" />
+	        #else:
+	          <input type="checkbox" name="mixedAccept" id="mixedAccept" value="1" />
+	        #end if
+	        <label for="mixedAccept" class="check">
+                Test for mixed accept headers and q values (takes some time)
+                <a href="http://pedantic-web.org/fops.html#accept-interpretation" title="get more info (in a new window)" target="_blank"><img src="$resourceBaseUri/info.png" alt="info" /></a>
+            </label>
           </p>
           
           <p>
@@ -161,13 +174,13 @@
               </a>
              </td>
              #set $totalTests = len($testResults[$testRequirement[0]])
-             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == EARL["failed"]])
+             #set $failedTests = len([x for x in $testResults[$testRequirement[0]] if x[3] == str(EARL["failed"])])
              #if $failedTests == 0:
                #set $cssClass = "allTestsOk"
              #else:
                #set $cssClass = "someTestsFail"
              #end if
-            <td class="$cssClass">
+            <td class="$cssClass" style="text-align: center;">
             #echo ($totalTests - $failedTests)#/$totalTests
             </td>            
           </tr>
@@ -206,7 +219,7 @@
          <div class="dialogArea">
 	       #for $trace in $httpTraces[$testRequirement[0]]:
  	       <!-- $trace[1] -->
-           <div class="assertion" id="assertion$trace[18]">
+           <div class="assertion">
 	       <div class="request">
 	  	      <div class="requestInner">
 	  	         <span class="httpHeader">#echo $trace[13].upper() # #echo $trace[14]#</span>
@@ -223,9 +236,9 @@
 	            #if $trace[3] == 200:
                 <div class="fileIcon">
 		          <a href="$trace[2]">
-		          #if ($trace[4].startswith(mimetypes.rdfXml)):
+		          #if ($trace[4] and $trace[4].startswith(mimetypes.rdfXml)):
 			        <img src="$resourceBaseUri/rdf-file.png" alt="RDF icon" />
-			      #else if ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml)):
+			      #else if ($trace[4] and ($trace[4].startswith(mimetypes.html) or $trace[4].startswith(mimetypes.xhtml))):
 			        <img src="$resourceBaseUri/html-file.png" alt="HTML icon" />
 			      #else:
 			        <img src="$resourceBaseUri/unknown-file.png" alt="Unknown file type icon" />
@@ -277,7 +290,7 @@
       <h4>Test results</h4>
       <ul class="testResultChecklist">
 	  #for $test in $testResults[$testRequirement[0]]:
-        #if $test[3] == EARL["passed"]:
+        #if $test[3] == str(EARL["passed"]):
           #set $testResultCssClass = "correctValue"
         #else
           #set $testResultCssClass = "badValue"
@@ -288,7 +301,7 @@
 	  #end for
       </ul>
     
-      <h4>Conclusions on the type of the resources</h4>
+      <h4>Conclusions on the type of the resources <a href="http://www.w3.org/2001/tag/issues.html?type=1#httpRange-14" title="get more info " target="_blank"><img src="$resourceBaseUri/info.png" alt="info" /></a></h4>
       <ul class="httpRange14Conc">
       #for $resource in $httpRange14Conclusions[$testRequirement[0]]:
         <li>
@@ -315,13 +328,14 @@
         </li>
         <li>
           Browse the data using a RDF browser:
-          <a href="http://beckr.org/marbles?uri=#echo quote($finalUri[0], '') #">Marbles</a>,
-          <a href="http://linkeddata.uriburner.com/ode/?uri=#echo quote($finalUri[0], '') #"><abbr title="OpenLink Data Explorer">ODE</abbr></a>,
-          <a href="http://dataviewer.zitgist.com/?uri=#echo quote($finalUri[0], '') #">Zitgist</a>, 
-          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=#echo quote($finalUri[0], '') #">Disco</a>
+          <a href="http://beckr.org/marbles?uri=$uri">Marbles</a>,
+          <a href="http://linkeddata.uriburner.com/ode/?uri=$uri"><abbr title="OpenLink Data Explorer">ODE</abbr></a>,
+          <a href="http://dataviewer.zitgist.com/?uri=$uri">Zitgist</a>, 
+          <a href="http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=$uri">Disco</a>,
+          <a href="http://ontorule-project.eu/parrot/parrot?documentUri=$uri">Parrot</a>
         </li>
         <li>
-          <a href="http://pingthesemanticweb.com/ping.php?url=#echo quote($finalUri[0], '') #">PingTheSemanticWeb</a>
+          <a href="http://pingthesemanticweb.com/ping.php?url=$uri">PingTheSemanticWeb</a>
         </li>
         #end if
       #end for
@@ -344,10 +358,10 @@
       </p>
       #if len($testAgent) > 0:
       <p>
-        Report generated by <a href="$testAgent[3]/">$testAgent[1]</a>, version $testAgent[2] on ${reportDate}. 
+        Report generated by <a href="$testAgent[0][3]">$testAgent[0][1]</a>, version $testAgent[0][2] on ${reportDate}. 
         You can also <a href="$rdfReportUrl">get an RDF version</a> of this report.
       </p>
-      #else:
+      #end if
       <p>
         <a href="http://vapour.sourceforge.net/">Vapour</a> is a validation service to check whether semantic web 
         data is correctly published according to the current best practices, as defined by the 
@@ -355,13 +369,12 @@
         <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes</a> and the 
         <a href="http://www.w3.org/TR/cooluris/">Cool <abbr title="Uniform Resource Identifier">URIs</abbr></a>.
       </p>
-      #end if
     </div>
 
-	<div id="checking-dialog" title="Checking with Vapour">
-		<p><img src="$resourceBaseUri/images/spinner.gif" alt="checking..."/></p>
-		<p>Vapour is checking...</p> 
-	</div> 
+    <div id="checking-dialog" title="Checking with Vapour">
+      <p><img src="$resourceBaseUri/images/spinner.gif" alt="checking..."/></p>
+      <p>Vapour is checking...</p> 
+    </div> 
 
     <script type="text/javascript"src="$resourceBaseUri/jquery-1.7.1.min.js"></script>
     <script type="text/javascript"src="$resourceBaseUri/jquery.validate.min.js"></script>

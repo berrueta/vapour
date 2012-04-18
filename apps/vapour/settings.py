@@ -120,11 +120,50 @@ INSTALLED_APPS = (
      "vapour.teapot",
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s'
+        },
+        'verbose': {
+            'format': '%(asctime)s %(filename)s:%(lineno)d %(process)d %(thread)d %(levelname)s: %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level' : 'DEBUG',
+            'class' : 'logging.StreamHandler',
+            'formatter': 'simple'
+            
+        },
+	    'file': {
+	        'level': 'INFO',
+	        'class': 'logging.FileHandler',
+            'filename': '/home/sergio/projects/vapour/apps/vapour/vapour.log',
+            'formatter': 'simple'
+	    }
+    },
+    'loggers': {
+        'vapour': {
+            'handlers': ['file'],
+            'level': 'INFO'
+        },
+        'vapour.dev': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
+    }
+}
+
 #Custom stuff for vapour
 REQ_BASE_URL = "http://validator.linkeddata.org/vapour#req"
-PATH_RDF_FILES = "http://vapour.sourceforge.net"
+if DEBUG:
+    PATH_RDF_FILES = os.path.join(ROOT_PATH, "..", "..", "webpage")
+else:
+    PATH_RDF_FILES = "http://vapour.sourceforge.net"
 PATH_RESOURCES_FILES = "http://idi.fundacionctic.org/vapourres"
 PATH_TEMPLATES = os.path.join(ROOT_PATH, "strainer/templates/")
-PATH_LOG = os.path.join(ROOT_PATH, "log/vapour.log")
 ALLOW_INTRANET = True
 
