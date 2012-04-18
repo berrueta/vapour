@@ -36,8 +36,8 @@ function getVapourReport(form, uri) {
 
     var req = $.ajax({
                         type: "GET",
-                        //url: "http://validator.linkeddata.org/vapour", 
-                        url: "http://192.168.2.19:8000/vapour",
+                        url: "http://validator.linkeddata.org/vapour", 
+                        //url: "http://localhost:8000/vapour",
                         contentType: "application/x-www-form-urlencoded",
                         data: { vocabUri: uri, format: "rdf" },
                         accepts: "application/rdf+xml",
