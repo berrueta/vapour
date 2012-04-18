@@ -6,11 +6,11 @@ import RDF
 from vapour.namespaces import bindings, buildPrefixesSparqlDeclaration
 import re
 
-def performSparqlQuery(graph, query, lib="rdflib"):
-    if (lib == "librdf" ):
-        return performSparqlQueryLibRdf(graph, query)
-    else:
+def performSparqlQuery(graph, query, lib="librdf"):
+    if (lib == "rdflib" ):
         return performSparqlQueryRdfLib(graph, query)
+    else:
+        return performSparqlQueryLibRdf(graph, query)
 
 def performSparqlQueryLibRdf(graph, query):
     query = normalizeQuery(buildPrefixesSparqlDeclaration() + query)

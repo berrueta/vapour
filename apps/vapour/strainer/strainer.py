@@ -95,7 +95,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
         }
         ORDER BY ASC(?previousRequestCount)
     """ % testRequirementUri
-    return performSparqlQuery(model, query, lib="librdf")
+    return performSparqlQuery(model, query)
 
 def getFinalUriFromModel(model, testRequirementUri):
     query = """
