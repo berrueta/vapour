@@ -7,6 +7,7 @@ from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 from vapour.settings import DEBUG, MEDIA_URL, PATH_TEMPLATES, PATH_RDF_FILES, PATH_RESOURCES_FILES
 from vapour.common.lang import if_else
+from vapour.common import getLogger
 
 resourceBaseUri = None
 if DEBUG:
@@ -18,8 +19,8 @@ class cup:
 
     @staticmethod
     def GET(request):
-        
-        logger = common.createLogger()
+
+        logger = getLogger()
 
         uri = None
         uri = request.GET.get("uri")
@@ -41,20 +42,30 @@ class cup:
             userAgent = options.defaultUserAgent # prevent HTTP header injection
 
         format = "html"
-        if ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
+        paramFormat = request.GET.get("format")
+        if (paramFormat and (paramFormat in ["rdf", "html"])):
+            format = paramFormat
+            logger.info("Using forced format to return the report as %s" % format.upper())
+        elif ((uri is not None) and (request.META.has_key("HTTP_ACCEPT"))):
             format = common.getBestFormat(request.META["HTTP_ACCEPT"])
-            logger.info("Using content negotiation to return report in %s" % format.upper())
-        else:
-            format = request.GET.get("format")
+            logger.info("Using content negotiation to return the report as %s" % format.upper())
 
-        client = None
         client = request.META.get('REMOTE_ADDR')
 
-        validateRDF = False
-        validateRDF = request.GET.get("validateRDF") is "1"            
+        if (request.GET.get("validateRDF")):
+            validateRDF = bool(int(request.GET.get("validateRDF"))) 
+        else:
+            validateRDF = False
 
-        htmlVersions = False
-        htmlVersions = request.GET.get("htmlVersions") is "1"
+        if (request.GET.get("htmlVersions")):
+            htmlVersions = bool(int(request.GET.get("htmlVersions"))) 
+        else:
+            htmlVersions = False   
+
+        if (request.GET.get("mixedAccept")):
+            mixedAccept = bool(int(request.GET.get("mixedAccept"))) 
+        else:
+            mixedAccept = False      
 
         try:
             store = common.createStore()
@@ -68,19 +79,21 @@ class cup:
                 resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
 
                 # defines the options of the validator
-                validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, validateRDF, userAgent, client)
+                validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, mixedAccept, validateRDF, userAgent, client)
                 
                 recipes.checkRecipes(store, resourceToCheck, validatorOptions)
                 namespaceFlavour = None
                 validRecipes = []
                 
-                if format == "html":        
-                    store.parse(PATH_RDF_FILES + "/vapour.rdf")
-                    store.parse(PATH_RDF_FILES + "/recipes.rdf")
-                    store.parse(PATH_RDF_FILES + "/earl.rdf")        
-                    store.parse(PATH_RDF_FILES + "/http.rdf")        
-                    store.parse(PATH_RDF_FILES + "/vocab.rdf")        
-                    model = common.createModel(store)
+                logger.debug("Reading common files from %s" % PATH_RDF_FILES)
+                store.parse(PATH_RDF_FILES + "/vapour.rdf")
+                store.parse(PATH_RDF_FILES + "/recipes.rdf")
+                store.parse(PATH_RDF_FILES + "/earl.rdf")        
+                store.parse(PATH_RDF_FILES + "/http.rdf")        
+                store.parse(PATH_RDF_FILES + "/vocab.rdf")       
+                model = common.createModel(store)
+
+                if format == "html":    
                     response = HttpResponse(strainer.resultsModelToHTML(model, uri, True,
                                                                     validatorOptions, namespaceFlavour, 
                                                                     validRecipes, resourceBaseUri, PATH_TEMPLATES),

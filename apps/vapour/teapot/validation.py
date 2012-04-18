@@ -19,7 +19,7 @@ def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpRes
             return False
         bindings = { u"rdf":RDF }
         query = "SELECT * WHERE { <%s> ?p ?o }" % resource['uri']
-        definitionTriples = g.query(Parse(query), initNs=bindings).serialize('python')
+        definitionTriples = g.query(query, initNs=bindings).serialize('python')
 #        definitionTriples = [(p,o) for (p,o) in g.predicate_objects(resource)]
         isThereADefinitionForTheResource = len(definitionTriples) > 0
         addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], isThereADefinitionForTheResource, testRequirement)

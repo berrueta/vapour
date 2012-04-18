@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:dct="http://purl.org/dc/terms/"
+      xmlns:doap="http://usefulinc.com/ns/doap#"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xml:lang="en"
+>
+
+  <head>
+    <title property="dct:title">Vapour API</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="transformation" href="http://www-sop.inria.fr/acacia/soft/RDFa2RDFXML.xsl"/>
+    <link rel="shortcut icon" href="resources/images/favicon.png" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="../resources/style.css" />
+    <link rel="meta" type="application/rdf+xml" title="DOAP" href="resources/doap.rdf" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://berrueta.net/foaf.rdf" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.wikier.org/foaf.rdf" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://dz015.wordpress.com/foaf.rdf" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.ivanminguez.net/foaf.rdf" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="http://www.kagueto.net/files/foaf.rdf" />
+    <link rel="dct:creator" href="http://www.wikier.org/foaf#wikier" />
+    <script type="text/javascript" src="../resources/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../resources/thickbox.js"></script>
+   <link rel="stylesheet" href="../resources/thickbox.css" type="text/css" media="screen" />
+  </head>
+
+  <body typeof="doap:Project" about="http://vapour.sourceforge.net/doap#vapour">
+
+    <div class="accessibility">
+      <a href="#content">Go directly to the content</a>
+    </div>
+
+    <div id="header">
+      <h1>
+        <a href="http://vapour.sourceforge.net/" rel="doap:homepage" title="go to the home page" accesskey="0">
+          <abbr title="VAlidation Process Of Uri Response">vapour</abbr>
+        </a>
+      </h1>
+      <h2>API</h2>
+    </div>
+
+    <div id="content">
+
+      <p>
+        <a href="..">Vapour</a> exposes exactly the same RDF report through a REST API (currently only RDF/XML is supported). 
+        The report areu generated using <a href="http://www.w3.org/TR/EARL10/">EARL</a> as the primary vocabulary.
+      </p>
+
+      <p>
+        It can be accessed using content negotiation, for instance using <a href="http://curl.haxx.se/">curl</a>:  
+      </p>
+
+      <pre>$ curl -H "Accept: application/rdf+xml" "http://validator.linkeddata.org/vapour?uri=http://dbpedia.org/resource/Asturias"</pre>
+
+      <p>
+        Or forcing the returned format with a query parameter, for instance:  
+      </p>
+
+      <pre>$ curl "http://validator.linkeddata.org/vapour?uri=http://dbpedia.org/resource/Asturias&format=rdf"</pre>
+
+      <h3>Bindings</h3>
+
+      <p>
+        Although you are free to use the raw RDF version of the report, we are also providing API bindings for some
+        popular programming languages:
+      </p>
+
+      <h4>Java</h4>
+
+      <p>
+        This bindings provides a Java-native API to use Vapour, allowing to perform validations and retrieve the details 
+        if the test suite executed. Using <a href="http://maven.apache.org">maven</a> you just need to declare this
+        dependency:
+      </p>
+
+      <pre>&lt;dependencies&gt;
+  (...)
+  &lt;dependency&gt;
+    &lt;groupId&gt;net.sf.vapour&lt;/groupId&gt;
+    &lt;artifactId&gt;vapour-api&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
+
+      <p>
+        If you don't want to install it from the code, the simplest method to get the library is
+        using the following repository:
+      </p>
+
+      <pre>&lt;repositories&gt;
+  (...)
+  &lt;repository&gt;
+    &lt;id&gt;ctic&lt;/id&gt;
+    &lt;url&gt;http://repository.fundacionctic.org/artifactory/repo&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;</pre>
+
+      <p>
+        For those who are not using maven in their projects, a JAR package with dependencies is also provided
+        (<a href="../resources/bin/vapour-api-1.0-with-dependencies.jar">vapour-api-1.0-with-dependencies.jar</a>).
+        Please, be careful using this package in your projects, because the dependecies included could conflict 
+        with yours.
+      </p>
+
+      <p>
+        Finally, the code you would need to used coould be something like:
+      </p>
+
+      <pre>VapourApi api = VapourApiFactory.createVapourApi();
+VapourReport report = api.check("http://dbpedia.org/resource/Asturias");
+System.out.println(report);</pre>
+
+      <p>
+        If you would requiere more details, this 
+        <a href="../resources/images/vapour-api-java-classes.png" title="Vapour API Java Bindings class diagram" class="thickbox">class diagram</a> 
+        might be useful.
+      </p>
+
+      <h4>Javascript</h4>
+
+      <p>
+        Although it is still in an early development state, the Vapour API can be also used from Javascript (the public service is
+        <a href="http://www.w3.org/TR/cors/">CORS</a>-enabled). You just need to include something like this in your webpage:
+      </p>
+
+      <pre>&lt;form id="vapour"&gt;
+  &lt;label for="uri"&gt;
+    URI:
+    &lt;input type="text" name="uri" id="uri" size="50" value="http://dbpedia.org/resource/Asturias" /&gt;
+  &lt;/label&gt;
+  &lt;input type="submit" value="check" /&gt;
+&lt;/form&gt;
+	
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://vapour.sourceforge.net/api/js/jquery.rdfquery.core.min-1.0.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"src="http://vapour.sourceforge.net/api/js/vapour.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+  $(document).ready(function() {
+    $("form#vapour").vapour();
+  });
+&lt;/script&gt;</pre>
+
+      <p>
+        The file '<tt>vapour.js'</tt> provides the basic functionality to work with Vapour, allowing the validatation of a URI
+        and embedding the report with the performed tests on any web page. A full demo file is provided at the same source code
+        repository for explain its usage, but it is <a href="js/demo.html">online available</a> too.
+      </p>
+
+      <p>
+        This bindings are based on <a href="http://code.google.com/p/rdfquery/">rdfQuery</a> plugin for 
+        <a href="http://jquery.com/">jQuery</a>.
+      </p>
+
+    </div>
+
+    <div id="footer">
+      <h3 class="accessibility">About</h3>
+      <ul>
+        <li>
+          <a href="http://fundacionctic.org/"><img src="../resources/images/ctic.png" width="215" height="62" alt="Fundación CTIC" /></a>
+        </li>
+        <li>
+          <a href="http://sourceforge.net/projects/vapour/"><img src="../resources/images/sf.png" width="210" height="62" alt="SourceForge.net Logo" /></a>
+        </li>
+      </ul>
+    </div>
+
+  </body>
+
+</html>
+

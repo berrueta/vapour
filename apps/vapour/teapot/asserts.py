@@ -52,7 +52,7 @@ def addAssertion(graph, testSubject, test, outcome, testRequirement):
     graph.add((assertion, EARL["result"], resultSubject))
         
     graph.add((assertion, RDF["type"], EARL["Assertion"]))
-    graph.add((assertion, EARL["assertedBy"], VAPOUR["vapour2-0"]))
+    graph.add((assertion, EARL["assertedBy"], VAPOUR2["vapour3-0"]))
     graph.add((assertion, EARL["subject"], testSubject));
     graph.add((assertion, EARL["mode"], EARL["automatic"]))
     graph.add((assertion, EARL["test"], test))

@@ -49,11 +49,11 @@
       </p>
 
       <p>
-        Vapour is
-        available as a <a href="http://idi.fundacionctic.org/vapour">public web service</a>, but also as open source 
-        software under the terms of the 
+        Although the main way to use Vapour is throught the <a href="http://validator.linkeddata.org">public web service</a>, 
+        the source code is avaible as open source software under the terms of the 
         <a href="http://www.w3.org/Consortium/Legal/copyright-software" rel="doap:license">W3C License</a>, so you can set 
         up your own service or modify the source code in <span property="doap:programming-language">Python</span>, if needed.
+        Some more <a href="https://www.ohloh.net/p/vapour">details are available at ohloh</a>.
       </p>
 
       <h3 id="demo">Public web service</h3>
@@ -125,6 +125,13 @@
         </li>
       </ul>
 
+      <h4>API</h4>
+
+      <p>
+        Vapour exposes exactly the same information used for generating the report as RDF. 
+        Please check <a href="api">further details</a> about how use this API</a>.  
+      </p>
+
       <h4>Become involved</h4>
 
       <p>
@@ -138,17 +145,6 @@
       <p> Don't hesitate to post comments to the 
         <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=vapour-devel" rel="doap:mailing-list">development mailing list</a> 
         or to report bugs using the <a href="http://sourceforge.net/tracker/?group_id=188075&amp;atid=923865" rel="doap:bug-database">project's bug tracker</a>. 
-      </p>
-
-      <h4>History</h4>
-
-      <p>
-        Vapour was originally created to check the compliance of a web site against the <em>recipes</em> described
-        in the <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
-        <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
-        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft), but later it was extended to
-        be more generic to any kind of resources. This work is <strong>not</strong> endorsed by 
-        <acronym title="World Wide Web Consortium">W3C</acronym>.
       </p>
 
       <h4>High-level architecture</h4>
@@ -183,6 +179,18 @@
         </dd>
       </dl>
 
+      <h4>History</h4>
+
+      <p>
+        Vapour was originally created to check the compliance of a web site against the <em>recipes</em> described
+        in the <a href="http://www.w3.org/TR/swbp-vocab-pub/"><em>Best Practices Recipes for Publishing 
+        <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</em></a> 
+        (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft), but later it was extended to
+        be more generic to any kind of resources. This work is <strong>not</strong> endorsed by 
+        <acronym title="World Wide Web Consortium">W3C</acronym>.
+      </p>
+
+
       <h3 id="references">References</h3>
       <ul>
         <li>
@@ -192,13 +200,9 @@
           <a href="http://linkeddata.org/">Linked Data</a>
         </li>
         <li>
-          <a href="http://www.w3.org/2006/07/SWD/">Semantic Web Deployment</a> Working Group at 
-          <acronym title="World Wide Web Consortium">W3C</acronym>
-        </li>
-        <li>
           <a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing 
           <acronym title="Resource Description Framework">RDF</acronym> Vocabularies</a>
-          (<acronym title="World Wide Web Consortium">W3C</acronym> Working Draft)
+          (<acronym title="World Wide Web Consortium">W3C</acronym> Working Group Note)
         </li>
         <li>
           <a href="http://idi.fundacionctic.org/rdfbestprac/">Unit tests for <em>Best Practice
@@ -211,13 +215,33 @@
         </li>
       </ul>
 
+      <h3>Acknowledgements</h3>
+      <ul id="funding">
+        <li>
+          <a href="http://www.treelogic.com/web/guest/investigacion/tecnologias-semanticas/-/journal_content/56/10137/35701"><img src="resources/images/adapta.jpg" alt="ADAPTA INNPACTO" /></a>
+          <a href="http://www.idi.mineco.gob.es/portal/site/MICINN/menuitem.dbc68b34d11ccbd5d52ffeb801432ea0/?vgnextoid=c8e371e47ecfe210VgnVCM1000001d04140aRCRD"><img src="resources/images/innpacto.jpg" alt="INNPACTO 2011" /></a>
+        </li>
+        <li>
+          <a href="http://www.micinn.es/"><img src="resources/images/micinn.jpg" alt="Spanish Ministry of Science and Innovation" /></a>
+          <a href="http://ec.europa.eu/regional_policy"><img src="resources/images/feder.jpg" alt="European Regional Development Fund (FEDER)" /></a>
+        </li>
+      </ul>
+      <p>
+        This project have been developed by <a href="http://fundacionctic.org/">CTIC</a> partially supported by the
+        <a href="http://www.treelogic.com/web/guest/investigacion/tecnologias-semanticas/-/journal_content/56/10137/35701">ADAPTA</a> 
+        research project, which is partially funded by the 
+        <a href="http://www.idi.mineco.gob.es/portal/site/MICINN/menuitem.dbc68b34d11ccbd5d52ffeb801432ea0/?vgnextoid=c8e371e47ecfe210VgnVCM1000001d04140aRCRD">INNPACTO 2011 programme</a> 
+        (IPT-2011-0949-430000) of the Spanish Ministry of Science and Innovation and the 
+        European Regional Development Fund (FEDER).
+      </p>
+
     </div>
 
     <div id="footer">
       <h3 class="accessibility">About</h3>
       <ul>
         <li>
-          <a href="http://www.fundacionctic.org/"><img src="resources/images/ctic.png" width="215" height="62" alt="Fundación CTIC" /></a>
+          <a href="http://fundacionctic.org/"><img src="resources/images/ctic.png" width="215" height="62" alt="Fundación CTIC" /></a>
         </li>
         <li>
           <a href="http://sourceforge.net/projects/vapour/"><img src="resources/images/sf.png" width="210" height="62" alt="SourceForge.net Logo" /></a>

@@ -9,6 +9,8 @@ body{
     background-position: top left;
     background-repeat: repeat-x;
     background-color: #ffffff;
+    font-family: sans-serif; 
+    line-height: 1.4em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -68,6 +70,16 @@ h4 {
   font-size: 1.1em;
 }
 
+a, a:active, a:visited {
+  color: #344251;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #344251;
+  color: #ffffff;
+}
+
 p {
   text-align: justify;
 }
@@ -81,6 +93,15 @@ strong.vapour {
   font-weight: bold;
 }
 
+pre {
+    background-color: #eeeeee;
+    border: solid 1px #5674bc;
+    margin-left: 2em;
+    width: 80%%;
+    padding: 1.5em 2em 1.5em 2em;
+    line-height: 1.1em;
+}
+
 div#header {
   background-color: #5674bc;
   text-align: left;
@@ -92,6 +113,10 @@ div#header {
   height:100px;
 }
 
+div#header a:hover {
+  background-color: transparent;
+}
+
 div#content {
   margin: 1.5em 0 2em 0;
   padding: 3em;
@@ -99,6 +124,11 @@ div#content {
 
 div#content ul {
   list-style-type: none;
+}
+
+div#content ul li:before {
+    content: "•  ";
+    color:  #344251;
 }
 
 div#content dl#arch {
@@ -128,11 +158,34 @@ img#demobutton:hover {
   
 }
 
+ul#funding {
+  list-style: none;
+  display: block;
+  float: right;
+  text-align: left;
+  margin: 0;
+}
+
+div#content ul#funding li:before {
+    content: "";
+}
+
+ul#funding a:hover {
+    background-color: #cccccc;
+}
+
 div#footer {
-  margin-top: 3em;
+  margin-top: 8em;
   padding: 1em 3em 3em 5em;
   border-top: 1px #5674bc groove;
   background-color: #CCC;
+}
+
+div#footer p {
+    width: 60%;
+    display: inline;
+    font-size: 0.85em;
+    color: #ffffff;
 }
 
 div#footer ul {
@@ -145,6 +198,10 @@ div#footer ul {
 div#footer ul li {
   margin-left: 2em;
   display: inline;
+}
+
+div#footer a:hover {
+  background-color: transparent;
 }
 
 body:before {
@@ -210,13 +267,5 @@ body:before {
     -ms-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
     -o-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
     box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee; 
-}
-
-pre {
-    background-color: #eeeeee;
-    border: solid 1px #5674bc;
-    margin-left: 2em;
-    width: 70%;
-    padding: 1.5em 2em 1.5em 2em;
 }
 

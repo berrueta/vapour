@@ -10,6 +10,8 @@ body{
     background-position: top left;
     background-repeat: repeat-x;
     background-color: #ffffff;
+    font-family: sans-serif; 
+    line-height: 1.4em;
 }
 
 
@@ -55,6 +57,16 @@ div#header h2 {
   color: #dddddd;
   display: inline;
   padding-left: 0.4em;
+}
+
+a, a:active, a:visited {
+  color: #344251;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #344251;
+  color: #ffffff;
 }
 
 img {
@@ -462,6 +474,10 @@ h3
   color: #888888;
 }
 
+div.assertion {
+    line-height: 1em;
+}
+
 div#footer {
   margin-top: 3em;
   padding: 1em 3em 3em 5em;
@@ -575,7 +591,8 @@ div#checking-dialog {
     text-align: center;
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.7em;  
+    border-radius: 20px;
 } 
 
 .ui-dialog-titlebar { 

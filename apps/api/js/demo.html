@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset=utf-8 />
+	<title>Vapour JS Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://vapour.sourceforge.net/resources/style.css" />
+    <style type="text/css">
+        html {
+          background: #5674bc;
+        }
+        body {
+          background: #5674bc;
+          margin: 0;
+          padding: 2em 1em 2em 1em;;
+          font-size: 80%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          color: #5674bc;
+        }
+
+        h1 {
+          font-size: 4em;
+          font-weight: bold;
+          color: #ffffff;
+          display: inline;
+        }
+
+        h1 a, h1 a:active, h1 a:hover, h1 a:visited {
+          color: #ffffff;
+          text-decoration: none;
+        }
+
+        h1 a abbr {
+          border-bottom: 0;
+          text-transform: uppercase
+        }
+
+        form {
+            margin: 3em;
+        }
+        form label {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <h1>Vapour JS Demo</h1>
+
+    <form id="vapour">
+          <label for="uri">
+            URI:
+            <input type="text" name="uri" id="uri" size="50" value="http://dbpedia.org/resource/Asturias" />
+          </label>
+          <input type="submit" value="check" />
+    </form>
+	
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="jquery.rdfquery.core.min-1.0.js"></script>
+    <script type="text/javascript"src="vapour.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var report = $("form#vapour").vapour();
+      });
+    </script>
+
+  </body>
+
+</html>
+

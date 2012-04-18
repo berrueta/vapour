@@ -12,6 +12,7 @@ HTTP = Namespace("http://www.w3.org/2006/http#")
 HTTP_METHODS = Namespace("http://www.w3.org/2006/http-methods#")
 HTTP_STATUS_CODES = Namespace("http://www.w3.org/2006/http-statusCodes#")
 VAPOUR = Namespace("http://vapour.sourceforge.net/vocab.rdf#")
+VAPOUR2 = Namespace("http://vapour.sourceforge.net/vapour.rdf#")
 RECIPES = Namespace("http://vapour.sourceforge.net/recipes.rdf#")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
@@ -25,8 +26,14 @@ bindings = {
                 u"uri":URI,
                 u"http":HTTP,
                 u"vapour":VAPOUR,
+                u"vapour2":VAPOUR2,
                 u"recipes":RECIPES,
                 u"foaf":FOAF,
             }
 
+def buildPrefixesSparqlDeclaration():
+    prefixes = ""
+    for prefix, ns in bindings.items():
+        prefixes += "PREFIX %s: <%s> \n" % (prefix, ns) 
+    return prefixes
 

@@ -1,3 +1,14 @@
+/**
+ * Copyright (C) 2012 Fundación CTIC <http://fundacionctic.org>, All Rights Reserved.
+ *
+ * This work is distributed under the W3C® Software License in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You may obtain a copy of the License at
+ *
+ *     http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ */
 package net.sf.vapour.api;
 
 import java.io.IOException;
@@ -21,11 +32,17 @@ import org.apache.log4j.Logger;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+/**
+ * Default implementation of the Vapour API bindings for Java
+ * 
+ * @author sergio.fernandez@fundacionctic.org
+ *
+ */
 class VapourApiImpl implements VapourApi {
 
 	private static final Logger log = Logger.getLogger(VapourApiImpl.class);
 	private static final String VAPOUR_CACHE_PATH = "vapour.cache";
-	public static final String URI_PARAM = "vocabUri"; //FIXME: change to 'uri' on the new versions
+	public static final String URI_PARAM = "uri";
 	public static final String VALIDATE_RDF_PARAM = "validateRDF";
 	public static final String HTML_VERSION_PARAM = "htmlVersions";
 	public static final String DEFAULT_RESPONSE_PARAM = "defaultResponse";
@@ -38,7 +55,7 @@ class VapourApiImpl implements VapourApi {
 		super();
 		this.cache = false;
 		this.service = service;
-		log.info("Create API against " + this.service);
+		log.info("Created API bindings against " + this.service);
 	}
 
 	public VapourReport check(String uri) {
