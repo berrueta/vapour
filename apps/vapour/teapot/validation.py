@@ -19,7 +19,7 @@ def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpRes
             addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], False, testRequirement)
             return False
         query = "SELECT * WHERE { <%s> ?p ?o }" % resource['uri']
-        definitionTriples = performSparqlQuery(q, query)
+        definitionTriples = performSparqlQuery(g, query)
 #        definitionTriples = [(p,o) for (p,o) in g.predicate_objects(resource)]
         isThereADefinitionForTheResource = len(definitionTriples) > 0
         addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], isThereADefinitionForTheResource, testRequirement)
