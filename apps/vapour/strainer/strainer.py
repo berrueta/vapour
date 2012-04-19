@@ -9,7 +9,10 @@ from Cheetah.Template import Template
 import datetime
 import sys
 import traceback
-import set
+try:
+   set
+except NameError:
+   from sets import Set as set
 
 templateDir = "vapour/strainer/templates/" #FIXME
 
