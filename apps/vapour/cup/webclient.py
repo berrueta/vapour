@@ -9,6 +9,9 @@ from vapour.settings import DEBUG, MEDIA_URL, PATH_TEMPLATES, PATH_RDF_FILES, PA
 from vapour.common.lang import if_else
 from vapour.common import getLogger
 
+import warnings
+warnings.simplefilter("ignore", DeprecationWarning)
+
 resourceBaseUri = None
 if DEBUG:
     resourceBaseUri = if_else(MEDIA_URL[-1] == "/", MEDIA_URL[:-1], MEDIA_URL) #remove last slash
