@@ -2,7 +2,10 @@ from rdflib import ConjunctiveGraph, URIRef
 from httpdialog import followRedirects
 import mimetypes
 import httplib
-from sets import Set
+try:
+   set
+except NameError:
+   from sets import Set as set
 from vapour.namespaces import RDF, RDFS, OWL
 from vapour.cup import common
 from vapour.teapot import options
@@ -46,7 +49,7 @@ def autodetectUris(graph, vocabUri, userAgent):
     
             allClasses = rdfsClasses + owlClasses
             allProperties = rdfProperties + objectProperties + datatypeProperties + annotationProperties
-            allInstances = list(Set(definedResources) - Set(allClasses + allProperties + owlOntologies))
+            allInstances = list(set(definedResources) - set(allClasses + allProperties + owlOntologies))
     
             classes = pickFromNamespaceIfPossible(allClasses, vocabUri)
             properties = pickFromNamespaceIfPossible(allProperties, vocabUri)
