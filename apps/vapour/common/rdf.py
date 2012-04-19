@@ -1,11 +1,4 @@
 
-import rdflib
-rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
-rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
-import RDF
-from vapour.namespaces import bindings, buildPrefixesSparqlDeclaration
-import re
-
 def performSparqlQuery(graph, query, lib="librdf"):
     if (lib == "rdflib" ):
         return performSparqlQueryRdfLib(graph, query)
@@ -13,6 +6,8 @@ def performSparqlQuery(graph, query, lib="librdf"):
         return performSparqlQueryLibRdf(graph, query)
 
 def performSparqlQueryLibRdf(graph, query):
+    import RDF
+    from vapour.namespaces import buildPrefixesSparqlDeclaration
     query = normalizeQuery(buildPrefixesSparqlDeclaration() + query)
     #loggger.debug("Performing SPARQL query: %s" % query)
     parser = RDF.Parser(mime_type="application/rdf+xml")
@@ -36,6 +31,10 @@ def performSparqlQueryLibRdf(graph, query):
     return results
 
 def performSparqlQueryRdfLib(graph, query):
+    import rdflib
+    rdflib.plugin.register("sparql", rdflib.query.Processor, "rdfextras.sparql.processor", "Processor")
+    rdflib.plugin.register("sparql", rdflib.query.Result, "rdfextras.sparql.query", "SPARQLQueryResult")
+    from vapour.namespaces import bindings
     #loggger.debug("Performing SPARQL query: %s" % normalizeQuery(query))
     results = graph.query(query, initNs=bindings)
     #loggger.debug("Returned %d results" % len(results))
@@ -47,6 +46,7 @@ def normalizeQuery(query):
     return query
 
 def getQueryVars(query):
+    import re
     p = re.compile("select (distinct )?((\?[a-zA-Z]+ )+)where*", re.IGNORECASE)
     m = p.search(query)
     vars = []
