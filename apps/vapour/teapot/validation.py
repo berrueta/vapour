@@ -1,6 +1,7 @@
 
-from rdflib.graph import ConjunctiveGraph, Graph
-from vapour.namespaces import *
+from rdflib.graph import ConjunctiveGraph
+from vapour.common.rdf import performSparqlQuery
+from vapour.namespaces import RECIPES
 from asserts import addAssertion
 from util import *
 import httplib
@@ -17,9 +18,8 @@ def assertLastResponseBodyContainsDefinitionForResource(graph, resource, httpRes
         except Exception, e:
             addAssertion(graph, testSubject, RECIPES["TestResponseParseableRdf"], False, testRequirement)
             return False
-        bindings = { u"rdf":RDF }
         query = "SELECT * WHERE { <%s> ?p ?o }" % resource['uri']
-        definitionTriples = g.query(query, initNs=bindings).serialize('python')
+        definitionTriples = performSparqlQuery(q, query)
 #        definitionTriples = [(p,o) for (p,o) in g.predicate_objects(resource)]
         isThereADefinitionForTheResource = len(definitionTriples) > 0
         addAssertion(graph, testSubject, RECIPES["TestContainsResourceDefinition"], isThereADefinitionForTheResource, testRequirement)
