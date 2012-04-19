@@ -1,5 +1,5 @@
 
-def performSparqlQuery(graph, query, lib="librdf"):
+def performSparqlQuery(graph, query, lib="rdflib"):
     if (lib == "rdflib" ):
         return performSparqlQueryRdfLib(graph, query)
     else:
