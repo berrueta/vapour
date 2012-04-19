@@ -145,10 +145,10 @@ class QueryBuilder {
 		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("PREFIX http: <http://www.w3.org/2006/http#> \n");
 		sb.append("PREFIX vapour: <http://vapour.sourceforge.net/vocab.rdf#> \n");
-		sb.append("SELECT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation \n");
+		sb.append("SELECT DISTINCT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation \n");
 		sb.append("       ?statusCodeTest ?statusCodeValidity ?responseContentTypeTest ?responseContentTypeValidity \n");
 		sb.append("       ?requestAccept ?previousRequestCount ?requestType ?requestMethodName ?requestAbsPath \n");
-		sb.append("       ?requestHost ?responseVary ?userAgent ?assertion \n");
+		sb.append("       ?requestHost ?responseVary ?userAgent \n");
 		sb.append("WHERE { \n");
 		sb.append("     <" + test + "> dct:hasPart ?assertion . \n");
 		sb.append("     ?assertion earl:subject ?response . \n");
