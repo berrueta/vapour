@@ -9,6 +9,7 @@ from Cheetah.Template import Template
 import datetime
 import sys
 import traceback
+import set
 
 templateDir = "vapour/strainer/templates/" #FIXME
 
@@ -95,7 +96,14 @@ def getHttpTracesFromModel(model, testRequirementUri):
         }
         ORDER BY ASC(?previousRequestCount)
     """ % testRequirementUri
-    return performSparqlQuery(model, query)
+    results = performSparqlQuery(model, query)
+    responses = set()
+    filteredResults = []
+    for result in results:
+        if result[0] not in responses:
+            filteredResults.append(result)
+            responses.add(result[0])
+    return filteredResults
 
 def getFinalUriFromModel(model, testRequirementUri):
     query = """
