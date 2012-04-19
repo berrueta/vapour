@@ -21,12 +21,10 @@ import com.hp.hpl.jena.query.QuerySolution;
  */
 class VapourAssertionImpl implements VapourAssertion {
 	
-	String id;
 	VapourRequest request;
 	VapourResponse response;
 
 	public VapourAssertionImpl(QuerySolution qs) {
-		this.id = qs.get("assertion").toString();
 		this.buildRequest(qs);
 		this.buildResponse(qs);
 	}
@@ -61,33 +59,8 @@ class VapourAssertionImpl implements VapourAssertion {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		VapourAssertionImpl other = (VapourAssertionImpl) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Vapour Assertion '" + id + "':\n " + request + "\n" + response + "\n";
+		return "Vapour Assertion:\n " + request + "\n" + response + "\n";
 	}
 
 }
