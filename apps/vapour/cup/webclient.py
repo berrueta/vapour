@@ -34,8 +34,7 @@ class cup:
         if ((defaultResponse is not "rdfxml") and (defaultResponse is not "html") and (defaultResponse is not "dontmind")):
             defaultResponse = "dontmind" # default value            
 
-        userAgent = options.defaultUserAgent
-        userAgent = request.META["HTTP_USER_AGENT"]
+        userAgent = request.GET.get("userAgent")
         if (not userAgent):
             userAgent = options.defaultUserAgent
         elif ("\n" in userAgent):
