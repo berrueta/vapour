@@ -290,7 +290,7 @@
       <h4>Test results</h4>
       <ul class="testResultChecklist">
 	  #for $test in $testResults[$testRequirement[0]]:
-        #if $test[3] == str(EARL["passed"]):
+        #if $test[3] == EARL["passed"]:
           #set $testResultCssClass = "correctValue"
         #else
           #set $testResultCssClass = "badValue"
