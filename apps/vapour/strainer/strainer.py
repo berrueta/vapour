@@ -121,7 +121,14 @@ def getFinalUriFromModel(model, testRequirementUri):
           FILTER (?statusCodeNumber = 200)
     }
     """ % testRequirementUri
-    return performSparqlQuery(model, query)
+    resources = set()
+    results = performSparqlQuery(model, query)
+    filtered = []
+    for result in results:
+        if (result[0] not in resources):
+            resources.add(result[0])
+            filtered.append(result)
+    return filtered
 
 def getHttpRange14ConclusionsFromModel(model, testRequirementUri):
     query = """
