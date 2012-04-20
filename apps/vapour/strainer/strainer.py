@@ -150,7 +150,10 @@ def getTestAgent(model):
             foaf:homepage ?agentHomepage .
         }
     """
-    return performSparqlQuery(model, query)
+    results = performSparqlQuery(model, query)
+    for result in results:
+        return result
+    return []
 
 def sortTrace(trace):    
     # FIXME: deprecate this function, already ordered directly in the query
