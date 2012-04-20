@@ -104,7 +104,7 @@ def getHttpTracesFromModel(model, testRequirementUri):
     filteredResults = []
     for result in results:
         if result[0] not in responses:
-            filteredResults.append(result)
+            filteredResults.insert(int(result[11]), result)
             responses.add(result[0])
     return filteredResults
 
