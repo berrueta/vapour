@@ -39,7 +39,8 @@ def checkRecipes(graph, resource, validatorOptions):
         for i in range(0, len(mimetypes.mixed)):
             checkWithMixedAccept(graph, resource, i, validatorOptions)
     if validatorOptions.htmlVersions:
-        checkVary(graph, validatorOptions)
+        pass #FIXME: temporally disabled due many bugs on the sparql engine used
+        #checkVary(graph, validatorOptions)
 
 def checkWithoutAcceptHeader(graph, resource, validatorOptions):
     scenarioDescription = " (without content negotiation)"
