@@ -76,7 +76,7 @@ class VapourReportImpl implements VapourReport {
 
 	@Override
 	public String toString() {
-		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getPassedTests() + "/" + this.getPerformedTests() + ")";
+		return (this.isValid() ? "all tests passed" : "some tests failed") + " (" + this.getPassedTests() + " passed/" + this.getPerformedTests() + " total)";
 	}
 	
 }

@@ -37,13 +37,17 @@ class SparqlHelper {
 		log.trace("Query: " + query);
 		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
 		ResultSet results = qe.execSelect();
-		return results.nextSolution().getLiteral(var).getInt();
+		int countResult = results.nextSolution().getLiteral(var).getInt();
+		log.trace("COUNT query result: " + countResult);
+		return countResult;
 	}
 
 	public static boolean execAskQuery(Model model, String query) {
 		log.trace("Query: " + query);
 		QueryExecution qe = QueryExecutionFactory.create(QueryFactory.create(query), model);
-		return qe.execAsk();
+		boolean askResult = qe.execAsk();
+		log.trace("ASK query result: " + askResult);
+		return askResult;
 	}
 	
 	public static ResultSet execSelectQuery(Model model, String query) {

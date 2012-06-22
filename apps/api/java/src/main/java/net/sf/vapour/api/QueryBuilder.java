@@ -24,10 +24,10 @@ class QueryBuilder {
 	public static String buildAskFailedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("ASK { \n");
 		sb.append("  ?testRequirement a earl:TestRequirement ; \n");
-		sb.append("    dc:hasPart ?assertion . \n");
+		sb.append("    dct:hasPart ?assertion . \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
         sb.append("  ?result earl:outcome earl:failed . \n");
@@ -50,11 +50,11 @@ class QueryBuilder {
 	public static String buildCountFailedTests() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("SELECT (COUNT(DISTINCT ?testRequirement) AS ?count) \n");
 		sb.append("WHERE { \n");
 		sb.append("  ?testRequirement a earl:TestRequirement ; \n");
-		sb.append("    dc:hasPart ?assertion . \n");
+		sb.append("    dct:hasPart ?assertion . \n");
 		sb.append("  ?assertion a earl:Assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
         sb.append("  ?result earl:outcome earl:failed . \n");
@@ -88,10 +88,10 @@ class QueryBuilder {
 	public static String buildAskFailedTest(String test) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PREFIX earl: <http://www.w3.org/ns/earl#> \n");
-		sb.append("PREFIX dc: <http://purl.org/dc/elements/1.1/> \n");
+		sb.append("PREFIX dct: <http://purl.org/dc/terms/> \n");
 		sb.append("ASK { \n");
 		sb.append("  <" + test + "> a earl:TestRequirement ; \n");
-        sb.append("    dc:hasPart ?assertion . \n");
+        sb.append("    dct:hasPart ?assertion . \n");
         sb.append("  ?assertion earl:result ?result . \n");
         sb.append("  ?result earl:outcome earl:failed . \n");
 		sb.append("}");
