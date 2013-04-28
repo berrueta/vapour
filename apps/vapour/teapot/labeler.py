@@ -10,8 +10,7 @@ def labelTestSubjects(graph, rootTestSubject, what, accept = None):
             title = title + " without specifying the desired content type"
         else:
             title = title + " " + mimetypes.requestDescription[accept]
-        titleLiteral = Literal(title)
-        titleLiteral.language = "en"
+        titleLiteral = Literal(title, lang = "en")
         graph.add((sequence[i], DC["title"], titleLiteral))
         
 def inttoord(i):

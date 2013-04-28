@@ -10,7 +10,7 @@ Dependencies
 
     - python (>=2.4)
     - django (>=1.5)
-    - rdflib (>=3.0)
+    - rdflib (>=3.4)
     - rdfextras (>=0.1)
     - httplib
     - dnspython
