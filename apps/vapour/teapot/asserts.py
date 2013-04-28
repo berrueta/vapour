@@ -73,8 +73,7 @@ def addTestRequirement(graph, title, order):
     reqCount += 1
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
     graph.add((testRequirement, VAPOUR["order"], Literal(order)))
-    titleLiteral = Literal(title)
-    titleLiteral.language = "en"
+    titleLiteral = Literal(title, lang = "en")
     graph.add((testRequirement, DC["title"], titleLiteral))    
     return testRequirement
 
