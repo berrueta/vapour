@@ -1,5 +1,5 @@
 
-from django.conf.urls.defaults import patterns, include, url, handler404
+from django.conf.urls import patterns, include, url, handler404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.views.static import serve
 from vapour.cup.webclient import cup
