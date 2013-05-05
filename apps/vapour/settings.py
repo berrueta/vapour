@@ -134,21 +134,15 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level' : 'DEBUG',
+            'level' : 'INFO',
             'class' : 'logging.StreamHandler',
             'formatter': 'simple'
             
-        },
-	    'file': {
-	        'level': 'INFO',
-	        'class': 'logging.FileHandler',
-            'filename': '/tmp/vapour/apps/vapour/vapour.log',
-            'formatter': 'simple'
-	    }
+        }
     },
     'loggers': {
         'vapour': {
-            'handlers': ['file'],
+            'handlers': ['console'],
             'level': 'INFO'
         },
         'vapour.dev': {
