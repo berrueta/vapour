@@ -7,3 +7,10 @@ target
 .project
 .classpath
 .settings
+apps/Cheetah
+apps/django
+apps/isodate
+pyparsing.py
+apps/rdfextras
+apps/rdflib
+lib
