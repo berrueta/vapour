@@ -1,6 +1,5 @@
 
 import urlparse
-from dns.resolver import Resolver, NXDOMAIN
 from vapour.settings import ALLOW_INTRANET
 from vapour.cup import common
 from vapour.common import getLogger
@@ -14,6 +13,7 @@ def isLocatedAtIntranet(host, options=None):
         requestFromIntranet = isIntranet(options.client)
 
     if (not ALLOW_INTRANET and not requestFromIntranet):
+        from dns.resolver import Resolver, NXDOMAIN
         try:
             resolver = Resolver()
             ipList = resolver.query(host.split(":")[0])
