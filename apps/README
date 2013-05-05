@@ -46,5 +46,7 @@ To run Vapour in the local development environment, use:
 
    $ dev_appserver.py .
 
-You may need to copy or symlink some Python dependencies to
-the current directory.
+GAE requires to bundle all the application's dependencies. You can
+either copy or symlink them manually, or you can use the script
+'download-deps.sh', which will automatically download the dependencies
+and expand them in the current directory.
