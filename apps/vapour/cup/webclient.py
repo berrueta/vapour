@@ -1,6 +1,6 @@
 
-import random
-import traceback
+import random, traceback
+from datetime import datetime
 from django.http import HttpResponse, HttpResponseBadRequest
 from vapour.strainer import strainer
 from vapour.teapot import recipes, autodetect, options
@@ -83,7 +83,9 @@ class cup:
                 # defines the options of the validator
                 validatorOptions = options.ValidatorOptions(htmlVersions, defaultResponse, mixedAccept, validateRDF, userAgent, client)
                 
+                startTime = datetime.now()
                 recipes.checkRecipes(store, resourceToCheck, validatorOptions)
+                dialogTime = datetime.now() - startTime
                 namespaceFlavour = None
                 validRecipes = []
                 
@@ -95,10 +97,17 @@ class cup:
                 store.parse(PATH_RDF_FILES + "/vocab.rdf")       
                 model = common.createModel(store)
 
-                if format == "html":    
+                responseTime = datetime.now() - startTime
+
+                logger.info("Response time: %d (ms) - HTTP dialog time: %d (ms)" % (responseTime.total_seconds() * 1000,
+                                                                                    dialogTime.total_seconds() * 1000))
+
+                if format == "html":
+                    responseTimeSeconds = round(responseTime.total_seconds() * 1000) / 1000;
                     response = HttpResponse(strainer.resultsModelToHTML(model, uri, True,
-                                                                    validatorOptions, namespaceFlavour, 
-                                                                    validRecipes, resourceBaseUri, PATH_TEMPLATES),
+                                                                        validatorOptions, namespaceFlavour, 
+                                                                        validRecipes, responseTimeSeconds,
+                                                                        resourceBaseUri, PATH_TEMPLATES),
                                             mimetype="text/html") #IE sucks
                     response["Vary"] = "Accept"
                     response["Access-Control-Allow-Origin"] = "*"

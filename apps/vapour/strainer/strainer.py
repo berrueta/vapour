@@ -59,6 +59,17 @@ def getResultsFromModel(model, testRequirementUri):
     """ % testRequirementUri
     return performSparqlQuery(model, query)
 
+def getHttpRequestCountFromModel(model):
+    query = """
+        SELECT DISTINCT ?httpRequest
+        WHERE {
+            ?httpRequest rdf:type http:Request
+        }
+    """
+    results = performSparqlQuery(model, query)
+    return len(results)
+    
+
 def getHttpTracesFromModel(model, testRequirementUri):
     query = """
         SELECT DISTINCT ?response ?responseTitle ?absoluteUri ?statusCodeNumber ?responseContentType ?responseLocation
@@ -198,7 +209,7 @@ def prepareData(resourceBaseUri, validatorOptions, uri="", printForm=False, name
     data['rdfReportUrl'] = '?'+ str(urllib.urlencode({'uri':uri or '','validateRDF':str(int(validatorOptions.validateRdf)),'htmlVersions':str(int(validatorOptions.htmlVersions)),'format':'rdf', 'defaultResponse':validatorOptions.defaultResponse})).replace("&","&amp;")
     return data
 
-def resultsModelToHTML(model, uri, printForm, validatorOptions, namespaceFlavour, validRecipes,
+def resultsModelToHTML(model, uri, printForm, validatorOptions, namespaceFlavour, validRecipes, responseTime,
                        resourceBaseUri = "resources", templateDir = templateDir):
     """
     Entry point: use a RDFmodel with results as input to populate a
@@ -214,6 +225,8 @@ def resultsModelToHTML(model, uri, printForm, validatorOptions, namespaceFlavour
     data['testAgent'] = getTestAgent(model)
     data['isThereAnyFailingTest'] = isThereAnyFailingTest(model)
     data['reportDate'] = str(datetime.datetime.now())
+    data['responseTime'] = responseTime
+    data['httpRequestCount'] = getHttpRequestCountFromModel(model)
     t = Template(file=templateDir + "/results.tmpl", searchList=[data])
     return t
 
