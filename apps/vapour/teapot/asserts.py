@@ -5,7 +5,7 @@ from rdflib import BNode, Literal, URIRef
 import mimetypes
 from vapour.settings import REQ_BASE_URL
 
-reqCount = 1
+requestCounter = AtomicCounter()
 
 def assertLastResponseCode200(graph, rootTestSubject, testRequirement):
     testSubject = lastTestSubjectOfSequence(graph, rootTestSubject)
@@ -68,12 +68,10 @@ def addAssertion(graph, testSubject, test, outcome, testRequirement):
     graph.add((testRequirement, DCT["hasPart"], assertion))
 
 def addTestRequirement(graph, title, order):
-    global reqCount
-    testRequirement = URIRef(REQ_BASE_URL + str(reqCount))
-    reqCount += 1
+    global requestCounter
+    testRequirement = URIRef(REQ_BASE_URL + str(requestCounter.getNext()))
     graph.add((testRequirement, RDF["type"], EARL["TestRequirement"]))
     graph.add((testRequirement, VAPOUR["order"], Literal(order)))
     titleLiteral = Literal(title, lang = "en")
     graph.add((testRequirement, DC["title"], titleLiteral))    
     return testRequirement
-
