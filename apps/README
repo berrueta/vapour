@@ -1,0 +1,52 @@
+Vapour (VAlidation Process Of Uri Response)
+===========================================
+
+Vapour is a validation service to check whether semantic web data is correctly 
+published according to the current best practices, as defined by the Linked 
+Data principles, the Best Practice Recipes and the Cool URIs.
+
+Dependencies
+------------
+
+    - python (>=2.7)
+    - django (>=1.5)
+    - rdflib (>=3.4)
+    - rdfextras (>=0.1)
+    - httplib
+    - dnspython (optional)
+
+
+Running as standalone Django app
+--------------------------------
+
+Execute the following command in this directory:
+
+    python manage.py runserver
+
+
+Running in Apache
+-----------------
+
+To run Vapour as CGI on Apache, use the following configuration:
+
+    WSGIScriptAlias / /path/to/vapour/apps/wsgi.py
+
+    <Directory /path/to/vapour/apps>
+        Order deny,allow
+        Allow from all
+    </Directory> 
+
+Remember to disable the debug mode on Django settings.
+
+
+Running in Google App Engine
+----------------------------
+
+To run Vapour in the local development environment, use:
+
+   $ dev_appserver.py .
+
+GAE requires to bundle all the application's dependencies. You can
+either copy or symlink them manually, or you can use the script
+'download-deps.sh', which will automatically download the dependencies
+and expand them in the current directory.
