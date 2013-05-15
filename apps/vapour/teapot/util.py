@@ -35,4 +35,19 @@ def getLiteralProperty(graph, resource, property):
     l = [x for x in graph.objects(resource, property)]
     if len(l) == 0: return None
     else: return l[0]
-    
+
+###########################################################
+
+import threading
+
+class AtomicCounter:
+    def __init__(self):
+        self.value = 0L
+        self.lock = threading.RLock()
+
+    def getNext(self):
+        self.lock.acquire()
+        currentValue = self.value
+        self.value += 1
+        self.lock.release()
+        return currentValue
