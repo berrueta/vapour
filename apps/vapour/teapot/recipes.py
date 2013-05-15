@@ -1,6 +1,6 @@
 
 from vapour.namespaces import *
-from rdflib import Graph
+from rdflib import ConjunctiveGraph, Graph
 from httpdialog import followRedirects
 from asserts import *
 from validation import assertLastResponseBodyContainsDefinitionForResource
@@ -28,13 +28,53 @@ assertLastResponseContentTypeFunctions = {
 
 # it needs a refactor into OOP
 
-def checkRecipes(graph, resource, validatorOptions):
-    checkWithoutAcceptHeader(graph, resource, validatorOptions)
-    checkWithAcceptRdf(graph, resource, validatorOptions)
-    if validatorOptions.htmlVersions:
+import threading
+
+class NoHeadersThread(threading.Thread):
+    def __init__(self, resource, validatorOptions):
+        super(NoHeadersThread, self).__init__()
+        self.partialGraph = ConjunctiveGraph()
+        self.resource = resource
+        self.validatorOptions = validatorOptions
+
+    def run(self):
+        checkWithoutAcceptHeader(self.partialGraph, self.resource, self.validatorOptions)
+
+class AcceptRdfThread(threading.Thread):
+    def __init__(self, resource, validatorOptions):
+        super(AcceptRdfThread, self).__init__()
+        self.partialGraph = ConjunctiveGraph()
+        self.resource = resource
+        self.validatorOptions = validatorOptions
+
+    def run(self):
+        checkWithAcceptRdf(self.partialGraph, self.resource, self.validatorOptions)
+
+class AcceptXhtmlOrHtmlThread(threading.Thread):
+    def __init__(self, resource, validatorOptions):
+        super(AcceptXhtmlOrHtmlThread, self).__init__()
+        self.partialGraph = ConjunctiveGraph()
+        self.resource = resource
+        self.validatorOptions = validatorOptions
+
+    def run(self):
         #checkWithAcceptHtml(graph, resource, classUri, propertyUri)
         #checkWithAcceptXhtml(graph, resource, classUri, propertyUri)
-        checkWithAcceptXhtmlOrHtml(graph, resource, validatorOptions)
+        checkWithAcceptXhtmlOrHtml(self.partialGraph, self.resource, self.validatorOptions)
+
+def checkRecipes(graph, resource, validatorOptions):
+    threads = [NoHeadersThread(resource, validatorOptions),
+               AcceptRdfThread(resource, validatorOptions)]
+    if validatorOptions.htmlVersions:
+        threads.append(AcceptXhtmlOrHtmlThread(resource, validatorOptions))
+
+    for thread in threads:
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+        graph += thread.partialGraph
+
     if validatorOptions.mixedAccept:
         for i in range(0, len(mimetypes.mixed)):
             checkWithMixedAccept(graph, resource, i, validatorOptions)
