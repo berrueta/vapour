@@ -72,9 +72,11 @@ def checkRecipes(graph, resource, validatorOptions):
     if validatorOptions.htmlVersions:
         threads.append(AcceptXhtmlOrHtmlThread(resource, validatorOptions))
 
+    logger.debug("Starting threads: %s" % str(threads))
     for thread in threads:
         thread.start()
 
+    logger.debug("Joining threads")
     for thread in threads:
         thread.join()
         graph += thread.partialGraph

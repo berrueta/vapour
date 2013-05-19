@@ -67,9 +67,9 @@ class cup:
                 
             if uri is not None:
                 if (client):
-                    logger.info("Request from %s over URI: %s" % (client, uri))
+                    logger.debug("Request from %s over URI: %s" % (client, uri))
                 else:
-                    logger.info("Request over URI: " + uri)
+                    logger.debug("Request over URI: " + uri)
 
                 resourceToCheck = {'uri': uri, 'description': "resource URI", 'order': 1} #FIXME: not necessary anymore, but it'd need some code rewriting          
 
