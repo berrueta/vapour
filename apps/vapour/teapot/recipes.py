@@ -6,10 +6,11 @@ from asserts import *
 from validation import assertLastResponseBodyContainsDefinitionForResource
 from httprange14 import httpRange14Conclusions
 from util import lastTestSubjectOfSequence
-import mimetypes, options
+import mimetypes, options, logging, threading
 from string import lower
 from vapour.common.rdf import performSparqlQuery
-from vapour.common import getLogger
+
+logger = logging.getLogger(__name__)
 
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
@@ -29,8 +30,6 @@ assertLastResponseContentTypeFunctions = {
 
 # it needs a refactor into OOP
 
-import threading
-
 class NoHeadersThread(threading.Thread):
     def __init__(self, resource, validatorOptions):
         super(NoHeadersThread, self).__init__()
@@ -39,9 +38,9 @@ class NoHeadersThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
-        getLogger().debug("Checking %s without accept headers" % self.resource)
+        logger.debug("Checking %s without accept headers" % self.resource['uri'])
         checkWithoutAcceptHeader(self.partialGraph, self.resource, self.validatorOptions)
-        getLogger().debug("Completed checking of %s without accept headers" % self.resource)
+        logger.debug("Completed checking of %s without accept headers" % self.resource['uri'])
 
 class AcceptRdfThread(threading.Thread):
     def __init__(self, resource, validatorOptions):
@@ -51,9 +50,9 @@ class AcceptRdfThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
-        getLogger().debug("Checking %s requesting RDF" % self.resource)
+        logger.debug("Checking %s requesting RDF" % self.resource['uri'])
         checkWithAcceptRdf(self.partialGraph, self.resource, self.validatorOptions)
-        getLogger().debug("Completed checking of %s requesting RDF" % self.resource)
+        logger.debug("Completed checking of %s requesting RDF" % self.resource['uri'])
 
 class AcceptXhtmlOrHtmlThread(threading.Thread):
     def __init__(self, resource, validatorOptions):
@@ -63,9 +62,9 @@ class AcceptXhtmlOrHtmlThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
-        getLogger().debug("Checking %s requesting (X)HTML" % self.resource)
+        logger.debug("Checking %s requesting (X)HTML" % self.resource['uri'])
         checkWithAcceptXhtmlOrHtml(self.partialGraph, self.resource, self.validatorOptions)
-        getLogger().debug("Completed checking of %s requesting (X)HTML" % self.resource)
+        logger.debug("Completed checking of %s requesting (X)HTML" % self.resource['uri'])
 
 def checkRecipes(graph, resource, validatorOptions):
     threads = [NoHeadersThread(resource, validatorOptions),

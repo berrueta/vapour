@@ -3,12 +3,15 @@ from vapour.namespaces import *
 from vapour.common.vapourexceptions import *
 from vapour.teapot import options
 from vapour.common.security import isLocatedAtIntranet, isValidUrl
-from vapour.common import getLogger
+from vapour.settings import RUNNING_IN_GAE
 from labeler import labelTestSubjects
 from rdflib import Graph, BNode, Literal
 import httplib
 import urlparse
 import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 maxRedirects = 3
 defaultUserAgent = "vapour.sourceforge.net"
@@ -59,11 +62,12 @@ def simpleRequest(graph, url, accept, previousRequestCount, previousTestSubjectR
     host = parsedUrl[1]
     path = parsedUrl[2]
 
-    locatedAtIntranet, ip = isLocatedAtIntranet(host, options)
-    isLocatedAtIntranetStr = "is" if locatedAtIntranet else "is not"
-    getLogger().debug("Host %s %s located at intranet" % (host, isLocatedAtIntranetStr))
-    if locatedAtIntranet:
-        raise ForbiddenAddress(str(ip), url, options.client)
+    if not RUNNING_IN_GAE:
+        locatedAtIntranet, ip = isLocatedAtIntranet(host, options)
+        isLocatedAtIntranetStr = "is" if locatedAtIntranet else "is not"
+        logger.debug("Host %s %s located at intranet" % (host, isLocatedAtIntranetStr))
+        if locatedAtIntranet:
+            raise ForbiddenAddress(str(ip), url, options.client)
     
     conn = httplib.HTTPConnection(host)
     headers = {"User-Agent": options.userAgent}
