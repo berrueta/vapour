@@ -21,7 +21,6 @@ class cup:
 
         logger = getLogger()
 
-        uri = None
         uri = request.GET.get("uri")
         if (not uri):
             uri = request.GET.get("vocabUri") # legacy http api
