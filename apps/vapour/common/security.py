@@ -1,13 +1,11 @@
 
-import urlparse
+import urlparse, logging
 from vapour.settings import ALLOW_INTRANET
 from vapour.cup import common
-from vapour.common import getLogger
+
+logger = logging.getLogger(__name__)
 
 def isLocatedAtIntranet(host, options=None):
-
-    logger = getLogger()
-
     requestFromIntranet = False
     if (options and options.client):
         requestFromIntranet = isIntranet(options.client)

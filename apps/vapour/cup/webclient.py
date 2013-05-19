@@ -1,5 +1,5 @@
 
-import random, traceback
+import random, traceback, logging
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseBadRequest
 from vapour.strainer import strainer
@@ -7,20 +7,18 @@ from vapour.teapot import recipes, autodetect, options
 from vapour.cup import common
 from vapour.settings import STATIC_URL, PATH_TEMPLATES, PATH_RDF_FILES
 from vapour.common.lang import if_else
-from vapour.common import getLogger
 
 import warnings
 warnings.simplefilter("ignore", DeprecationWarning)
 
 resourceBaseUri = if_else(STATIC_URL[-1] == "/", STATIC_URL[:-1], STATIC_URL) #remove last slash
 
+logger = logging.getLogger(__name__)
+
 class cup:
 
     @staticmethod
     def GET(request):
-
-        logger = getLogger()
-
         uri = request.GET.get("uri")
         if (not uri):
             uri = request.GET.get("vocabUri") # legacy http api

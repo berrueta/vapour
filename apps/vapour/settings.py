@@ -3,9 +3,9 @@
 import os
 import sys
 
-ROOT_PATH = os.path.dirname(__file__)
+RUNNING_IN_GAE='SERVER_SOFTWARE' in os.environ and (os.environ['SERVER_SOFTWARE'].startswith('Development') or os.environ['SERVER_SOFTWARE'].startswith('Google App Engine'))
 
-sys.path.append(os.path.abspath("lib"))
+ROOT_PATH = os.path.dirname(__file__)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -123,7 +123,7 @@ INSTALLED_APPS = (
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'simple': {
             'format': '%(asctime)s %(filename)s:%(lineno)d %(levelname)s: %(message)s'
@@ -134,27 +134,23 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level' : 'INFO',
+            'level' : 'DEBUG',    # minimum level
             'class' : 'logging.StreamHandler',
             'formatter': 'simple'
-            
         }
     },
     'loggers': {
         'vapour': {
-            'handlers': ['console'],
-            'level': 'INFO'
-        },
-        'vapour.dev': {
-            'handlers': ['console'],
-            'level': 'DEBUG'
+            'handlers': [] if RUNNING_IN_GAE else ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': True
         }
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".vapour-gae.appspot.com", "localhost", "127.0.0.1"]
 
 #Custom stuff for vapour
 REQ_BASE_URL = "http://validator.linkeddata.org/vapour#req"
