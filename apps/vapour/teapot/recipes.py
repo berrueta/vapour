@@ -9,6 +9,7 @@ from util import lastTestSubjectOfSequence
 import mimetypes, options
 from string import lower
 from vapour.common.rdf import performSparqlQuery
+from vapour.common import getLogger
 
 assertLastResponseContentTypeFunctions = {
                                           mimetypes.rdfXml : assertLastResponseContentTypeRdf,
@@ -38,7 +39,9 @@ class NoHeadersThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
+        getLogger().debug("Checking %s without accept headers" % self.resource)
         checkWithoutAcceptHeader(self.partialGraph, self.resource, self.validatorOptions)
+        getLogger().debug("Completed checking of %s without accept headers" % self.resource)
 
 class AcceptRdfThread(threading.Thread):
     def __init__(self, resource, validatorOptions):
@@ -48,7 +51,9 @@ class AcceptRdfThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
+        getLogger().debug("Checking %s requesting RDF" % self.resource)
         checkWithAcceptRdf(self.partialGraph, self.resource, self.validatorOptions)
+        getLogger().debug("Completed checking of %s requesting RDF" % self.resource)
 
 class AcceptXhtmlOrHtmlThread(threading.Thread):
     def __init__(self, resource, validatorOptions):
@@ -58,9 +63,9 @@ class AcceptXhtmlOrHtmlThread(threading.Thread):
         self.validatorOptions = validatorOptions
 
     def run(self):
-        #checkWithAcceptHtml(graph, resource, classUri, propertyUri)
-        #checkWithAcceptXhtml(graph, resource, classUri, propertyUri)
+        getLogger().debug("Checking %s requesting (X)HTML" % self.resource)
         checkWithAcceptXhtmlOrHtml(self.partialGraph, self.resource, self.validatorOptions)
+        getLogger().debug("Completed checking of %s requesting (X)HTML" % self.resource)
 
 def checkRecipes(graph, resource, validatorOptions):
     threads = [NoHeadersThread(resource, validatorOptions),
