@@ -141,7 +141,7 @@ LOGGING = {
     },
     'loggers': {
         'vapour': {
-            'handlers': [] if RUNNING_IN_GAE else ['console'],
+            'handlers': [] if RUNNING_IN_GAE else ['console'],  # GAE handles its own logging (run dev_appserver with --log_level=DEBUG)
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': True
         }
